@@ -39,13 +39,13 @@ public struct Constants {
     static let kFCM = UserDefaults.standard.string(forKey: "fcmToken")
     
     //urls for sk rest server
-    static let url_Http_Registration = "https://test-push.hyber.im/api/2.3/device/registration" as NSString
-    static let url_Http_Revoke = "https://test-push.hyber.im/api/2.3/device/revoke" as NSString
-    static let url_Http_Update = "https://test-push.hyber.im/api/2.3/device/update" as NSString
-    static let url_Http_Mess_history = "https://test-push.hyber.im/api/2.3/message/history?startDate=" as String
-    static let url_Http_Mess_dr = "https://test-push.hyber.im/api/2.3/message/dr" as NSString
-    static let url_Http_Mess_callback = "https://test-push.hyber.im/api/2.3/message/callback" as NSString
-    static let url_Http_Device_getall = "https://test-push.hyber.im/api/2.3/device/all" as NSString
+    static let url_Http_Registration = "https://push.hyber.im/api/2.3/device/registration" as NSString
+    static let url_Http_Revoke = "https://push.hyber.im/api/2.3/device/revoke" as NSString
+    static let url_Http_Update = "https://push.hyber.im/api/2.3/device/update" as NSString
+    static let url_Http_Mess_history = "https://push.hyber.im/api/2.3/message/history?startDate=" as String
+    static let url_Http_Mess_dr = "https://push.hyber.im/api/2.3/message/dr" as NSString
+    static let url_Http_Mess_callback = "https://push.hyber.im/api/2.3/message/callback" as NSString
+    static let url_Http_Device_getall = "https://push.hyber.im/api/2.3/device/all" as NSString
     
     
     static let debug_log_path = "/Users/imperituroard/Desktop/application_debug.log" as String
