@@ -2,14 +2,14 @@
 //  sk_sdk_core.swift
 //  test222
 //
-//  Created by Дмитрий Буйновский on 29/04/2019.
-//  Copyright © 2019 Дмитрий Буйновский. All rights reserved.
+//  Created by ard on 29/04/2019.
+//  Copyright © 2019 ard. All rights reserved.
 //
 
 //import Foundation
 import CoreData
 
-extension Svyazcom {
+extension HyberSK {
     //let df = ViewController.init()
     //df.
 }
@@ -58,7 +58,7 @@ class ViewController2: UIViewController {
         let managedContext = appDelegate.persistentContainer.viewContext
         
         //Now let’s create an entity and new user records.
-        let userEntity = NSEntityDescription.entity(forEntityName: "Svyazcom_mess", in: managedContext)!
+        let userEntity = NSEntityDescription.entity(forEntityName: "HyberSK_mess", in: managedContext)!
         
         //final, we need to add some data to our newly created record for each keys using
         //here adding 5 data with loop
@@ -90,7 +90,7 @@ class ViewController2: UIViewController {
         let managedContext = appDelegate.persistentContainer.viewContext
         
         //Prepare the request of type NSFetchRequest  for the entity
-        let fetchRequest = NSFetchRequest<NSFetchRequestResult>(entityName: "Svyazcom_mess")
+        let fetchRequest = NSFetchRequest<NSFetchRequestResult>(entityName: "HyberSK_mess")
         
         //        fetchRequest.fetchLimit = 1
         //        fetchRequest.predicate = NSPredicate(format: "username = %@", "Ankur")

@@ -2,8 +2,8 @@
 //  sksdk.swift
 //  sksdk
 //
-//  Created by Дмитрий Буйновский on 08/05/2019.
-//  Copyright © 2019 Дмитрий Буйновский. All rights reserved.
+//  Created by ard on 08/05/2019.
+//  Copyright © 2019 ard. All rights reserved.
 //
 
 //import UIKit
@@ -26,9 +26,12 @@ public extension Notification.Name {
     static let completedLengthyDownload = Notification.Name("completedLengthyDownload")
 }
 
-public class Svyazcom {
+public class HyberSK {
     
-    public init() {}
+    public init(user_msisdn: String, user_password: String)
+    {
+        
+    }
     
     private let processor = Processing.init()
     
@@ -68,8 +71,8 @@ public class Svyazcom {
     
     
     
-    //Процедура 1. Регистрация устройства на Связькоме и файербэйзе
-    public func sk_register_device(user_phone: String, user_password: String, x_hyber_sesion_id: String, x_hyber_ios_bundle_id: String, x_hyber_app_fingerprint: String)->String {
+    //Процедура 1. Регистрация устройства на сервере и файербэйзе
+    public func sk_register_new(user_phone: String, user_password: String, x_hyber_sesion_id: String, x_hyber_ios_bundle_id: String, x_hyber_app_fingerprint: String)->String {
         do{
             
             if (Constants.registrationstatus==false){
@@ -226,7 +229,7 @@ public class Svyazcom {
     }
     
     
-    public func sk_clear_device_all()->String {
+    public func sk_clear_all_device()->String {
         do{
             
             if (Constants.registrationstatus==true){
@@ -279,12 +282,20 @@ public class Svyazcom {
         }
     }
     
+    public func rewrite_msisdn(newmsisdn: String) {
+        
+    }
+    
+    public func rewrite_password(newpassword: String) {
+        
+    }
+    
     
     
     
     
     //Procedure 3. Get all saved messages from coredata
-    public func sk_get_all_messages_from_local(start_time: String, end_time: String) {
+    private func sk_get_all_messages_from_local(start_time: String, end_time: String) {
         
     }
     

@@ -2,8 +2,8 @@
 //  push_adapter2.swift
 //  sksdk
 //
-//  Created by Дмитрий Буйновский on 15/05/2019.
-//  Copyright © 2019 Дмитрий Буйновский. All rights reserved.
+//  Created by ard on 15/05/2019.
+//  Copyright © 2019 ard. All rights reserved.
 //
 
 import Foundation

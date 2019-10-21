@@ -9,7 +9,7 @@
 import UIKit
 import NotificationCenter
 
-public extension Svyazcom {
+public extension HyberSK {
     /// An instance of `HyberFirebaseMessagingHelper`
     public static weak var firebaseMessagingHelper: HyberFirebaseMessagingHelper? = .none
 

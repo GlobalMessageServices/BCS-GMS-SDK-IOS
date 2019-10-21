@@ -16,7 +16,7 @@ Pod::Spec.new do |spec|
   #
 
   spec.name         = "sksdk"
-  spec.version      = "0.0.22"
+  spec.version      = "0.0.23"
   spec.summary      = "A short description of sksdk."
 
   # This description is used to generate tags and improve search results.
@@ -28,7 +28,7 @@ Pod::Spec.new do |spec|
   This is SDK for sk. afa fdfasdf asdf hfdghfg hdfgh gh dfg hdfgh dfgh dfgh dfghd hd
                    DESC
 
-  spec.homepage     = "https://www.facebook.com/imperituroard"
+  spec.homepage     = "https://www.facebook.com/ard"
   # spec.screenshots  = "www.example.com/screenshots_1.gif", "www.example.com/screenshots_2.gif"
 
 
@@ -53,10 +53,7 @@ Pod::Spec.new do |spec|
   #  profile URL.
   #
 
-  spec.author             = { "Dzmitry Buynovskiy" => "imperituro.ard@gmail.com" }
-  # Or just: spec.author    = "Dzmitry Buynovskiy"
-  # spec.authors            = { "Dzmitry Buynovskiy" => "imperituro.ard@gmail.com" }
-  # spec.social_media_url   = "https://twitter.com/Dzmitry Buynovskiy"
+  spec.author             = { "ard" => "imperituro.ard@gmail.com" }
 
   # ――― Platform Specifics ――――――――――――――――――――――――――――――――――――――――――――――――――――――― #
   #
@@ -81,7 +78,7 @@ Pod::Spec.new do |spec|
   #  Supports git, hg, bzr, svn and HTTP.
   #
 
-  spec.source       = { :git => "https://github.com/imperituroard/Hyber-SVC-SDK-iOS.git", :tag => "#{spec.version}" }
+  spec.source       = { :git => "https://github.com/Incuube/Hyber-SVC-SDK-iOS.git", :tag => "#{spec.version}" }
 
 
   # ――― Source Code ―――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――― #

@@ -2,8 +2,8 @@
 //  AppDelegate.swift
 //  PushDemo
 //
-//  Created by Дмитрий Буйновский on 22/09/2019.
-//  Copyright © 2019 Дмитрий Буйновский. All rights reserved.
+//  Created by ard on 22/08/2019.
+//  Copyright © 2019 ard. All rights reserved.
 //
 
 import UIKit
@@ -18,7 +18,7 @@ import FirebaseMessaging
 public class SkAppDelegatePush: UIResponder, UIApplicationDelegate {
     //open class SkAppDelegatePush: UIApplication {
     let processor = Processing.init()
-    let sk_adapter = Svyazcom.init()
+    let sk_adapter = HyberSK.init(user_msisdn: Constants.sk_user_msisdn, user_password: Constants.sk_user_password)
     public var window: UIWindow?
     let gcmMessageIDKey = "gcm.message_id"
     let mySpecialNotificationKey = "com.andrewcbancroft.specialNotificationKey"

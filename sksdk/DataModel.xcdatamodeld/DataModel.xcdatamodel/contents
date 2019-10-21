@@ -5,11 +5,7 @@
         <attribute name="attribute1" optional="YES" attributeType="Date" usesScalarValueType="NO" syncable="YES"/>
         <attribute name="attribute2" optional="YES" attributeType="String" syncable="YES"/>
     </entity>
-    <entity name="Person" representedClassName="Person" syncable="YES" codeGenerationType="class">
-        <attribute name="name" optional="YES" attributeType="String" syncable="YES"/>
-    </entity>
-    <entity name="Registrations" representedClassName="Registrations" syncable="YES" codeGenerationType="class"/>
-    <entity name="Svyazcom_mess" representedClassName="Svyazcom_mess" syncable="YES" codeGenerationType="class">
+    <entity name="HyberSK_mess" representedClassName="HyberSK_mess" syncable="YES" codeGenerationType="class">
         <attribute name="body" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="date" optional="YES" attributeType="Date" usesScalarValueType="NO" syncable="YES"/>
         <attribute name="from" optional="YES" attributeType="String" syncable="YES"/>
@@ -20,6 +16,10 @@
         <attribute name="google_c_a_udt" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="title" optional="YES" attributeType="String" syncable="YES"/>
     </entity>
+    <entity name="Person" representedClassName="Person" syncable="YES" codeGenerationType="class">
+        <attribute name="name" optional="YES" attributeType="String" syncable="YES"/>
+    </entity>
+    <entity name="Registrations" representedClassName="Registrations" syncable="YES" codeGenerationType="class"/>
     <entity name="User" representedClassName="User" syncable="YES" codeGenerationType="class">
         <attribute name="email" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="password" optional="YES" attributeType="String" syncable="YES"/>
@@ -29,7 +29,7 @@
         <element name="Entity" positionX="-63" positionY="-18" width="128" height="90"/>
         <element name="Person" positionX="-63" positionY="9" width="128" height="60"/>
         <element name="Registrations" positionX="-54" positionY="27" width="128" height="45"/>
-        <element name="Svyazcom_mess" positionX="-54" positionY="27" width="128" height="180"/>
+        <element name="HyberSK_mess" positionX="-54" positionY="27" width="128" height="180"/>
         <element name="User" positionX="-54" positionY="18" width="128" height="90"/>
     </elements>
 </model>

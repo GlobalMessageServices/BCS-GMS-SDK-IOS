@@ -22,7 +22,7 @@ public protocol HyberRemoteNotificationReciever: class {
     func didReceiveRemoteNotification(userInfo: [AnyHashable: Any])
 }
 
-public extension Svyazcom {
+public extension HyberSK {
 
     /**
      Handles registration for push-notification receiving

@@ -2,9 +2,9 @@
 //
 import Foundation
 
-public let HyberLogger = Svyazcom.hyberLog
+public let HyberLogger = HyberSK.hyberLog
 
-public extension Svyazcom {
+public extension HyberSK {
 
     static let hyberLog : Logger = {
         let log = Logger()

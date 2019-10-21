@@ -2,8 +2,8 @@
 //  header_sksdk.h
 //  PushDemo
 //
-//  Created by Дмитрий Буйновский on 28/09/2019.
-//  Copyright © 2019 Дмитрий Буйновский. All rights reserved.
+//  Created by ard on 28/09/2019.
+//  Copyright © 2019 ard. All rights reserved.
 //
 
 #ifndef header_sksdk_h

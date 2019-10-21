@@ -2,8 +2,8 @@
 //  sksdk.h
 //  sksdk
 //
-//  Created by Дмитрий Буйновский on 08/05/2019.
-//  Copyright © 2019 Дмитрий Буйновский. All rights reserved.
+//  Created by ard on 08/05/2019.
+//  Copyright © 2019 ard. All rights reserved.
 //
 
 //dbuynovskiy

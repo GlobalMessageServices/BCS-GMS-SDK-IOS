@@ -2,8 +2,8 @@
 //  params.swift
 //  test222
 //
-//  Created by Дмитрий Буйновский on 28/04/2019.
-//  Copyright © 2019 Дмитрий Буйновский. All rights reserved.
+//  Created by ard on 28/04/2019.
+//  Copyright © 2019 ard. All rights reserved.
 //
 
 import Foundation
@@ -16,7 +16,10 @@ public struct Constants {
     static var sk_registration_token = UserDefaults.standard.string(forKey: "sk_registration_token")
     static var deviceId = UserDefaults.standard.string(forKey: "deviceId")
     public static var sk_user_msisdn = "375291234567"
+    public static var sk_user_password = ""
     public static var firebase_registration_token = UserDefaults.standard.string(forKey: "firebase_registration_token")
+    
+    
     //static let sk_registration_token = UserDefaults.standard.bool(forKey: "sk_registration_token")
     
     

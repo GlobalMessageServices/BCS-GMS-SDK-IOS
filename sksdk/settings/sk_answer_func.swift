@@ -2,8 +2,8 @@
 //  sk_answer_func.swift
 //  PushDemo
 //
-//  Created by Дмитрий Буйновский on 28/09/2019.
-//  Copyright © 2019 Дмитрий Буйновский. All rights reserved.
+//  Created by ard on 28/09/2019.
+//  Copyright © 2019 ard. All rights reserved.
 //
 
 import Foundation

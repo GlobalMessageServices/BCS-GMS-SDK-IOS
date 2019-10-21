@@ -2,7 +2,7 @@
 //  Entity+CoreDataClass.swift
 //  
 //
-//  Created by Дмитрий Буйновский on 11/05/2019.
+//  Created by ard on 11/05/2019.
 //
 //
 
