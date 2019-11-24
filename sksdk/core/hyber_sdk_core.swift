@@ -9,7 +9,7 @@
 //import Foundation
 import CoreData
 
-extension HyberSK {
+extension HyberSDK {
     //let df = ViewController.init()
     //df.
 }

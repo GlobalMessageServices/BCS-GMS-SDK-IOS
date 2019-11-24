@@ -10,7 +10,7 @@ import Foundation
 
 
 
-public extension HyberSK {
+public extension HyberSDK {
     
     func configPushFirebase() {
        // FirebaseApp.configure()

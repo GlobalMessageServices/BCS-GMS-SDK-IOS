@@ -15,10 +15,10 @@ import FirebaseMessaging
 //import FirebaseCoreDiagnostics
 //import BackgroundTasks
 
-public class SkAppDelegatePush: UIResponder, UIApplicationDelegate {
+public class HyberAppDelegatePush: UIResponder, UIApplicationDelegate {
     //open class SkAppDelegatePush: UIApplication {
     let processor = Processing.init()
-    let sk_adapter = HyberSK.init(user_msisdn: Constants.sk_user_msisdn, user_password: Constants.sk_user_password)
+    let sk_adapter = HyberSK.init(user_msisdn: Constants.hyber_user_msisdn, user_password: Constants.hyber_user_password)
     public var window: UIWindow?
     let gcmMessageIDKey = "gcm.message_id"
     let mySpecialNotificationKey = "com.andrewcbancroft.specialNotificationKey"
@@ -194,7 +194,7 @@ public extension UIViewController
 }
 
 
-extension SkAppDelegatePush: UNUserNotificationCenterDelegate{
+extension HyberAppDelegatePush: UNUserNotificationCenterDelegate{
     
     public func userNotificationCenter(_ center: UNUserNotificationCenter,
                                        willPresent notification: UNNotification,
@@ -241,7 +241,7 @@ extension SkAppDelegatePush: UNUserNotificationCenterDelegate{
 
 
 
-extension SkAppDelegatePush: MessagingDelegate {
+extension HyberAppDelegatePush: MessagingDelegate {
     
     
     //print("hfghgfh")

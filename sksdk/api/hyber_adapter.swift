@@ -9,7 +9,7 @@
 import Foundation
 import CryptoSwift
 
-class SKrest {
+class HyberAPI {
     
     
     
@@ -22,7 +22,7 @@ class SKrest {
     
     //rest function for device registration
     //1 procedure
-    func sk_device_register(X_Hyber_Client_API_Key: String, X_Hyber_Session_Id: String, X_Hyber_IOS_Bundle_Id: String, device_Name:String, device_Type:String, os_Type:String, sdk_Version:String, user_Pass:String, user_Phone:String)->String {
+    func hyber_device_register(X_Hyber_Client_API_Key: String, X_Hyber_Session_Id: String, X_Hyber_IOS_Bundle_Id: String, device_Name:String, device_Type:String, os_Type:String, sdk_Version:String, user_Pass:String, user_Phone:String)->String {
         
         do{
             
@@ -135,7 +135,7 @@ class SKrest {
                     
                     print(newString3)
                     UserDefaults.standard.set(newString3, forKey: "sk_registration_token")
-                    Constants.sk_registration_token = newString3
+                    Constants.hyber_registration_token = newString3
                     
                     UserDefaults.standard.set(true, forKey: "registrationstatus")
                     Constants.registrationstatus = true
