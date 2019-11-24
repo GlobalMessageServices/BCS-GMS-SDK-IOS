@@ -6,9 +6,9 @@
 //  Copyright © 2019 ard. All rights reserved.
 //
 
-#ifndef header_Hyber_SDK_iOS_h
-#define header_Hyber_SDK_iOS_h
+#ifndef header_HyberSDK_h
+#define header_HyberSDK_h
 
 
-#endif /* header_Hyber_SDK_iOS_h */
+#endif /* header_HyberSDK_h */
 #import <CommonCrypto/CommonHMAC.h>

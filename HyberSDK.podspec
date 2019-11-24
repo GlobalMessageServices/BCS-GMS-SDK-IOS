@@ -89,7 +89,7 @@ Pod::Spec.new do |spec|
   #  Not including the public_header_files will make all headers public.
   #
 
-  spec.source_files  = "Classes", "Classes/**/*.{h,m}", "Hyber-SDK-iOS/*.{h,m}", "Hyber-SDK-iOS", "Hyber-SDK-iOS/api", "Hyber-SDK-iOS/core", "Hyber-SDK-iOS/settings" #, "Hyber-SDK-iOS/notifications"
+  spec.source_files  = "Classes", "Classes/**/*.{h,m}", "HyberSDK/*.{h,m}", "HyberSDK", "HyberSDK/api", "HyberSDK/core", "HyberSDK/settings" #, "HyberSDK/notifications"
   spec.exclude_files = "Classes/Exclude"
 
   # spec.public_header_files = "Classes/**/*.h"
@@ -190,7 +190,7 @@ Pod::Spec.new do |spec|
   #  core.public_header_files = 'Core/FirebaseCore/*.h'
   #  core.source_files = 'Core/FirebaseCore/*.{h,m}'
   #  core.dependency 'Firebase/Core'
-  #  core.xcconfig = { 'HEADER_SEARCH_PATHS' => '$(PODS_ROOT)/Hyber-SDK-iOS/FirebaseCore' }
+  #  core.xcconfig = { 'HEADER_SEARCH_PATHS' => '$(PODS_ROOT)/HyberSDK/FirebaseCore' }
   #end
 
 
