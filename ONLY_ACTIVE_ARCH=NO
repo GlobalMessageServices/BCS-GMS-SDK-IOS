@@ -1,5 +1,0 @@
-Build settings from command line:
-    BUILD_DIR = /Users/imperituroard/Library/Developer/Xcode/DerivedData/sksdk-aagxxpzldzcfhmhhivfkyllphugx/Build/Products
-    BUILD_ROOT = /Users/imperituroard/Library/Developer/Xcode/DerivedData/sksdk-aagxxpzldzcfhmhhivfkyllphugx/Build/Products
-    SDKROOT = iphoneos12.2
-
