@@ -16,7 +16,7 @@ Pod::Spec.new do |spec|
   #
 
   spec.name         = "HyberSDK"
-  spec.version      = "0.0.26"
+  spec.version      = "0.0.27"
   spec.summary      = "A short description of HyberSDK."
 
   # This description is used to generate tags and improve search results.
