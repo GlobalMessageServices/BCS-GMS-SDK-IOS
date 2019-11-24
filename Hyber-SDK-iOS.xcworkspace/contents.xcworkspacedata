@@ -2,7 +2,7 @@
 <Workspace
    version = "1.0">
    <FileRef
-      location = "group:Hyber-SDK-iOS.xcodeproj">
+      location = "group:/Users/imperituroard/Desktop/Projects-IOS/Hyber-SVC-SDK-iOS/Hyber-SVC-SDK-iOS/HyberSDK.xcodeproj">
    </FileRef>
    <FileRef
       location = "group:Pods/Pods.xcodeproj">

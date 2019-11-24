@@ -8,12 +8,12 @@
 
 /* Begin PBXBuildFile section */
 		27DEA8D1F6CD13DF21B724B7 /* Pods_Hyber_SDK_iOSTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6A8736D5F424CAD5E7486F72 /* Pods_Hyber_SDK_iOSTests.framework */; };
-		BA5EE3CA238AD4BB00D2AA12 /* Hyber_SDK_iOS.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = BA5EE3C0238AD4BB00D2AA12 /* Hyber_SDK_iOS.framework */; };
-		BA5EE3CF238AD4BB00D2AA12 /* Hyber_SDK_iOSTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA5EE3CE238AD4BB00D2AA12 /* Hyber_SDK_iOSTests.swift */; };
-		BA5EE3D1238AD4BB00D2AA12 /* Hyber_SDK_iOS.h in Headers */ = {isa = PBXBuildFile; fileRef = BA5EE3C3238AD4BB00D2AA12 /* Hyber_SDK_iOS.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		BA5EE3CA238AD4BB00D2AA12 /* HyberSDK.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = BA5EE3C0238AD4BB00D2AA12 /* HyberSDK.framework */; };
+		BA5EE3CF238AD4BB00D2AA12 /* HyberSDKTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA5EE3CE238AD4BB00D2AA12 /* HyberSDKTests.swift */; };
+		BA5EE3D1238AD4BB00D2AA12 /* HyberSDK.h in Headers */ = {isa = PBXBuildFile; fileRef = BA5EE3C3238AD4BB00D2AA12 /* HyberSDK.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		BA5EE3DB238ADAD800D2AA12 /* HyberSDK.podspec in Resources */ = {isa = PBXBuildFile; fileRef = BA5EE3DA238ADAD800D2AA12 /* HyberSDK.podspec */; };
 		BA5EE3DD238ADB1100D2AA12 /* HyberAppDelegatePush.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA5EE3DC238ADB1100D2AA12 /* HyberAppDelegatePush.swift */; };
-		BA5EE3DF238ADB1B00D2AA12 /* hybersdk.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA5EE3DE238ADB1B00D2AA12 /* hybersdk.swift */; };
+		BA5EE3DF238ADB1B00D2AA12 /* HyberSDK.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA5EE3DE238ADB1B00D2AA12 /* HyberSDK.swift */; };
 		BA5EE3E1238ADB2D00D2AA12 /* BridgingHeader.h in Headers */ = {isa = PBXBuildFile; fileRef = BA5EE3E0238ADB2D00D2AA12 /* BridgingHeader.h */; };
 		BA5EE3E9238ADB6900D2AA12 /* hyber_sdk_core.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA5EE3E5238ADB6900D2AA12 /* hyber_sdk_core.swift */; };
 		BA5EE3EA238ADB6900D2AA12 /* push_adapter2.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA5EE3E6238ADB6900D2AA12 /* push_adapter2.swift */; };
@@ -56,15 +56,15 @@
 		76840A4C2DABF712873286D9 /* Pods-Hyber-SDK-iOSTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Hyber-SDK-iOSTests.release.xcconfig"; path = "Target Support Files/Pods-Hyber-SDK-iOSTests/Pods-Hyber-SDK-iOSTests.release.xcconfig"; sourceTree = "<group>"; };
 		956040D1570F6A01E4348B3C /* Pods_Hyber_SDK_iOS.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Hyber_SDK_iOS.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		9EFA99836953A25481C1C700 /* Pods-Hyber-SDK-iOS.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Hyber-SDK-iOS.debug.xcconfig"; path = "Target Support Files/Pods-Hyber-SDK-iOS/Pods-Hyber-SDK-iOS.debug.xcconfig"; sourceTree = "<group>"; };
-		BA5EE3C0238AD4BB00D2AA12 /* Hyber_SDK_iOS.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Hyber_SDK_iOS.framework; sourceTree = BUILT_PRODUCTS_DIR; };
-		BA5EE3C3238AD4BB00D2AA12 /* Hyber_SDK_iOS.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = Hyber_SDK_iOS.h; sourceTree = "<group>"; };
+		BA5EE3C0238AD4BB00D2AA12 /* HyberSDK.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = HyberSDK.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		BA5EE3C3238AD4BB00D2AA12 /* HyberSDK.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = HyberSDK.h; sourceTree = "<group>"; };
 		BA5EE3C4238AD4BB00D2AA12 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		BA5EE3C9238AD4BB00D2AA12 /* Hyber-SDK-iOSTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "Hyber-SDK-iOSTests.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
-		BA5EE3CE238AD4BB00D2AA12 /* Hyber_SDK_iOSTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Hyber_SDK_iOSTests.swift; sourceTree = "<group>"; };
+		BA5EE3C9238AD4BB00D2AA12 /* HyberSDKTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = HyberSDKTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		BA5EE3CE238AD4BB00D2AA12 /* HyberSDKTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HyberSDKTests.swift; sourceTree = "<group>"; };
 		BA5EE3D0238AD4BB00D2AA12 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		BA5EE3DA238ADAD800D2AA12 /* HyberSDK.podspec */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = HyberSDK.podspec; sourceTree = "<group>"; };
 		BA5EE3DC238ADB1100D2AA12 /* HyberAppDelegatePush.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HyberAppDelegatePush.swift; sourceTree = "<group>"; };
-		BA5EE3DE238ADB1B00D2AA12 /* hybersdk.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = hybersdk.swift; sourceTree = "<group>"; };
+		BA5EE3DE238ADB1B00D2AA12 /* HyberSDK.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HyberSDK.swift; sourceTree = "<group>"; };
 		BA5EE3E0238ADB2D00D2AA12 /* BridgingHeader.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BridgingHeader.h; sourceTree = "<group>"; };
 		BA5EE3E5238ADB6900D2AA12 /* hyber_sdk_core.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = hyber_sdk_core.swift; sourceTree = "<group>"; };
 		BA5EE3E6238ADB6900D2AA12 /* push_adapter2.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = push_adapter2.swift; sourceTree = "<group>"; };
@@ -102,7 +102,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				BA5EE3CA238AD4BB00D2AA12 /* Hyber_SDK_iOS.framework in Frameworks */,
+				BA5EE3CA238AD4BB00D2AA12 /* HyberSDK.framework in Frameworks */,
 				27DEA8D1F6CD13DF21B724B7 /* Pods_Hyber_SDK_iOSTests.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -123,8 +123,8 @@
 			isa = PBXGroup;
 			children = (
 				BA5EE3DA238ADAD800D2AA12 /* HyberSDK.podspec */,
-				BA5EE3C2238AD4BB00D2AA12 /* Hyber-SDK-iOS */,
-				BA5EE3CD238AD4BB00D2AA12 /* Hyber-SDK-iOSTests */,
+				BA5EE3C2238AD4BB00D2AA12 /* HyberSDK */,
+				BA5EE3CD238AD4BB00D2AA12 /* HyberSDKTests */,
 				BA5EE3C1238AD4BB00D2AA12 /* Products */,
 				EBCB302523BFA044958CB5CB /* Pods */,
 				36C2BA6E0CEA341D695B4CBB /* Frameworks */,
@@ -134,13 +134,13 @@
 		BA5EE3C1238AD4BB00D2AA12 /* Products */ = {
 			isa = PBXGroup;
 			children = (
-				BA5EE3C0238AD4BB00D2AA12 /* Hyber_SDK_iOS.framework */,
-				BA5EE3C9238AD4BB00D2AA12 /* Hyber-SDK-iOSTests.xctest */,
+				BA5EE3C0238AD4BB00D2AA12 /* HyberSDK.framework */,
+				BA5EE3C9238AD4BB00D2AA12 /* HyberSDKTests.xctest */,
 			);
 			name = Products;
 			sourceTree = "<group>";
 		};
-		BA5EE3C2238AD4BB00D2AA12 /* Hyber-SDK-iOS */ = {
+		BA5EE3C2238AD4BB00D2AA12 /* HyberSDK */ = {
 			isa = PBXGroup;
 			children = (
 				BA5EE40C238ADBE400D2AA12 /* settings */,
@@ -148,22 +148,22 @@
 				BA5EE3F2238ADBAF00D2AA12 /* notifications */,
 				BA5EE3ED238ADB7900D2AA12 /* api */,
 				BA5EE3E4238ADB5600D2AA12 /* core */,
-				BA5EE3C3238AD4BB00D2AA12 /* Hyber_SDK_iOS.h */,
+				BA5EE3C3238AD4BB00D2AA12 /* HyberSDK.h */,
 				BA5EE3C4238AD4BB00D2AA12 /* Info.plist */,
 				BA5EE3DC238ADB1100D2AA12 /* HyberAppDelegatePush.swift */,
 				BA5EE3E0238ADB2D00D2AA12 /* BridgingHeader.h */,
-				BA5EE3DE238ADB1B00D2AA12 /* hybersdk.swift */,
+				BA5EE3DE238ADB1B00D2AA12 /* HyberSDK.swift */,
 			);
-			path = "Hyber-SDK-iOS";
+			path = HyberSDK;
 			sourceTree = "<group>";
 		};
-		BA5EE3CD238AD4BB00D2AA12 /* Hyber-SDK-iOSTests */ = {
+		BA5EE3CD238AD4BB00D2AA12 /* HyberSDKTests */ = {
 			isa = PBXGroup;
 			children = (
-				BA5EE3CE238AD4BB00D2AA12 /* Hyber_SDK_iOSTests.swift */,
+				BA5EE3CE238AD4BB00D2AA12 /* HyberSDKTests.swift */,
 				BA5EE3D0238AD4BB00D2AA12 /* Info.plist */,
 			);
-			path = "Hyber-SDK-iOSTests";
+			path = HyberSDKTests;
 			sourceTree = "<group>";
 		};
 		BA5EE3E4238ADB5600D2AA12 /* core */ = {
@@ -241,7 +241,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				BA5EE406238ADBD900D2AA12 /* Log.h in Headers */,
-				BA5EE3D1238AD4BB00D2AA12 /* Hyber_SDK_iOS.h in Headers */,
+				BA5EE3D1238AD4BB00D2AA12 /* HyberSDK.h in Headers */,
 				BA5EE3E1238ADB2D00D2AA12 /* BridgingHeader.h in Headers */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -249,9 +249,9 @@
 /* End PBXHeadersBuildPhase section */
 
 /* Begin PBXNativeTarget section */
-		BA5EE3BF238AD4BB00D2AA12 /* Hyber-SDK-iOS */ = {
+		BA5EE3BF238AD4BB00D2AA12 /* HyberSDK */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = BA5EE3D4238AD4BB00D2AA12 /* Build configuration list for PBXNativeTarget "Hyber-SDK-iOS" */;
+			buildConfigurationList = BA5EE3D4238AD4BB00D2AA12 /* Build configuration list for PBXNativeTarget "HyberSDK" */;
 			buildPhases = (
 				8DB13EC78BD54D48D521CCAF /* [CP] Check Pods Manifest.lock */,
 				BA5EE3BB238AD4BB00D2AA12 /* Headers */,
@@ -264,14 +264,14 @@
 			);
 			dependencies = (
 			);
-			name = "Hyber-SDK-iOS";
+			name = HyberSDK;
 			productName = "Hyber-SDK-iOS";
-			productReference = BA5EE3C0238AD4BB00D2AA12 /* Hyber_SDK_iOS.framework */;
+			productReference = BA5EE3C0238AD4BB00D2AA12 /* HyberSDK.framework */;
 			productType = "com.apple.product-type.framework";
 		};
-		BA5EE3C8238AD4BB00D2AA12 /* Hyber-SDK-iOSTests */ = {
+		BA5EE3C8238AD4BB00D2AA12 /* HyberSDKTests */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = BA5EE3D7238AD4BB00D2AA12 /* Build configuration list for PBXNativeTarget "Hyber-SDK-iOSTests" */;
+			buildConfigurationList = BA5EE3D7238AD4BB00D2AA12 /* Build configuration list for PBXNativeTarget "HyberSDKTests" */;
 			buildPhases = (
 				1C8F13DAC54F152BCC124F1C /* [CP] Check Pods Manifest.lock */,
 				BA5EE3C5238AD4BB00D2AA12 /* Sources */,
@@ -283,9 +283,9 @@
 			dependencies = (
 				BA5EE3CC238AD4BB00D2AA12 /* PBXTargetDependency */,
 			);
-			name = "Hyber-SDK-iOSTests";
+			name = HyberSDKTests;
 			productName = "Hyber-SDK-iOSTests";
-			productReference = BA5EE3C9238AD4BB00D2AA12 /* Hyber-SDK-iOSTests.xctest */;
+			productReference = BA5EE3C9238AD4BB00D2AA12 /* HyberSDKTests.xctest */;
 			productType = "com.apple.product-type.bundle.unit-test";
 		};
 /* End PBXNativeTarget section */
@@ -307,7 +307,7 @@
 					};
 				};
 			};
-			buildConfigurationList = BA5EE3BA238AD4BB00D2AA12 /* Build configuration list for PBXProject "Hyber-SDK-iOS" */;
+			buildConfigurationList = BA5EE3BA238AD4BB00D2AA12 /* Build configuration list for PBXProject "HyberSDK" */;
 			compatibilityVersion = "Xcode 9.3";
 			developmentRegion = en;
 			hasScannedForEncodings = 0;
@@ -319,8 +319,8 @@
 			projectDirPath = "";
 			projectRoot = "";
 			targets = (
-				BA5EE3BF238AD4BB00D2AA12 /* Hyber-SDK-iOS */,
-				BA5EE3C8238AD4BB00D2AA12 /* Hyber-SDK-iOSTests */,
+				BA5EE3BF238AD4BB00D2AA12 /* HyberSDK */,
+				BA5EE3C8238AD4BB00D2AA12 /* HyberSDKTests */,
 			);
 		};
 /* End PBXProject section */
@@ -430,7 +430,7 @@
 				BA5EE409238ADBD900D2AA12 /* Formatter.swift in Sources */,
 				BA5EE3EB238ADB6900D2AA12 /* hyber_sdk_init.swift in Sources */,
 				BA5EE411238ADBF900D2AA12 /* params.swift in Sources */,
-				BA5EE3DF238ADB1B00D2AA12 /* hybersdk.swift in Sources */,
+				BA5EE3DF238ADB1B00D2AA12 /* HyberSDK.swift in Sources */,
 				BA5EE3FA238ADBC400D2AA12 /* hyber_firebase.swift in Sources */,
 				BA5EE3F9238ADBC400D2AA12 /* HyberFirebaseHelper.swift in Sources */,
 				BA5EE3F8238ADBC400D2AA12 /* HyberPushNotificationHelper.swift in Sources */,
@@ -441,7 +441,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				BA5EE3CF238AD4BB00D2AA12 /* Hyber_SDK_iOSTests.swift in Sources */,
+				BA5EE3CF238AD4BB00D2AA12 /* HyberSDKTests.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -450,7 +450,7 @@
 /* Begin PBXTargetDependency section */
 		BA5EE3CC238AD4BB00D2AA12 /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
-			target = BA5EE3BF238AD4BB00D2AA12 /* Hyber-SDK-iOS */;
+			target = BA5EE3BF238AD4BB00D2AA12 /* HyberSDK */;
 			targetProxy = BA5EE3CB238AD4BB00D2AA12 /* PBXContainerItemProxy */;
 		};
 /* End PBXTargetDependency section */
@@ -590,14 +590,14 @@
 				DYLIB_COMPATIBILITY_VERSION = 1;
 				DYLIB_CURRENT_VERSION = 1;
 				DYLIB_INSTALL_NAME_BASE = "@rpath";
-				INFOPLIST_FILE = "Hyber-SDK-iOS/Info.plist";
+				INFOPLIST_FILE = "$(SRCROOT)/HyberSDK/Info.plist";
 				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
 					"@loader_path/Frameworks",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = "com.hyber.ios.hybersdkios.Hyber-SDK-iOS";
+				PRODUCT_BUNDLE_IDENTIFIER = com.hyber.ios.hybersdkios.HyberSDK;
 				PRODUCT_NAME = "$(TARGET_NAME:c99extidentifier)";
 				SKIP_INSTALL = YES;
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
@@ -618,14 +618,14 @@
 				DYLIB_COMPATIBILITY_VERSION = 1;
 				DYLIB_CURRENT_VERSION = 1;
 				DYLIB_INSTALL_NAME_BASE = "@rpath";
-				INFOPLIST_FILE = "Hyber-SDK-iOS/Info.plist";
+				INFOPLIST_FILE = "$(SRCROOT)/HyberSDK/Info.plist";
 				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
 					"@loader_path/Frameworks",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = "com.hyber.ios.hybersdkios.Hyber-SDK-iOS";
+				PRODUCT_BUNDLE_IDENTIFIER = com.hyber.ios.hybersdkios.HyberSDK;
 				PRODUCT_NAME = "$(TARGET_NAME:c99extidentifier)";
 				SKIP_INSTALL = YES;
 				SWIFT_VERSION = 5.0;
@@ -676,7 +676,7 @@
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
-		BA5EE3BA238AD4BB00D2AA12 /* Build configuration list for PBXProject "Hyber-SDK-iOS" */ = {
+		BA5EE3BA238AD4BB00D2AA12 /* Build configuration list for PBXProject "HyberSDK" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				BA5EE3D2238AD4BB00D2AA12 /* Debug */,
@@ -685,7 +685,7 @@
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		BA5EE3D4238AD4BB00D2AA12 /* Build configuration list for PBXNativeTarget "Hyber-SDK-iOS" */ = {
+		BA5EE3D4238AD4BB00D2AA12 /* Build configuration list for PBXNativeTarget "HyberSDK" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				BA5EE3D5238AD4BB00D2AA12 /* Debug */,
@@ -694,7 +694,7 @@
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		BA5EE3D7238AD4BB00D2AA12 /* Build configuration list for PBXNativeTarget "Hyber-SDK-iOSTests" */ = {
+		BA5EE3D7238AD4BB00D2AA12 /* Build configuration list for PBXNativeTarget "HyberSDKTests" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				BA5EE3D8238AD4BB00D2AA12 /* Debug */,

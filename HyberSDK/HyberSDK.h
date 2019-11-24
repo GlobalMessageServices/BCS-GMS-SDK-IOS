@@ -10,10 +10,10 @@
 #import <CommonCrypto/CommonHMAC.h>
 
 //! Project version number for Hyber_SDK_iOS.
-FOUNDATION_EXPORT double Hyber_SDK_iOSVersionNumber;
+FOUNDATION_EXPORT double HyberSDKVersionNumber;
 
 //! Project version string for Hyber_SDK_iOS.
-FOUNDATION_EXPORT const unsigned char Hyber_SDK_iOSVersionString[];
+FOUNDATION_EXPORT const unsigned char HyberSDKVersionString[];
 
 // In this header, you should import all the public headers of your framework using statements like #import <Hyber_SDK_iOS/PublicHeader.h>
 
