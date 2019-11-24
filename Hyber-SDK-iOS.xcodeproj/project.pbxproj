@@ -11,7 +11,7 @@
 		BA5EE3CA238AD4BB00D2AA12 /* Hyber_SDK_iOS.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = BA5EE3C0238AD4BB00D2AA12 /* Hyber_SDK_iOS.framework */; };
 		BA5EE3CF238AD4BB00D2AA12 /* Hyber_SDK_iOSTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA5EE3CE238AD4BB00D2AA12 /* Hyber_SDK_iOSTests.swift */; };
 		BA5EE3D1238AD4BB00D2AA12 /* Hyber_SDK_iOS.h in Headers */ = {isa = PBXBuildFile; fileRef = BA5EE3C3238AD4BB00D2AA12 /* Hyber_SDK_iOS.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		BA5EE3DB238ADAD800D2AA12 /* HyberSDK.podspec in Resources */ = {isa = PBXBuildFile; fileRef = BA5EE3DA238ADAD800D2AA12 /* HyberSDK.podspec */; };
+		BA5EE3DB238ADAD800D2AA12 /* hybersdk.podspec in Resources */ = {isa = PBXBuildFile; fileRef = BA5EE3DA238ADAD800D2AA12 /* hybersdk.podspec */; };
 		BA5EE3DD238ADB1100D2AA12 /* HyberAppDelegatePush.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA5EE3DC238ADB1100D2AA12 /* HyberAppDelegatePush.swift */; };
 		BA5EE3DF238ADB1B00D2AA12 /* hybersdk.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA5EE3DE238ADB1B00D2AA12 /* hybersdk.swift */; };
 		BA5EE3E1238ADB2D00D2AA12 /* BridgingHeader.h in Headers */ = {isa = PBXBuildFile; fileRef = BA5EE3E0238ADB2D00D2AA12 /* BridgingHeader.h */; };
@@ -62,7 +62,7 @@
 		BA5EE3C9238AD4BB00D2AA12 /* Hyber-SDK-iOSTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "Hyber-SDK-iOSTests.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
 		BA5EE3CE238AD4BB00D2AA12 /* Hyber_SDK_iOSTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Hyber_SDK_iOSTests.swift; sourceTree = "<group>"; };
 		BA5EE3D0238AD4BB00D2AA12 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		BA5EE3DA238ADAD800D2AA12 /* HyberSDK.podspec */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = HyberSDK.podspec; sourceTree = "<group>"; };
+		BA5EE3DA238ADAD800D2AA12 /* hybersdk.podspec */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = hybersdk.podspec; sourceTree = "<group>"; };
 		BA5EE3DC238ADB1100D2AA12 /* HyberAppDelegatePush.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HyberAppDelegatePush.swift; sourceTree = "<group>"; };
 		BA5EE3DE238ADB1B00D2AA12 /* hybersdk.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = hybersdk.swift; sourceTree = "<group>"; };
 		BA5EE3E0238ADB2D00D2AA12 /* BridgingHeader.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BridgingHeader.h; sourceTree = "<group>"; };
@@ -122,7 +122,7 @@
 		BA5EE3B6238AD4BB00D2AA12 = {
 			isa = PBXGroup;
 			children = (
-				BA5EE3DA238ADAD800D2AA12 /* HyberSDK.podspec */,
+				BA5EE3DA238ADAD800D2AA12 /* hybersdk.podspec */,
 				BA5EE3C2238AD4BB00D2AA12 /* Hyber-SDK-iOS */,
 				BA5EE3CD238AD4BB00D2AA12 /* Hyber-SDK-iOSTests */,
 				BA5EE3C1238AD4BB00D2AA12 /* Products */,
@@ -330,7 +330,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				BA5EE3DB238ADAD800D2AA12 /* HyberSDK.podspec in Resources */,
+				BA5EE3DB238ADAD800D2AA12 /* hybersdk.podspec in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
