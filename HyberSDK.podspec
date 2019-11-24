@@ -16,7 +16,7 @@ Pod::Spec.new do |spec|
   #
 
   spec.name         = "HyberSDK"
-  spec.version      = "0.0.24"
+  spec.version      = "0.0.25"
   spec.summary      = "A short description of HyberSDK."
 
   # This description is used to generate tags and improve search results.
@@ -78,7 +78,7 @@ Pod::Spec.new do |spec|
   #  Supports git, hg, bzr, svn and HTTP.
   #
 
-  spec.source       = { :git => "https://github.com/Incuube/Hyber-SVC-SDK-iOS.git", :tag => "#{spec.version}" }
+  spec.source       = { :git => "ssh://github.com/Incuube/Hyber-SVC-SDK-iOS.git", :tag => "#{spec.version}" }
 
 
   # ――― Source Code ―――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――― #
@@ -89,7 +89,7 @@ Pod::Spec.new do |spec|
   #  Not including the public_header_files will make all headers public.
   #
 
-  spec.source_files  = "Classes", "Classes/**/*.{h,m}", "Hyber-SDK-iOS/*.{h,m}", "hybersdk", "Hyber-SDK-iOS/api", "Hyber-SDK-iOS/core", "Hyber-SDK-iOS/settings" #, "Hyber-SDK-iOS/notifications"
+  spec.source_files  = "Classes", "Classes/**/*.{h,m}", "Hyber-SDK-iOS/*.{h,m}", "Hyber-SDK-iOS", "Hyber-SDK-iOS/api", "Hyber-SDK-iOS/core", "Hyber-SDK-iOS/settings" #, "Hyber-SDK-iOS/notifications"
   spec.exclude_files = "Classes/Exclude"
 
   # spec.public_header_files = "Classes/**/*.h"
@@ -190,7 +190,7 @@ Pod::Spec.new do |spec|
   #  core.public_header_files = 'Core/FirebaseCore/*.h'
   #  core.source_files = 'Core/FirebaseCore/*.{h,m}'
   #  core.dependency 'Firebase/Core'
-  #  core.xcconfig = { 'HEADER_SEARCH_PATHS' => '$(PODS_ROOT)/sksdk/FirebaseCore' }
+  #  core.xcconfig = { 'HEADER_SEARCH_PATHS' => '$(PODS_ROOT)/Hyber-SDK-iOS/FirebaseCore' }
   #end
 
 
