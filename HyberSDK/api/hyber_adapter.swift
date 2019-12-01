@@ -260,9 +260,9 @@ class HyberAPI {
                     
                     UserDefaults.standard.synchronize()
                     
-                    if let appDomain = Bundle.main.bundleIdentifier {
-                        UserDefaults.standard.removePersistentDomain(forName: appDomain)
-                    }
+                    //if let appDomain = Bundle.main.bundleIdentifier {
+                    //    UserDefaults.standard.removePersistentDomain(forName: appDomain)
+                    //}
                     
                     
                     if response == "SUCCESS"
@@ -270,6 +270,7 @@ class HyberAPI {
                         self.processor.file_logger(message: "\(procedure_name) success response body is \(response)", loglevel: ".debug")                }
                 case 401:
                     Constants.registrationstatus = false
+                    UserDefaults.standard.set(false, forKey: "registrationstatus")
                     UserDefaults.standard.synchronize()
                     
                 default:
@@ -377,6 +378,7 @@ class HyberAPI {
                         self.processor.file_logger(message: "\(procedure_name) success response body is \(response)", loglevel: ".debug")                }
                 case 401:
                     Constants.registrationstatus = false
+                    UserDefaults.standard.set(false, forKey: "registrationstatus")
                     UserDefaults.standard.synchronize()
                     
                 default:
@@ -482,6 +484,7 @@ class HyberAPI {
                     
                 case 401:
                     Constants.registrationstatus = false
+                    UserDefaults.standard.set(false, forKey: "registrationstatus")
                     UserDefaults.standard.synchronize()
                     
                     
@@ -591,6 +594,7 @@ class HyberAPI {
                         
                     case 401:
                         Constants.registrationstatus = false
+                        UserDefaults.standard.set(false, forKey: "registrationstatus")
                         UserDefaults.standard.synchronize()
                         
                     default:
@@ -698,6 +702,7 @@ class HyberAPI {
                     
                 case 401:
                     Constants.registrationstatus = false
+                    UserDefaults.standard.set(false, forKey: "registrationstatus")
                     UserDefaults.standard.synchronize()
                     
                 default:
@@ -828,6 +833,7 @@ class HyberAPI {
                     
                 case 401:
                     Constants.registrationstatus = false
+                    UserDefaults.standard.set(false, forKey: "registrationstatus")
                     UserDefaults.standard.synchronize()
                     
                     
@@ -1005,6 +1011,7 @@ class HyberAPI {
                     
                 case 401:
                     Constants.registrationstatus = false
+                    UserDefaults.standard.set(false, forKey: "registrationstatus")
                     UserDefaults.standard.synchronize()
                     
                 default:
