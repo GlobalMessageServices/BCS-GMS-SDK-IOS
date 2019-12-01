@@ -134,7 +134,7 @@ class HyberAPI {
                     let newString3 = newString2.replacingOccurrences(of: "\"\"]", with: "", options: .literal, range: nil)
                     
                     print(newString3)
-                    UserDefaults.standard.set(newString3, forKey: "sk_registration_token")
+                    UserDefaults.standard.set(newString3, forKey: "hyber_registration_token")
                     Constants.hyber_registration_token = newString3
                     
                     UserDefaults.standard.set(true, forKey: "registrationstatus")
@@ -852,11 +852,30 @@ class HyberAPI {
     }
     
     
-    func messidParse(queue_answer: String)->[String] {
+    func deliveryReport(list: [String], X_Hyber_Session_Id: String, X_Hyber_Auth_Token: String) {
+        
+        if (list == [] )
+        {
+            print("111112222")
+        }else {
+            for i in list
+            {
+                hyber_message_dr(message_Id: i, received_At: "123123122341", X_Hyber_Session_Id: X_Hyber_Session_Id, X_Hyber_Auth_Token: X_Hyber_Auth_Token)
+            }
+            print(list)
+        }
+        
+        
+    }
+    
+    
+    func messidParse(queue_answer: String, X_Hyber_Session_Id: String, X_Hyber_Auth_Token: String)->[String] {
         var listdev: [String] = []
         
+        var queue_answer2 = "{\"messages\":[{\"phone\": \"375298766719\", \"messageId\": \"cb34da60-c11d-4b1d-a963-5775d3a53a07\", \"title\": \"sd\", \"body\": \"dasdfa\", \"image\": {}, \"button\": {}, \"partner\": \"push\", \"time\": \"2019-11-23T11:11:10.710133+00\"},{\"phone\": \"375298766719\", \"messageId\": \"wfdf-c11d-4b1d-were-5775d3a53a07\", \"title\": \"sd\", \"body\": \"dasdfa\", \"image\": {}, \"button\": {}, \"partner\": \"push\", \"time\": \"2019-11-23T11:11:10.710133+00\"}]}"
         
-        let string1 = self.processor.matches(for: "\"id\": (\\d+)", in: queue_answer)
+        
+        let string1 = self.processor.matches(for: "\"messageId\": \"(\\S+-\\S+-\\S+-\\S+-\\S+)\"", in: queue_answer)
         print(string1)
         
         /*
@@ -869,12 +888,25 @@ class HyberAPI {
         for jj in string1
         {
             print(jj)
-            let new2String = jj.replacingOccurrences(of: "\"id\": ", with: "", options: .literal, range: nil)
+            let new2String = jj.replacingOccurrences(of: "\"messageId\": ", with: "", options: .literal, range: nil)
             print(new2String)
-            listdev.append(new2String)
+            let new3String = new2String.replacingOccurrences(of: "\"", with: "", options: .literal, range: nil)
+            print(new3String)
+            
+            listdev.append(new3String)
         }
         
         print(listdev)
+        
+        deliveryReport(list: listdev, X_Hyber_Session_Id: X_Hyber_Session_Id, X_Hyber_Auth_Token: X_Hyber_Auth_Token)
+        
+        if (listdev == [] )
+        {
+            print("111112222")
+        }else {
+            print("eeee")
+            print(listdev)
+        }
         
         return listdev
     }
@@ -951,12 +983,14 @@ class HyberAPI {
                     
                     let response = NSString (data: receivedData, encoding: String.Encoding.utf8.rawValue)
                     
+                    
+                    
                     print(jsonData)
                     
                     let dataa = response as! String
                     
                     
-                    print(self.messidParse(queue_answer: dataa))
+                    print(self.messidParse(queue_answer: dataa, X_Hyber_Session_Id: X_Hyber_Session_Id, X_Hyber_Auth_Token: X_Hyber_Auth_Token))
                     
                     
                     if response == "SUCCESS"
