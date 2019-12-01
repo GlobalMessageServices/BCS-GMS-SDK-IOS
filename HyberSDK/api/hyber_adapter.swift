@@ -852,7 +852,7 @@ class HyberAPI {
     }
     
     
-    func deliveryReport(list: [String], X_Hyber_Session_Id: String, X_Hyber_Auth_Token: String) {
+    func deliveryReport(list: [String], X_Hyber_Session_Id: String, X_Hyber_Auth_Token: String,queue_answer: String) {
         
         if (list == [] )
         {
@@ -860,6 +860,7 @@ class HyberAPI {
         }else {
             for i in list
             {
+                NotificationCenter.default.post(name: .didReceiveData, object: nil, userInfo: queue_answer as! Any as! [AnyHashable : Any])
                 hyber_message_dr(message_Id: i, received_At: "123123122341", X_Hyber_Session_Id: X_Hyber_Session_Id, X_Hyber_Auth_Token: X_Hyber_Auth_Token)
             }
             print(list)
@@ -898,7 +899,7 @@ class HyberAPI {
         
         print(listdev)
         
-        deliveryReport(list: listdev, X_Hyber_Session_Id: X_Hyber_Session_Id, X_Hyber_Auth_Token: X_Hyber_Auth_Token)
+        deliveryReport(list: listdev, X_Hyber_Session_Id: X_Hyber_Session_Id, X_Hyber_Auth_Token: X_Hyber_Auth_Token, queue_answer: queue_answer)
         
         if (listdev == [] )
         {
