@@ -850,4 +850,145 @@ class HyberAPI {
             return answer_b.general_answer(resp_code: "710", body_json: "error", description: "hyber_device_get_all Critical error")
         }
     }
+    
+    
+    func messidParse(queue_answer: String)->[String] {
+        var listdev: [String] = []
+        
+        
+        let string1 = self.processor.matches(for: "\"id\": (\\d+)", in: queue_answer)
+        print(string1)
+        
+        /*
+         let jsonData2 = try? JSONSerialization.data(withJSONObject: string1, options: [])
+         let jsonString2 = String(data: jsonData2!, encoding: .utf8)!
+         let string2 = String(jsonString2).replacingOccurrences(of: "\\", with: "", options: .literal, range: nil)
+         print(string2)
+         */
+        
+        for jj in string1
+        {
+            print(jj)
+            let new2String = jj.replacingOccurrences(of: "\"id\": ", with: "", options: .literal, range: nil)
+            print(new2String)
+            listdev.append(new2String)
+        }
+        
+        print(listdev)
+        
+        return listdev
+    }
+    
+    //8 queue procedure
+    func hyber_check_queue(X_Hyber_Session_Id: String, X_Hyber_Auth_Token:String)->String {
+        do {
+            let procedure_name = "hyber_check_queue"
+            let configuration = URLSessionConfiguration .default
+            let session = URLSession(configuration: configuration)
+            let semaphore2 = DispatchSemaphore(value: 0)
+            var answ: String = String()
+            let params =  [:] as Dictionary<String, AnyObject>
+            let urlString = NSString(format: Constants.hyber_url_mess_queue);
+            processor.file_logger(message: "\(procedure_name) url string is \(urlString)", loglevel: ".debug")
+            processor.file_logger(message: "\(procedure_name) params is \(params.description)", loglevel: ".debug")
+            
+            let request : NSMutableURLRequest = NSMutableURLRequest()
+            request.url = URL(string: NSString(format: "%@", urlString)as String)
+            request.httpMethod = "POST"
+            request.timeoutInterval = 30
+            request.addValue("application/json", forHTTPHeaderField: "Content-Type")
+            request.addValue("application/json", forHTTPHeaderField: "Accept")
+            //request.addValue("test", forHTTPHeaderField: "X-Hyber-Client-API-Key")
+            request.addValue(X_Hyber_Session_Id, forHTTPHeaderField: "X-Hyber-Session-Id")
+            //request.addValue("1234567890", forHTTPHeaderField: "X-Hyber-IOS-Bundle-Id")
+            //request.addValue("1", forHTTPHeaderField: "X-Hyber-App-Fingerprint")
+            
+            
+            let timeInterval =  NSDate().timeIntervalSince1970
+            let timet = Int(round(timeInterval) as Double)
+            let auth_token = X_Hyber_Auth_Token + ":" + String(timet)
+            let sha256_auth_token = auth_token.sha256()
+            print(sha256_auth_token)
+            
+            self.processor.file_logger(message: "\(procedure_name) request X-Hyber-Timestamp is \(String(timet))", loglevel: ".debug")
+            request.addValue(String(timet), forHTTPHeaderField: "X-Hyber-Timestamp")
+            request.addValue(sha256_auth_token, forHTTPHeaderField: "X-Hyber-Auth-Token")
+            print(request.allHTTPHeaderFields)
+            print(request.httpBody)
+            
+            
+            request.httpBody  = try! JSONSerialization.data(withJSONObject: params, options: [])
+            
+            let dataTask = session.dataTask(with: request as URLRequest)
+            {
+                ( data: Data?, response: URLResponse?, error: Error?) -> Void in
+                // 1: Check HTTP Response for successful GET request
+                guard let httpResponse = response as? HTTPURLResponse, let receivedData = data
+                    else {
+                        print("error: not a valid http response")
+                        return
+                }
+                
+                let jsonData = try? JSONSerialization.jsonObject(with: receivedData, options: []) as? Dictionary<String, Any>
+                //////self.logger.file_logger(message: "\(procedure_name) response jsonData is \(jsonData??["devices"])", loglevel: ".debug")
+                let body_json: String = String(decoding: receivedData, as: UTF8.self)
+                
+                answ = self.answer_buider.general_answer(resp_code: String(httpResponse.statusCode), body_json: body_json, description: "Success")
+                
+                self.processor.file_logger(message: "\(procedure_name) response jsonData is \(jsonData)", loglevel: ".debug")
+                
+                self.processor.file_logger(message: "\(procedure_name) response code is \(httpResponse.statusCode)", loglevel: ".debug")
+                
+                self.processor.file_logger(message: "\(procedure_name) response data is \(data)", loglevel: ".debug")
+                
+                self.processor.file_logger(message: "\(procedure_name) response debugDescription is \(httpResponse.debugDescription)", loglevel: ".debug")
+                
+                print(httpResponse.statusCode)
+                
+                switch (httpResponse.statusCode)
+                {
+                case 200:
+                    
+                    let response = NSString (data: receivedData, encoding: String.Encoding.utf8.rawValue)
+                    
+                    print(jsonData)
+                    
+                    let dataa = response as! String
+                    
+                    
+                    print(self.messidParse(queue_answer: dataa))
+                    
+                    
+                    if response == "SUCCESS"
+                    {
+                        self.processor.file_logger(message: "\(procedure_name) success response body is \(response)", loglevel: ".debug")                }
+                    
+                case 401:
+                    Constants.registrationstatus = false
+                    UserDefaults.standard.synchronize()
+                    
+                default:
+                    self.processor.file_logger(message: "\(procedure_name) save profile POST request got response \(httpResponse.statusCode)", loglevel: ".error")
+                }
+                semaphore2.signal()
+            }
+            dataTask.resume()
+            semaphore2.wait()
+            return answ
+        } catch {
+            print("invalid regex: \(error.localizedDescription)")
+            return answer_b.general_answer(resp_code: "710", body_json: "error", description: "Critical error")
+        }
+    }
+    
+    
+    /*
+    typealias CompletionHandler = (_ result:NSDictionary) -> Void
+    
+    func hardProcessingWithString(input: String, completion: (String) -> Void) {
+        completion("we finished!")
+    }
+ */
+    
+    
 }

@@ -38,14 +38,91 @@ public struct Constants {
     static let kHyberClientAPIKey = UserDefaults.standard.string(forKey:"clientApiKey")
     static let kFCM = UserDefaults.standard.string(forKey: "fcmToken")
     
+    static let branch = "test"
+    
+    static func url_Http_Registration_fun(branch: String) -> String {
+        if (branch=="master")
+        {
+            return "https://push.hyber.im/api/2.3/device/registration"
+        }else {
+            return "https://test-push.hyber.im/api/2.3/device/registration"
+        }
+    }
+    
+    static func url_Http_Revoke_fun(branch: String) -> String {
+        if (branch=="master")
+        {
+            return "https://push.hyber.im/api/2.3/device/revoke"
+        }else {
+            return "https://test-push.hyber.im/api/2.3/device/revoke"
+        }
+    }
+    
+    static func url_Http_Update_fun(branch: String) -> String {
+        if (branch=="master")
+        {
+            return "https://push.hyber.im/api/2.3/device/update"
+        }else {
+            return "https://test-push.hyber.im/api/2.3/device/update"
+        }
+    }
+    
+    static func url_Http_Mess_history_fun(branch: String) -> String {
+        if (branch=="master")
+        {
+            return "https://push.hyber.im/api/2.3/message/history?startDate="
+        }else {
+            return "https://test-push.hyber.im/api/2.3/message/history?startDate="
+        }
+    }
+    
+    
+    static func url_Http_Mess_dr_fun(branch: String) -> String {
+        if (branch=="master")
+        {
+            return "https://push.hyber.im/api/2.3/message/dr"
+        }else {
+            return "https://test-push.hyber.im/api/2.3/message/dr"
+        }
+    }
+    
+    static func url_Http_Mess_callback_fun(branch: String) -> String {
+        if (branch=="master")
+        {
+            return "https://push.hyber.im/api/2.3/message/callback"
+        }else {
+            return "https://test-push.hyber.im/api/2.3/message/callback"
+        }
+    }
+    
+    static func url_Http_Device_getall_fun(branch: String) -> String {
+        if (branch=="master")
+        {
+            return "https://push.hyber.im/api/2.3/device/all"
+        }else {
+            return "https://test-push.hyber.im/api/2.3/device/all"
+        }
+    }
+    
+    static func fun_hyber_url_mess_queue(branch: String) -> String {
+        if (branch == "master") {
+            return "https://push.hyber.im/api/2.3/message/queue"
+        } else {
+            return "https://test-push.hyber.im/api/2.3/message/queue"
+        }
+    }
+    
+
+    
     //urls for hyber rest server
-    static let url_Http_Registration = "https://push.hyber.im/api/2.3/device/registration" as NSString
-    static let url_Http_Revoke = "https://push.hyber.im/api/2.3/device/revoke" as NSString
-    static let url_Http_Update = "https://push.hyber.im/api/2.3/device/update" as NSString
-    static let url_Http_Mess_history = "https://push.hyber.im/api/2.3/message/history?startDate=" as String
-    static let url_Http_Mess_dr = "https://push.hyber.im/api/2.3/message/dr" as NSString
-    static let url_Http_Mess_callback = "https://push.hyber.im/api/2.3/message/callback" as NSString
-    static let url_Http_Device_getall = "https://push.hyber.im/api/2.3/device/all" as NSString
+    static let url_Http_Registration = url_Http_Registration_fun(branch: branch) as NSString
+    static let url_Http_Revoke = url_Http_Revoke_fun(branch: branch) as NSString
+    static let url_Http_Update = url_Http_Update_fun(branch: branch) as NSString
+    static let url_Http_Mess_history = url_Http_Mess_history_fun(branch: branch) as String
+    static let url_Http_Mess_dr = url_Http_Mess_dr_fun(branch: branch) as NSString
+    static let url_Http_Mess_callback = url_Http_Mess_callback_fun(branch: branch) as NSString
+    static let url_Http_Device_getall = url_Http_Device_getall_fun(branch: branch) as NSString
+    static let hyber_url_mess_queue = fun_hyber_url_mess_queue(branch: branch) as NSString
     
     
     static let debug_log_path = "/Users/imperituroard/Desktop/application_debug.log" as String

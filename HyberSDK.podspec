@@ -16,7 +16,7 @@ Pod::Spec.new do |spec|
   #
 
   spec.name         = "HyberSDK"
-  spec.version      = "0.0.27"
+  spec.version      = "0.0.28"
   spec.summary      = "A short description of HyberSDK."
 
   # This description is used to generate tags and improve search results.
@@ -146,7 +146,7 @@ Pod::Spec.new do |spec|
   #spec.dependency "FirebaseAnalyticsInterop"
   #spec.dependency "FirebaseAuthInterop"
   #spec.dependency "FirebaseInstanceID"
-  spec.dependency "CryptoSwift"
+  spec.dependency "CryptoSwift", "1.0.0"
 
 
   spec.dependency "Firebase"

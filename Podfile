@@ -16,7 +16,7 @@ target 'Hyber-SDK-iOS' do
   pod 'Firebase/Firestore'
   pod 'Google-Mobile-Ads-SDK'
   pod 'BoringSSL-GRPC'
-  pod 'CryptoSwift'
+  pod 'CryptoSwift', '1.0.0'
 
 
   target 'Hyber-SDK-iOSTests' do

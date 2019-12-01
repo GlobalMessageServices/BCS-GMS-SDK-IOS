@@ -1,3 +1,0 @@
-# Hyber-SVC-SDK-iOS
-
-

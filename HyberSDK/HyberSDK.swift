@@ -291,6 +291,26 @@ public class HyberSDK {
     }
     
     
+    public func hyber_check_queue()->String {
+        do{
+            
+            if (Constants.registrationstatus==true){
+                let X_Hyber_Session_Id: String = Constants.firebase_registration_token ?? "22"
+                let hyber_rest_server = HyberAPI.init()
+                
+                let ansss = hyber_rest_server.hyber_check_queue(X_Hyber_Session_Id: X_Hyber_Session_Id, X_Hyber_Auth_Token: Constants.hyber_registration_token!)
+                return ansss}
+            else {
+                return answer_b.general_answer(resp_code: "704", body_json: "error", description: "Not registered")
+            }
+            
+        } catch  {
+            print("invalid regex: \(error.localizedDescription)")
+            return answer_b.general_answer(resp_code: "710", body_json: "error", description: "Critical error")
+        }
+    }
+
+    
     
     
     
