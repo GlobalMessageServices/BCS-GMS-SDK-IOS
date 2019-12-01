@@ -10,6 +10,27 @@ import Foundation
 import CoreData
 import UIKit
 
+
+public struct HyberFunAnswerRegister {
+    var code: Int
+    var result: String
+    var description: String
+    var deviceId: String
+    var token: String
+    var userId: String
+    var userPhone: String
+    var createdAt: String
+}
+
+public struct HyberFunAnswerGeneral {
+    var code: Int
+    var result: String
+    var description: String
+    var body: String
+}
+
+
+
 public struct Constants {
     
     static var registrationstatus = UserDefaults.standard.bool(forKey: "registrationstatus")

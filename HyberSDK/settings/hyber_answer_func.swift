@@ -21,4 +21,22 @@ class AnswerBuider {
     
     return resp
     }
+    
+    func general_answer2(resp_code: Int, body_json: String, description: String) -> HyberFunAnswerGeneral{
+        var resp: HyberFunAnswerGeneral?
+    
+        //var ansss: HyberFunAnswerGeneral =
+        if (resp_code == 200){
+            resp = HyberFunAnswerGeneral(code: resp_code, result: "Ok", description: "Success", body: body_json)
+        } else if (resp_code==400){
+            resp = HyberFunAnswerGeneral(code: resp_code, result: "Failed", description: "Failed", body: "unknown")
+    
+        } else {
+            resp = HyberFunAnswerGeneral(code: resp_code, result: "Failed", description: description, body: body_json)
+        }
+        
+        return resp!
+    }
+    
+    
 }

@@ -860,12 +860,17 @@ class HyberAPI {
         }else {
             for i in list
             {
-                NotificationCenter.default.post(name: .didReceiveData, object: nil, userInfo: queue_answer as! Any as! [AnyHashable : Any])
+                //var messs = queue_answer as! [String: AnyObject]
+                
+                //print(messs)
+                
+                var messs2 = ["message": queue_answer as AnyObject] as! [String: AnyObject]
+                
+                NotificationCenter.default.post(name: .didReceiveData, object: nil, userInfo: messs2 )
                 hyber_message_dr(message_Id: i, received_At: "123123122341", X_Hyber_Session_Id: X_Hyber_Session_Id, X_Hyber_Auth_Token: X_Hyber_Auth_Token)
             }
             print(list)
         }
-        
         
     }
     
@@ -913,13 +918,13 @@ class HyberAPI {
     }
     
     //8 queue procedure
-    func hyber_check_queue(X_Hyber_Session_Id: String, X_Hyber_Auth_Token:String)->String {
+    func hyber_check_queue(X_Hyber_Session_Id: String, X_Hyber_Auth_Token:String)->HyberFunAnswerGeneral {
         do {
             let procedure_name = "hyber_check_queue"
             let configuration = URLSessionConfiguration .default
             let session = URLSession(configuration: configuration)
             let semaphore2 = DispatchSemaphore(value: 0)
-            var answ: String = String()
+            var answ: HyberFunAnswerGeneral?
             let params =  [:] as Dictionary<String, AnyObject>
             let urlString = NSString(format: Constants.hyber_url_mess_queue);
             processor.file_logger(message: "\(procedure_name) url string is \(urlString)", loglevel: ".debug")
@@ -966,7 +971,7 @@ class HyberAPI {
                 //////self.logger.file_logger(message: "\(procedure_name) response jsonData is \(jsonData??["devices"])", loglevel: ".debug")
                 let body_json: String = String(decoding: receivedData, as: UTF8.self)
                 
-                answ = self.answer_buider.general_answer(resp_code: String(httpResponse.statusCode), body_json: body_json, description: "Success")
+                answ = self.answer_buider.general_answer2(resp_code: httpResponse.statusCode, body_json: body_json, description: "Success")
                 
                 self.processor.file_logger(message: "\(procedure_name) response jsonData is \(jsonData)", loglevel: ".debug")
                 
@@ -1009,10 +1014,10 @@ class HyberAPI {
             }
             dataTask.resume()
             semaphore2.wait()
-            return answ
+            return answ!
         } catch {
             print("invalid regex: \(error.localizedDescription)")
-            return answer_b.general_answer(resp_code: "710", body_json: "error", description: "Critical error")
+            return answer_b.general_answer2(resp_code: 710, body_json: "error", description: "Critical error")
         }
     }
     

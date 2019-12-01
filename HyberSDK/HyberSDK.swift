@@ -30,7 +30,10 @@ public class HyberSDK {
     
     public init(user_msisdn: String, user_password: String)
     {
-        
+        Constants.registrationstatus = UserDefaults.standard.bool(forKey: "registrationstatus")
+        Constants.hyber_registration_token = UserDefaults.standard.string(forKey: "hyber_registration_token")
+        Constants.deviceId = UserDefaults.standard.string(forKey: "deviceId")
+        Constants.firebase_registration_token = UserDefaults.standard.string(forKey: "firebase_registration_token")
     }
     
     private let processor = Processing.init()
@@ -291,7 +294,7 @@ public class HyberSDK {
     }
     
     
-    public func hyber_check_queue()->String {
+    public func hyber_check_queue()->HyberFunAnswerGeneral {
         do{
             
             if (Constants.registrationstatus==true){
@@ -299,14 +302,15 @@ public class HyberSDK {
                 let hyber_rest_server = HyberAPI.init()
                 
                 let ansss = hyber_rest_server.hyber_check_queue(X_Hyber_Session_Id: X_Hyber_Session_Id, X_Hyber_Auth_Token: Constants.hyber_registration_token!)
+                
                 return ansss}
             else {
-                return answer_b.general_answer(resp_code: "704", body_json: "error", description: "Not registered")
+                return answer_b.general_answer2(resp_code: 704, body_json: "error", description: "Not registered")
             }
             
         } catch  {
             print("invalid regex: \(error.localizedDescription)")
-            return answer_b.general_answer(resp_code: "710", body_json: "error", description: "Critical error")
+            return answer_b.general_answer2(resp_code: 710, body_json: "error", description: "Critical error")
         }
     }
 
