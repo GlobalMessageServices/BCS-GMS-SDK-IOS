@@ -508,7 +508,7 @@ class HyberAPI {
     //for send delivery report to hyber server
     func hyber_message_dr(message_Id: String, received_At: String, X_Hyber_Session_Id: String, X_Hyber_Auth_Token:String)->String {
         do{
-            if (message_Id != nil && message_Id != "") {
+            if (message_Id != nil && message_Id != "" && message_Id != "[]" ) {
                 let procedure_name = "hyber_message_dr"
                 let configuration = URLSessionConfiguration .default
                 let session = URLSession(configuration: configuration)

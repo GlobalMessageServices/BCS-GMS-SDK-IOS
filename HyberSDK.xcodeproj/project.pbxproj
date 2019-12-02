@@ -7,7 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		27DEA8D1F6CD13DF21B724B7 /* Pods_Hyber_SDK_iOSTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6A8736D5F424CAD5E7486F72 /* Pods_Hyber_SDK_iOSTests.framework */; };
+		225C71927643D897917A4C1D /* Pods_HyberSDK.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E80972298BFD46FD5BE8F985 /* Pods_HyberSDK.framework */; };
 		BA5EE3CA238AD4BB00D2AA12 /* HyberSDK.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = BA5EE3C0238AD4BB00D2AA12 /* HyberSDK.framework */; };
 		BA5EE3CF238AD4BB00D2AA12 /* HyberSDKTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA5EE3CE238AD4BB00D2AA12 /* HyberSDKTests.swift */; };
 		BA5EE3D1238AD4BB00D2AA12 /* HyberSDK.h in Headers */ = {isa = PBXBuildFile; fileRef = BA5EE3C3238AD4BB00D2AA12 /* HyberSDK.h */; settings = {ATTRIBUTES = (Public, ); }; };
@@ -36,7 +36,7 @@
 		BA5EE410238ADBF900D2AA12 /* hyber_answer_func.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA5EE40D238ADBF800D2AA12 /* hyber_answer_func.swift */; };
 		BA5EE411238ADBF900D2AA12 /* params.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA5EE40E238ADBF900D2AA12 /* params.swift */; };
 		BA5EE412238ADBF900D2AA12 /* add_functions.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA5EE40F238ADBF900D2AA12 /* add_functions.swift */; };
-		C4E6AA89914D717B94DF0A72 /* Pods_Hyber_SDK_iOS.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 956040D1570F6A01E4348B3C /* Pods_Hyber_SDK_iOS.framework */; };
+		CD4FF15A972D0A028B6F4C75 /* Pods_HyberSDKTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 60213F3483C73244BD3DD186 /* Pods_HyberSDKTests.framework */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -50,12 +50,9 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
-		2169C5AEAE15475111B445ED /* Pods-Hyber-SDK-iOSTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Hyber-SDK-iOSTests.debug.xcconfig"; path = "Target Support Files/Pods-Hyber-SDK-iOSTests/Pods-Hyber-SDK-iOSTests.debug.xcconfig"; sourceTree = "<group>"; };
-		2AFE08CAB7FDABF713CD0E4A /* Pods-Hyber-SDK-iOS.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Hyber-SDK-iOS.release.xcconfig"; path = "Target Support Files/Pods-Hyber-SDK-iOS/Pods-Hyber-SDK-iOS.release.xcconfig"; sourceTree = "<group>"; };
-		6A8736D5F424CAD5E7486F72 /* Pods_Hyber_SDK_iOSTests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Hyber_SDK_iOSTests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
-		76840A4C2DABF712873286D9 /* Pods-Hyber-SDK-iOSTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Hyber-SDK-iOSTests.release.xcconfig"; path = "Target Support Files/Pods-Hyber-SDK-iOSTests/Pods-Hyber-SDK-iOSTests.release.xcconfig"; sourceTree = "<group>"; };
-		956040D1570F6A01E4348B3C /* Pods_Hyber_SDK_iOS.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Hyber_SDK_iOS.framework; sourceTree = BUILT_PRODUCTS_DIR; };
-		9EFA99836953A25481C1C700 /* Pods-Hyber-SDK-iOS.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Hyber-SDK-iOS.debug.xcconfig"; path = "Target Support Files/Pods-Hyber-SDK-iOS/Pods-Hyber-SDK-iOS.debug.xcconfig"; sourceTree = "<group>"; };
+		0DDE1C1EF17BC4954F1688AA /* Pods-HyberSDK.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-HyberSDK.release.xcconfig"; path = "Target Support Files/Pods-HyberSDK/Pods-HyberSDK.release.xcconfig"; sourceTree = "<group>"; };
+		60213F3483C73244BD3DD186 /* Pods_HyberSDKTests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_HyberSDKTests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		669723B9C9041488BF9B8BFB /* Pods-HyberSDK.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-HyberSDK.debug.xcconfig"; path = "Target Support Files/Pods-HyberSDK/Pods-HyberSDK.debug.xcconfig"; sourceTree = "<group>"; };
 		BA5EE3C0238AD4BB00D2AA12 /* HyberSDK.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = HyberSDK.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		BA5EE3C3238AD4BB00D2AA12 /* HyberSDK.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = HyberSDK.h; sourceTree = "<group>"; };
 		BA5EE3C4238AD4BB00D2AA12 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
@@ -87,6 +84,9 @@
 		BA5EE40D238ADBF800D2AA12 /* hyber_answer_func.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = hyber_answer_func.swift; sourceTree = "<group>"; };
 		BA5EE40E238ADBF900D2AA12 /* params.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = params.swift; sourceTree = "<group>"; };
 		BA5EE40F238ADBF900D2AA12 /* add_functions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = add_functions.swift; sourceTree = "<group>"; };
+		D53AD46060DE0D3D3ED1F791 /* Pods-HyberSDKTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-HyberSDKTests.release.xcconfig"; path = "Target Support Files/Pods-HyberSDKTests/Pods-HyberSDKTests.release.xcconfig"; sourceTree = "<group>"; };
+		E0B6DBF4AFB4A921E27BE040 /* Pods-HyberSDKTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-HyberSDKTests.debug.xcconfig"; path = "Target Support Files/Pods-HyberSDKTests/Pods-HyberSDKTests.debug.xcconfig"; sourceTree = "<group>"; };
+		E80972298BFD46FD5BE8F985 /* Pods_HyberSDK.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_HyberSDK.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -94,7 +94,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				C4E6AA89914D717B94DF0A72 /* Pods_Hyber_SDK_iOS.framework in Frameworks */,
+				225C71927643D897917A4C1D /* Pods_HyberSDK.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -103,18 +103,18 @@
 			buildActionMask = 2147483647;
 			files = (
 				BA5EE3CA238AD4BB00D2AA12 /* HyberSDK.framework in Frameworks */,
-				27DEA8D1F6CD13DF21B724B7 /* Pods_Hyber_SDK_iOSTests.framework in Frameworks */,
+				CD4FF15A972D0A028B6F4C75 /* Pods_HyberSDKTests.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
-		36C2BA6E0CEA341D695B4CBB /* Frameworks */ = {
+		9E713615968A2F3D354F2F83 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
-				956040D1570F6A01E4348B3C /* Pods_Hyber_SDK_iOS.framework */,
-				6A8736D5F424CAD5E7486F72 /* Pods_Hyber_SDK_iOSTests.framework */,
+				E80972298BFD46FD5BE8F985 /* Pods_HyberSDK.framework */,
+				60213F3483C73244BD3DD186 /* Pods_HyberSDKTests.framework */,
 			);
 			name = Frameworks;
 			sourceTree = "<group>";
@@ -127,7 +127,7 @@
 				BA5EE3CD238AD4BB00D2AA12 /* HyberSDKTests */,
 				BA5EE3C1238AD4BB00D2AA12 /* Products */,
 				EBCB302523BFA044958CB5CB /* Pods */,
-				36C2BA6E0CEA341D695B4CBB /* Frameworks */,
+				9E713615968A2F3D354F2F83 /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
@@ -225,10 +225,10 @@
 		EBCB302523BFA044958CB5CB /* Pods */ = {
 			isa = PBXGroup;
 			children = (
-				9EFA99836953A25481C1C700 /* Pods-Hyber-SDK-iOS.debug.xcconfig */,
-				2AFE08CAB7FDABF713CD0E4A /* Pods-Hyber-SDK-iOS.release.xcconfig */,
-				2169C5AEAE15475111B445ED /* Pods-Hyber-SDK-iOSTests.debug.xcconfig */,
-				76840A4C2DABF712873286D9 /* Pods-Hyber-SDK-iOSTests.release.xcconfig */,
+				669723B9C9041488BF9B8BFB /* Pods-HyberSDK.debug.xcconfig */,
+				0DDE1C1EF17BC4954F1688AA /* Pods-HyberSDK.release.xcconfig */,
+				E0B6DBF4AFB4A921E27BE040 /* Pods-HyberSDKTests.debug.xcconfig */,
+				D53AD46060DE0D3D3ED1F791 /* Pods-HyberSDKTests.release.xcconfig */,
 			);
 			path = Pods;
 			sourceTree = "<group>";
@@ -253,12 +253,12 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = BA5EE3D4238AD4BB00D2AA12 /* Build configuration list for PBXNativeTarget "HyberSDK" */;
 			buildPhases = (
-				8DB13EC78BD54D48D521CCAF /* [CP] Check Pods Manifest.lock */,
+				A8FEE88E04F8BEB53EE7B23C /* [CP] Check Pods Manifest.lock */,
 				BA5EE3BB238AD4BB00D2AA12 /* Headers */,
 				BA5EE3BC238AD4BB00D2AA12 /* Sources */,
 				BA5EE3BD238AD4BB00D2AA12 /* Frameworks */,
 				BA5EE3BE238AD4BB00D2AA12 /* Resources */,
-				76F77FAB7F57E76F06C9CA8F /* [CP] Copy Pods Resources */,
+				FFB42C808DB8291DE094BCFB /* [CP] Copy Pods Resources */,
 			);
 			buildRules = (
 			);
@@ -273,7 +273,7 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = BA5EE3D7238AD4BB00D2AA12 /* Build configuration list for PBXNativeTarget "HyberSDKTests" */;
 			buildPhases = (
-				1C8F13DAC54F152BCC124F1C /* [CP] Check Pods Manifest.lock */,
+				E09D42178438C2A0B510132F /* [CP] Check Pods Manifest.lock */,
 				BA5EE3C5238AD4BB00D2AA12 /* Sources */,
 				BA5EE3C6238AD4BB00D2AA12 /* Frameworks */,
 				BA5EE3C7238AD4BB00D2AA12 /* Resources */,
@@ -344,7 +344,7 @@
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXShellScriptBuildPhase section */
-		1C8F13DAC54F152BCC124F1C /* [CP] Check Pods Manifest.lock */ = {
+		A8FEE88E04F8BEB53EE7B23C /* [CP] Check Pods Manifest.lock */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
@@ -359,50 +359,50 @@
 			outputFileListPaths = (
 			);
 			outputPaths = (
-				"$(DERIVED_FILE_DIR)/Pods-Hyber-SDK-iOSTests-checkManifestLockResult.txt",
+				"$(DERIVED_FILE_DIR)/Pods-HyberSDK-checkManifestLockResult.txt",
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
 			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
 			showEnvVarsInLog = 0;
 		};
-		76F77FAB7F57E76F06C9CA8F /* [CP] Copy Pods Resources */ = {
+		E09D42178438C2A0B510132F /* [CP] Check Pods Manifest.lock */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
 			);
 			inputFileListPaths = (
-				"${PODS_ROOT}/Target Support Files/Pods-Hyber-SDK-iOS/Pods-Hyber-SDK-iOS-resources-${CONFIGURATION}-input-files.xcfilelist",
+			);
+			inputPaths = (
+				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
+				"${PODS_ROOT}/Manifest.lock",
+			);
+			name = "[CP] Check Pods Manifest.lock";
+			outputFileListPaths = (
+			);
+			outputPaths = (
+				"$(DERIVED_FILE_DIR)/Pods-HyberSDKTests-checkManifestLockResult.txt",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
+			showEnvVarsInLog = 0;
+		};
+		FFB42C808DB8291DE094BCFB /* [CP] Copy Pods Resources */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-HyberSDK/Pods-HyberSDK-resources-${CONFIGURATION}-input-files.xcfilelist",
 			);
 			name = "[CP] Copy Pods Resources";
 			outputFileListPaths = (
-				"${PODS_ROOT}/Target Support Files/Pods-Hyber-SDK-iOS/Pods-Hyber-SDK-iOS-resources-${CONFIGURATION}-output-files.xcfilelist",
+				"${PODS_ROOT}/Target Support Files/Pods-HyberSDK/Pods-HyberSDK-resources-${CONFIGURATION}-output-files.xcfilelist",
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-Hyber-SDK-iOS/Pods-Hyber-SDK-iOS-resources.sh\"\n";
-			showEnvVarsInLog = 0;
-		};
-		8DB13EC78BD54D48D521CCAF /* [CP] Check Pods Manifest.lock */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputFileListPaths = (
-			);
-			inputPaths = (
-				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
-				"${PODS_ROOT}/Manifest.lock",
-			);
-			name = "[CP] Check Pods Manifest.lock";
-			outputFileListPaths = (
-			);
-			outputPaths = (
-				"$(DERIVED_FILE_DIR)/Pods-Hyber-SDK-iOS-checkManifestLockResult.txt",
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
+			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-HyberSDK/Pods-HyberSDK-resources.sh\"\n";
 			showEnvVarsInLog = 0;
 		};
 /* End PBXShellScriptBuildPhase section */
@@ -580,7 +580,7 @@
 		};
 		BA5EE3D5238AD4BB00D2AA12 /* Debug */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 9EFA99836953A25481C1C700 /* Pods-Hyber-SDK-iOS.debug.xcconfig */;
+			baseConfigurationReference = 669723B9C9041488BF9B8BFB /* Pods-HyberSDK.debug.xcconfig */;
 			buildSettings = {
 				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_IDENTITY = "";
@@ -608,7 +608,7 @@
 		};
 		BA5EE3D6238AD4BB00D2AA12 /* Release */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 2AFE08CAB7FDABF713CD0E4A /* Pods-Hyber-SDK-iOS.release.xcconfig */;
+			baseConfigurationReference = 0DDE1C1EF17BC4954F1688AA /* Pods-HyberSDK.release.xcconfig */;
 			buildSettings = {
 				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_IDENTITY = "";
@@ -635,7 +635,7 @@
 		};
 		BA5EE3D8238AD4BB00D2AA12 /* Debug */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 2169C5AEAE15475111B445ED /* Pods-Hyber-SDK-iOSTests.debug.xcconfig */;
+			baseConfigurationReference = E0B6DBF4AFB4A921E27BE040 /* Pods-HyberSDKTests.debug.xcconfig */;
 			buildSettings = {
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				CODE_SIGN_STYLE = Automatic;
@@ -655,7 +655,7 @@
 		};
 		BA5EE3D9238AD4BB00D2AA12 /* Release */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 76840A4C2DABF712873286D9 /* Pods-Hyber-SDK-iOSTests.release.xcconfig */;
+			baseConfigurationReference = D53AD46060DE0D3D3ED1F791 /* Pods-HyberSDKTests.release.xcconfig */;
 			buildSettings = {
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				CODE_SIGN_STYLE = Automatic;

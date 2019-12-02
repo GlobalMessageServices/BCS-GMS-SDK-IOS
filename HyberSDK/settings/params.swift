@@ -59,7 +59,7 @@ public struct Constants {
     static let kHyberClientAPIKey = UserDefaults.standard.string(forKey:"clientApiKey")
     static let kFCM = UserDefaults.standard.string(forKey: "fcmToken")
     
-    static let branch = "test"
+    static let branch = "master"
     
     static func url_Http_Registration_fun(branch: String) -> String {
         if (branch=="master")

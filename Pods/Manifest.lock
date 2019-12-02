@@ -126,7 +126,7 @@ PODS:
 
 DEPENDENCIES:
   - BoringSSL-GRPC
-  - CryptoSwift
+  - CryptoSwift (= 1.0.0)
   - Firebase/AdMob
   - Firebase/Auth
   - Firebase/Core
@@ -184,6 +184,6 @@ SPEC CHECKSUMS:
   Protobuf: a4dc852ad69c027ca2166ed287b856697814375b
   SwiftyJSON: 6faa0040f8b59dead0ee07436cbf76b73c08fd08
 
-PODFILE CHECKSUM: 400d5bd66679a5fd6eb900830072a6665109d2f3
+PODFILE CHECKSUM: 3e00c1e7a77c5d9866fe9af7feb908d8c048ca63
 
 COCOAPODS: 1.7.4

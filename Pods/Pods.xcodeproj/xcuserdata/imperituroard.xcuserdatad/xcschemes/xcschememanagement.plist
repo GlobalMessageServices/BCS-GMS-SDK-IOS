@@ -123,14 +123,14 @@
 			<key>orderHint</key>
 			<integer>15</integer>
 		</dict>
-		<key>Pods-Hyber-SDK-iOS.xcscheme</key>
+		<key>Pods-HyberSDK.xcscheme</key>
 		<dict>
 			<key>isShown</key>
 			<false/>
 			<key>orderHint</key>
 			<integer>21</integer>
 		</dict>
-		<key>Pods-Hyber-SDK-iOSTests.xcscheme</key>
+		<key>Pods-HyberSDKTests.xcscheme</key>
 		<dict>
 			<key>isShown</key>
 			<false/>
