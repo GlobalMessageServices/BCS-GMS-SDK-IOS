@@ -62,12 +62,19 @@
 #include <openssl_grpc/bio.h>
 #include <openssl_grpc/buf.h>
 #include <openssl_grpc/err.h>
+#include <openssl_grpc/lhash.h>
 #include <openssl_grpc/mem.h>
 
 #include "conf_def.h"
 #include "internal.h"
 #include "../internal.h"
 
+
+DEFINE_LHASH_OF(CONF_VALUE)
+
+struct conf_st {
+  LHASH_OF(CONF_VALUE) *data;
+};
 
 // The maximum length we can grow a value to after variable expansion. 64k
 // should be more than enough for all reasonable uses.

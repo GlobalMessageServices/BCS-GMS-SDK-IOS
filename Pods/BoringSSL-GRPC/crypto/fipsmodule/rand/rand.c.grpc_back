@@ -32,9 +32,9 @@
 
 
 // It's assumed that the operating system always has an unfailing source of
-// entropy which is accessed via |CRYPTO_sysrand|. (If the operating system
-// entropy source fails, it's up to |CRYPTO_sysrand| to abort the process—we
-// don't try to handle it.)
+// entropy which is accessed via |CRYPTO_sysrand[_for_seed]|. (If the operating
+// system entropy source fails, it's up to |CRYPTO_sysrand| to abort the
+// process—we don't try to handle it.)
 //
 // In addition, the hardware may provide a low-latency RNG. Intel's rdrand
 // instruction is the canonical example of this. When a hardware RNG is
@@ -61,11 +61,11 @@ struct rand_thread_state {
   // (re)seeded. This is bound by |kReseedInterval|.
   unsigned calls;
   // last_block_valid is non-zero iff |last_block| contains data from
-  // |CRYPTO_sysrand|.
+  // |CRYPTO_sysrand_for_seed|.
   int last_block_valid;
 
 #if defined(BORINGSSL_FIPS)
-  // last_block contains the previous block from |CRYPTO_sysrand|.
+  // last_block contains the previous block from |CRYPTO_sysrand_for_seed|.
   uint8_t last_block[CRNGT_BLOCK_SIZE];
   // next and prev form a NULL-terminated, double-linked list of all states in
   // a process.
@@ -125,15 +125,6 @@ static void rand_thread_state_free(void *state_in) {
 
 #if defined(OPENSSL_X86_64) && !defined(OPENSSL_NO_ASM) && \
     !defined(BORINGSSL_UNSAFE_DETERMINISTIC_MODE)
-
-// These functions are defined in asm/rdrand-x86_64.pl
-extern int CRYPTO_rdrand(uint8_t out[8]);
-extern int CRYPTO_rdrand_multiple8_buf(uint8_t *buf, size_t len);
-
-static int have_rdrand(void) {
-  return (OPENSSL_ia32cap_get()[1] & (1u << 30)) != 0;
-}
-
 static int hwrand(uint8_t *buf, const size_t len) {
   if (!have_rdrand()) {
     return 0;
@@ -178,7 +169,7 @@ static void rand_get_seed(struct rand_thread_state *state,
                           uint8_t seed[CTR_DRBG_ENTROPY_LEN]) {
   if (!state->last_block_valid) {
     if (!hwrand(state->last_block, sizeof(state->last_block))) {
-      CRYPTO_sysrand(state->last_block, sizeof(state->last_block));
+      CRYPTO_sysrand_for_seed(state->last_block, sizeof(state->last_block));
     }
     state->last_block_valid = 1;
   }
@@ -188,15 +179,16 @@ static void rand_get_seed(struct rand_thread_state *state,
 #define FIPS_OVERREAD 10
   uint8_t entropy[CTR_DRBG_ENTROPY_LEN * FIPS_OVERREAD];
 
-  if (!hwrand(entropy, sizeof(entropy))) {
-    CRYPTO_sysrand(entropy, sizeof(entropy));
+  int used_hwrand = hwrand(entropy, sizeof(entropy));
+  if (!used_hwrand) {
+    CRYPTO_sysrand_for_seed(entropy, sizeof(entropy));
   }
 
   // See FIPS 140-2, section 4.9.2. This is the “continuous random number
   // generator test” which causes the program to randomly abort. Hopefully the
   // rate of failure is small enough not to be a problem in practice.
   if (CRYPTO_memcmp(state->last_block, entropy, CRNGT_BLOCK_SIZE) == 0) {
-    printf("CRNGT failed.\n");
+    fprintf(stderr, "CRNGT failed.\n");
     BORINGSSL_FIPS_abort();
   }
 
@@ -204,7 +196,7 @@ static void rand_get_seed(struct rand_thread_state *state,
        i += CRNGT_BLOCK_SIZE) {
     if (CRYPTO_memcmp(entropy + i - CRNGT_BLOCK_SIZE, entropy + i,
                       CRNGT_BLOCK_SIZE) == 0) {
-      printf("CRNGT failed.\n");
+      fprintf(stderr, "CRNGT failed.\n");
       BORINGSSL_FIPS_abort();
     }
   }
@@ -219,6 +211,17 @@ static void rand_get_seed(struct rand_thread_state *state,
       seed[j] ^= entropy[CTR_DRBG_ENTROPY_LEN * i + j];
     }
   }
+
+#if defined(OPENSSL_URANDOM)
+  // If we used RDRAND, also opportunistically read from the system. This avoids
+  // solely relying on the hardware once the entropy pool has been initialized.
+  if (used_hwrand) {
+    CRYPTO_sysrand_if_available(entropy, CTR_DRBG_ENTROPY_LEN);
+    for (size_t i = 0; i < CTR_DRBG_ENTROPY_LEN; i++) {
+      seed[i] ^= entropy[i];
+    }
+  }
+#endif
 }
 
 #else
@@ -334,6 +337,8 @@ void RAND_bytes_with_additional_data(uint8_t *out, size_t out_len,
 
     out += todo;
     out_len -= todo;
+    // Though we only check before entering the loop, this cannot add enough to
+    // overflow a |size_t|.
     state->calls++;
     first_call = 0;
   }

@@ -162,7 +162,7 @@
 #include "internal.h"
 
 
-namespace bssl {
+BSSL_NAMESPACE_BEGIN
 
 SSL3_STATE::SSL3_STATE()
     : skip_early_data(false),
@@ -172,12 +172,17 @@ SSL3_STATE::SSL3_STATE()
       has_message(false),
       initial_handshake_complete(false),
       session_reused(false),
+      delegated_credential_used(false),
       send_connection_binding(false),
-      tlsext_channel_id_valid(false),
+      channel_id_valid(false),
       key_update_pending(false),
       wpend_pending(false),
       early_data_accepted(false),
-      draft_downgrade(false) {}
+      tls13_downgrade(false),
+      token_binding_negotiated(false),
+      pq_experiment_signal_seen(false),
+      alert_dispatch(false),
+      renegotiate_pending(false) {}
 
 SSL3_STATE::~SSL3_STATE() {}
 
@@ -214,13 +219,4 @@ void ssl3_free(SSL *ssl) {
   ssl->s3 = NULL;
 }
 
-const struct ssl_cipher_preference_list_st *ssl_get_cipher_preferences(
-    const SSL *ssl) {
-  if (ssl->cipher_list != NULL) {
-    return ssl->cipher_list;
-  }
-
-  return ssl->ctx->cipher_list;
-}
-
-}  // namespace bssl
+BSSL_NAMESPACE_END

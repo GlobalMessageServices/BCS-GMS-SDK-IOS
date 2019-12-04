@@ -1,27 +1,31 @@
 # Uncomment the next line to define a global platform for your project
 # platform :ios, '9.0'
 
-target 'HyberSDK' do
+target 'PushDTest' do
   # Comment the next line if you don't want to use dynamic frameworks
   use_frameworks!
 
-  # Pods for Hyber-SDK-iOS
-  pod 'SwiftyJSON', '~> 4.0'
+  # Pods for imperituroard
   pod 'Firebase/Core'
-  pod 'Firebase/Messaging'
   pod 'Firebase/Auth'
   pod 'Firebase/AdMob'
-  #pod 'Firebase/Database'
-  #pod 'Firebase/Storage'
+  pod 'Firebase/Database'
+  pod 'Firebase/Messaging'
+  pod 'Firebase/Storage'
   pod 'Firebase/Firestore'
   pod 'Google-Mobile-Ads-SDK'
-  pod 'BoringSSL-GRPC'
   pod 'CryptoSwift', '1.0.0'
+  pod 'HyberSDK', :git => 'git@github.com:Incuube/Hyber-SVC-SDK-iOS.git', :branch => 'test'
 
+  target 'PushDTestTests' do
+    inherit! :search_paths
+    # Pods for testing
+  end
 
-  target 'HyberSDKTests' do
+  target 'PushDTestUITests' do
     inherit! :search_paths
     # Pods for testing
   end
 
 end
+

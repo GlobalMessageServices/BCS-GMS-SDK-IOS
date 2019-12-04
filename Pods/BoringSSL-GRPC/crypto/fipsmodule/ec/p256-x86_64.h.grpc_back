@@ -23,6 +23,8 @@
 
 #include <openssl/bn.h>
 
+#include "../bn/internal.h"
+
 #if defined(__cplusplus)
 extern "C" {
 #endif
@@ -60,6 +62,40 @@ static inline void ecp_nistz256_from_mont(BN_ULONG res[P256_LIMBS],
   static const BN_ULONG ONE[P256_LIMBS] = { 1 };
   ecp_nistz256_mul_mont(res, in, ONE);
 }
+
+// ecp_nistz256_to_mont sets |res| to |in|, converted to Montgomery domain
+// by multiplying with RR = 2^512 mod P precomputed for NIST P256 curve.
+static inline void ecp_nistz256_to_mont(BN_ULONG res[P256_LIMBS],
+                                        const BN_ULONG in[P256_LIMBS]) {
+  static const BN_ULONG RR[P256_LIMBS] = {
+      TOBN(0x00000000, 0x00000003), TOBN(0xfffffffb, 0xffffffff),
+      TOBN(0xffffffff, 0xfffffffe), TOBN(0x00000004, 0xfffffffd)};
+  ecp_nistz256_mul_mont(res, in, RR);
+}
+
+
+// P-256 scalar operations.
+//
+// The following functions compute modulo N, where N is the order of P-256. They
+// take fully-reduced inputs and give fully-reduced outputs.
+
+// ecp_nistz256_ord_mul_mont sets |res| to |a| * |b| where inputs and outputs
+// are in Montgomery form. That is, |res| is |a| * |b| * 2^-256 mod N.
+void ecp_nistz256_ord_mul_mont(BN_ULONG res[P256_LIMBS],
+                               const BN_ULONG a[P256_LIMBS],
+                               const BN_ULONG b[P256_LIMBS]);
+
+// ecp_nistz256_ord_sqr_mont sets |res| to |a|^(2*|rep|) where inputs and
+// outputs are in Montgomery form. That is, |res| is
+// (|a| * 2^-256)^(2*|rep|) * 2^256 mod N.
+void ecp_nistz256_ord_sqr_mont(BN_ULONG res[P256_LIMBS],
+                               const BN_ULONG a[P256_LIMBS], BN_ULONG rep);
+
+// beeu_mod_inverse_vartime sets out = a^-1 mod p using a Euclidean algorithm.
+// Assumption: 0 < a < p < 2^(256) and p is odd.
+int beeu_mod_inverse_vartime(BN_ULONG out[P256_LIMBS],
+                             const BN_ULONG a[P256_LIMBS],
+                             const BN_ULONG p[P256_LIMBS]);
 
 
 // P-256 point operations.

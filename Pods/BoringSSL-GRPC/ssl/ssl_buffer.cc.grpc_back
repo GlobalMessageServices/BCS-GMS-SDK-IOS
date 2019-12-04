@@ -27,7 +27,7 @@
 #include "internal.h"
 
 
-namespace bssl {
+BSSL_NAMESPACE_BEGIN
 
 // BIO uses int instead of size_t. No lengths will exceed uint16_t, so this will
 // not overflow.
@@ -113,9 +113,10 @@ static int dtls_read_buffer_next_packet(SSL *ssl) {
   }
 
   // Read a single packet from |ssl->rbio|. |buf->cap()| must fit in an int.
-  int ret = BIO_read(ssl->rbio, buf->data(), static_cast<int>(buf->cap()));
+  int ret =
+      BIO_read(ssl->rbio.get(), buf->data(), static_cast<int>(buf->cap()));
   if (ret <= 0) {
-    ssl->s3->rwstate = SSL_READING;
+    ssl->s3->rwstate = SSL_ERROR_WANT_READ;
     return ret;
   }
   buf->DidWrite(static_cast<size_t>(ret));
@@ -134,10 +135,10 @@ static int tls_read_buffer_extend_to(SSL *ssl, size_t len) {
   while (buf->size() < len) {
     // The amount of data to read is bounded by |buf->cap|, which must fit in an
     // int.
-    int ret = BIO_read(ssl->rbio, buf->data() + buf->size(),
+    int ret = BIO_read(ssl->rbio.get(), buf->data() + buf->size(),
                        static_cast<int>(len - buf->size()));
     if (ret <= 0) {
-      ssl->s3->rwstate = SSL_READING;
+      ssl->s3->rwstate = SSL_ERROR_WANT_READ;
       return ret;
     }
     buf->DidWrite(static_cast<size_t>(ret));
@@ -163,7 +164,7 @@ int ssl_read_buffer_extend_to(SSL *ssl, size_t len) {
     return -1;
   }
 
-  if (ssl->rbio == NULL) {
+  if (ssl->rbio == nullptr) {
     OPENSSL_PUT_ERROR(SSL, SSL_R_BIO_NOT_SET);
     return -1;
   }
@@ -240,9 +241,9 @@ static int tls_write_buffer_flush(SSL *ssl) {
   SSLBuffer *buf = &ssl->s3->write_buffer;
 
   while (!buf->empty()) {
-    int ret = BIO_write(ssl->wbio, buf->data(), buf->size());
+    int ret = BIO_write(ssl->wbio.get(), buf->data(), buf->size());
     if (ret <= 0) {
-      ssl->s3->rwstate = SSL_WRITING;
+      ssl->s3->rwstate = SSL_ERROR_WANT_WRITE;
       return ret;
     }
     buf->Consume(static_cast<size_t>(ret));
@@ -257,9 +258,9 @@ static int dtls_write_buffer_flush(SSL *ssl) {
     return 1;
   }
 
-  int ret = BIO_write(ssl->wbio, buf->data(), buf->size());
+  int ret = BIO_write(ssl->wbio.get(), buf->data(), buf->size());
   if (ret <= 0) {
-    ssl->s3->rwstate = SSL_WRITING;
+    ssl->s3->rwstate = SSL_ERROR_WANT_WRITE;
     // If the write failed, drop the write buffer anyway. Datagram transports
     // can't write half a packet, so the caller is expected to retry from the
     // top.
@@ -271,7 +272,7 @@ static int dtls_write_buffer_flush(SSL *ssl) {
 }
 
 int ssl_write_buffer_flush(SSL *ssl) {
-  if (ssl->wbio == NULL) {
+  if (ssl->wbio == nullptr) {
     OPENSSL_PUT_ERROR(SSL, SSL_R_BIO_NOT_SET);
     return -1;
   }
@@ -283,4 +284,4 @@ int ssl_write_buffer_flush(SSL *ssl) {
   }
 }
 
-}  // namespace bssl
+BSSL_NAMESPACE_END
