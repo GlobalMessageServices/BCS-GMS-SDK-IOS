@@ -16,7 +16,7 @@ Pod::Spec.new do |spec|
   #
 
   spec.name         = "HyberSDK"
-  spec.version      = "0.0.30"
+  spec.version      = "0.1.0"
   spec.summary      = "A short description of HyberSDK."
 
   # This description is used to generate tags and improve search results.
@@ -53,7 +53,7 @@ Pod::Spec.new do |spec|
   #  profile URL.
   #
 
-  spec.author             = { "ard" => "imperituro.ard@gmail.com" }
+  spec.author             = { "gms" => "gms@gms-worldwide.com" }
 
   # ――― Platform Specifics ――――――――――――――――――――――――――――――――――――――――――――――――――――――― #
   #
@@ -120,50 +120,13 @@ Pod::Spec.new do |spec|
 
   spec.swift_version = '4.0'
 
-  #spec.frameworks  = "Firebase", "FirebaseCore", "FirebaseMessaging", "FirebaseAuth", "FirebaseAnalytics", "FirebaseAnalyticsInterop", "FirebaseAuthInterop", "FirebaseDatabase", "FirebaseFirestore", "FirebaseInstanceID", "FirebaseStorage", "GTMSessionFetcher", "GoogleAppMeasurement", "GoogleUtilities", "Protobuf", "gRPC-C++", "gRPC-Core", "leveldb-library", "nanopb", "Google-Mobile-Ads-SDK"
-
-
-
-  #spec.libraries = 'c++', 'sqlite3', 'z'
-
   spec.static_framework = true
 
 
-  #spec.dependency "gRPC-C++"
-  #spec.dependency "gRPC-Core"
-  #spec.dependency "leveldb-library"
-  #spec.dependency "nanopb"
-  #spec.dependency "Protobuf"
-  #spec.dependency "GoogleUtilities"
-  #spec.dependency "GoogleAppMeasurement"
-  #spec.dependency "GTMSessionFetcher"
-  
+
   spec.dependency "BoringSSL-GRPC"
-  #spec.dependency "FirebaseABTesting"
-  spec.dependency "FirebaseRemoteConfig"
-  #spec.dependency "Firebase"
-  #spec.dependency "FirebaseAnalytics"
-  #spec.dependency "FirebaseAnalyticsInterop"
-  #spec.dependency "FirebaseAuthInterop"
-  #spec.dependency "FirebaseInstanceID"
   spec.dependency "CryptoSwift", "1.0.0"
-
-
-  spec.dependency "Firebase"
-
-  spec.dependency "Firebase/Core"
-  spec.dependency "Firebase/Messaging"
-  spec.dependency "Firebase/Auth"
-  #spec.dependency "Firebase/Database"
-  #spec.dependency "Firebase/Storage"
-  spec.dependency "Firebase/Firestore"
-  spec.dependency "Google-Mobile-Ads-SDK"
-  #spec.dependency "SwiftyJSON"
-
-
-  # spec.library   = "iconv"
-  # spec.libraries = "iconv", "xml2"
-  #spec.library   = "SwiftyJSON"
+  spec.dependency "SwiftyJSON"
 
   # ――― Project Settings ――――――――――――――――――――――――――――――――――――――――――――――――――――――――― #
   #
@@ -175,10 +138,6 @@ Pod::Spec.new do |spec|
   spec.requires_arc          = true
 
   spec.xcconfig = { 'LIBRARY_SEARCH_PATHS' => "$(SRCROOT)/Pods/**" }
-
-  #spec.xcconfig = {
-  #  'FRAMEWORK_SEARCH_PATHS' => '$(inherited) $(SRCROOT)/Pods/FirebaseCore $(SRCROOT)/Pods/FirebaseRemoteConfig $(SRCROOT)/Pods/FirebaseInstanceID $(SRCROOT)/Pods/FirebaseAnalytics $(SRCROOT)/Pods/FirebaseABTesting'
-  #}
 
   spec.pod_target_xcconfig = {
     'OTHER_LDFLAGS' => '$(inherited) -ObjC'

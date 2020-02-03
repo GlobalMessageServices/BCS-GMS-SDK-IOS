@@ -12,9 +12,9 @@ import UIKit
 import CryptoSwift
 
 //import CoreData
-import FirebaseCore
-import FirebaseMessaging
-import FirebaseInstanceID
+//import FirebaseCore
+//import FirebaseMessaging
+//import FirebaseInstanceID
 
 //coredata
 //https://medium.com/@ankurvekariya/core-data-crud-with-swift-4-2-for-beginners-40efe4e7d1cc
@@ -67,38 +67,16 @@ public class HyberSDK {
     let answer_b = AnswerBuider.init()
     
     
-   // public func reggggg() {
-   //     let hhhh = FbPush.init()
-   //     hhhh.fb_register()
-   // }
-    
-    
     
     //Процедура 1. Регистрация устройства на сервере и файербэйзе
-    public func hyber_register_new(user_phone: String, user_password: String, x_hyber_sesion_id: String, x_hyber_ios_bundle_id: String, x_hyber_app_fingerprint: String)->String {
+    public func hyber_register_new(user_phone: String, user_password: String, x_hyber_sesion_id: String, x_hyber_ios_bundle_id: String, x_hyber_app_fingerprint: String, X_Hyber_Session_Id:String, X_Hyber_Client_API_Key: String)->String {
         do{
             
             if (Constants.registrationstatus==false){
-                let X_Hyber_Session_Id: String = Constants.firebase_registration_token ?? "22"
-                
-                //let push_adapter = FbClass2.init()
-                //var token_fb = push_adapter.firebase_register()
-                let token_fb = "test"
-                
-                
-                
-                print("token (ljljl)")
-                print(token_fb)
-                
-                //os_Type:UIDevice.current.systemName
-                
+                let X_Hyber_Session_Id: String = X_Hyber_Session_Id
+
                 let hyber_rest_server = HyberAPI.init()
-                let abbb = hyber_rest_server.hyber_device_register(X_Hyber_Client_API_Key: token_fb, X_Hyber_Session_Id: x_hyber_sesion_id, X_Hyber_IOS_Bundle_Id: x_hyber_ios_bundle_id,  device_Name:UIDevice.modelName, device_Type: Constants.localizedModel, os_Type: "ios", sdk_Version: Constants.sdkVersion, user_Pass: user_password, user_Phone: user_phone)
-                
-                print("hyberregister")
-                
-                
-                
+                let abbb = hyber_rest_server.hyber_device_register(X_Hyber_Client_API_Key: X_Hyber_Client_API_Key, X_Hyber_Session_Id: x_hyber_sesion_id, X_Hyber_IOS_Bundle_Id: x_hyber_ios_bundle_id,  device_Name:UIDevice.modelName, device_Type: Constants.localizedModel, os_Type: "ios", sdk_Version: Constants.sdkVersion, user_Pass: user_password, user_Phone: user_phone)
                 
                 return abbb
             }
@@ -116,9 +94,6 @@ public class HyberSDK {
         do{
             if (Constants.registrationstatus==true){
                 let X_Hyber_Session_Id: String = Constants.firebase_registration_token ?? "22"
-                print(Constants.deviceId)
-                print(X_Hyber_Session_Id)
-                print(Constants.hyber_registration_token)
                 
                 let hyber_rest_server = HyberAPI.init()
                 let ggg = hyber_rest_server.hyber_device_revoke(dev_list: [Constants.deviceId!], X_Hyber_Session_Id: X_Hyber_Session_Id, X_Hyber_Auth_Token: Constants.hyber_registration_token!)
@@ -317,17 +292,7 @@ public class HyberSDK {
     
     
     
-    
-    //Procedure 3. Get all saved messages from coredata
-    private func hyber_get_all_messages_from_local(start_time: String, end_time: String) {
-        
-    }
-    
-    
-    private func hyber_deliver_report_to_hyber_server () {
-        
-    }
-    
+  
     
 
     
@@ -336,44 +301,12 @@ public class HyberSDK {
     private func test(){
         let testtt = HyberAPI.init()
         testtt.hyber_device_register(X_Hyber_Client_API_Key: "test", X_Hyber_Session_Id: "22", X_Hyber_IOS_Bundle_Id: "1234567890", device_Name:"herolte : SM-G930F", device_Type: Constants.localizedModel, os_Type: UIDevice.current.systemName, sdk_Version: Constants.sdkVersion, user_Pass:"c225db4ab8c12905f86c840620b44d61", user_Phone:"380967747874")
-        
-        //lib.HyberLogger.HyberLogger("ghg")
+
     }
     
-    /*
-     public func test2(){
-     print("ddima 123098")
-     print(Constants.dev_os_Version)
-     print(Constants.application_name)
-     print("type 1")
-     print(Constants.kDeviceType)
-     print(Constants.kDeviceType2)
-     print("vendor 1")
-     print("vendor: \(Constants.identifierForVendor)")
-     print("device type: \(Constants.localizedModel)")
-     let date = NSDate()
-     let timestamp = UInt64(floor(date.timeIntervalSince1970 * 1000))
-     print(timestamp)
-     //sleep(30)
-     //SPLogger.trace("asdf")
-     }
-     
-     private func test3()->String{
-     return "123"
-     }
-     
-     private func test4() {
-     //let asa = ViewController.init()
-     //asa.createData()
-     //asa.retrieveData()
-     }
-     */
     
 }
 
-private func sayHelloGlaballyTo(name: String) {
-    print("Hello \(name). You just called a global fuction. Well done!")
-}
 
 
 extension String {
@@ -403,17 +336,7 @@ extension String {
         
         return hexString
     }
-    
-    
-    func application(_ application: UIApplication, didRegisterForRemoteNotificationsWithDeviceToken deviceToken: Data) {
-        print("APNs token retrieved: \(deviceToken)")
-        
-        // With swizzling disabled you must set the APNs token here.
-        Messaging.messaging().apnsToken = deviceToken
-    }
-    
-    
-    
+
 }
 
 

@@ -7,14 +7,14 @@ target 'HyberSDK' do
 
   # Pods for Hyber-SDK-iOS
   pod 'SwiftyJSON', '~> 4.0'
-  pod 'Firebase/Core'
-  pod 'Firebase/Messaging'
-  pod 'Firebase/Auth'
-  pod 'Firebase/AdMob'
+  #pod 'Firebase/Core'
+  #pod 'Firebase/Messaging'
+  #pod 'Firebase/Auth'
+  #pod 'Firebase/AdMob'
   #pod 'Firebase/Database'
   #pod 'Firebase/Storage'
-  pod 'Firebase/Firestore'
-  pod 'Google-Mobile-Ads-SDK'
+  #pod 'Firebase/Firestore'
+  #pod 'Google-Mobile-Ads-SDK'
   pod 'BoringSSL-GRPC'
   pod 'CryptoSwift', '1.0.0'
 
