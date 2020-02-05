@@ -36,8 +36,8 @@ public struct Constants {
     static var registrationstatus = UserDefaults.standard.bool(forKey: "registrationstatus")
     static var hyber_registration_token = UserDefaults.standard.string(forKey: "hyber_registration_token")
     static var deviceId = UserDefaults.standard.string(forKey: "deviceId")
-    public static var hyber_user_msisdn = "375291234567"
-    public static var hyber_user_password = ""
+    public static var hyber_user_msisdn = UserDefaults.standard.string(forKey: "hyber_user_msisdn")
+    public static var hyber_user_password = UserDefaults.standard.string(forKey: "hyber_user_password")
     public static var firebase_registration_token = UserDefaults.standard.string(forKey: "firebase_registration_token")
     
     

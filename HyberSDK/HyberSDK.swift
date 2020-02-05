@@ -68,17 +68,23 @@ public class HyberSDK {
     
     
     
-    //Процедура 1. Регистрация устройства на сервере и файербэйзе
-    public func hyber_register_new(user_phone: String, user_password: String, x_hyber_sesion_id: String, x_hyber_ios_bundle_id: String, x_hyber_app_fingerprint: String, X_Hyber_Session_Id:String, X_Hyber_Client_API_Key: String)->String {
+    //Procedure 1. new device registration
+    //x_hyber_sesion_id - firebase FCM token
+    //x_hyber_ios_bundle_id - ios application bundle id
+    //X_Hyber_Client_API_Key - provide by hub administrator
+    public func hyber_register_new(user_phone: String, user_password: String, x_hyber_sesion_id: String, x_hyber_ios_bundle_id: String, X_Hyber_Client_API_Key: String)->String {
         do{
             
             if (Constants.registrationstatus==false){
-                let X_Hyber_Session_Id: String = X_Hyber_Session_Id
+
+                UserDefaults.standard.set(x_hyber_sesion_id, forKey: "firebase_registration_token")
+                Constants.firebase_registration_token = x_hyber_sesion_id
 
                 let hyber_rest_server = HyberAPI.init()
                 let abbb = hyber_rest_server.hyber_device_register(X_Hyber_Client_API_Key: X_Hyber_Client_API_Key, X_Hyber_Session_Id: x_hyber_sesion_id, X_Hyber_IOS_Bundle_Id: x_hyber_ios_bundle_id,  device_Name:UIDevice.modelName, device_Type: Constants.localizedModel, os_Type: "ios", sdk_Version: Constants.sdkVersion, user_Pass: user_password, user_Phone: user_phone)
-                
                 return abbb
+                
+                
             }
             else {
                 return answer_b.general_answer(resp_code: "701", body_json: "error", description: "Registration exists")
@@ -261,11 +267,13 @@ public class HyberSDK {
     }
     
     public func rewrite_msisdn(newmsisdn: String) {
-        
+        UserDefaults.standard.set(newmsisdn, forKey: "hyber_user_msisdn")
+        Constants.firebase_registration_token = newmsisdn
     }
     
     public func rewrite_password(newpassword: String) {
-        
+        UserDefaults.standard.set(newpassword, forKey: "hyber_user_password")
+        Constants.firebase_registration_token = newpassword
     }
     
     
