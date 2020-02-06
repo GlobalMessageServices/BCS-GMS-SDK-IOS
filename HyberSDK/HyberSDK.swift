@@ -298,21 +298,6 @@ public class HyberSDK {
     }
 
     
-    
-    
-  
-    
-
-    
-    
-    
-    private func test(){
-        let testtt = HyberAPI.init()
-        testtt.hyber_device_register(X_Hyber_Client_API_Key: "test", X_Hyber_Session_Id: "22", X_Hyber_IOS_Bundle_Id: "1234567890", device_Name:"herolte : SM-G930F", device_Type: Constants.localizedModel, os_Type: UIDevice.current.systemName, sdk_Version: Constants.sdkVersion, user_Pass:"c225db4ab8c12905f86c840620b44d61", user_Phone:"380967747874")
-
-    }
-    
-    
 }
 
 

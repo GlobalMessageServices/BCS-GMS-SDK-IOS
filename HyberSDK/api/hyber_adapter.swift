@@ -60,8 +60,7 @@ class HyberAPI {
             request.addValue(X_Hyber_Client_API_Key, forHTTPHeaderField: "X-Hyber-Client-API-Key")
             request.addValue(X_Hyber_Session_Id, forHTTPHeaderField: "X-Hyber-Session-Id")
             request.addValue(X_Hyber_IOS_Bundle_Id, forHTTPHeaderField: "X-Hyber-IOS-Bundle-Id")
-            //request.addValue(X_Hyber_App_Fingerprint, forHTTPHeaderField: "X-Hyber-App-Fingerprint")
-            
+
             request.httpBody  = try! JSONSerialization.data(withJSONObject: params, options: [])
             
             print(request.httpBody)

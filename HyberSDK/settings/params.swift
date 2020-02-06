@@ -150,7 +150,7 @@ public struct Constants {
     static let loglevel = ".debug" as String
     static let application_name = "test_app" as String
     
-    static var message_buffer = "" as String
+    public static var message_buffer = "" as String
 }
 
 
