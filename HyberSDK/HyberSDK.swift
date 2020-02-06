@@ -76,15 +76,11 @@ public class HyberSDK {
         do{
             
             if (Constants.registrationstatus==false){
-
                 UserDefaults.standard.set(x_hyber_sesion_id, forKey: "firebase_registration_token")
                 Constants.firebase_registration_token = x_hyber_sesion_id
-
                 let hyber_rest_server = HyberAPI.init()
                 let abbb = hyber_rest_server.hyber_device_register(X_Hyber_Client_API_Key: X_Hyber_Client_API_Key, X_Hyber_Session_Id: x_hyber_sesion_id, X_Hyber_IOS_Bundle_Id: x_hyber_ios_bundle_id,  device_Name:UIDevice.modelName, device_Type: Constants.localizedModel, os_Type: "ios", sdk_Version: Constants.sdkVersion, user_Pass: user_password, user_Phone: user_phone)
                 return abbb
-                
-                
             }
             else {
                 return answer_b.general_answer(resp_code: "701", body_json: "error", description: "Registration exists")
@@ -100,11 +96,9 @@ public class HyberSDK {
         do{
             if (Constants.registrationstatus==true){
                 let X_Hyber_Session_Id: String = Constants.firebase_registration_token ?? "22"
-                
                 let hyber_rest_server = HyberAPI.init()
                 let ggg = hyber_rest_server.hyber_device_revoke(dev_list: [Constants.deviceId!], X_Hyber_Session_Id: X_Hyber_Session_Id, X_Hyber_Auth_Token: Constants.hyber_registration_token!)
                 return ggg
-                
             } else {
                 return answer_b.general_answer(resp_code: "704", body_json: "error", description: "Not registered")
             }
@@ -122,7 +116,6 @@ public class HyberSDK {
                 let hyber_rest_server = HyberAPI.init()
                 let ansss = hyber_rest_server.hyber_device_get_all(X_Hyber_Session_Id: X_Hyber_Session_Id, X_Hyber_Auth_Token: Constants.hyber_registration_token!)
                 print(ansss)
-                
                 return ansss}
             else {
                 return answer_b.general_answer(resp_code: "704", body_json: "error", description: "Not registered")
