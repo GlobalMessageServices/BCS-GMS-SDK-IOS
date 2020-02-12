@@ -16,7 +16,7 @@ Pod::Spec.new do |spec|
   #
 
   spec.name         = "HyberSDK"
-  spec.version      = "0.1.2"
+  spec.version      = "0.1.3"
   spec.summary      = "A short description of HyberSDK."
 
   # This description is used to generate tags and improve search results.
@@ -118,7 +118,7 @@ Pod::Spec.new do |spec|
   # spec.framework  = "SomeFramework"
   # spec.frameworks = "SomeFramework", "AnotherFramework"
 
-  spec.swift_version = '4.0'
+  spec.swift_version = ['3.0', '4.0', '4.2', '5.0', '5.1']
 
   spec.static_framework = true
 

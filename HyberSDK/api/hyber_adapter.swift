@@ -44,7 +44,7 @@ class HyberAPI {
             
             let urlString = NSString(format: Constants.url_Http_Registration as NSString);
             processor.file_logger(message: "hyber_device_register url string is \(urlString)", loglevel: ".debug")
-
+            
             let request : NSMutableURLRequest = NSMutableURLRequest()
             //var result = "" as? [[String: Any]];
             
@@ -58,7 +58,7 @@ class HyberAPI {
             request.addValue(X_Hyber_Client_API_Key, forHTTPHeaderField: "X-Hyber-Client-API-Key")
             request.addValue(X_Hyber_Session_Id, forHTTPHeaderField: "X-Hyber-Session-Id")
             request.addValue(X_Hyber_IOS_Bundle_Id, forHTTPHeaderField: "X-Hyber-IOS-Bundle-Id")
-
+            
             request.httpBody  = try! JSONSerialization.data(withJSONObject: params, options: [])
             
             print(request.httpBody)
@@ -1027,12 +1027,12 @@ class HyberAPI {
     
     
     /*
-    typealias CompletionHandler = (_ result:NSDictionary) -> Void
-    
-    func hardProcessingWithString(input: String, completion: (String) -> Void) {
-        completion("we finished!")
-    }
- */
+     typealias CompletionHandler = (_ result:NSDictionary) -> Void
+     
+     func hardProcessingWithString(input: String, completion: (String) -> Void) {
+     completion("we finished!")
+     }
+     */
     
     
 }
