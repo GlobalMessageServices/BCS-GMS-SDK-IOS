@@ -14,11 +14,8 @@ class HyberAPI {
     
     
     private let processor = Processing.init()
-    
     private let answer_buider = AnswerBuider.init()
-    
     let answer_b = AnswerBuider.init()
-    
     
     //rest function for device registration
     //1 procedure
@@ -47,6 +44,7 @@ class HyberAPI {
             
             let urlString = NSString(format: Constants.url_Http_Registration as NSString);
             processor.file_logger(message: "hyber_device_register url string is \(urlString)", loglevel: ".debug")
+
             let request : NSMutableURLRequest = NSMutableURLRequest()
             //var result = "" as? [[String: Any]];
             

@@ -5,12 +5,10 @@ import Foundation
 public let HyberLogger = HyberSDK.hyberLog
 
 public extension HyberSDK {
-
     static let hyberLog : Logger = {
         let log = Logger()
         return log
     }()
-
 }
 
 private let benchmarker = Benchmarker()

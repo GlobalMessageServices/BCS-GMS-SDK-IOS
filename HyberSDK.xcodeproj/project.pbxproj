@@ -14,12 +14,7 @@
 		BA5EE3DB238ADAD800D2AA12 /* HyberSDK.podspec in Resources */ = {isa = PBXBuildFile; fileRef = BA5EE3DA238ADAD800D2AA12 /* HyberSDK.podspec */; };
 		BA5EE3DF238ADB1B00D2AA12 /* HyberSDK.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA5EE3DE238ADB1B00D2AA12 /* HyberSDK.swift */; };
 		BA5EE3E1238ADB2D00D2AA12 /* BridgingHeader.h in Headers */ = {isa = PBXBuildFile; fileRef = BA5EE3E0238ADB2D00D2AA12 /* BridgingHeader.h */; };
-		BA5EE3E9238ADB6900D2AA12 /* hyber_sdk_core.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA5EE3E5238ADB6900D2AA12 /* hyber_sdk_core.swift */; };
-		BA5EE3EB238ADB6900D2AA12 /* hyber_sdk_init.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA5EE3E7238ADB6900D2AA12 /* hyber_sdk_init.swift */; };
 		BA5EE3EF238ADB8C00D2AA12 /* hyber_adapter.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA5EE3EE238ADB8C00D2AA12 /* hyber_adapter.swift */; };
-		BA5EE3F7238ADBC400D2AA12 /* hyber_notif_firebase.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA5EE3F3238ADBC300D2AA12 /* hyber_notif_firebase.swift */; };
-		BA5EE3F8238ADBC400D2AA12 /* HyberPushNotificationHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA5EE3F4238ADBC300D2AA12 /* HyberPushNotificationHelper.swift */; };
-		BA5EE3F9238ADBC400D2AA12 /* HyberFirebaseHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA5EE3F5238ADBC300D2AA12 /* HyberFirebaseHelper.swift */; };
 		BA5EE404238ADBD900D2AA12 /* Formatters.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA5EE3FC238ADBD800D2AA12 /* Formatters.swift */; };
 		BA5EE405238ADBD900D2AA12 /* HyberLogger.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA5EE3FD238ADBD900D2AA12 /* HyberLogger.swift */; };
 		BA5EE406238ADBD900D2AA12 /* Log.h in Headers */ = {isa = PBXBuildFile; fileRef = BA5EE3FE238ADBD900D2AA12 /* Log.h */; };
@@ -57,12 +52,7 @@
 		BA5EE3DA238ADAD800D2AA12 /* HyberSDK.podspec */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = HyberSDK.podspec; sourceTree = "<group>"; };
 		BA5EE3DE238ADB1B00D2AA12 /* HyberSDK.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HyberSDK.swift; sourceTree = "<group>"; };
 		BA5EE3E0238ADB2D00D2AA12 /* BridgingHeader.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BridgingHeader.h; sourceTree = "<group>"; };
-		BA5EE3E5238ADB6900D2AA12 /* hyber_sdk_core.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = hyber_sdk_core.swift; sourceTree = "<group>"; };
-		BA5EE3E7238ADB6900D2AA12 /* hyber_sdk_init.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = hyber_sdk_init.swift; sourceTree = "<group>"; };
 		BA5EE3EE238ADB8C00D2AA12 /* hyber_adapter.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = hyber_adapter.swift; sourceTree = "<group>"; };
-		BA5EE3F3238ADBC300D2AA12 /* hyber_notif_firebase.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = hyber_notif_firebase.swift; sourceTree = "<group>"; };
-		BA5EE3F4238ADBC300D2AA12 /* HyberPushNotificationHelper.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HyberPushNotificationHelper.swift; sourceTree = "<group>"; };
-		BA5EE3F5238ADBC300D2AA12 /* HyberFirebaseHelper.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HyberFirebaseHelper.swift; sourceTree = "<group>"; };
 		BA5EE3FC238ADBD800D2AA12 /* Formatters.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Formatters.swift; sourceTree = "<group>"; };
 		BA5EE3FD238ADBD900D2AA12 /* HyberLogger.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HyberLogger.swift; sourceTree = "<group>"; };
 		BA5EE3FE238ADBD900D2AA12 /* Log.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Log.h; sourceTree = "<group>"; };
@@ -135,9 +125,7 @@
 			children = (
 				BA5EE40C238ADBE400D2AA12 /* settings */,
 				BA5EE3FB238ADBC900D2AA12 /* logger */,
-				BA5EE3F2238ADBAF00D2AA12 /* notifications */,
 				BA5EE3ED238ADB7900D2AA12 /* api */,
-				BA5EE3E4238ADB5600D2AA12 /* core */,
 				BA5EE3C3238AD4BB00D2AA12 /* HyberSDK.h */,
 				BA5EE3C4238AD4BB00D2AA12 /* Info.plist */,
 				BA5EE3E0238ADB2D00D2AA12 /* BridgingHeader.h */,
@@ -155,31 +143,12 @@
 			path = HyberSDKTests;
 			sourceTree = "<group>";
 		};
-		BA5EE3E4238ADB5600D2AA12 /* core */ = {
-			isa = PBXGroup;
-			children = (
-				BA5EE3E5238ADB6900D2AA12 /* hyber_sdk_core.swift */,
-				BA5EE3E7238ADB6900D2AA12 /* hyber_sdk_init.swift */,
-			);
-			path = core;
-			sourceTree = "<group>";
-		};
 		BA5EE3ED238ADB7900D2AA12 /* api */ = {
 			isa = PBXGroup;
 			children = (
 				BA5EE3EE238ADB8C00D2AA12 /* hyber_adapter.swift */,
 			);
 			path = api;
-			sourceTree = "<group>";
-		};
-		BA5EE3F2238ADBAF00D2AA12 /* notifications */ = {
-			isa = PBXGroup;
-			children = (
-				BA5EE3F3238ADBC300D2AA12 /* hyber_notif_firebase.swift */,
-				BA5EE3F5238ADBC300D2AA12 /* HyberFirebaseHelper.swift */,
-				BA5EE3F4238ADBC300D2AA12 /* HyberPushNotificationHelper.swift */,
-			);
-			path = notifications;
 			sourceTree = "<group>";
 		};
 		BA5EE3FB238ADBC900D2AA12 /* logger */ = {
@@ -387,15 +356,10 @@
 				BA5EE40B238ADBD900D2AA12 /* Themes.swift in Sources */,
 				BA5EE40A238ADBD900D2AA12 /* Benchmarker.swift in Sources */,
 				BA5EE412238ADBF900D2AA12 /* add_functions.swift in Sources */,
-				BA5EE3F7238ADBC400D2AA12 /* hyber_notif_firebase.swift in Sources */,
-				BA5EE3E9238ADB6900D2AA12 /* hyber_sdk_core.swift in Sources */,
 				BA5EE408238ADBD900D2AA12 /* Theme.swift in Sources */,
 				BA5EE409238ADBD900D2AA12 /* Formatter.swift in Sources */,
-				BA5EE3EB238ADB6900D2AA12 /* hyber_sdk_init.swift in Sources */,
 				BA5EE411238ADBF900D2AA12 /* params.swift in Sources */,
 				BA5EE3DF238ADB1B00D2AA12 /* HyberSDK.swift in Sources */,
-				BA5EE3F9238ADBC400D2AA12 /* HyberFirebaseHelper.swift in Sources */,
-				BA5EE3F8238ADBC400D2AA12 /* HyberPushNotificationHelper.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
