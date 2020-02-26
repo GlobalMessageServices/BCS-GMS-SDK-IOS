@@ -276,6 +276,7 @@ class HyberAPI {
                 semaphore6.signal()
             }
             dataTask.resume()
+           // semaphore6.wait(timeout: DispatchTime.now() + 2)
             semaphore6.wait()
             
             return answ

@@ -28,12 +28,14 @@ public extension Notification.Name {
 
 public class HyberSDK {
     
-    public init(user_msisdn: String, user_password: String)
+    public init()
     {
         Constants.registrationstatus = UserDefaults.standard.bool(forKey: "registrationstatus")
         Constants.hyber_registration_token = UserDefaults.standard.string(forKey: "hyber_registration_token")
         Constants.deviceId = UserDefaults.standard.string(forKey: "deviceId")
         Constants.firebase_registration_token = UserDefaults.standard.string(forKey: "firebase_registration_token")
+        Constants.hyber_user_msisdn = UserDefaults.standard.string(forKey: "hyber_user_msisdn")
+        Constants.hyber_user_password = UserDefaults.standard.string(forKey: "hyber_user_password")
     }
     
     private let processor = Processing.init()
@@ -72,6 +74,8 @@ public class HyberSDK {
     //x_hyber_sesion_id - firebase FCM token
     //x_hyber_ios_bundle_id - ios application bundle id
     //X_Hyber_Client_API_Key - provide by hub administrator
+    //user_phone - subscribers msisdn
+    //subscribers password (optional, for future use)
     public func hyber_register_new(user_phone: String, user_password: String, x_hyber_sesion_id: String, x_hyber_ios_bundle_id: String, X_Hyber_Client_API_Key: String)->String {
         do{
             
