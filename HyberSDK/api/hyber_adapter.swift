@@ -384,9 +384,9 @@ class HyberAPI {
     
     //4 procedure
     //for get message history device from hyber server
-    func hyber_message_get_history(utc_time: Int, X_Hyber_Session_Id: String, X_Hyber_Auth_Token:String)->String {
+    func hyber_message_get_history(utc_time: Int, X_Hyber_Session_Id: String, X_Hyber_Auth_Token:String)->HyberFunAnswerGetMessageHistory {
         do{
-            var answ: String = String()
+            var answ: HyberFunAnswerGetMessageHistory = HyberFunAnswerGetMessageHistory.init(code: 0, result: "unknown", description: "unknown", body: nil)
             let procedure_name = "hyber_message_get_history"
             let configuration = URLSessionConfiguration .default
             let session = URLSession(configuration: configuration)
@@ -437,8 +437,10 @@ class HyberAPI {
                 //////self.logger.file_logger(message: "\(procedure_name) response jsonData is \(jsonData??["devices"])", loglevel: ".debug")
                 let body_json: String = String(decoding: receivedData, as: UTF8.self)
                 
-                answ = self.answer_buider.general_answer(resp_code: String(httpResponse.statusCode), body_json: body_json, description: "Success")
+                answ.code = httpResponse.statusCode
+                answ.body = self.jsonparser.getMessageHistoryJson(str_resp: body_json)
                 
+                //answ = self.answer_buider.general_answer(resp_code: String(httpResponse.statusCode), body_json: body_json, description: "Success")
                 
                 
                 self.processor.file_logger(message: "\(procedure_name) response jsonData is \(jsonData)", loglevel: ".debug")
@@ -483,7 +485,8 @@ class HyberAPI {
             return answ
         } catch {
             print("invalid regex: \(error.localizedDescription)")
-            return answer_b.general_answer(resp_code: "710", body_json: "error", description: "Critical error")
+            
+            return HyberFunAnswerGetMessageHistory.init(code: 710, result: "error", description: "Critical error", body: nil)
         }
     }
     

@@ -52,8 +52,6 @@ class AnswParser {
         return res
     }
     
-    
-    
     func updateregistrationJParse(str_resp: String) -> UpdateRegJsonParse
     {
         struct RegisterUpdate: Decodable {
@@ -108,11 +106,69 @@ class AnswParser {
         
         let res = HyberGetDeviceList.init(devices: devHyber)
         return res
-        
     }
     
     
-    
+    func getMessageHistoryJson(str_resp: String) -> MessagesListResponse
+    {
+        
+        struct ImageResponseParse: Decodable {
+            enum Category: String, Decodable {
+                case swift, combine, debugging, xcode
+            }
+            var url: String?=nil
+        }
+        
+        struct ButtonResponseParse: Decodable {
+            enum Category: String, Decodable {
+                case swift, combine, debugging, xcode
+            }
+            var text: String?=nil
+            var url: String?=nil
+        }
+        
+        struct HyberMessageListParse: Decodable {
+            enum Category: String, Decodable {
+                case swift, combine, debugging, xcode
+            }
+            var phone: String?=nil
+            var messageId: String?=nil
+            var title: String?=nil
+            var body: String?=nil
+            var image: ImageResponseParse?=nil
+            var button: ButtonResponseParse?=nil
+            var time: String?=nil
+            var partner: String?=nil
+        }
+        
+        struct MessagesListRespAll: Decodable {
+            enum Category: String, Decodable {
+                case swift, combine, debugging, xcode
+            }
+            var limitDays: Int
+            var limitMessages: Int
+            var lastTime: Int
+            var messages: [HyberMessageListParse]
+        }
+        
+        let jsonData = str_resp.data(using: .utf8)!
+        //let jsonData = JSON.self(using: .utf8)!
+        let parsedJson: MessagesListRespAll = try! JSONDecoder().decode(MessagesListRespAll.self, from: jsonData)
+        
+        var messListHyber: [MessagesResponseStr] = []
+        
+        for i in parsedJson.messages
+        {
+            let elem3: ImageResponse = ImageResponse.init(url: (i.image?.url!)!)
+            let elem2: ButtonResponse = ButtonResponse.init(text: (i.button?.text)!, url: (i.button?.url)!)
+            let elem1: MessagesResponseStr = MessagesResponseStr.init(phone: i.phone!, messageId: i.messageId!, title: i.title!, body: i.body!, image: elem3, button: elem2, time: i.time!, partner: i.partner!)
+            messListHyber.append(elem1)
+        }
+        
+        let res = MessagesListResponse.init(limitDays: parsedJson.limitDays, limitMessages: parsedJson.limitMessages, lastTime: parsedJson.lastTime, messages: messListHyber)
+        return res
+        
+    }
     
     
 }

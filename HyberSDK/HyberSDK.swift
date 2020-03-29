@@ -191,7 +191,7 @@ public class HyberSDK {
         case FoundNil(String)
     }
     
-    public func hyber_get_message_history(period_in_seconds: Int) -> String {
+    public func hyber_get_message_history(period_in_seconds: Int) -> HyberFunAnswerGetMessageHistory {
         do {
             if (Constants.registrationstatus==true){
                 let X_Hyber_Session_Id: String = Constants.firebase_registration_token ?? "22"
@@ -200,11 +200,12 @@ public class HyberSDK {
                 let ansss = hyber_rest_server.hyber_message_get_history(utc_time: period_in_seconds, X_Hyber_Session_Id: X_Hyber_Session_Id, X_Hyber_Auth_Token: Constants.hyber_registration_token!)
                 return ansss}
             else {
-                return answer_b.general_answer(resp_code: "704", body_json: "error", description: "Not registered")
+                return HyberFunAnswerGetMessageHistory.init(code: 704, result: "error", description: "Not registered", body: nil)
             }
         } catch  {
             print("invalid regex: \(error.localizedDescription)")
-            return answer_b.general_answer(resp_code: "710", body_json: "error", description: "Critical error")
+            return HyberFunAnswerGetMessageHistory.init(code: 710, result: "error", description: "Critical error", body: nil)
+            //return answer_b.general_answer(resp_code: "710", body_json: "error", description: "Critical error")
         }
     }
     

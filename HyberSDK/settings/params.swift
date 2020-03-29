@@ -68,6 +68,40 @@ public struct HyberFunAnswerGetDeviceList {
     public var body: HyberGetDeviceList? = nil
 }
 
+public struct ImageResponse {
+    public var url: String
+}
+
+public struct ButtonResponse {
+    public var text: String
+    public var url: String
+}
+
+public struct MessagesResponseStr {
+    public var phone: String
+    public var messageId: String
+    public var title: String
+    public var body: String
+    public var image: ImageResponse
+    public var button: ButtonResponse
+    public var time: String
+    public var partner: String
+}
+
+public struct MessagesListResponse {
+    public var limitDays: Int
+    public var limitMessages: Int
+    public var lastTime: Int
+    public var messages: [MessagesResponseStr]
+}
+
+public struct HyberFunAnswerGetMessageHistory {
+    public var code: Int
+    public var result: String
+    public var description: String
+    public var body: MessagesListResponse? = nil
+}
+
 public struct Constants {
     
     public static var registrationstatus = UserDefaults.standard.bool(forKey: "registrationstatus")
