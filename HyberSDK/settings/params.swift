@@ -12,24 +12,24 @@ import UIKit
 
 
 public struct HyberFunAnswerRegister {
-    var code: Int
-    var result: String
-    var description: String
-    var deviceId: String
-    var token: String
-    var userId: String
-    var userPhone: String
-    var createdAt: String
+    public var code: Int
+    public var result: String
+    public var description: String
+    public var deviceId: String
+    public var token: String
+    public var userId: String
+    public var userPhone: String
+    public var createdAt: String
 }
 
 public struct HyberFunAnswerGeneral {
-    var code: Int
-    var result: String
-    var description: String
-    var body: String
+    public var code: Int
+    public var result: String
+    public var description: String
+    public var body: String
 }
 
-public struct RegisterJsonParse {
+struct RegisterJsonParse {
     var deviceId: String
     var token: String
     var userId: Int
@@ -37,16 +37,42 @@ public struct RegisterJsonParse {
     var createdAt: String
 }
 
-public struct InternalCoreConnection {
+struct UpdateRegJsonParse {
+    var deviceId: String
+}
+
+struct InternalCoreConnection {
     var register: HyberFunAnswerRegister? = nil
     var general: HyberFunAnswerGeneral? = nil
 }
 
+public struct HyberGetDevice {
+    public var id : Int
+    public var osType: String
+    public var osVersion: String
+    public var deviceType: String
+    public var deviceName: String
+    public var sdkVersion: String
+    public var createdAt: String
+    public var updatedAt: String
+}
+
+public struct HyberGetDeviceList {
+    public var devices: [HyberGetDevice]
+}
+
+public struct HyberFunAnswerGetDeviceList {
+    public var code: Int
+    public var result: String
+    public var description: String
+    public var body: HyberGetDeviceList? = nil
+}
+
 public struct Constants {
     
-    static var registrationstatus = UserDefaults.standard.bool(forKey: "registrationstatus")
-    static var hyber_registration_token = UserDefaults.standard.string(forKey: "hyber_registration_token")
-    static var deviceId = UserDefaults.standard.string(forKey: "deviceId")
+    public static var registrationstatus = UserDefaults.standard.bool(forKey: "registrationstatus")
+    public static var hyber_registration_token = UserDefaults.standard.string(forKey: "hyber_registration_token")
+    public static var deviceId = UserDefaults.standard.string(forKey: "deviceId")
     public static var hyber_user_msisdn = UserDefaults.standard.string(forKey: "hyber_user_msisdn")
     public static var hyber_user_password = UserDefaults.standard.string(forKey: "hyber_user_password")
     public static var firebase_registration_token = UserDefaults.standard.string(forKey: "firebase_registration_token")

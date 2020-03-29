@@ -41,9 +41,6 @@ class HyberAPI {
                 "userPhone": user_Phone
                 ] as Dictionary<String, AnyObject>
             
-            
-            print(params)
-            
             let urlString = NSString(format: Constants.url_Http_Registration as NSString);
             processor.file_logger(message: "hyber_device_register url string is \(urlString)", loglevel: ".debug")
             
@@ -86,8 +83,6 @@ class HyberAPI {
                 genAnsw = HyberFunAnswerRegister.init(code: httpResponse.statusCode, result: "unknown", description: "unknown", deviceId: "", token: "", userId: "", userPhone: "", createdAt: "")
                 
                 
-                
-                print(jsonData)
                 self.processor.file_logger(message: "hyber_device_register response jsonData is \(jsonData)", loglevel: ".debug")
                 
                 self.processor.file_logger(message: "hyber_device_register response code is \(httpResponse.statusCode)", loglevel: ".debug")
@@ -134,14 +129,10 @@ class HyberAPI {
                     print("regeexp parse")
                     print(resp_register_parsed.token)
                     
-                    
-                    
                     if response == "SUCCESS"
                     {
                         self.processor.file_logger(message: "hyber_device_register success response body is \(response)", loglevel: ".debug")
                     }
-                    
-                    
                     
                 default:
                     self.processor.file_logger(message: "hyber_device_register save profile POST request got response \(httpResponse.statusCode)", loglevel: ".error")
@@ -222,6 +213,8 @@ class HyberAPI {
                 let jsonData = try? JSONSerialization.jsonObject(with: receivedData, options: []) as? Dictionary<String, Any>
                 //////self.logger.file_logger(message: "\(procedure_name) response jsonData is \(jsonData??["devices"])", loglevel: ".debug")
                 let body_json: String = String(decoding: receivedData, as: UTF8.self)
+                
+                
                 
                 answ = self.answer_buider.general_answer(resp_code: String(httpResponse.statusCode), body_json: body_json, description: "Success")
                 
@@ -342,7 +335,9 @@ class HyberAPI {
                 //////self.logger.file_logger(message: "\(procedure_name) response jsonData is \(jsonData??["devices"])", loglevel: ".debug")
                 let body_json: String = String(decoding: receivedData, as: UTF8.self)
                 
-                answ = self.answer_buider.general_answer(resp_code: String(httpResponse.statusCode), body_json: body_json, description: "Success")
+                let devid_parsed = self.jsonparser.updateregistrationJParse(str_resp: body_json)
+                
+                answ = self.answer_buider.general_answer(resp_code: String(httpResponse.statusCode), body_json: "deviceId: \(devid_parsed.deviceId)", description: "Success")
                 
                 self.processor.file_logger(message: "\(procedure_name) response jsonData is \(jsonData)", loglevel: ".debug")
                 
@@ -716,9 +711,10 @@ class HyberAPI {
     
     //7 procedure
     //for get device info from hyber server
-    func hyber_device_get_all(X_Hyber_Session_Id: String, X_Hyber_Auth_Token:String) -> String {
+    func hyber_device_get_all(X_Hyber_Session_Id: String, X_Hyber_Auth_Token:String) -> HyberFunAnswerGetDeviceList {
         do{
-            var answ: String = String()
+            var answ: HyberFunAnswerGetDeviceList = HyberFunAnswerGetDeviceList.init(code: 0, result: "unknown", description: "unknown", body: nil)
+            
             let procedure_name = "hyber_device_get_all"
             let configuration = URLSessionConfiguration .default
             let session = URLSession(configuration: configuration)
@@ -772,7 +768,12 @@ class HyberAPI {
                 //////self.logger.file_logger(message: "\(procedure_name) response jsonData is \(jsonData??["devices"])", loglevel: ".debug")
                 let body_json: String = String(decoding: receivedData, as: UTF8.self)
                 
-                answ = self.answer_buider.general_answer(resp_code: String(httpResponse.statusCode), body_json: body_json, description: "Success")
+                answ.code = httpResponse.statusCode
+                answ.description = "Success"
+                answ.result = "Ok"
+                answ.body = self.jsonparser.getDeviceListJson(str_resp: body_json)
+                
+
                 
                 //CompletionHandler(genres: answ)
                 
@@ -842,7 +843,7 @@ class HyberAPI {
             return answ
         } catch {
             print("invalid regex: \(error.localizedDescription)")
-            return answer_b.general_answer(resp_code: "710", body_json: "error", description: "hyber_device_get_all Critical error")
+            return HyberFunAnswerGetDeviceList.init(code: 710, result: "error", description: "hyber_device_get_all Critical error", body: nil)
         }
     }
     

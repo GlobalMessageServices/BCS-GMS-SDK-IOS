@@ -87,11 +87,11 @@ public class HyberSDK {
                 return hyber_register_new_answer
             }
             else {
-                return HyberFunAnswerRegister(code: 701, result: "error", description: "Registration exists", deviceId: Constants.deviceId!, token: Constants.hyber_registration_token!, userId: "", userPhone: Constants.hyber_user_msisdn!, createdAt: "")
+                return HyberFunAnswerRegister.init(code: 701, result: "error", description: "Registration exists", deviceId: Constants.deviceId!, token: Constants.hyber_registration_token!, userId: "", userPhone: Constants.hyber_user_msisdn!, createdAt: "")
             }
         } catch let error {
             print("invalid regex: \(error.localizedDescription)")
-            return HyberFunAnswerRegister(code: 710, result: "error", description: "Critical error", deviceId: "", token: "", userId: "", userPhone: "", createdAt: "")
+            return HyberFunAnswerRegister.init(code: 710, result: "error", description: "Critical error", deviceId: "", token: "", userId: "", userPhone: "", createdAt: "")
         }
     }
     
@@ -113,7 +113,7 @@ public class HyberSDK {
     }
     
     
-    public func hyber_get_device_all_from_hyber() -> String {
+    public func hyber_get_device_all_from_hyber() -> HyberFunAnswerGetDeviceList {
         do{
             if (Constants.registrationstatus==true){
                 let X_Hyber_Session_Id: String = Constants.firebase_registration_token ?? "22"
@@ -122,12 +122,12 @@ public class HyberSDK {
                 print(ansss)
                 return ansss}
             else {
-                return answer_b.general_answer(resp_code: "704", body_json: "error", description: "Not registered")
+                return HyberFunAnswerGetDeviceList.init(code: 704, result: "error", description: "Not registered", body: nil)
             }
             
         } catch let error {
             print("invalid regex: \(error.localizedDescription)")
-            return answer_b.general_answer(resp_code: "710", body_json: "error", description: "Critical error")
+            return HyberFunAnswerGetDeviceList.init(code: 710, result: "error", description: "Critical error", body: nil)
         }
     }
     
@@ -217,8 +217,7 @@ public class HyberSDK {
                 
                 var listdev: [String] = []
                 
-                let dev_list_all = self.processor.matches(for: "\"id\": (\\d+)", in: getdev)
-                print(dev_list_all)
+                let dev_list_all = getdev.body
                 
                 /*
                  let jsonData2 = try? JSONSerialization.data(withJSONObject: string1, options: [])
@@ -227,12 +226,9 @@ public class HyberSDK {
                  print(string2)
                  */
                 
-                for jj in dev_list_all
+                for jj in dev_list_all!.devices
                 {
-                    print(jj)
-                    let new2String = jj.replacingOccurrences(of: "\"id\": ", with: "", options: .literal, range: nil)
-                    print(new2String)
-                    listdev.append(new2String)
+                    listdev.append(String(jj.id))
                 }
                 
                 print(listdev)
