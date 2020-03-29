@@ -127,6 +127,7 @@ Pod::Spec.new do |spec|
   spec.dependency "BoringSSL-GRPC"
   spec.dependency "CryptoSwift", "1.0.0"
   spec.dependency "SwiftyJSON"
+  spec.dependency "JSON"
 
   # ――― Project Settings ――――――――――――――――――――――――――――――――――――――――――――――――――――――――― #
   #

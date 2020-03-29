@@ -11,7 +11,7 @@ import CryptoSwift
 
 class HyberAPI {
     
-    
+    private let jsonparser = AnswParser.init()
     
     private let processor = Processing.init()
     private let answer_buider = AnswerBuider.init()
@@ -104,6 +104,8 @@ class HyberAPI {
                     
                     let str_resp = response as! String
                     print(str_resp)
+                    
+                    print(self.jsonparser.registerJParse(str_resp: str_resp))
                     
                     let token_func = self.processor.matches(for: "\"token\": \"((\\S+))\"", in: str_resp)
                     

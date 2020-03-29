@@ -26,6 +26,7 @@
 		BA5EE410238ADBF900D2AA12 /* hyber_answer_func.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA5EE40D238ADBF800D2AA12 /* hyber_answer_func.swift */; };
 		BA5EE411238ADBF900D2AA12 /* params.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA5EE40E238ADBF900D2AA12 /* params.swift */; };
 		BA5EE412238ADBF900D2AA12 /* add_functions.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA5EE40F238ADBF900D2AA12 /* add_functions.swift */; };
+		BA9189DE2431131B00E16F9B /* json_parser.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA9189DD2431131B00E16F9B /* json_parser.swift */; };
 		CC916915F8094B14C0A07743 /* Pods_HyberSDK.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = AC4881CAE50F2D196BDBD3AC /* Pods_HyberSDK.framework */; };
 /* End PBXBuildFile section */
 
@@ -64,6 +65,7 @@
 		BA5EE40D238ADBF800D2AA12 /* hyber_answer_func.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = hyber_answer_func.swift; sourceTree = "<group>"; };
 		BA5EE40E238ADBF900D2AA12 /* params.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = params.swift; sourceTree = "<group>"; };
 		BA5EE40F238ADBF900D2AA12 /* add_functions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = add_functions.swift; sourceTree = "<group>"; };
+		BA9189DD2431131B00E16F9B /* json_parser.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = json_parser.swift; sourceTree = "<group>"; };
 		CA9147BC9AACA1046DFDCE57 /* Pods-HyberSDKTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-HyberSDKTests.release.xcconfig"; path = "Target Support Files/Pods-HyberSDKTests/Pods-HyberSDKTests.release.xcconfig"; sourceTree = "<group>"; };
 		E94C6B52F27BF51249CA43A0 /* Pods-HyberSDKTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-HyberSDKTests.debug.xcconfig"; path = "Target Support Files/Pods-HyberSDKTests/Pods-HyberSDKTests.debug.xcconfig"; sourceTree = "<group>"; };
 		FDD587900A8D050CA604C9BE /* Pods-HyberSDK.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-HyberSDK.release.xcconfig"; path = "Target Support Files/Pods-HyberSDK/Pods-HyberSDK.release.xcconfig"; sourceTree = "<group>"; };
@@ -172,6 +174,7 @@
 				BA5EE40F238ADBF900D2AA12 /* add_functions.swift */,
 				BA5EE40D238ADBF800D2AA12 /* hyber_answer_func.swift */,
 				BA5EE40E238ADBF900D2AA12 /* params.swift */,
+				BA9189DD2431131B00E16F9B /* json_parser.swift */,
 			);
 			path = settings;
 			sourceTree = "<group>";
@@ -360,6 +363,7 @@
 				BA5EE409238ADBD900D2AA12 /* Formatter.swift in Sources */,
 				BA5EE411238ADBF900D2AA12 /* params.swift in Sources */,
 				BA5EE3DF238ADB1B00D2AA12 /* HyberSDK.swift in Sources */,
+				BA9189DE2431131B00E16F9B /* json_parser.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

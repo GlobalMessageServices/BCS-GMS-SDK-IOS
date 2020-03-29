@@ -17,7 +17,7 @@ target 'HyberSDK' do
   #pod 'Google-Mobile-Ads-SDK'
   pod 'BoringSSL-GRPC'
   pod 'CryptoSwift', '1.0.0'
-
+  pod 'JSON'
 
   target 'HyberSDKTests' do
     inherit! :search_paths

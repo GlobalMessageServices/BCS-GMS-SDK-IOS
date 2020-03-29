@@ -29,7 +29,13 @@ public struct HyberFunAnswerGeneral {
     var body: String
 }
 
-
+public struct RegisterJsonParse {
+    var deviceId: Int
+    var token: String
+    var userId: Int
+    var userPhone: String
+    var createdAt: String
+}
 
 public struct Constants {
     
