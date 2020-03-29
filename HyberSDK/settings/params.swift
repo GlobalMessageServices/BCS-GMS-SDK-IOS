@@ -102,6 +102,13 @@ public struct HyberFunAnswerGetMessageHistory {
     public var body: MessagesListResponse? = nil
 }
 
+public struct HyberGeneralAnswerStruct {
+    public var code: Int
+    public var result: String
+    public var description: String
+    public var body: String
+}
+
 public struct Constants {
     
     public static var registrationstatus = UserDefaults.standard.bool(forKey: "registrationstatus")

@@ -96,7 +96,7 @@ public class HyberSDK {
     }
     
     //Procedure 2. Delete registration
-    public func hyber_clear_current_device()->String {
+    public func hyber_clear_current_device()->HyberGeneralAnswerStruct {
         do{
             if (Constants.registrationstatus==true){
                 let X_Hyber_Session_Id: String = Constants.firebase_registration_token ?? "22"
@@ -104,11 +104,11 @@ public class HyberSDK {
                 let answer = hyber_rest_server.hyber_device_revoke(dev_list: [Constants.deviceId!], X_Hyber_Session_Id: X_Hyber_Session_Id, X_Hyber_Auth_Token: Constants.hyber_registration_token!)
                 return answer
             } else {
-                return answer_b.general_answer(resp_code: "704", body_json: "error", description: "Not registered")
+                return answer_b.general_answer_struct(resp_code: "704", body_json: "error", description: "Not registered")
             }
         } catch let error {
             print("invalid regex: \(error.localizedDescription)")
-            return answer_b.general_answer(resp_code: "710", body_json: "error", description: "Critical error")
+            return answer_b.general_answer_struct(resp_code: "710", body_json: "error", description: "Critical error")
         }
     }
     
@@ -131,7 +131,7 @@ public class HyberSDK {
         }
     }
     
-    public func hyber_send_message_callback(message_id: String, message_text: String) -> String {
+    public func hyber_send_message_callback(message_id: String, message_text: String) -> HyberGeneralAnswerStruct {
         do{
             if (Constants.registrationstatus==true){
                 let X_Hyber_Session_Id: String = Constants.firebase_registration_token ?? "22"
@@ -141,15 +141,15 @@ public class HyberSDK {
                 
                 return anss}
             else {
-                return answer_b.general_answer(resp_code: "704", body_json: "error", description: "Not registered")
+                return answer_b.general_answer_struct(resp_code: "704", body_json: "error", description: "Not registered")
             }
         } catch let error {
             print("invalid regex: \(error.localizedDescription)")
-            return answer_b.general_answer(resp_code: "710", body_json: "error", description: "Critical error")
+            return answer_b.general_answer_struct(resp_code: "710", body_json: "error", description: "Critical error")
         }
     }
     
-    public func hyber_message_delivery_report(message_id: String) -> String {
+    public func hyber_message_delivery_report(message_id: String) -> HyberGeneralAnswerStruct {
         do{
             if (Constants.registrationstatus==true){
                 let X_Hyber_Session_Id: String = Constants.firebase_registration_token ?? "22"
@@ -162,15 +162,15 @@ public class HyberSDK {
                 
                 return asaa}
             else {
-                return answer_b.general_answer(resp_code: "704", body_json: "error", description: "Not registered")
+                return answer_b.general_answer_struct(resp_code: "704", body_json: "error", description: "Not registered")
             }
         } catch let error {
             print("invalid regex: \(error.localizedDescription)")
-            return answer_b.general_answer(resp_code: "710", body_json: "error", description: "Critical error")
+            return answer_b.general_answer_struct(resp_code: "710", body_json: "error", description: "Critical error")
         }
     }
     
-    public func hyber_update_registration() -> String {
+    public func hyber_update_registration() -> HyberGeneralAnswerStruct {
         do{
             if (Constants.registrationstatus==true){
                 let X_Hyber_Session_Id: String = Constants.firebase_registration_token ?? "22"
@@ -179,11 +179,11 @@ public class HyberSDK {
                 let ansss = hyber_rest_server.hyber_device_update(fcm_Token: Constants.firebase_registration_token!, os_Type: "ios", os_Version: Constants.dev_os_Version, device_Type: Constants.localizedModel, device_Name: UIDevice.modelName, sdk_Version: Constants.sdkVersion, X_Hyber_Session_Id: X_Hyber_Session_Id, X_Hyber_Auth_Token:Constants.hyber_registration_token!)
                 return ansss}
             else {
-                return answer_b.general_answer(resp_code: "704", body_json: "error", description: "Not registered")
+                return answer_b.general_answer_struct(resp_code: "704", body_json: "error", description: "Not registered")
             }
         } catch let error {
             print("invalid regex: \(error.localizedDescription)")
-            return answer_b.general_answer(resp_code: "710", body_json: "error", description: "Critical error")
+            return answer_b.general_answer_struct(resp_code: "710", body_json: "error", description: "Critical error")
         }
     }
     
@@ -210,7 +210,7 @@ public class HyberSDK {
     }
     
     
-    public func hyber_clear_all_device()->String {
+    public func hyber_clear_all_device()->HyberGeneralAnswerStruct {
         do{
             
             if (Constants.registrationstatus==true){
@@ -246,27 +246,29 @@ public class HyberSDK {
                 
             }
             else {
-                return answer_b.general_answer(resp_code: "704", body_json: "error", description: "Not registered")
+                return answer_b.general_answer_struct(resp_code: "704", body_json: "error", description: "Not registered")
             }
             
         } catch  {
             print("invalid regex: \(error.localizedDescription)")
-            return answer_b.general_answer(resp_code: "710", body_json: "error", description: "Critical error")
+            return answer_b.general_answer_struct(resp_code: "710", body_json: "error", description: "Critical error")
         }
     }
     
-    public func rewrite_msisdn(newmsisdn: String) {
+    public func rewrite_msisdn(newmsisdn: String) -> HyberGeneralAnswerStruct {
         UserDefaults.standard.set(newmsisdn, forKey: "hyber_user_msisdn")
         Constants.firebase_registration_token = newmsisdn
+        return HyberGeneralAnswerStruct.init(code: 200, result: "Ok", description: "Success", body: "newmsisdn: \(newmsisdn)")
     }
     
-    public func rewrite_password(newpassword: String) {
+    public func rewrite_password(newpassword: String) -> HyberGeneralAnswerStruct{
         UserDefaults.standard.set(newpassword, forKey: "hyber_user_password")
         Constants.firebase_registration_token = newpassword
+        return HyberGeneralAnswerStruct.init(code: 200, result: "Ok", description: "Success", body: "newpassword: \(newpassword)")
     }
     
     
-    public func hyber_check_queue()->HyberFunAnswerGeneral {
+    public func hyber_check_queue() -> HyberFunAnswerGeneral {
         do{
             if (Constants.registrationstatus==true){
                 let X_Hyber_Session_Id: String = Constants.firebase_registration_token ?? "22"

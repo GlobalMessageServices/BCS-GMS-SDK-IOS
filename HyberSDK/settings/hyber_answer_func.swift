@@ -22,6 +22,20 @@ class AnswerBuider {
         return resp
     }
     
+    func general_answer_struct(resp_code: String, body_json: String, description: String) -> HyberGeneralAnswerStruct{
+        var resp: HyberGeneralAnswerStruct = HyberGeneralAnswerStruct.init(code: 0, result: "unknown", description: "unknown", body: "unknown")
+        if (resp_code=="200"){
+            resp = HyberGeneralAnswerStruct.init(code: 200, result: "Ok", description: "Success", body: body_json)
+        } else if (resp_code=="400"){
+            resp = HyberGeneralAnswerStruct.init(code: 400, result: "Failed", description: "Failed", body: "unknown")
+        } else {
+            
+            resp = HyberGeneralAnswerStruct.init(code: Int(resp_code)!, result: "Failed", description: "Failed", body: body_json)
+        }
+        
+        return resp
+    }
+    
     func general_answer2(resp_code: Int, body_json: String, description: String) -> HyberFunAnswerGeneral{
         var resp: HyberFunAnswerGeneral?
         

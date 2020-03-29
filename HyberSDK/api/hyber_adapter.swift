@@ -153,12 +153,12 @@ class HyberAPI {
     
     //2 procedure
     //for revoke device from hyber server
-    func hyber_device_revoke(dev_list: [String], X_Hyber_Session_Id: String, X_Hyber_Auth_Token:String)->String {
+    func hyber_device_revoke(dev_list: [String], X_Hyber_Session_Id: String, X_Hyber_Auth_Token:String)->HyberGeneralAnswerStruct {
         do{
             let procedure_name = "hyber_device_revoke"
             let configuration = URLSessionConfiguration .default
             let session = URLSession(configuration: configuration)
-            var answ: String = String()
+            var answ: HyberGeneralAnswerStruct = HyberGeneralAnswerStruct.init(code: 0, result: "unknown", description: "unknown", body: "unknown")
             let semaphore6 = DispatchSemaphore(value: 0)
             
             let params =  ["devices": dev_list] as Dictionary<String, AnyObject>
@@ -216,7 +216,7 @@ class HyberAPI {
                 
                 
                 
-                answ = self.answer_buider.general_answer(resp_code: String(httpResponse.statusCode), body_json: body_json, description: "Success")
+                answ = self.answer_buider.general_answer_struct(resp_code: String(httpResponse.statusCode), body_json: body_json, description: "Success")
                 
                 print(jsonData)
                 self.processor.file_logger(message: "\(procedure_name) response jsonData is \(jsonData)", loglevel: ".debug")
@@ -266,19 +266,19 @@ class HyberAPI {
             return answ
         } catch {
             print("invalid regex: \(error.localizedDescription)")
-            return answer_b.general_answer(resp_code: "710", body_json: "error", description: "Critical error")
+            return answer_b.general_answer_struct(resp_code: "710", body_json: "error", description: "Critical error")
         }
     }
     
     
     //3 procedure
     //for update device from hyber server
-    func hyber_device_update(fcm_Token: String, os_Type: String, os_Version: String, device_Type: String, device_Name: String, sdk_Version: String, X_Hyber_Session_Id: String, X_Hyber_Auth_Token:String)->String {
+    func hyber_device_update(fcm_Token: String, os_Type: String, os_Version: String, device_Type: String, device_Name: String, sdk_Version: String, X_Hyber_Session_Id: String, X_Hyber_Auth_Token:String) -> HyberGeneralAnswerStruct {
         do{
             let procedure_name = "hyber_device_update"
             let configuration = URLSessionConfiguration .default
             let session = URLSession(configuration: configuration)
-            var answ: String = String()
+            var answ: HyberGeneralAnswerStruct = HyberGeneralAnswerStruct.init(code: 0, result: "unknown", description: "unknown", body: "unknown")
             let semaphore5 = DispatchSemaphore(value: 0)
             
             let params =  [
@@ -337,7 +337,7 @@ class HyberAPI {
                 
                 let devid_parsed = self.jsonparser.updateregistrationJParse(str_resp: body_json)
                 
-                answ = self.answer_buider.general_answer(resp_code: String(httpResponse.statusCode), body_json: "deviceId: \(devid_parsed.deviceId)", description: "Success")
+                answ = self.answer_buider.general_answer_struct(resp_code: String(httpResponse.statusCode), body_json: "deviceId: \(devid_parsed.deviceId)", description: "Success")
                 
                 self.processor.file_logger(message: "\(procedure_name) response jsonData is \(jsonData)", loglevel: ".debug")
                 
@@ -376,7 +376,7 @@ class HyberAPI {
             return answ
         } catch {
             print("invalid regex: \(error.localizedDescription)")
-            return answer_b.general_answer(resp_code: "710", body_json: "error", description: "Critical error")
+            return answer_b.general_answer_struct(resp_code: "710", body_json: "error", description: "Critical error")
         }
     }
     
@@ -495,13 +495,13 @@ class HyberAPI {
     
     //5 procedure
     //for send delivery report to hyber server
-    func hyber_message_dr(message_Id: String, received_At: String, X_Hyber_Session_Id: String, X_Hyber_Auth_Token:String)->String {
+    func hyber_message_dr(message_Id: String, received_At: String, X_Hyber_Session_Id: String, X_Hyber_Auth_Token:String)->HyberGeneralAnswerStruct {
         do{
             if (message_Id != nil && message_Id != "" && message_Id != "[]" ) {
                 let procedure_name = "hyber_message_dr"
                 let configuration = URLSessionConfiguration .default
                 let session = URLSession(configuration: configuration)
-                var answ: String = String()
+                var answ: HyberGeneralAnswerStruct = HyberGeneralAnswerStruct.init(code: 0, result: "unknown", description: "unknown", body: "unknown")
                 let semaphore3 = DispatchSemaphore(value: 0)
                 
                 let params =  [
@@ -558,7 +558,7 @@ class HyberAPI {
                     //////self.logger.file_logger(message: "\(procedure_name) response jsonData is \(jsonData??["devices"])", loglevel: ".debug")
                     let body_json: String = String(decoding: receivedData, as: UTF8.self)
                     
-                    answ = self.answer_buider.general_answer(resp_code: String(httpResponse.statusCode), body_json: body_json, description: "Success")
+                    answ = self.answer_buider.general_answer_struct(resp_code: String(httpResponse.statusCode), body_json: body_json, description: "Success")
                     
                     self.processor.file_logger(message: "\(procedure_name) response jsonData is \(jsonData)", loglevel: ".debug")
                     
@@ -595,25 +595,25 @@ class HyberAPI {
                 semaphore3.wait()
                 return answ
             } else {
-                return self.answer_buider.general_answer(resp_code: "700", body_json: "{\"error\":\"Incorrect input\"}", description: "Failed")
+                return self.answer_buider.general_answer_struct(resp_code: "700", body_json: "{\"error\":\"Incorrect input\"}", description: "Failed")
             }
             
         } catch {
             print("invalid regex: \(error.localizedDescription)")
-            return answer_b.general_answer(resp_code: "710", body_json: "error", description: "Critical error")
+            return answer_b.general_answer_struct(resp_code: "710", body_json: "error", description: "Critical error")
         }
         
     }
     
     //6 procedure
     //for message callback to hyber server
-    func hyber_message_callback(message_Id: String, answer: String, X_Hyber_Session_Id: String, X_Hyber_Auth_Token:String)->String {
+    func hyber_message_callback(message_Id: String, answer: String, X_Hyber_Session_Id: String, X_Hyber_Auth_Token:String)->HyberGeneralAnswerStruct {
         do {
             let procedure_name = "hyber_message_callback"
             let configuration = URLSessionConfiguration .default
             let session = URLSession(configuration: configuration)
             let semaphore2 = DispatchSemaphore(value: 0)
-            var answ: String = String()
+            var answ: HyberGeneralAnswerStruct = HyberGeneralAnswerStruct.init(code: 0, result: "unknown", description: "unknown", body: "unknown")
             let params =  [
                 "messageId":message_Id,
                 "answer": answer
@@ -664,7 +664,7 @@ class HyberAPI {
                 //////self.logger.file_logger(message: "\(procedure_name) response jsonData is \(jsonData??["devices"])", loglevel: ".debug")
                 let body_json: String = String(decoding: receivedData, as: UTF8.self)
                 
-                answ = self.answer_buider.general_answer(resp_code: String(httpResponse.statusCode), body_json: body_json, description: "Success")
+                answ = self.answer_buider.general_answer_struct(resp_code: String(httpResponse.statusCode), body_json: body_json, description: "Success")
                 
                 self.processor.file_logger(message: "\(procedure_name) response jsonData is \(jsonData)", loglevel: ".debug")
                 
@@ -704,7 +704,7 @@ class HyberAPI {
             return answ
         } catch {
             print("invalid regex: \(error.localizedDescription)")
-            return answer_b.general_answer(resp_code: "710", body_json: "error", description: "Critical error")
+            return answer_b.general_answer_struct(resp_code: "710", body_json: "error", description: "Critical error")
         }
     }
     
