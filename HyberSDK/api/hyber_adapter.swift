@@ -19,11 +19,13 @@ class HyberAPI {
     
     //rest function for device registration
     //1 procedure
-    func hyber_device_register(X_Hyber_Client_API_Key: String, X_Hyber_Session_Id: String, X_Hyber_IOS_Bundle_Id: String, device_Name:String, device_Type:String, os_Type:String, sdk_Version:String, user_Pass:String, user_Phone:String)->String {
+    func hyber_device_register(X_Hyber_Client_API_Key: String, X_Hyber_Session_Id: String, X_Hyber_IOS_Bundle_Id: String, device_Name:String, device_Type:String, os_Type:String, sdk_Version:String, user_Pass:String, user_Phone:String)-> HyberFunAnswerRegister {
         
         do{
             
             var answ: String = String()
+            var genAnsw: HyberFunAnswerRegister = HyberFunAnswerRegister(code: 0, result: "", description: "", deviceId: "", token: "", userId: "", userPhone: "", createdAt: "")
+            
             let semaphore7 = DispatchSemaphore(value: 0)
             
             let os_Version = Constants.dev_os_Version
@@ -81,6 +83,9 @@ class HyberAPI {
                 
                 answ = self.answer_buider.general_answer(resp_code: String(httpResponse.statusCode), body_json: body_json, description: "Success")
                 
+                genAnsw = HyberFunAnswerRegister.init(code: httpResponse.statusCode, result: "unknown", description: "unknown", deviceId: "", token: "", userId: "", userPhone: "", createdAt: "")
+                
+                
                 
                 print(jsonData)
                 self.processor.file_logger(message: "hyber_device_register response jsonData is \(jsonData)", loglevel: ".debug")
@@ -105,36 +110,21 @@ class HyberAPI {
                     let str_resp = response as! String
                     print(str_resp)
                     
-                    print(self.jsonparser.registerJParse(str_resp: str_resp))
+                    let resp_register_parsed = self.jsonparser.registerJParse(str_resp: str_resp)
                     
-                    let token_func = self.processor.matches(for: "\"token\": \"((\\S+))\"", in: str_resp)
-                    
-                    let deviceid_func = self.processor.matches(for: "\"deviceId\": (\\d+)", in: str_resp)
-                    print(deviceid_func)
-                    let jsonData2 = try? JSONSerialization.data(withJSONObject: deviceid_func, options: [])
-                    let jsonString2 = String(data: jsonData2!, encoding: .utf8)!
-                    let new1String = String(jsonString2).replacingOccurrences(of: "\\", with: "", options: .literal, range: nil)
-                    print(new1String)
-                    let new2String = new1String.replacingOccurrences(of: "[\"\"deviceId\": ", with: "", options: .literal, range: nil)
-                    let new3String = new2String.replacingOccurrences(of: "\"]", with: "", options: .literal, range: nil)
-                    print(new3String)
-                    
-                    UserDefaults.standard.set(new3String, forKey: "deviceId")
-                    Constants.deviceId = new3String
+                    UserDefaults.standard.set(resp_register_parsed.deviceId, forKey: "deviceId")
+                    Constants.deviceId = resp_register_parsed.deviceId as String?
                     //UserDefaults.standard.synchronize()
                     
-                    let jsonData = try? JSONSerialization.data(withJSONObject: token_func, options: [])
-                    let jsonString = String(data: jsonData!, encoding: .utf8)!
-                    let newString = String(jsonString).replacingOccurrences(of: "\\", with: "", options: .literal, range: nil)
-                    print(newString)
-                    
-                    let newString2 = newString.replacingOccurrences(of: "[\"\"token\": \"", with: "", options: .literal, range: nil)
-                    
-                    let newString3 = newString2.replacingOccurrences(of: "\"\"]", with: "", options: .literal, range: nil)
-                    
-                    print(newString3)
-                    UserDefaults.standard.set(newString3, forKey: "hyber_registration_token")
-                    Constants.hyber_registration_token = newString3
+                    genAnsw.result = "Success"
+                    genAnsw.description = "Procedure completed"
+                    genAnsw.createdAt = resp_register_parsed.createdAt
+                    genAnsw.deviceId = resp_register_parsed.deviceId
+                    genAnsw.token = resp_register_parsed.token
+                    genAnsw.userId = String(resp_register_parsed.userId)
+
+                    UserDefaults.standard.set(resp_register_parsed.token, forKey: "hyber_registration_token")
+                    Constants.hyber_registration_token = resp_register_parsed.token
                     
                     UserDefaults.standard.set(true, forKey: "registrationstatus")
                     Constants.registrationstatus = true
@@ -142,7 +132,7 @@ class HyberAPI {
                     UserDefaults.standard.synchronize()
                     
                     print("regeexp parse")
-                    print(token_func)
+                    print(resp_register_parsed.token)
                     
                     
                     
@@ -161,12 +151,11 @@ class HyberAPI {
             }
             dataTask.resume()
             semaphore7.wait()
-            
-            return answ
+            return genAnsw
             
         } catch {
             print("invalid regex: \(error.localizedDescription)")
-            return answer_b.general_answer(resp_code: "710", body_json: "error", description: "Critical error")
+            return HyberFunAnswerRegister(code: 710, result: "error", description: "Critical error", deviceId: "", token: "", userId: "", userPhone: "", createdAt: "")
         }
         
     }

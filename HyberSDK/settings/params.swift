@@ -30,11 +30,16 @@ public struct HyberFunAnswerGeneral {
 }
 
 public struct RegisterJsonParse {
-    var deviceId: Int
+    var deviceId: String
     var token: String
     var userId: Int
     var userPhone: String
     var createdAt: String
+}
+
+public struct InternalCoreConnection {
+    var register: HyberFunAnswerRegister? = nil
+    var general: HyberFunAnswerGeneral? = nil
 }
 
 public struct Constants {

@@ -76,7 +76,7 @@ public class HyberSDK {
     //X_Hyber_Client_API_Key - provide by hub administrator
     //user_phone - subscribers msisdn
     //subscribers password (optional, for future use)
-    public func hyber_register_new(user_phone: String, user_password: String, x_hyber_sesion_id: String, x_hyber_ios_bundle_id: String, X_Hyber_Client_API_Key: String)->String {
+    public func hyber_register_new(user_phone: String, user_password: String, x_hyber_sesion_id: String, x_hyber_ios_bundle_id: String, X_Hyber_Client_API_Key: String)->HyberFunAnswerRegister {
         do{
             
             if (Constants.registrationstatus==false){
@@ -87,11 +87,11 @@ public class HyberSDK {
                 return hyber_register_new_answer
             }
             else {
-                return answer_b.general_answer(resp_code: "701", body_json: "error", description: "Registration exists")
+                return HyberFunAnswerRegister(code: 701, result: "error", description: "Registration exists", deviceId: Constants.deviceId!, token: Constants.hyber_registration_token!, userId: "", userPhone: Constants.hyber_user_msisdn!, createdAt: "")
             }
         } catch let error {
             print("invalid regex: \(error.localizedDescription)")
-            return answer_b.general_answer(resp_code: "710", body_json: "error", description: "Critical error")
+            return HyberFunAnswerRegister(code: 710, result: "error", description: "Critical error", deviceId: "", token: "", userId: "", userPhone: "", createdAt: "")
         }
     }
     

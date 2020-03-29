@@ -24,7 +24,7 @@ class AnswParser {
             enum Category: String, Decodable {
                 case swift, combine, debugging, xcode
             }
-            let deviceId: Int
+            let deviceId: String
         }
         
         struct RegisterProfile: Decodable {
