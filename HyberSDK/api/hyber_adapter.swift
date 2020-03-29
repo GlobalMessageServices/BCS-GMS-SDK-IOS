@@ -460,6 +460,8 @@ class HyberAPI {
                     
                     let response = NSString (data: receivedData, encoding: String.Encoding.utf8.rawValue)
                     
+                    answ.result = "Success"
+                    
                     
                     if response == "SUCCESS"
                     {

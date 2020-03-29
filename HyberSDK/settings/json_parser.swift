@@ -145,9 +145,9 @@ class AnswParser {
             enum Category: String, Decodable {
                 case swift, combine, debugging, xcode
             }
-            var limitDays: Int
-            var limitMessages: Int
-            var lastTime: Int
+            var limitDays: Int?=nil
+            var limitMessages: Int?=nil
+            var lastTime: Int?=nil
             var messages: [HyberMessageListParse]
         }
         
@@ -159,9 +159,9 @@ class AnswParser {
         
         for i in parsedJson.messages
         {
-            let elem3: ImageResponse = ImageResponse.init(url: (i.image?.url!)!)
-            let elem2: ButtonResponse = ButtonResponse.init(text: (i.button?.text)!, url: (i.button?.url)!)
-            let elem1: MessagesResponseStr = MessagesResponseStr.init(phone: i.phone!, messageId: i.messageId!, title: i.title!, body: i.body!, image: elem3, button: elem2, time: i.time!, partner: i.partner!)
+            let elem3: ImageResponse = ImageResponse.init(url: i.image?.url)
+            let elem2: ButtonResponse = ButtonResponse.init(text: i.button?.text, url: i.button?.url)
+            let elem1: MessagesResponseStr = MessagesResponseStr.init(phone: i.phone, messageId: i.messageId, title: i.title, body: i.body, image: elem3, button: elem2, time: i.time, partner: i.partner)
             messListHyber.append(elem1)
         }
         

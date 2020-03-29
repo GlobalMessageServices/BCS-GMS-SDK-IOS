@@ -69,36 +69,36 @@ public struct HyberFunAnswerGetDeviceList {
 }
 
 public struct ImageResponse {
-    public var url: String
+    public var url: String?=nil
 }
 
 public struct ButtonResponse {
-    public var text: String
-    public var url: String
+    public var text: String?=nil
+    public var url: String?=nil
 }
 
 public struct MessagesResponseStr {
-    public var phone: String
-    public var messageId: String
-    public var title: String
-    public var body: String
-    public var image: ImageResponse
-    public var button: ButtonResponse
-    public var time: String
-    public var partner: String
+    public var phone: String?=nil
+    public var messageId: String?=nil
+    public var title: String?=nil
+    public var body: String?=nil
+    public var image: ImageResponse?=nil
+    public var button: ButtonResponse?=nil
+    public var time: String?=nil
+    public var partner: String?=nil
 }
 
 public struct MessagesListResponse {
-    public var limitDays: Int
-    public var limitMessages: Int
-    public var lastTime: Int
+    public var limitDays: Int?=nil
+    public var limitMessages: Int?=nil
+    public var lastTime: Int?=nil
     public var messages: [MessagesResponseStr]
 }
 
 public struct HyberFunAnswerGetMessageHistory {
-    public var code: Int
-    public var result: String
-    public var description: String
+    public var code: Int?=nil
+    public var result: String?=nil
+    public var description: String?=nil
     public var body: MessagesListResponse? = nil
 }
 
