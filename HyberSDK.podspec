@@ -16,7 +16,7 @@ Pod::Spec.new do |spec|
   #
 
   spec.name         = "HyberSDK"
-  spec.version      = "0.2.1"
+  spec.version      = "0.2.2"
   spec.summary      = "A short description of HyberSDK."
 
   # This description is used to generate tags and improve search results.
@@ -25,7 +25,7 @@ Pod::Spec.new do |spec|
   #   * Write the description between the DESC delimiters below.
   #   * Finally, don't worry about the indent, CocoaPods strips it!
   spec.description  = <<-DESC
-  This is SDK for Hyber. afa fdfasdf asdf hfdghfg hdfgh gh dfg hdfgh dfgh dfgh dfghd hd
+  This is SDK for Hyber. This SDK is for communication web service API only.
                    DESC
 
   spec.homepage     = "https://www.facebook.com/ard"
@@ -53,7 +53,7 @@ Pod::Spec.new do |spec|
   #  profile URL.
   #
 
-  spec.author             = { "gms" => "gms@gms-worldwide.com" }
+  spec.author             = { "Hyber" => "hyber@hyber.com" }
 
   # ――― Platform Specifics ――――――――――――――――――――――――――――――――――――――――――――――――――――――― #
   #
@@ -128,6 +128,7 @@ Pod::Spec.new do |spec|
   spec.dependency "CryptoSwift", "1.0.0"
   spec.dependency "SwiftyJSON"
   spec.dependency "JSON"
+  spec.dependency 'RetrofireSwift'
 
   # ――― Project Settings ――――――――――――――――――――――――――――――――――――――――――――――――――――――――― #
   #
