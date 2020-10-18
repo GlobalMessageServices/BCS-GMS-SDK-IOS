@@ -5,8 +5,7 @@ target 'HyberSDK' do
   # Comment the next line if you don't want to use dynamic frameworks
   use_frameworks!
 
-  # Pods for Hyber-SDK-iOS
-  pod 'SwiftyJSON', '~> 4.0'
+  # Pods for HyberSDK
   #pod 'Firebase/Core'
   #pod 'Firebase/Messaging'
   #pod 'Firebase/Auth'
@@ -18,10 +17,25 @@ target 'HyberSDK' do
   pod 'BoringSSL-GRPC'
   pod 'CryptoSwift', '1.0.0'
   pod 'JSON'
+  pod 'RetrofireSwift'
+  pod 'SwiftyBeaver'
 
   target 'HyberSDKTests' do
     inherit! :search_paths
     # Pods for testing
+    #pod 'Firebase/Core'
+    #pod 'Firebase/Messaging'
+    #pod 'Firebase/Auth'
+    #pod 'Firebase/AdMob'
+    #pod 'Firebase/Database'
+    #pod 'Firebase/Storage'
+    #pod 'Firebase/Firestore'
+    #pod 'Google-Mobile-Ads-SDK'
+    pod 'BoringSSL-GRPC'
+    pod 'CryptoSwift', '1.0.0'
+    pod 'JSON'
+    pod 'RetrofireSwift'
+    pod 'SwiftyBeaver'
   end
 
 end

@@ -2,7 +2,7 @@
 //  json_parser.swift
 //  HyberSDK
 //
-//  Created by Дмитрий Буйновский on 29/03/2020.
+//  Created by Kirill Kotov on 29/03/2020.
 //  Copyright © 2020 GMS. All rights reserved.
 //
 

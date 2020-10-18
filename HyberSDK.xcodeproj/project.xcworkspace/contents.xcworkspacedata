@@ -2,6 +2,6 @@
 <Workspace
    version = "1.0">
    <FileRef
-      location = "self:Hyber-SDK-iOS.xcodeproj">
+      location = "self:HyberSDK.xcodeproj">
    </FileRef>
 </Workspace>

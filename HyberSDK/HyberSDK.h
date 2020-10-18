@@ -1,9 +1,9 @@
 //
-//  Hyber_SDK_iOS.h
-//  Hyber-SDK-iOS
+//  HyberSDK.h
+//  HyberSDK
 //
-//  Created by Дмитрий Буйновский on 24/11/2019.
-//  Copyright © 2019 GMS. All rights reserved.
+//  Created by Kirill Kotov on 01/10/2020.
+//  Copyright © 2020 HYBER. All rights reserved.
 //
 
 #import <UIKit/UIKit.h>
@@ -12,9 +12,8 @@
 //! Project version number for HyberSDK.
 FOUNDATION_EXPORT double HyberSDKVersionNumber;
 
-//! Project version string for Hyber_SDK_iOS.
+//! Project version string for HyberSDK.
 FOUNDATION_EXPORT const unsigned char HyberSDKVersionString[];
 
 // In this header, you should import all the public headers of your framework using statements like #import <HyberSDK/PublicHeader.h>
-
 

@@ -1,8 +1,6 @@
 //
-//  params.swift
-//  test222
 //
-//  Created by ard on 28/04/2019.
+//  Created by Kirill Kotov on 28/04/2019.
 //  Copyright © 2019 ard. All rights reserved.
 //
 
@@ -109,6 +107,53 @@ public struct HyberGeneralAnswerStruct {
     public var body: String
 }
 
+
+public struct PushSdkParametersPublic {
+    
+    public struct BranchStructObj {
+         var fun_hyber_url_device_update: String
+         var fun_hyber_url_registration: String
+         var fun_hyber_url_revoke: String
+         var fun_hyber_url_get_device_all: String
+         var fun_hyber_url_message_callback: String
+         var fun_hyber_url_message_dr: String
+         var fun_hyber_url_mess_queue: String
+         var hyber_url_message_history: String
+    }
+    
+    var BranchStructObj = branchMasterValue.self
+    
+    //public val branchMasterValue: BranchStructObj = BranchStructObj()
+    
+    
+    public struct branchMasterValue {
+        static let fun_hyber_url_device_update = "https://push.hyber.im/api/2.3/device/update"
+        static let fun_hyber_url_registration = "https://push.hyber.im/api/2.3/device/registration"
+        static let fun_hyber_url_revoke = "https://push.hyber.im/api/2.3/device/revoke"
+        static let fun_hyber_url_get_device_all = "https://push.hyber.im/api/2.3/device/all"
+        static let fun_hyber_url_message_callback = "https://push.hyber.im/api/2.3/message/callback"
+        static let fun_hyber_url_message_dr = "https://push.hyber.im/api/2.3/message/dr"
+        static let fun_hyber_url_mess_queue = "https://push.hyber.im/api/2.3/message/queue"
+        static let hyber_url_message_history = "https://push.hyber.im/api/2.3/message/history?startDate="
+    }
+    
+    public struct branchTestValue {
+        static let fun_hyber_url_device_update = "https://test-push.hyber.im/api/2.3/device/update"
+        static let fun_hyber_url_registration = "https://test-push.hyber.im/api/2.3/device/registration"
+        static let fun_hyber_url_revoke = "https://test-push.hyber.im/api/2.3/device/revoke"
+        static let fun_hyber_url_get_device_all = "https://test-push.hyber.im/api/2.3/device/all"
+        static let fun_hyber_url_message_callback = "https://test-push.hyber.im/api/2.3/message/callback"
+        static let fun_hyber_url_message_dr = "https://test-push.hyber.im/api/2.3/message/dr"
+        static let fun_hyber_url_mess_queue = "https://test-push.hyber.im/api/2.3/message/queue"
+        static let hyber_url_message_history = "https://test-push.hyber.im/api/2.3/message/history?startDate="
+    }
+
+    static let TAG_LOGGING = "HyberPushSDK"
+    static let hyber_log_level_error = "error"
+    static let hyber_log_level_debug = "debug"
+}
+
+
 public struct Constants {
     
     public static var registrationstatus = UserDefaults.standard.bool(forKey: "registrationstatus")
@@ -120,7 +165,6 @@ public struct Constants {
     
     
     //static let hyber_registration_token = UserDefaults.standard.bool(forKey: "hyber_registration_token")
-    
     
     
     
@@ -266,6 +310,10 @@ public extension UIDevice {
             case "iPhone11,2":                              return "iPhone XS"
             case "iPhone11,4", "iPhone11,6":                return "iPhone XS Max"
             case "iPhone11,8":                              return "iPhone XR"
+            case "iPhone12,1":                              return "iPhone 11"
+            case "iPhone12,3":                              return "iPhone 11 Pro"
+            case "iPhone12,5":                              return "iPhone 11 Pro Max"
+            case "iPhone12,8":                              return "iPhone SE (2nd generation)"
             case "iPad2,1", "iPad2,2", "iPad2,3", "iPad2,4":return "iPad 2"
             case "iPad3,1", "iPad3,2", "iPad3,3":           return "iPad 3"
             case "iPad3,4", "iPad3,5", "iPad3,6":           return "iPad 4"
@@ -285,6 +333,7 @@ public extension UIDevice {
             case "iPad7,3", "iPad7,4":                      return "iPad Pro (10.5-inch)"
             case "iPad8,1", "iPad8,2", "iPad8,3", "iPad8,4":return "iPad Pro (11-inch)"
             case "iPad8,5", "iPad8,6", "iPad8,7", "iPad8,8":return "iPad Pro (12.9-inch) (3rd generation)"
+            case "iPad8,11", "iPad8,12":                    return "iPad Pro (12.9-inch) (4th generation)"
             case "AppleTV5,3":                              return "Apple TV"
             case "AppleTV6,2":                              return "Apple TV 4K"
             case "AudioAccessory1,1":                       return "HomePod"

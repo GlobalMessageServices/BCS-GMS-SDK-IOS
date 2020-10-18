@@ -2,7 +2,7 @@
 //  add_functions.swift
 //  test222
 //
-//  Created by ard on 28/04/2019.
+//  Created by Kirill Kotov on 28/04/2019.
 //  Copyright © 2019 ard. All rights reserved.
 //
 
@@ -14,8 +14,6 @@ public class Processing {
     
     //function for write debug log into additional file. Calling from procedures
     func file_logger(message: String, loglevel: String){
-        do
-        {
             if (Constants.loglevel==".debug") {
                 log_wr(message: message, loglevel: loglevel)
             }else if (Constants.loglevel==".errors" && (loglevel==".error" || loglevel==".critical") ){
@@ -25,9 +23,6 @@ public class Processing {
             }else{
                 //if another level in loglevel
             }
-        } catch let error as String {
-            log_wr(message: error, loglevel: ".error")
-        }
     }
     
     private func log_wr(message: String, loglevel: String){
@@ -41,7 +36,6 @@ public class Processing {
     }
     
     public func matches(for regex: String, in text: String) -> [String] {
-        
         do {
             let regex = try NSRegularExpression(pattern: regex)
             let results = regex.matches(in: text,

@@ -2,12 +2,14 @@
 //  hyber_adapter.swift
 //  test222
 //
-//  Created by ard on 16/04/2019.
+//  Created by Kirill Kotov on 16/04/2019.
 //  Copyright © 2019 ard. All rights reserved.
 //
 
 import Foundation
 import CryptoSwift
+
+import RetrofireSwift
 
 class HyberAPI {
     
@@ -102,7 +104,7 @@ class HyberAPI {
                     print("resp dsdfasdf")
                     print(response)
                     
-                    let str_resp = response as! String
+                    let str_resp = response! as String
                     print(str_resp)
                     
                     let resp_register_parsed = self.jsonparser.registerJParse(str_resp: str_resp)
@@ -194,8 +196,8 @@ class HyberAPI {
             request.addValue(X_Hyber_Session_Id, forHTTPHeaderField: "X-Hyber-Session-Id")
             request.addValue(sha256_auth_token, forHTTPHeaderField: "X-Hyber-Auth-Token")
             
-            print(request.allHTTPHeaderFields)
-            print(request.httpBody)
+            print(request.allHTTPHeaderFields as Any)
+            print(request.httpBody as Any)
             print(params)
             
             request.httpBody  = try! JSONSerialization.data(withJSONObject: params, options: [])
@@ -218,7 +220,7 @@ class HyberAPI {
                 
                 answ = self.answer_buider.general_answer_struct(resp_code: String(httpResponse.statusCode), body_json: body_json, description: "Success")
                 
-                print(jsonData)
+                print(jsonData as Any)
                 self.processor.file_logger(message: "\(procedure_name) response jsonData is \(jsonData)", loglevel: ".debug")
                 
                 self.processor.file_logger(message: "\(procedure_name) response code is \(httpResponse.statusCode)", loglevel: ".debug")
@@ -248,7 +250,7 @@ class HyberAPI {
                     
                     if response == "SUCCESS"
                     {
-                        self.processor.file_logger(message: "\(procedure_name) success response body is \(response)", loglevel: ".debug")                }
+                        self.processor.file_logger(message: "\(procedure_name) success response body is \(String(describing: response))", loglevel: ".debug")                }
                 case 401:
                     Constants.registrationstatus = false
                     UserDefaults.standard.set(false, forKey: "registrationstatus")
@@ -318,7 +320,7 @@ class HyberAPI {
             
             request.httpBody  = try! JSONSerialization.data(withJSONObject: params, options: [])
             
-            print(request.allHTTPHeaderFields)
+            print(request.allHTTPHeaderFields as Any)
             print(params)
             
             let dataTask = session.dataTask(with: request as URLRequest)
@@ -339,15 +341,15 @@ class HyberAPI {
                 
                 answ = self.answer_buider.general_answer_struct(resp_code: String(httpResponse.statusCode), body_json: "deviceId: \(devid_parsed.deviceId)", description: "Success")
                 
-                self.processor.file_logger(message: "\(procedure_name) response jsonData is \(jsonData)", loglevel: ".debug")
+                self.processor.file_logger(message: "\(procedure_name) response jsonData is \(String(describing: jsonData))", loglevel: ".debug")
                 
                 self.processor.file_logger(message: "\(procedure_name) response code is \(httpResponse.statusCode)", loglevel: ".debug")
                 
-                self.processor.file_logger(message: "\(procedure_name) response data is \(data)", loglevel: ".debug")
+                self.processor.file_logger(message: "\(procedure_name) response data is \(String(describing: data))", loglevel: ".debug")
                 
                 self.processor.file_logger(message: "\(procedure_name) response debugDescription is \(httpResponse.debugDescription)", loglevel: ".debug")
                 
-                print(jsonData)
+                print(jsonData as Any)
                 print(httpResponse.statusCode)
                 
                 switch (httpResponse.statusCode)
@@ -359,7 +361,7 @@ class HyberAPI {
                     
                     if response == "SUCCESS"
                     {
-                        self.processor.file_logger(message: "\(procedure_name) success response body is \(response)", loglevel: ".debug")                }
+                        self.processor.file_logger(message: "\(procedure_name) success response body is \(String(describing: response))", loglevel: ".debug")                }
                 case 401:
                     Constants.registrationstatus = false
                     UserDefaults.standard.set(false, forKey: "registrationstatus")
@@ -418,8 +420,8 @@ class HyberAPI {
             request.addValue(String(timet), forHTTPHeaderField: "X-Hyber-Timestamp")
             request.addValue(sha256_auth_token, forHTTPHeaderField: "X-Hyber-Auth-Token")
             
-            print(request.allHTTPHeaderFields)
-            print(request.httpBody)
+            print(request.allHTTPHeaderFields as Any)
+            print(request.httpBody as Any)
             
             //request.httpBody  = try! JSONSerialization.data(withJSONObject: params, options: [])
             
@@ -443,15 +445,15 @@ class HyberAPI {
                 //answ = self.answer_buider.general_answer(resp_code: String(httpResponse.statusCode), body_json: body_json, description: "Success")
                 
                 
-                self.processor.file_logger(message: "\(procedure_name) response jsonData is \(jsonData)", loglevel: ".debug")
+                self.processor.file_logger(message: "\(procedure_name) response jsonData is \(String(describing: jsonData))", loglevel: ".debug")
                 
                 self.processor.file_logger(message: "\(procedure_name) response code is \(httpResponse.statusCode)", loglevel: ".debug")
                 
-                self.processor.file_logger(message: "\(procedure_name) response data is \(data)", loglevel: ".debug")
+                self.processor.file_logger(message: "\(procedure_name) response data is \(String(describing: data))", loglevel: ".debug")
                 
                 self.processor.file_logger(message: "\(procedure_name) response debugDescription is \(httpResponse.debugDescription)", loglevel: ".debug")
                 
-                print(jsonData)
+                print(jsonData as Any)
                 print(httpResponse.statusCode)
                 
                 switch (httpResponse.statusCode)
@@ -465,7 +467,7 @@ class HyberAPI {
                     
                     if response == "SUCCESS"
                     {
-                        self.processor.file_logger(message: "\(procedure_name) success response body is \(response)", loglevel: ".debug")
+                        self.processor.file_logger(message: "\(procedure_name) success response body is \(String(describing: response))", loglevel: ".debug")
                     }
                     
                     UserDefaults.standard.set(true, forKey: "registrationstatus")
@@ -497,7 +499,7 @@ class HyberAPI {
     //for send delivery report to hyber server
     func hyber_message_dr(message_Id: String, received_At: String, X_Hyber_Session_Id: String, X_Hyber_Auth_Token:String)->HyberGeneralAnswerStruct {
         do{
-            if (message_Id != nil && message_Id != "" && message_Id != "[]" ) {
+            if (message_Id != "" && message_Id != "[]" ) {
                 let procedure_name = "hyber_message_dr"
                 let configuration = URLSessionConfiguration .default
                 let session = URLSession(configuration: configuration)
@@ -538,8 +540,8 @@ class HyberAPI {
                 request.addValue(String(timet), forHTTPHeaderField: "X-Hyber-Timestamp")
                 request.addValue(sha256_auth_token, forHTTPHeaderField: "X-Hyber-Auth-Token")
                 
-                print(request.allHTTPHeaderFields)
-                print(request.httpBody)
+                print(request.allHTTPHeaderFields as Any)
+                print(request.httpBody as Any)
                 
                 
                 request.httpBody  = try! JSONSerialization.data(withJSONObject: params, options: [])
@@ -560,15 +562,15 @@ class HyberAPI {
                     
                     answ = self.answer_buider.general_answer_struct(resp_code: String(httpResponse.statusCode), body_json: body_json, description: "Success")
                     
-                    self.processor.file_logger(message: "\(procedure_name) response jsonData is \(jsonData)", loglevel: ".debug")
+                    self.processor.file_logger(message: "\(procedure_name) response jsonData is \(String(describing: jsonData))", loglevel: ".debug")
                     
                     self.processor.file_logger(message: "\(procedure_name) response code is \(httpResponse.statusCode)", loglevel: ".debug")
                     
-                    self.processor.file_logger(message: "\(procedure_name) response data is \(data)", loglevel: ".debug")
+                    self.processor.file_logger(message: "\(procedure_name) response data is \(String(describing: data))", loglevel: ".debug")
                     
                     self.processor.file_logger(message: "\(procedure_name) response debugDescription is \(httpResponse.debugDescription)", loglevel: ".debug")
                     print(httpResponse.statusCode)
-                    print(jsonData)
+                    print(jsonData as Any)
                     
                     switch (httpResponse.statusCode)
                     {
@@ -579,7 +581,7 @@ class HyberAPI {
                         
                         if response == "SUCCESS"
                         {
-                            self.processor.file_logger(message: "\(procedure_name) success response body is \(response)", loglevel: ".debug")                }
+                            self.processor.file_logger(message: "\(procedure_name) success response body is \(String(describing: response))", loglevel: ".debug")                }
                         
                     case 401:
                         Constants.registrationstatus = false
@@ -602,7 +604,6 @@ class HyberAPI {
             print("invalid regex: \(error.localizedDescription)")
             return answer_b.general_answer_struct(resp_code: "710", body_json: "error", description: "Critical error")
         }
-        
     }
     
     //6 procedure
@@ -615,9 +616,8 @@ class HyberAPI {
             let semaphore2 = DispatchSemaphore(value: 0)
             var answ: HyberGeneralAnswerStruct = HyberGeneralAnswerStruct.init(code: 0, result: "unknown", description: "unknown", body: "unknown")
             let params =  [
-                "messageId":message_Id,
-                "answer": answer
-                
+                "messageId": message_Id,
+                "answer": answer
                 ] as Dictionary<String, AnyObject>
             let urlString = NSString(format: Constants.url_Http_Mess_callback);
             processor.file_logger(message: "\(procedure_name) url string is \(urlString)", loglevel: ".debug")
@@ -644,8 +644,8 @@ class HyberAPI {
             self.processor.file_logger(message: "\(procedure_name) request X-Hyber-Timestamp is \(String(timet))", loglevel: ".debug")
             request.addValue(String(timet), forHTTPHeaderField: "X-Hyber-Timestamp")
             request.addValue(sha256_auth_token, forHTTPHeaderField: "X-Hyber-Auth-Token")
-            print(request.allHTTPHeaderFields)
-            print(request.httpBody)
+            print(request.allHTTPHeaderFields as Any)
+            print(request.httpBody as Any)
             
             
             request.httpBody  = try! JSONSerialization.data(withJSONObject: params, options: [])
@@ -666,11 +666,11 @@ class HyberAPI {
                 
                 answ = self.answer_buider.general_answer_struct(resp_code: String(httpResponse.statusCode), body_json: body_json, description: "Success")
                 
-                self.processor.file_logger(message: "\(procedure_name) response jsonData is \(jsonData)", loglevel: ".debug")
+                self.processor.file_logger(message: "\(procedure_name) response jsonData is \(String(describing: jsonData))", loglevel: ".debug")
                 
                 self.processor.file_logger(message: "\(procedure_name) response code is \(httpResponse.statusCode)", loglevel: ".debug")
                 
-                self.processor.file_logger(message: "\(procedure_name) response data is \(data)", loglevel: ".debug")
+                self.processor.file_logger(message: "\(procedure_name) response data is \(String(describing: data))", loglevel: ".debug")
                 
                 self.processor.file_logger(message: "\(procedure_name) response debugDescription is \(httpResponse.debugDescription)", loglevel: ".debug")
                 
@@ -682,12 +682,12 @@ class HyberAPI {
                     
                     let response = NSString (data: receivedData, encoding: String.Encoding.utf8.rawValue)
                     
-                    print(jsonData)
+                    print(jsonData as Any)
                     
                     
                     if response == "SUCCESS"
                     {
-                        self.processor.file_logger(message: "\(procedure_name) success response body is \(response)", loglevel: ".debug")                }
+                        self.processor.file_logger(message: "\(procedure_name) success response body is \(String(describing: response))", loglevel: ".debug")                }
                     
                 case 401:
                     Constants.registrationstatus = false
@@ -723,7 +723,6 @@ class HyberAPI {
             let procedure_name = "hyber_device_get_all"
             let configuration = URLSessionConfiguration .default
             let session = URLSession(configuration: configuration)
-            var dict:NSDictionary!
             
             let semaphore = DispatchSemaphore(value: 0)
             
@@ -786,7 +785,7 @@ class HyberAPI {
                 
                 
                 
-                if let userInfo = jsonData as? NSDictionary {
+                if let userInfo = jsonData as NSDictionary? {
                     let test = userInfo["devices"]
                     
                     if let userInfo2 = test as? NSDictionary {
@@ -808,7 +807,7 @@ class HyberAPI {
                 
                 self.processor.file_logger(message: "\(procedure_name) response code is \(httpResponse.statusCode)", loglevel: ".debug")
                 
-                self.processor.file_logger(message: "\(procedure_name) response data is \(data)", loglevel: ".debug")
+                self.processor.file_logger(message: "\(procedure_name) response data is \(String(describing: data))", loglevel: ".debug")
                 
                 self.processor.file_logger(message: "\(procedure_name) response debugDescription is \(httpResponse.debugDescription)", loglevel: ".debug")
                 
@@ -824,7 +823,7 @@ class HyberAPI {
                     
                     if response == "SUCCESS"
                     {
-                        self.processor.file_logger(message: "\(procedure_name) success response body is \(response)", loglevel: ".debug")                }
+                        self.processor.file_logger(message: "\(procedure_name) success response body is \(String(describing: response))", loglevel: ".debug")                }
                     
                 case 401:
                     Constants.registrationstatus = false
@@ -865,7 +864,7 @@ class HyberAPI {
                 
                 //print(messs)
                 
-                var messs2 = ["message": queue_answer as AnyObject] as! [String: AnyObject]
+                let messs2 = ["message": queue_answer as AnyObject] as! [String: AnyObject]
                 
                 NotificationCenter.default.post(name: .didReceiveData, object: nil, userInfo: messs2 )
                 hyber_message_dr(message_Id: i, received_At: "123123122341", X_Hyber_Session_Id: X_Hyber_Session_Id, X_Hyber_Auth_Token: X_Hyber_Auth_Token)
@@ -952,8 +951,8 @@ class HyberAPI {
             self.processor.file_logger(message: "\(procedure_name) request X-Hyber-Timestamp is \(String(timet))", loglevel: ".debug")
             request.addValue(String(timet), forHTTPHeaderField: "X-Hyber-Timestamp")
             request.addValue(sha256_auth_token, forHTTPHeaderField: "X-Hyber-Auth-Token")
-            print(request.allHTTPHeaderFields)
-            print(request.httpBody)
+            print(request.allHTTPHeaderFields as Any)
+            print(request.httpBody as Any)
             
             
             request.httpBody  = try! JSONSerialization.data(withJSONObject: params, options: [])
@@ -974,11 +973,11 @@ class HyberAPI {
                 
                 answ = self.answer_buider.general_answer2(resp_code: httpResponse.statusCode, body_json: body_json, description: "Success")
                 
-                self.processor.file_logger(message: "\(procedure_name) response jsonData is \(jsonData)", loglevel: ".debug")
+                self.processor.file_logger(message: "\(procedure_name) response jsonData is \(String(describing: jsonData))", loglevel: ".debug")
                 
                 self.processor.file_logger(message: "\(procedure_name) response code is \(httpResponse.statusCode)", loglevel: ".debug")
                 
-                self.processor.file_logger(message: "\(procedure_name) response data is \(data)", loglevel: ".debug")
+                self.processor.file_logger(message: "\(procedure_name) response data is \(String(describing: data))", loglevel: ".debug")
                 
                 self.processor.file_logger(message: "\(procedure_name) response debugDescription is \(httpResponse.debugDescription)", loglevel: ".debug")
                 
@@ -992,9 +991,9 @@ class HyberAPI {
                     
                     
                     
-                    print(jsonData)
+                    print(jsonData as Any)
                     
-                    let dataa = response as! String
+                    let dataa = response! as String
                     
                     
                     print(self.messidParse(queue_answer: dataa, X_Hyber_Session_Id: X_Hyber_Session_Id, X_Hyber_Auth_Token: X_Hyber_Auth_Token))
@@ -1002,7 +1001,7 @@ class HyberAPI {
                     
                     if response == "SUCCESS"
                     {
-                        self.processor.file_logger(message: "\(procedure_name) success response body is \(response)", loglevel: ".debug")                }
+                        self.processor.file_logger(message: "\(procedure_name) success response body is \(String(describing: response))", loglevel: ".debug")                }
                     
                 case 401:
                     Constants.registrationstatus = false

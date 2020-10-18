@@ -2,7 +2,7 @@
 //  hyber_answer_func.swift
 //  PushDemo
 //
-//  Created by ard on 28/09/2019.
+//  Created by Kirill Kotov on 28/09/2019.
 //  Copyright © 2019 ard. All rights reserved.
 //
 
@@ -32,7 +32,6 @@ class AnswerBuider {
             
             resp = HyberGeneralAnswerStruct.init(code: Int(resp_code)!, result: "Failed", description: "Failed", body: body_json)
         }
-        
         return resp
     }
     

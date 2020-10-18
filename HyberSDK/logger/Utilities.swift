@@ -2,7 +2,7 @@
 // Utilities.swift
 //  Hyber-SDK
 //
-//  Created by Taras on 10/27/16.
+//  Created by Kirill Kotov on 10/27/16.
 //  Incuube
 //
 

@@ -2,7 +2,7 @@
 //  hybersdk.swift
 //  hybersdk
 //
-//  Created by ard on 08/05/2019.
+//  Created by Kirill Kotov on 08/05/2019.
 //  Copyright © 2019 ard. All rights reserved.
 //
 
@@ -10,6 +10,7 @@
 import Foundation
 import UIKit
 import CryptoSwift
+import SwiftyBeaver
 
 //import CoreData
 //import FirebaseCore
@@ -28,7 +29,10 @@ public extension Notification.Name {
 
 public class HyberSDK {
     
-    public init()
+    public init(
+        //platform_branch: PushSdkParametersPublic,
+        log_level: String = "error"
+        )
     {
         Constants.registrationstatus = UserDefaults.standard.bool(forKey: "registrationstatus")
         Constants.hyber_registration_token = UserDefaults.standard.string(forKey: "hyber_registration_token")
@@ -67,7 +71,6 @@ public class HyberSDK {
     
     
     let answer_b = AnswerBuider.init()
-    
     
     
     //Procedure 1. new device registration
