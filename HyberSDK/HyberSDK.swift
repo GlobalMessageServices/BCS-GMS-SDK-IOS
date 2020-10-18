@@ -10,8 +10,8 @@
 import Foundation
 import UIKit
 import CryptoSwift
-import SwiftyBeaver
-
+//import SwiftyBeaver
+//
 //import CoreData
 //import FirebaseCore
 //import FirebaseMessaging
@@ -31,7 +31,8 @@ public class HyberSDK {
     
     public init(
         //platform_branch: PushSdkParametersPublic,
-        log_level: String = "error"
+        log_level: String = "error",
+        kk: String = "h"
         )
     {
         Constants.registrationstatus = UserDefaults.standard.bool(forKey: "registrationstatus")

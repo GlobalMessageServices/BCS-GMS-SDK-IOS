@@ -1,45 +1,33 @@
 PODS:
-  - Alamofire (5.0.5)
-  - BoringSSL-GRPC (0.0.7):
-    - BoringSSL-GRPC/Implementation (= 0.0.7)
-    - BoringSSL-GRPC/Interface (= 0.0.7)
-  - BoringSSL-GRPC/Implementation (0.0.7):
-    - BoringSSL-GRPC/Interface (= 0.0.7)
-  - BoringSSL-GRPC/Interface (0.0.7)
+  - BoringSSL-GRPC (0.0.13):
+    - BoringSSL-GRPC/Implementation (= 0.0.13)
+    - BoringSSL-GRPC/Interface (= 0.0.13)
+  - BoringSSL-GRPC/Implementation (0.0.13):
+    - BoringSSL-GRPC/Interface (= 0.0.13)
+  - BoringSSL-GRPC/Interface (0.0.13)
   - CryptoSwift (1.0.0)
   - JSON (5.0.0)
-  - RetrofireSwift (0.3.4):
-    - Alamofire
-    - SourceryForRetrofire (= 0.16.0-sfr-6)
-  - SourceryForRetrofire (0.16.0-sfr-6)
-  - SwiftyBeaver (1.8.4)
+  - SwiftyBeaver (1.9.2)
 
 DEPENDENCIES:
   - BoringSSL-GRPC
   - CryptoSwift (= 1.0.0)
   - JSON
-  - RetrofireSwift
   - SwiftyBeaver
 
 SPEC REPOS:
   https://github.com/cocoapods/specs.git:
-    - Alamofire
     - BoringSSL-GRPC
     - CryptoSwift
     - JSON
-    - RetrofireSwift
-    - SourceryForRetrofire
     - SwiftyBeaver
 
 SPEC CHECKSUMS:
-  Alamofire: df2f8f826963b08b9a870791ad48e07a10090b2e
-  BoringSSL-GRPC: 8edf627ee524575e2f8d19d56f068b448eea3879
+  BoringSSL-GRPC: 41adfd4432a3de4d89c5804e901749e62a7fe3e9
   CryptoSwift: d81eeaa59dc5a8d03720fe919a6fd07b51f7439f
   JSON: 93622160a062588b4cd3497b77ccd777f1fd0587
-  RetrofireSwift: 4c3611bd341af957c7ffbd1c24ac93ee5af496fd
-  SourceryForRetrofire: 1430840a10403d89165b29543a64f4c979278f4a
-  SwiftyBeaver: f9a9aba96a6a6166e21682377804d728b0d20b95
+  SwiftyBeaver: b8239f6bfe9e1ea3303e6139abc8c24228081d84
 
-PODFILE CHECKSUM: bd08a5afac91a4c04e3f41ce70c66a705271b1db
+PODFILE CHECKSUM: 7041739f4290a18397c4657fafe70f53064a5185
 
 COCOAPODS: 1.7.0

@@ -9,7 +9,7 @@
 import Foundation
 import CryptoSwift
 
-import RetrofireSwift
+//import RetrofireSwift
 
 class HyberAPI {
     

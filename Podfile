@@ -17,8 +17,8 @@ target 'HyberSDK' do
   pod 'BoringSSL-GRPC'
   pod 'CryptoSwift', '1.0.0'
   pod 'JSON'
-  pod 'RetrofireSwift'
-  pod 'SwiftyBeaver'
+  #pod 'RetrofireSwift'
+  #pod 'SwiftyBeaver'
 
   target 'HyberSDKTests' do
     inherit! :search_paths
@@ -34,7 +34,7 @@ target 'HyberSDK' do
     pod 'BoringSSL-GRPC'
     pod 'CryptoSwift', '1.0.0'
     pod 'JSON'
-    pod 'RetrofireSwift'
+    #pod 'RetrofireSwift'
     pod 'SwiftyBeaver'
   end
 
