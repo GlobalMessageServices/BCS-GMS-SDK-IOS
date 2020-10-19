@@ -28,11 +28,11 @@ public struct HyberFunAnswerGeneral {
 }
 
 struct RegisterJsonParse {
-    var deviceId: String
-    var token: String
-    var userId: Int
-    var userPhone: String
-    var createdAt: String
+    var deviceId: String?=nil
+    var token: String?=nil
+    var userId: Int?=0
+    var userPhone: String?=nil
+    var createdAt: String?=nil
 }
 
 struct UpdateRegJsonParse {
@@ -123,9 +123,7 @@ public struct PushSdkParametersPublic {
     
     var BranchStructObj = branchMasterValue.self
     
-    //public val branchMasterValue: BranchStructObj = BranchStructObj()
-    
-    
+
     public struct branchMasterValue {
         static let fun_hyber_url_device_update = "https://push.hyber.im/api/2.3/device/update"
         static let fun_hyber_url_registration = "https://push.hyber.im/api/2.3/device/registration"
@@ -169,11 +167,11 @@ public struct Constants {
     
     
     let kOSType = "ios"
-    static let sdkVersion = "0.0.12"
+    static let sdkVersion = "1.0.0.4"
     static let dev_os_Version = UIDevice.current.systemVersion
     static let kDeviceType = "\(UIDevice.current.model)"
     static let kDeviceType2 = "\(UIDevice.current.batteryLevel)"
-    static let identifierForVendor = "\(UIDevice.current.identifierForVendor)"
+    static let identifierForVendor = "\(String(describing: UIDevice.current.identifierForVendor))"
     static let localizedModel = "\(UIDevice.current.localizedModel)"
     //let kDeviceName = "\(UIDevice.current.modelName)"
     static let kBundleID = Bundle.main.infoDictionary?[kCFBundleIdentifierKey as String] as? String
@@ -196,7 +194,7 @@ public struct Constants {
         if (branch=="master")
         {
             return "https://push.hyber.im/api/2.3/device/revoke"
-        }else {
+        } else {
             return "https://test-push.hyber.im/api/2.3/device/revoke"
         }
     }
@@ -205,7 +203,7 @@ public struct Constants {
         if (branch=="master")
         {
             return "https://push.hyber.im/api/2.3/device/update"
-        }else {
+        } else {
             return "https://test-push.hyber.im/api/2.3/device/update"
         }
     }
@@ -214,7 +212,7 @@ public struct Constants {
         if (branch=="master")
         {
             return "https://push.hyber.im/api/2.3/message/history?startDate="
-        }else {
+        } else {
             return "https://test-push.hyber.im/api/2.3/message/history?startDate="
         }
     }
@@ -224,7 +222,7 @@ public struct Constants {
         if (branch=="master")
         {
             return "https://push.hyber.im/api/2.3/message/dr"
-        }else {
+        } else {
             return "https://test-push.hyber.im/api/2.3/message/dr"
         }
     }
@@ -233,7 +231,7 @@ public struct Constants {
         if (branch=="master")
         {
             return "https://push.hyber.im/api/2.3/message/callback"
-        }else {
+        } else {
             return "https://test-push.hyber.im/api/2.3/message/callback"
         }
     }
@@ -242,7 +240,7 @@ public struct Constants {
         if (branch=="master")
         {
             return "https://push.hyber.im/api/2.3/device/all"
-        }else {
+        } else {
             return "https://test-push.hyber.im/api/2.3/device/all"
         }
     }

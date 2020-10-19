@@ -28,10 +28,10 @@ public class Processing {
     private func log_wr(message: String, loglevel: String){
         let dateFormatter : DateFormatter = DateFormatter()
         dateFormatter.dateFormat = "yyyy-MM-dd HH:mm:ss"
-        let date = Date()
-        let dateString = dateFormatter.string(from: date)
-        let fileURL = URL(fileURLWithPath: Constants.debug_log_path)
-        let text = "\(dateString) \(Constants.application_name) \(loglevel) message: \(message)\n"
+        //let date = Date()
+        //let dateString = dateFormatter.string(from: date)
+        //let fileURL = URL(fileURLWithPath: Constants.debug_log_path)
+        //let text = "\(dateString) \(Constants.application_name) \(loglevel) message: \(message)\n"
         //try! text.write(to: fileURL, atomically: false, encoding: .utf8)
     }
     

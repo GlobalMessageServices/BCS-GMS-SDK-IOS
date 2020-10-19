@@ -18,7 +18,6 @@ class AnswerBuider {
         } else {
             resp = "{\"result\":\"Failed\",\"description\":\"\(description)\",\"code\":\(resp_code),\"body\":\"\(body_json)\"}"
         }
-        
         return resp
     }
     
@@ -30,15 +29,14 @@ class AnswerBuider {
             resp = HyberGeneralAnswerStruct.init(code: 400, result: "Failed", description: "Failed", body: "unknown")
         } else {
             
-            resp = HyberGeneralAnswerStruct.init(code: Int(resp_code)!, result: "Failed", description: "Failed", body: body_json)
+            resp = HyberGeneralAnswerStruct.init(code: Int(resp_code) ?? 0, result: "Failed", description: "Failed", body: body_json)
         }
         return resp
     }
     
     func general_answer2(resp_code: Int, body_json: String, description: String) -> HyberFunAnswerGeneral{
-        var resp: HyberFunAnswerGeneral?
+        var resp: HyberFunAnswerGeneral = HyberFunAnswerGeneral(code: 710, result: "Unknown", description: description, body: body_json)
         
-        //var ansss: HyberFunAnswerGeneral =
         if (resp_code == 200){
             resp = HyberFunAnswerGeneral(code: resp_code, result: "Ok", description: "Success", body: body_json)
         } else if (resp_code==400){
@@ -47,9 +45,6 @@ class AnswerBuider {
         } else {
             resp = HyberFunAnswerGeneral(code: resp_code, result: "Failed", description: description, body: body_json)
         }
-        
-        return resp!
+        return resp
     }
-    
-    
 }

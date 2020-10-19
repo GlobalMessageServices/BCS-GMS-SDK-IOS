@@ -44,7 +44,9 @@ class AnswParser {
             let profile: RegisterProfile
             let device: RegisterDevice
         }
-        let jsonData = str_resp.data(using: .utf8)!
+        
+
+        guard let jsonData = str_resp.data(using: .utf8) else { return RegisterJsonParse(deviceId: "", token: "", userId: 0, userPhone: "", createdAt: "")}
         //let jsonData = JSON.self(using: .utf8)!
         let parsedJson: FullRegister = try! JSONDecoder().decode(FullRegister.self, from: jsonData)
         print(parsedJson.session.token)
@@ -61,7 +63,7 @@ class AnswParser {
             let deviceId: Int
         }
         
-        let jsonData = str_resp.data(using: .utf8)!
+        guard let jsonData = str_resp.data(using: .utf8) else { return UpdateRegJsonParse(deviceId: "")}
         //let jsonData = JSON.self(using: .utf8)!
         let parsedJson: RegisterUpdate = try! JSONDecoder().decode(RegisterUpdate.self, from: jsonData)
         let res = UpdateRegJsonParse.init(deviceId: String(parsedJson.deviceId))
@@ -92,8 +94,7 @@ class AnswParser {
         let devices: [HyberGetDeviceListParse]
     }
         
-        let jsonData = str_resp.data(using: .utf8)!
-        //let jsonData = JSON.self(using: .utf8)!
+        guard let jsonData = str_resp.data(using: .utf8) else { return HyberGetDeviceList(devices: [])}
         let parsedJson: DevListRespAll = try! JSONDecoder().decode(DevListRespAll.self, from: jsonData)
         
         var devHyber: [HyberGetDevice] = []
@@ -151,23 +152,23 @@ class AnswParser {
             var messages: [HyberMessageListParse]
         }
         
-        let jsonData = str_resp.data(using: .utf8)!
-        //let jsonData = JSON.self(using: .utf8)!
-        let parsedJson: MessagesListRespAll = try! JSONDecoder().decode(MessagesListRespAll.self, from: jsonData)
-        
-        var messListHyber: [MessagesResponseStr] = []
-        
-        for i in parsedJson.messages
-        {
-            let elem3: ImageResponse = ImageResponse.init(url: i.image?.url)
-            let elem2: ButtonResponse = ButtonResponse.init(text: i.button?.text, url: i.button?.url)
-            let elem1: MessagesResponseStr = MessagesResponseStr.init(phone: i.phone, messageId: i.messageId, title: i.title, body: i.body, image: elem3, button: elem2, time: i.time, partner: i.partner)
-            messListHyber.append(elem1)
-        }
-        
-        let res = MessagesListResponse.init(limitDays: parsedJson.limitDays, limitMessages: parsedJson.limitMessages, lastTime: parsedJson.lastTime, messages: messListHyber)
-        return res
-        
+        guard let jsonData = str_resp.data(using: .utf8) else { return MessagesListResponse(limitDays: 0, limitMessages: 0, lastTime: 0, messages: [])}
+
+            //let jsonData = JSON.self(using: .utf8)!
+            let parsedJson: MessagesListRespAll = try! JSONDecoder().decode(MessagesListRespAll.self, from: jsonData)
+            
+            var messListHyber: [MessagesResponseStr] = []
+            
+            for i in parsedJson.messages
+            {
+                let elem3: ImageResponse = ImageResponse.init(url: i.image?.url)
+                let elem2: ButtonResponse = ButtonResponse.init(text: i.button?.text, url: i.button?.url)
+                let elem1: MessagesResponseStr = MessagesResponseStr.init(phone: i.phone, messageId: i.messageId, title: i.title, body: i.body, image: elem3, button: elem2, time: i.time, partner: i.partner)
+                messListHyber.append(elem1)
+            }
+            
+            let res = MessagesListResponse.init(limitDays: parsedJson.limitDays, limitMessages: parsedJson.limitMessages, lastTime: parsedJson.lastTime, messages: messListHyber)
+            return res
     }
     
     

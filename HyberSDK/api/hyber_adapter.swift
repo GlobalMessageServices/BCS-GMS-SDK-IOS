@@ -23,9 +23,8 @@ class HyberAPI {
     //1 procedure
     func hyber_device_register(X_Hyber_Client_API_Key: String, X_Hyber_Session_Id: String, X_Hyber_IOS_Bundle_Id: String, device_Name:String, device_Type:String, os_Type:String, sdk_Version:String, user_Pass:String, user_Phone:String)-> HyberFunAnswerRegister {
         
-        do{
-            
-            var answ: String = String()
+
+            //var answ: String = String()
             var genAnsw: HyberFunAnswerRegister = HyberFunAnswerRegister(code: 0, result: "", description: "", deviceId: "", token: "", userId: "", userPhone: "", createdAt: "")
             
             let semaphore7 = DispatchSemaphore(value: 0)
@@ -62,8 +61,8 @@ class HyberAPI {
             
             request.httpBody  = try! JSONSerialization.data(withJSONObject: params, options: [])
             
-            print(request.httpBody)
-            print(request.allHTTPHeaderFields)
+            print(request.httpBody ?? "")
+            print(request.allHTTPHeaderFields ?? "")
             
             let dataTask = session.dataTask(with: request as URLRequest)
             {
@@ -78,18 +77,18 @@ class HyberAPI {
                 
                 let jsonData = try? JSONSerialization.jsonObject(with: receivedData, options: []) as? Dictionary<String, Any>
                 //////self.logger.file_logger(message: "\(procedure_name) response jsonData is \(jsonData??["devices"])", loglevel: ".debug")
-                let body_json: String = String(decoding: receivedData, as: UTF8.self)
+                //let body_json: String = String(decoding: receivedData, as: UTF8.self)
                 
-                answ = self.answer_buider.general_answer(resp_code: String(httpResponse.statusCode), body_json: body_json, description: "Success")
+                //var answ = self.answer_buider.general_answer(resp_code: String(httpResponse.statusCode), body_json: body_json, description: "Success")
                 
                 genAnsw = HyberFunAnswerRegister.init(code: httpResponse.statusCode, result: "unknown", description: "unknown", deviceId: "", token: "", userId: "", userPhone: "", createdAt: "")
                 
                 
-                self.processor.file_logger(message: "hyber_device_register response jsonData is \(jsonData)", loglevel: ".debug")
+                self.processor.file_logger(message: "hyber_device_register response jsonData is \(String(describing: jsonData))", loglevel: ".debug")
                 
                 self.processor.file_logger(message: "hyber_device_register response code is \(httpResponse.statusCode)", loglevel: ".debug")
                 
-                self.processor.file_logger(message: "hyber_device_register response data is \(data)", loglevel: ".debug")
+                self.processor.file_logger(message: "hyber_device_register response data is \(String(describing: data))", loglevel: ".debug")
                 
                 self.processor.file_logger(message: "hyber_device_register response debugDescription is \(httpResponse.debugDescription)", loglevel: ".debug")
                 
@@ -101,10 +100,9 @@ class HyberAPI {
                     
                     let response = NSString (data: receivedData, encoding: String.Encoding.utf8.rawValue)
                     
-                    print("resp dsdfasdf")
-                    print(response)
+                    print(String(response ?? ""))
                     
-                    let str_resp = response! as String
+                    let str_resp = String(response ?? "")
                     print(str_resp)
                     
                     let resp_register_parsed = self.jsonparser.registerJParse(str_resp: str_resp)
@@ -115,10 +113,10 @@ class HyberAPI {
                     
                     genAnsw.result = "Success"
                     genAnsw.description = "Procedure completed"
-                    genAnsw.createdAt = resp_register_parsed.createdAt
-                    genAnsw.deviceId = resp_register_parsed.deviceId
-                    genAnsw.token = resp_register_parsed.token
-                    genAnsw.userId = String(resp_register_parsed.userId)
+                    genAnsw.createdAt = resp_register_parsed.createdAt ??  "empty"
+                    genAnsw.deviceId = resp_register_parsed.deviceId ?? "unknown"
+                    genAnsw.token = resp_register_parsed.token ?? "empty_token"
+                    genAnsw.userId = String(resp_register_parsed.userId ?? 0)
 
                     UserDefaults.standard.set(resp_register_parsed.token, forKey: "hyber_registration_token")
                     Constants.hyber_registration_token = resp_register_parsed.token
@@ -128,12 +126,11 @@ class HyberAPI {
                     
                     UserDefaults.standard.synchronize()
                     
-                    print("regeexp parse")
-                    print(resp_register_parsed.token)
+                    print(resp_register_parsed.token ?? "")
                     
                     if response == "SUCCESS"
                     {
-                        self.processor.file_logger(message: "hyber_device_register success response body is \(response)", loglevel: ".debug")
+                        self.processor.file_logger(message: "hyber_device_register success response body is \(String(describing: response))", loglevel: ".debug")
                     }
                     
                 default:
@@ -145,18 +142,13 @@ class HyberAPI {
             dataTask.resume()
             semaphore7.wait()
             return genAnsw
-            
-        } catch {
-            print("invalid regex: \(error.localizedDescription)")
-            return HyberFunAnswerRegister(code: 710, result: "error", description: "Critical error", deviceId: "", token: "", userId: "", userPhone: "", createdAt: "")
-        }
+        
         
     }
     
     //2 procedure
     //for revoke device from hyber server
     func hyber_device_revoke(dev_list: [String], X_Hyber_Session_Id: String, X_Hyber_Auth_Token:String)->HyberGeneralAnswerStruct {
-        do{
             let procedure_name = "hyber_device_revoke"
             let configuration = URLSessionConfiguration .default
             let session = URLSession(configuration: configuration)
@@ -172,7 +164,7 @@ class HyberAPI {
             processor.file_logger(message: "\(procedure_name) params is \"devices\": \(dev_list)", loglevel: ".debug")
             
             let request : NSMutableURLRequest = NSMutableURLRequest()
-            request.url = URL(string: NSString(format: "%@", urlString)as String)
+            request.url = URL(string: NSString(format: "%@", urlString) as String)
             request.httpMethod = "POST"
             request.timeoutInterval = 30
             request.addValue("application/json", forHTTPHeaderField: "Content-Type")
@@ -221,12 +213,12 @@ class HyberAPI {
                 answ = self.answer_buider.general_answer_struct(resp_code: String(httpResponse.statusCode), body_json: body_json, description: "Success")
                 
                 print(jsonData as Any)
-                self.processor.file_logger(message: "\(procedure_name) response jsonData is \(jsonData)", loglevel: ".debug")
+                self.processor.file_logger(message: "\(procedure_name) response jsonData is \(String(describing: jsonData))", loglevel: ".debug")
                 
                 self.processor.file_logger(message: "\(procedure_name) response code is \(httpResponse.statusCode)", loglevel: ".debug")
                 print(httpResponse.statusCode)
                 
-                self.processor.file_logger(message: "\(procedure_name) response data is \(data)", loglevel: ".debug")
+                self.processor.file_logger(message: "\(procedure_name) response data is \(String(describing: data))", loglevel: ".debug")
                 
                 self.processor.file_logger(message: "\(procedure_name) response debugDescription is \(httpResponse.debugDescription)", loglevel: ".debug")
                 
@@ -242,10 +234,6 @@ class HyberAPI {
                     Constants.registrationstatus = false
                     
                     UserDefaults.standard.synchronize()
-                    
-                    //if let appDomain = Bundle.main.bundleIdentifier {
-                    //    UserDefaults.standard.removePersistentDomain(forName: appDomain)
-                    //}
                     
                     
                     if response == "SUCCESS"
@@ -266,17 +254,12 @@ class HyberAPI {
             semaphore6.wait()
             
             return answ
-        } catch {
-            print("invalid regex: \(error.localizedDescription)")
-            return answer_b.general_answer_struct(resp_code: "710", body_json: "error", description: "Critical error")
-        }
     }
     
     
     //3 procedure
     //for update device from hyber server
     func hyber_device_update(fcm_Token: String, os_Type: String, os_Version: String, device_Type: String, device_Name: String, sdk_Version: String, X_Hyber_Session_Id: String, X_Hyber_Auth_Token:String) -> HyberGeneralAnswerStruct {
-        do{
             let procedure_name = "hyber_device_update"
             let configuration = URLSessionConfiguration .default
             let session = URLSession(configuration: configuration)
@@ -376,10 +359,6 @@ class HyberAPI {
             semaphore5.wait()
             
             return answ
-        } catch {
-            print("invalid regex: \(error.localizedDescription)")
-            return answer_b.general_answer_struct(resp_code: "710", body_json: "error", description: "Critical error")
-        }
     }
     
     
@@ -387,16 +366,15 @@ class HyberAPI {
     //4 procedure
     //for get message history device from hyber server
     func hyber_message_get_history(utc_time: Int, X_Hyber_Session_Id: String, X_Hyber_Auth_Token:String)->HyberFunAnswerGetMessageHistory {
-        do{
             var answ: HyberFunAnswerGetMessageHistory = HyberFunAnswerGetMessageHistory.init(code: 0, result: "unknown", description: "unknown", body: nil)
             let procedure_name = "hyber_message_get_history"
             let configuration = URLSessionConfiguration .default
             let session = URLSession(configuration: configuration)
             let semaphore4 = DispatchSemaphore(value: 0)
             
-            let escaped_utc = String(utc_time).addingPercentEncoding(withAllowedCharacters: CharacterSet.urlQueryAllowed) as! String
+            let escaped_utc = String(utc_time).addingPercentEncoding(withAllowedCharacters: CharacterSet.urlQueryAllowed)
             
-            let urlString = NSString(format: "\(Constants.url_Http_Mess_history)\(escaped_utc)" as NSString);
+        let urlString = NSString(format: "\(Constants.url_Http_Mess_history)\(String(describing: escaped_utc))" as NSString);
             processor.file_logger(message: "\(procedure_name) url string is \(urlString)", loglevel: ".debug")
             
             let request : NSMutableURLRequest = NSMutableURLRequest()
@@ -487,18 +465,12 @@ class HyberAPI {
             semaphore4.wait()
             
             return answ
-        } catch {
-            print("invalid regex: \(error.localizedDescription)")
-            
-            return HyberFunAnswerGetMessageHistory.init(code: 710, result: "error", description: "Critical error", body: nil)
-        }
     }
     
     
     //5 procedure
     //for send delivery report to hyber server
     func hyber_message_dr(message_Id: String, received_At: String, X_Hyber_Session_Id: String, X_Hyber_Auth_Token:String)->HyberGeneralAnswerStruct {
-        do{
             if (message_Id != "" && message_Id != "[]" ) {
                 let procedure_name = "hyber_message_dr"
                 let configuration = URLSessionConfiguration .default
@@ -528,7 +500,6 @@ class HyberAPI {
                 
                 let timeInterval =  NSDate().timeIntervalSince1970
                 let timet = Int(round(timeInterval) as Double)
-                print("token sfsdfsdfsd")
                 print(X_Hyber_Auth_Token)
                 print(timet)
                 let auth_token = X_Hyber_Auth_Token + ":" + String(timet)
@@ -599,17 +570,12 @@ class HyberAPI {
             } else {
                 return self.answer_buider.general_answer_struct(resp_code: "700", body_json: "{\"error\":\"Incorrect input\"}", description: "Failed")
             }
-            
-        } catch {
-            print("invalid regex: \(error.localizedDescription)")
-            return answer_b.general_answer_struct(resp_code: "710", body_json: "error", description: "Critical error")
-        }
+        
     }
     
     //6 procedure
     //for message callback to hyber server
     func hyber_message_callback(message_Id: String, answer: String, X_Hyber_Session_Id: String, X_Hyber_Auth_Token:String)->HyberGeneralAnswerStruct {
-        do {
             let procedure_name = "hyber_message_callback"
             let configuration = URLSessionConfiguration .default
             let session = URLSession(configuration: configuration)
@@ -702,10 +668,6 @@ class HyberAPI {
             dataTask.resume()
             semaphore2.wait()
             return answ
-        } catch {
-            print("invalid regex: \(error.localizedDescription)")
-            return answer_b.general_answer_struct(resp_code: "710", body_json: "error", description: "Critical error")
-        }
     }
     
     typealias CompletionHandler = (_ result:NSDictionary) -> Void
@@ -717,7 +679,6 @@ class HyberAPI {
     //7 procedure
     //for get device info from hyber server
     func hyber_device_get_all(X_Hyber_Session_Id: String, X_Hyber_Auth_Token:String) -> HyberFunAnswerGetDeviceList {
-        do{
             var answ: HyberFunAnswerGetDeviceList = HyberFunAnswerGetDeviceList.init(code: 0, result: "unknown", description: "unknown", body: nil)
             
             let procedure_name = "hyber_device_get_all"
@@ -796,14 +757,6 @@ class HyberAPI {
                 
                 //////let requestDataDict:NSDictionary = jsonData!! as NSDictionary
                 
-                //print(requestDataDict)
-                
-                //dict = requestDataDict
-                
-                //print(requestDataDict.object(forKey: "devices"))
-                
-                
-                
                 
                 self.processor.file_logger(message: "\(procedure_name) response code is \(httpResponse.statusCode)", loglevel: ".debug")
                 
@@ -823,7 +776,8 @@ class HyberAPI {
                     
                     if response == "SUCCESS"
                     {
-                        self.processor.file_logger(message: "\(procedure_name) success response body is \(String(describing: response))", loglevel: ".debug")                }
+                        self.processor.file_logger(message: "\(procedure_name) success response body is \(String(describing: response))", loglevel: ".debug")
+                    }
                     
                 case 401:
                     Constants.registrationstatus = false
@@ -845,10 +799,6 @@ class HyberAPI {
             print(answ)
             
             return answ
-        } catch {
-            print("invalid regex: \(error.localizedDescription)")
-            return HyberFunAnswerGetDeviceList.init(code: 710, result: "error", description: "hyber_device_get_all Critical error", body: nil)
-        }
     }
     
     
@@ -856,30 +806,24 @@ class HyberAPI {
         
         if (list == [] )
         {
-            print("111112222")
         }else {
             for i in list
             {
                 //var messs = queue_answer as! [String: AnyObject]
                 
-                //print(messs)
-                
-                let messs2 = ["message": queue_answer as AnyObject] as! [String: AnyObject]
+                let messs2 = ["message": queue_answer as AnyObject] as [String: AnyObject]
                 
                 NotificationCenter.default.post(name: .didReceiveData, object: nil, userInfo: messs2 )
-                hyber_message_dr(message_Id: i, received_At: "123123122341", X_Hyber_Session_Id: X_Hyber_Session_Id, X_Hyber_Auth_Token: X_Hyber_Auth_Token)
+                let res_dr = hyber_message_dr(message_Id: i, received_At: "123123122341", X_Hyber_Session_Id: X_Hyber_Session_Id, X_Hyber_Auth_Token: X_Hyber_Auth_Token)
+                print(res_dr)
             }
             print(list)
         }
-        
     }
     
     
     func messidParse(queue_answer: String, X_Hyber_Session_Id: String, X_Hyber_Auth_Token: String)->[String] {
         var listdev: [String] = []
-        
-        var queue_answer2 = "{\"messages\":[{\"phone\": \"375298766719\", \"messageId\": \"cb34da60-c11d-4b1d-a963-5775d3a53a07\", \"title\": \"sd\", \"body\": \"dasdfa\", \"image\": {}, \"button\": {}, \"partner\": \"push\", \"time\": \"2019-11-23T11:11:10.710133+00\"},{\"phone\": \"375298766719\", \"messageId\": \"wfdf-c11d-4b1d-were-5775d3a53a07\", \"title\": \"sd\", \"body\": \"dasdfa\", \"image\": {}, \"button\": {}, \"partner\": \"push\", \"time\": \"2019-11-23T11:11:10.710133+00\"}]}"
-        
         
         let string1 = self.processor.matches(for: "\"messageId\": \"(\\S+-\\S+-\\S+-\\S+-\\S+)\"", in: queue_answer)
         print(string1)
@@ -906,20 +850,11 @@ class HyberAPI {
         
         deliveryReport(list: listdev, X_Hyber_Session_Id: X_Hyber_Session_Id, X_Hyber_Auth_Token: X_Hyber_Auth_Token, queue_answer: queue_answer)
         
-        if (listdev == [] )
-        {
-            print("111112222")
-        }else {
-            print("eeee")
-            print(listdev)
-        }
-        
         return listdev
     }
     
     //8 queue procedure
     func hyber_check_queue(X_Hyber_Session_Id: String, X_Hyber_Auth_Token:String)->HyberFunAnswerGeneral {
-        do {
             let procedure_name = "hyber_check_queue"
             let configuration = URLSessionConfiguration .default
             let session = URLSession(configuration: configuration)
@@ -993,7 +928,7 @@ class HyberAPI {
                     
                     print(jsonData as Any)
                     
-                    let dataa = response! as String
+                    let dataa = String(response ?? "")
                     
                     
                     print(self.messidParse(queue_answer: dataa, X_Hyber_Session_Id: X_Hyber_Session_Id, X_Hyber_Auth_Token: X_Hyber_Auth_Token))
@@ -1015,11 +950,7 @@ class HyberAPI {
             }
             dataTask.resume()
             semaphore2.wait()
-            return answ!
-        } catch {
-            print("invalid regex: \(error.localizedDescription)")
-            return answer_b.general_answer2(resp_code: 710, body_json: "error", description: "Critical error")
-        }
+        return answ ?? HyberFunAnswerGeneral(code: 710, result: "Unknown error", description: "Nullable statement", body: "{}")
     }
     
     
