@@ -14,7 +14,7 @@ target 'HyberSDK' do
   #pod 'Firebase/Storage'
   #pod 'Firebase/Firestore'
   #pod 'Google-Mobile-Ads-SDK'
-  pod 'BoringSSL-GRPC'
+  pod 'BoringSSL-GRPC', '0.0.13'
   pod 'CryptoSwift', '1.0.0'
   pod 'JSON'
   #pod 'RetrofireSwift'
@@ -37,5 +37,4 @@ target 'HyberSDK' do
     #pod 'RetrofireSwift'
     pod 'SwiftyBeaver'
   end
-
 end

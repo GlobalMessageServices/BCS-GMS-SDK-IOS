@@ -40,9 +40,10 @@ public class Processing {
             let regex = try NSRegularExpression(pattern: regex)
             let results = regex.matches(in: text,
                                         range: NSRange(text.startIndex..., in: text))
-            return results.map {
+            let resp = results.map {
                 String(text[Range($0.range, in: text)!])
             }
+            return resp
         } catch let error {
             print("invalid regex: \(error.localizedDescription)")
             return []

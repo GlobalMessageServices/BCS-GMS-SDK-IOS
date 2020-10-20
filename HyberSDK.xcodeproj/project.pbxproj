@@ -7,8 +7,10 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		21CF6E7C440E8C87EFF44A94 /* Pods_HyberSDKTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 36BCB4E46C2F114CEAD245C7 /* Pods_HyberSDKTests.framework */; };
+		1CB36E843A51F18539C9079D /* Pods_HyberSDK.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 320800A3FD16B3A4D76739F4 /* Pods_HyberSDK.framework */; };
+		51FCFF54C1D645C153D6FEAD /* Pods_HyberSDKTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A5261895D30D70E34EE4BC3D /* Pods_HyberSDKTests.framework */; };
 		BA1A13B4253E85D700E93196 /* HyberSDK.podspec in Resources */ = {isa = PBXBuildFile; fileRef = BA1A13B3253E85D700E93196 /* HyberSDK.podspec */; };
+		BA1A13B6253E899E00E93196 /* Podfile in Resources */ = {isa = PBXBuildFile; fileRef = BA1A13B5253E899E00E93196 /* Podfile */; };
 		BA1C39F6253CB69000052185 /* HyberSDK.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = BA1C39EC253CB69000052185 /* HyberSDK.framework */; };
 		BA1C39FB253CB69000052185 /* HyberSDKTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA1C39FA253CB69000052185 /* HyberSDKTests.swift */; };
 		BA1C39FD253CB69000052185 /* HyberSDK.h in Headers */ = {isa = PBXBuildFile; fileRef = BA1C39EF253CB69000052185 /* HyberSDK.h */; settings = {ATTRIBUTES = (Public, ); }; };
@@ -19,7 +21,6 @@
 		BA8D3418253CC12E005BDC33 /* hyber_answer_func.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA8D3415253CC12E005BDC33 /* hyber_answer_func.swift */; };
 		BA8D3419253CC12E005BDC33 /* params.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA8D3416253CC12E005BDC33 /* params.swift */; };
 		BA8D341C253CC14A005BDC33 /* hyber_adapter.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA8D341B253CC14A005BDC33 /* hyber_adapter.swift */; };
-		C04482AA53327CA7596F1B6C /* Pods_HyberSDK.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8BE323D9F391699D4AA1D26E /* Pods_HyberSDK.framework */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -33,13 +34,14 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
-		003A391C970765D29E44B64E /* Pods-HyberSDK.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-HyberSDK.release.xcconfig"; path = "Target Support Files/Pods-HyberSDK/Pods-HyberSDK.release.xcconfig"; sourceTree = "<group>"; };
-		24F0FA61899A8D22630BD9D3 /* Pods-HyberSDKTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-HyberSDKTests.release.xcconfig"; path = "Target Support Files/Pods-HyberSDKTests/Pods-HyberSDKTests.release.xcconfig"; sourceTree = "<group>"; };
-		2BE6F119B5BC34CF931A6318 /* Pods-HyberSDK.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-HyberSDK.debug.xcconfig"; path = "Target Support Files/Pods-HyberSDK/Pods-HyberSDK.debug.xcconfig"; sourceTree = "<group>"; };
-		36BCB4E46C2F114CEAD245C7 /* Pods_HyberSDKTests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_HyberSDKTests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
-		62EFA8335FEA29B595B9A5BB /* Pods-HyberSDKTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-HyberSDKTests.debug.xcconfig"; path = "Target Support Files/Pods-HyberSDKTests/Pods-HyberSDKTests.debug.xcconfig"; sourceTree = "<group>"; };
-		8BE323D9F391699D4AA1D26E /* Pods_HyberSDK.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_HyberSDK.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		320800A3FD16B3A4D76739F4 /* Pods_HyberSDK.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_HyberSDK.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		34F3DEBE83D25A5FC852CB6F /* Pods-HyberSDKTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-HyberSDKTests.release.xcconfig"; path = "Target Support Files/Pods-HyberSDKTests/Pods-HyberSDKTests.release.xcconfig"; sourceTree = "<group>"; };
+		3A091A1AC4D5058AFAC01CD2 /* Pods-HyberSDK.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-HyberSDK.debug.xcconfig"; path = "Target Support Files/Pods-HyberSDK/Pods-HyberSDK.debug.xcconfig"; sourceTree = "<group>"; };
+		A5261895D30D70E34EE4BC3D /* Pods_HyberSDKTests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_HyberSDKTests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		B12B5959CD21D5B1C75CEC80 /* Pods-HyberSDKTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-HyberSDKTests.debug.xcconfig"; path = "Target Support Files/Pods-HyberSDKTests/Pods-HyberSDKTests.debug.xcconfig"; sourceTree = "<group>"; };
+		B1936BCE140D4B4F05AF6CF5 /* Pods-HyberSDK.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-HyberSDK.release.xcconfig"; path = "Target Support Files/Pods-HyberSDK/Pods-HyberSDK.release.xcconfig"; sourceTree = "<group>"; };
 		BA1A13B3253E85D700E93196 /* HyberSDK.podspec */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = HyberSDK.podspec; sourceTree = "<group>"; };
+		BA1A13B5253E899E00E93196 /* Podfile */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = Podfile; sourceTree = "<group>"; };
 		BA1C39EC253CB69000052185 /* HyberSDK.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = HyberSDK.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		BA1C39EF253CB69000052185 /* HyberSDK.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = HyberSDK.h; sourceTree = "<group>"; };
 		BA1C39F0253CB69000052185 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
@@ -60,7 +62,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				C04482AA53327CA7596F1B6C /* Pods_HyberSDK.framework in Frameworks */,
+				1CB36E843A51F18539C9079D /* Pods_HyberSDK.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -69,18 +71,18 @@
 			buildActionMask = 2147483647;
 			files = (
 				BA1C39F6253CB69000052185 /* HyberSDK.framework in Frameworks */,
-				21CF6E7C440E8C87EFF44A94 /* Pods_HyberSDKTests.framework in Frameworks */,
+				51FCFF54C1D645C153D6FEAD /* Pods_HyberSDKTests.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
-		575507AECB6C51AC3B742480 /* Frameworks */ = {
+		B4A205D28F743F2A275C5F77 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
-				8BE323D9F391699D4AA1D26E /* Pods_HyberSDK.framework */,
-				36BCB4E46C2F114CEAD245C7 /* Pods_HyberSDKTests.framework */,
+				320800A3FD16B3A4D76739F4 /* Pods_HyberSDK.framework */,
+				A5261895D30D70E34EE4BC3D /* Pods_HyberSDKTests.framework */,
 			);
 			name = Frameworks;
 			sourceTree = "<group>";
@@ -88,12 +90,13 @@
 		BA1C39E2253CB68F00052185 = {
 			isa = PBXGroup;
 			children = (
+				BA1A13B5253E899E00E93196 /* Podfile */,
 				BA1A13B3253E85D700E93196 /* HyberSDK.podspec */,
 				BA1C39EE253CB69000052185 /* HyberSDK */,
 				BA1C39F9253CB69000052185 /* HyberSDKTests */,
 				BA1C39ED253CB69000052185 /* Products */,
 				E9D77FC4D04AFBB6DE599CAA /* Pods */,
-				575507AECB6C51AC3B742480 /* Frameworks */,
+				B4A205D28F743F2A275C5F77 /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
@@ -150,10 +153,10 @@
 		E9D77FC4D04AFBB6DE599CAA /* Pods */ = {
 			isa = PBXGroup;
 			children = (
-				2BE6F119B5BC34CF931A6318 /* Pods-HyberSDK.debug.xcconfig */,
-				003A391C970765D29E44B64E /* Pods-HyberSDK.release.xcconfig */,
-				62EFA8335FEA29B595B9A5BB /* Pods-HyberSDKTests.debug.xcconfig */,
-				24F0FA61899A8D22630BD9D3 /* Pods-HyberSDKTests.release.xcconfig */,
+				3A091A1AC4D5058AFAC01CD2 /* Pods-HyberSDK.debug.xcconfig */,
+				B1936BCE140D4B4F05AF6CF5 /* Pods-HyberSDK.release.xcconfig */,
+				B12B5959CD21D5B1C75CEC80 /* Pods-HyberSDKTests.debug.xcconfig */,
+				34F3DEBE83D25A5FC852CB6F /* Pods-HyberSDKTests.release.xcconfig */,
 			);
 			path = Pods;
 			sourceTree = "<group>";
@@ -177,7 +180,7 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = BA1C3A00253CB69000052185 /* Build configuration list for PBXNativeTarget "HyberSDK" */;
 			buildPhases = (
-				16588151377DBC2EBB646DB2 /* [CP] Check Pods Manifest.lock */,
+				A00D5F03F8F8752F97442381 /* [CP] Check Pods Manifest.lock */,
 				BA1C39E7253CB69000052185 /* Headers */,
 				BA1C39E8253CB69000052185 /* Sources */,
 				BA1C39E9253CB69000052185 /* Frameworks */,
@@ -196,11 +199,11 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = BA1C3A03253CB69000052185 /* Build configuration list for PBXNativeTarget "HyberSDKTests" */;
 			buildPhases = (
-				99CA9D1CDAD13CBFE480590A /* [CP] Check Pods Manifest.lock */,
+				6FCF8D11B25B4DBD0DCEC6FA /* [CP] Check Pods Manifest.lock */,
 				BA1C39F1253CB69000052185 /* Sources */,
 				BA1C39F2253CB69000052185 /* Frameworks */,
 				BA1C39F3253CB69000052185 /* Resources */,
-				849CC2287BC371ADD423DD46 /* [CP] Embed Pods Frameworks */,
+				9F22980A6BE00AE85AE702C7 /* [CP] Embed Pods Frameworks */,
 			);
 			buildRules = (
 			);
@@ -254,6 +257,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				BA1A13B6253E899E00E93196 /* Podfile in Resources */,
 				BA1A13B4253E85D700E93196 /* HyberSDK.podspec in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -268,7 +272,7 @@
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXShellScriptBuildPhase section */
-		16588151377DBC2EBB646DB2 /* [CP] Check Pods Manifest.lock */ = {
+		6FCF8D11B25B4DBD0DCEC6FA /* [CP] Check Pods Manifest.lock */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
@@ -283,14 +287,14 @@
 			outputFileListPaths = (
 			);
 			outputPaths = (
-				"$(DERIVED_FILE_DIR)/Pods-HyberSDK-checkManifestLockResult.txt",
+				"$(DERIVED_FILE_DIR)/Pods-HyberSDKTests-checkManifestLockResult.txt",
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
 			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
 			showEnvVarsInLog = 0;
 		};
-		849CC2287BC371ADD423DD46 /* [CP] Embed Pods Frameworks */ = {
+		9F22980A6BE00AE85AE702C7 /* [CP] Embed Pods Frameworks */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
@@ -307,7 +311,7 @@
 			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-HyberSDKTests/Pods-HyberSDKTests-frameworks.sh\"\n";
 			showEnvVarsInLog = 0;
 		};
-		99CA9D1CDAD13CBFE480590A /* [CP] Check Pods Manifest.lock */ = {
+		A00D5F03F8F8752F97442381 /* [CP] Check Pods Manifest.lock */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
@@ -322,7 +326,7 @@
 			outputFileListPaths = (
 			);
 			outputPaths = (
-				"$(DERIVED_FILE_DIR)/Pods-HyberSDKTests-checkManifestLockResult.txt",
+				"$(DERIVED_FILE_DIR)/Pods-HyberSDK-checkManifestLockResult.txt",
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
@@ -488,7 +492,7 @@
 		};
 		BA1C3A01253CB69000052185 /* Debug */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 2BE6F119B5BC34CF931A6318 /* Pods-HyberSDK.debug.xcconfig */;
+			baseConfigurationReference = 3A091A1AC4D5058AFAC01CD2 /* Pods-HyberSDK.debug.xcconfig */;
 			buildSettings = {
 				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_IDENTITY = "";
@@ -516,7 +520,7 @@
 		};
 		BA1C3A02253CB69000052185 /* Release */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 003A391C970765D29E44B64E /* Pods-HyberSDK.release.xcconfig */;
+			baseConfigurationReference = B1936BCE140D4B4F05AF6CF5 /* Pods-HyberSDK.release.xcconfig */;
 			buildSettings = {
 				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_IDENTITY = "";
@@ -543,7 +547,7 @@
 		};
 		BA1C3A04253CB69000052185 /* Debug */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 62EFA8335FEA29B595B9A5BB /* Pods-HyberSDKTests.debug.xcconfig */;
+			baseConfigurationReference = B12B5959CD21D5B1C75CEC80 /* Pods-HyberSDKTests.debug.xcconfig */;
 			buildSettings = {
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				CODE_SIGN_STYLE = Automatic;
@@ -563,7 +567,7 @@
 		};
 		BA1C3A05253CB69000052185 /* Release */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 24F0FA61899A8D22630BD9D3 /* Pods-HyberSDKTests.release.xcconfig */;
+			baseConfigurationReference = 34F3DEBE83D25A5FC852CB6F /* Pods-HyberSDKTests.release.xcconfig */;
 			buildSettings = {
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				CODE_SIGN_STYLE = Automatic;

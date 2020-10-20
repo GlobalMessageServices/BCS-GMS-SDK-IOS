@@ -48,10 +48,16 @@ class AnswParser {
 
         guard let jsonData = str_resp.data(using: .utf8) else { return RegisterJsonParse(deviceId: "", token: "", userId: 0, userPhone: "", createdAt: "")}
         //let jsonData = JSON.self(using: .utf8)!
-        let parsedJson: FullRegister = try! JSONDecoder().decode(FullRegister.self, from: jsonData)
-        print(parsedJson.session.token)
-        let res = RegisterJsonParse.init(deviceId: String(parsedJson.device.deviceId), token: parsedJson.session.token, userId: parsedJson.profile.userId, userPhone: parsedJson.profile.userPhone, createdAt: parsedJson.profile.createdAt)
-        return res
+        do {
+           let parsedJson: FullRegister = try JSONDecoder().decode(FullRegister.self, from: jsonData)
+           print(parsedJson.session.token)
+           let res = RegisterJsonParse.init(deviceId: String(parsedJson.device.deviceId), token: parsedJson.session.token, userId: parsedJson.profile.userId, userPhone: parsedJson.profile.userPhone, createdAt: parsedJson.profile.createdAt)
+           return res
+            
+        } catch {
+            let res = RegisterJsonParse.init(deviceId: "unknown", token: "unknown_token", userId: 0, userPhone: "0", createdAt: "")
+            return res
+        }
     }
     
     func updateregistrationJParse(str_resp: String) -> UpdateRegJsonParse
@@ -65,9 +71,16 @@ class AnswParser {
         
         guard let jsonData = str_resp.data(using: .utf8) else { return UpdateRegJsonParse(deviceId: "")}
         //let jsonData = JSON.self(using: .utf8)!
-        let parsedJson: RegisterUpdate = try! JSONDecoder().decode(RegisterUpdate.self, from: jsonData)
-        let res = UpdateRegJsonParse.init(deviceId: String(parsedJson.deviceId))
-        return res
+        
+        do {
+            let parsedJson: RegisterUpdate = try JSONDecoder().decode(RegisterUpdate.self, from: jsonData)
+            let res = UpdateRegJsonParse.init(deviceId: String(parsedJson.deviceId))
+            return res
+        } catch {
+            let res = UpdateRegJsonParse.init(deviceId: "unknown")
+            return res
+        }
+        
     }
     
     func getDeviceListJson(str_resp: String) -> HyberGetDeviceList
@@ -95,7 +108,8 @@ class AnswParser {
     }
         
         guard let jsonData = str_resp.data(using: .utf8) else { return HyberGetDeviceList(devices: [])}
-        let parsedJson: DevListRespAll = try! JSONDecoder().decode(DevListRespAll.self, from: jsonData)
+        do {
+        let parsedJson: DevListRespAll = try JSONDecoder().decode(DevListRespAll.self, from: jsonData)
         
         var devHyber: [HyberGetDevice] = []
         
@@ -107,6 +121,10 @@ class AnswParser {
         
         let res = HyberGetDeviceList.init(devices: devHyber)
         return res
+        } catch {
+            let res = HyberGetDeviceList.init(devices: [])
+            return res
+        }
     }
     
     
@@ -154,9 +172,8 @@ class AnswParser {
         
         guard let jsonData = str_resp.data(using: .utf8) else { return MessagesListResponse(limitDays: 0, limitMessages: 0, lastTime: 0, messages: [])}
 
-            //let jsonData = JSON.self(using: .utf8)!
-            let parsedJson: MessagesListRespAll = try! JSONDecoder().decode(MessagesListRespAll.self, from: jsonData)
-            
+        do {
+            let parsedJson: MessagesListRespAll = try JSONDecoder().decode(MessagesListRespAll.self, from: jsonData)
             var messListHyber: [MessagesResponseStr] = []
             
             for i in parsedJson.messages
@@ -169,6 +186,11 @@ class AnswParser {
             
             let res = MessagesListResponse.init(limitDays: parsedJson.limitDays, limitMessages: parsedJson.limitMessages, lastTime: parsedJson.lastTime, messages: messListHyber)
             return res
+        } catch {
+            //handle error
+            let res = MessagesListResponse.init(limitDays: 0, limitMessages: 0, lastTime: 0, messages: [])
+            return res
+        }
     }
     
     

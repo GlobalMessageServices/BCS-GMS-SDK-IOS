@@ -153,7 +153,6 @@ public class HyberSDK {
                 let hyber_rest_server = HyberAPI.init()
                 let anss = hyber_rest_server.hyber_message_callback(message_Id: message_id, answer: message_text, X_Hyber_Session_Id: X_Hyber_Session_Id, X_Hyber_Auth_Token: Constants.hyber_registration_token ?? "token_empty")
                 
-                
                 return anss}
             else {
                 return answer_b.general_answer_struct(resp_code: "704", body_json: "error", description: "Not registered")

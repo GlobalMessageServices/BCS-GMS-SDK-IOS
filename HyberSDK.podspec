@@ -16,7 +16,7 @@ Pod::Spec.new do |spec|
   #
 
   spec.name         = "HyberSDK"
-  spec.version      = "1.0.0.6"
+  spec.version      = "1.0.0.8"
   spec.summary      = "A short description of HyberSDK."
 
   # This description is used to generate tags and improve search results.
@@ -124,11 +124,11 @@ Pod::Spec.new do |spec|
 
 
 
-  spec.dependency "BoringSSL-GRPC"
+  spec.dependency "BoringSSL-GRPC", "0.0.13"
   spec.dependency "CryptoSwift", "1.0.0"
-  spec.dependency "SwiftyJSON"
-  spec.dependency "JSON"
-  spec.dependency 'SwiftyBeaver'
+  spec.dependency "SwiftyJSON", "5.0.0"
+  spec.dependency "JSON", "5.0.0"
+  spec.dependency 'SwiftyBeaver', "1.9.2"
 
   # ――― Project Settings ――――――――――――――――――――――――――――――――――――――――――――――――――――――――― #
   #

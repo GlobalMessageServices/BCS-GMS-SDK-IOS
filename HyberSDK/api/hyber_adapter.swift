@@ -60,8 +60,12 @@ class HyberAPI {
             request.addValue(X_Hyber_Client_API_Key, forHTTPHeaderField: "X-Hyber-Client-API-Key")
             request.addValue(X_Hyber_Session_Id, forHTTPHeaderField: "X-Hyber-Session-Id")
             request.addValue(X_Hyber_IOS_Bundle_Id, forHTTPHeaderField: "X-Hyber-IOS-Bundle-Id")
-            
-            request.httpBody  = try! JSONSerialization.data(withJSONObject: params, options: [])
+        
+            do {
+               request.httpBody  = try JSONSerialization.data(withJSONObject: params, options: [])
+            } catch {
+               Constants.logger.debug("request.httpBody error")
+            }
             
             Constants.logger.debug(request.httpBody ?? "")
             Constants.logger.debug(request.allHTTPHeaderFields ?? "")
@@ -72,7 +76,7 @@ class HyberAPI {
                 // 1: Check HTTP Response for successful GET request
                 guard let httpResponse = response as? HTTPURLResponse, let receivedData = data
                     else {
-                        print("error: not a valid http response")
+                        Constants.logger.debug("error: not a valid http response")
                         semaphore7.signal()
                         return
                 }
@@ -160,7 +164,7 @@ class HyberAPI {
             let params =  ["devices": dev_list] as Dictionary<String, AnyObject>
             let urlString = NSString(format: Constants.platform_branch_active.url_Http_Revoke as NSString);
             
-            print("params: \(dev_list)")
+            Constants.logger.debug("params: \(dev_list)")
             
             processor.file_logger(message: "\(procedure_name) url string is \(urlString)", loglevel: ".debug")
             processor.file_logger(message: "\(procedure_name) params is \"devices\": \(dev_list)", loglevel: ".debug")
@@ -183,9 +187,8 @@ class HyberAPI {
             let timet = Int(round(timeInterval) as Double)
             let auth_token = X_Hyber_Auth_Token + ":" + String(timet)
             let sha256_auth_token = auth_token.sha256()
-            print(sha256_auth_token)
-            
-            self.processor.file_logger(message: "\(procedure_name) request X-Hyber-Timestamp is \(String(timet))", loglevel: ".debug")
+            Constants.logger.debug(sha256_auth_token)
+            Constants.logger.debug("\(procedure_name) request X-Hyber-Timestamp is \(String(timet))")
             request.addValue(String(timet), forHTTPHeaderField: "X-Hyber-Timestamp")
             request.addValue(X_Hyber_Session_Id, forHTTPHeaderField: "X-Hyber-Session-Id")
             request.addValue(sha256_auth_token, forHTTPHeaderField: "X-Hyber-Auth-Token")
@@ -194,7 +197,11 @@ class HyberAPI {
             print(request.httpBody as Any)
             print(params)
             
-            request.httpBody  = try! JSONSerialization.data(withJSONObject: params, options: [])
+        do {
+            request.httpBody  = try JSONSerialization.data(withJSONObject: params, options: [])
+        } catch {
+            Constants.logger.debug("request.httpBody error")
+        }
             
             let dataTask = session.dataTask(with: request as URLRequest)
             {
@@ -216,16 +223,16 @@ class HyberAPI {
                 answ = self.answer_buider.general_answer_struct(resp_code: String(httpResponse.statusCode), body_json: body_json, description: "Success")
                 
                 print(jsonData as Any)
-                self.processor.file_logger(message: "\(procedure_name) response jsonData is \(String(describing: jsonData))", loglevel: ".debug")
+                Constants.logger.debug("\(procedure_name) response jsonData is \(String(describing: jsonData))")
                 
-                self.processor.file_logger(message: "\(procedure_name) response code is \(httpResponse.statusCode)", loglevel: ".debug")
+                Constants.logger.debug("\(procedure_name) response code is \(httpResponse.statusCode)")
                 print(httpResponse.statusCode)
                 
-                self.processor.file_logger(message: "\(procedure_name) response data is \(String(describing: data))", loglevel: ".debug")
+                Constants.logger.debug("\(procedure_name) response data is \(String(describing: data))")
                 
-                self.processor.file_logger(message: "\(procedure_name) response debugDescription is \(httpResponse.debugDescription)", loglevel: ".debug")
+                Constants.logger.debug("\(procedure_name) response debugDescription is \(httpResponse.debugDescription)")
                 
-                print(httpResponse.debugDescription)
+                Constants.logger.debug(httpResponse.debugDescription)
                 
                 switch (httpResponse.statusCode)
                 {
@@ -279,8 +286,8 @@ class HyberAPI {
                 "sdkVersion":sdk_Version
                 ] as Dictionary<String, AnyObject>
         let urlString = NSString(format: Constants.platform_branch_active.url_Http_Update as NSString);
-            processor.file_logger(message: "\(procedure_name) url string is \(urlString)", loglevel: ".debug")
-            processor.file_logger(message: "\(procedure_name) params is \(params.description)", loglevel: ".debug")
+            Constants.logger.debug("\(procedure_name) url string is \(urlString)")
+            Constants.logger.debug("\(procedure_name) params is \(params.description)")
             
             let request : NSMutableURLRequest = NSMutableURLRequest()
             request.url = URL(string: NSString(format: "%@", urlString)as String)
@@ -305,7 +312,11 @@ class HyberAPI {
             
             
             
-            request.httpBody  = try! JSONSerialization.data(withJSONObject: params, options: [])
+        do {
+            request.httpBody  = try JSONSerialization.data(withJSONObject: params, options: [])
+        } catch {
+            Constants.logger.debug("request.httpBody error")
+        }
             
             Constants.logger.debug(request.allHTTPHeaderFields as Any)
             Constants.logger.debug(params)
@@ -329,7 +340,7 @@ class HyberAPI {
                 
                 answ = self.answer_buider.general_answer_struct(resp_code: String(httpResponse.statusCode), body_json: "deviceId: \(devid_parsed.deviceId)", description: "Success")
                 
-                self.processor.file_logger(message: "\(procedure_name) response jsonData is \(String(describing: jsonData))", loglevel: ".debug")
+                Constants.logger.debug("\(procedure_name) response jsonData is \(String(describing: jsonData))")
                 
                 self.processor.file_logger(message: "\(procedure_name) response code is \(httpResponse.statusCode)", loglevel: ".debug")
                 
@@ -405,8 +416,7 @@ class HyberAPI {
             print(request.allHTTPHeaderFields as Any)
             print(request.httpBody as Any)
             
-            //request.httpBody  = try! JSONSerialization.data(withJSONObject: params, options: [])
-            
+
             let dataTask = session.dataTask(with: request as URLRequest)
             {
                 ( data: Data?, response: URLResponse?, error: Error?) -> Void in
@@ -520,7 +530,11 @@ class HyberAPI {
                 print(request.httpBody as Any)
                 
                 
-                request.httpBody  = try! JSONSerialization.data(withJSONObject: params, options: [])
+                do {
+                    request.httpBody  = try JSONSerialization.data(withJSONObject: params, options: [])
+                } catch {
+                    Constants.logger.debug("request.httpBody error")
+                }
                 
                 let dataTask = session.dataTask(with: request as URLRequest)
                 {
@@ -620,7 +634,11 @@ class HyberAPI {
             print(request.httpBody as Any)
             
             
-            request.httpBody  = try! JSONSerialization.data(withJSONObject: params, options: [])
+        do {
+            request.httpBody  = try JSONSerialization.data(withJSONObject: params, options: [])
+        } catch {
+            Constants.logger.debug("request.httpBody error")
+        }
             
             let dataTask = session.dataTask(with: request as URLRequest)
             {
@@ -724,8 +742,7 @@ class HyberAPI {
             print(request.httpBody as Any)
             
             
-            //request.httpBody  = try! JSONSerialization.data(withJSONObject: params, options: [])
-            
+    
             let dataTask = session.dataTask(with: request as URLRequest)
             {
                 ( data: Data?, response: URLResponse?, error: Error?) -> Void in
@@ -763,9 +780,7 @@ class HyberAPI {
                     }
                 }
                 
-                //////let requestDataDict:NSDictionary = jsonData!! as NSDictionary
-                
-                
+   
                 self.processor.file_logger(message: "\(procedure_name) response code is \(httpResponse.statusCode)", loglevel: ".debug")
                 
                 self.processor.file_logger(message: "\(procedure_name) response data is \(String(describing: data))", loglevel: ".debug")
@@ -897,8 +912,12 @@ class HyberAPI {
             print(request.httpBody as Any)
             
             
-            request.httpBody  = try! JSONSerialization.data(withJSONObject: params, options: [])
-            
+        do {
+            request.httpBody  = try JSONSerialization.data(withJSONObject: params, options: [])
+        } catch {
+            Constants.logger.debug("request.httpBody error")
+        }
+        
             let dataTask = session.dataTask(with: request as URLRequest)
             {
                 ( data: Data?, response: URLResponse?, error: Error?) -> Void in
