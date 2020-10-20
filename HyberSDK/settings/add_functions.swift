@@ -45,7 +45,7 @@ public class Processing {
             }
             return resp
         } catch let error {
-            print("invalid regex: \(error.localizedDescription)")
+            Constants.logger.error("invalid regex: \(error.localizedDescription)")
             return []
         }
     }

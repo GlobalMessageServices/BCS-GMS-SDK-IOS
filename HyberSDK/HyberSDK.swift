@@ -33,7 +33,7 @@ public class HyberSDK {
     
     public init(
         platform_branch: PushSdkParametersPublic.BranchStructObj = PushSdkParametersPublic.branchMasterValue,
-        log_level: String = "error"
+        log_level: SwiftyBeaver.Level = .error
         )
     {
         Constants.registrationstatus = UserDefaults.standard.bool(forKey: "registrationstatus")
@@ -44,19 +44,13 @@ public class HyberSDK {
         Constants.hyber_user_password = UserDefaults.standard.string(forKey: "hyber_user_password")
         
         Constants.platform_branch_active = platform_branch
-        Constants.log_level_active = log_level
-        
+        //Constants.log_level_active = log_level
         let console = ConsoleDestination()
-        console.format = "$DHH:mm:ss$d $L $M"
+        console.format = "$Dyyyy-MM-dd HH:mm:ss.SSS$d PushSDK $T $N.$F:$l $L: $M"
+        console.minLevel = log_level
         let file = FileDestination()
         Constants.logger.addDestination(console)
-        
         Constants.logger.addDestination(file)
-        if (log_level == "debug")
-        {
-            let debug_out = Constants.logger.Level.debug
-            print(debug_out)
-        }
     }
     
     private let processor = Processing.init()
@@ -102,7 +96,7 @@ public class HyberSDK {
     //subscribers password (optional, for future use)
     public func hyber_register_new(user_phone: String, user_password: String, x_hyber_sesion_id: String, x_hyber_ios_bundle_id: String, X_Hyber_Client_API_Key: String)->HyberFunAnswerRegister {
         
-        Constants.logger.debug("Any")
+        Constants.logger.debug("Start function registrar main")
         
         
         if (Constants.registrationstatus==false){
@@ -140,7 +134,7 @@ public class HyberSDK {
                 let X_Hyber_Session_Id: String = Constants.firebase_registration_token ?? "firebase_empty"
                 let hyber_rest_server = HyberAPI.init()
                 let ansss = hyber_rest_server.hyber_device_get_all(X_Hyber_Session_Id: X_Hyber_Session_Id, X_Hyber_Auth_Token: Constants.hyber_registration_token ?? "token_empty")
-                print(ansss)
+                Constants.logger.debug(ansss)
                 return ansss}
             else {
                 return HyberFunAnswerGetDeviceList.init(code: 704, result: "error", description: "Not registered", body: nil)
@@ -163,9 +157,9 @@ public class HyberSDK {
             if (Constants.registrationstatus==true) {
                 let X_Hyber_Session_Id: String = Constants.firebase_registration_token ?? "firebase_empty"
                 let hyber_rest_server = HyberAPI.init()
-                print(X_Hyber_Session_Id)
-                print(message_id)
-                print(String(Constants.hyber_registration_token ?? ""))
+                Constants.logger.debug(X_Hyber_Session_Id)
+                Constants.logger.debug(message_id)
+                Constants.logger.debug(String(Constants.hyber_registration_token ?? ""))
                 
                 let asaa = hyber_rest_server.hyber_message_dr(message_Id: message_id, received_At: "123123122341", X_Hyber_Session_Id: X_Hyber_Session_Id, X_Hyber_Auth_Token: Constants.hyber_registration_token ?? "token_empty")
                 
@@ -225,12 +219,12 @@ public class HyberSDK {
                     listdev.append(String(jj.id))
                 }
                 
-                print(listdev)
+                Constants.logger.debug(listdev)
                 
                 let X_Hyber_Session_Id: String = Constants.firebase_registration_token ?? "firebase_empty"
-                print(String(Constants.deviceId ?? "unknown"))
-                print(X_Hyber_Session_Id)
-                print(String(Constants.hyber_registration_token ?? "token_empty"))
+                Constants.logger.debug(String(Constants.deviceId ?? "unknown"))
+                Constants.logger.debug(X_Hyber_Session_Id)
+                Constants.logger.debug(String(Constants.hyber_registration_token ?? "token_empty"))
                 
                 let hyber_rest_server = HyberAPI.init()
                 let ggg = hyber_rest_server.hyber_device_revoke(dev_list: listdev, X_Hyber_Session_Id: X_Hyber_Session_Id, X_Hyber_Auth_Token: Constants.hyber_registration_token ?? "empty_token")
@@ -290,12 +284,10 @@ extension String {
     private  func hexStringFromData(input: NSData) -> String {
         var bytes = [UInt8](repeating: 0, count: input.length)
         input.getBytes(&bytes, length: input.length)
-        
         var hexString = ""
         for byte in bytes {
             hexString += String(format:"%02x", UInt8(byte))
         }
-        
         return hexString
     }
     

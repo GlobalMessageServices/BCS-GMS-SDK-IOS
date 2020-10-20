@@ -50,7 +50,7 @@ class AnswParser {
         //let jsonData = JSON.self(using: .utf8)!
         do {
            let parsedJson: FullRegister = try JSONDecoder().decode(FullRegister.self, from: jsonData)
-           print(parsedJson.session.token)
+           Constants.logger.debug(parsedJson.session.token)
            let res = RegisterJsonParse.init(deviceId: String(parsedJson.device.deviceId), token: parsedJson.session.token, userId: parsedJson.profile.userId, userPhone: parsedJson.profile.userPhone, createdAt: parsedJson.profile.createdAt)
            return res
             
