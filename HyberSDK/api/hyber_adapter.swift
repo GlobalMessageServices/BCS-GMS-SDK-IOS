@@ -23,6 +23,8 @@ class HyberAPI {
     //1 procedure
     func hyber_device_register(X_Hyber_Client_API_Key: String, X_Hyber_Session_Id: String, X_Hyber_IOS_Bundle_Id: String, device_Name:String, device_Type:String, os_Type:String, sdk_Version:String, user_Pass:String, user_Phone:String)-> HyberFunAnswerRegister {
         
+            Constants.logger.debug("Start function hyber_device_register")
+        
 
             //var answ: String = String()
             var genAnsw: HyberFunAnswerRegister = HyberFunAnswerRegister(code: 0, result: "", description: "", deviceId: "", token: "", userId: "", userPhone: "", createdAt: "")
@@ -42,7 +44,7 @@ class HyberAPI {
                 "userPhone": user_Phone
                 ] as Dictionary<String, AnyObject>
             
-            let urlString = NSString(format: Constants.url_Http_Registration as NSString);
+            let urlString = NSString(format: Constants.platform_branch_active.url_Http_Registration as NSString);
             processor.file_logger(message: "hyber_device_register url string is \(urlString)", loglevel: ".debug")
             
             let request : NSMutableURLRequest = NSMutableURLRequest()
@@ -61,8 +63,8 @@ class HyberAPI {
             
             request.httpBody  = try! JSONSerialization.data(withJSONObject: params, options: [])
             
-            print(request.httpBody ?? "")
-            print(request.allHTTPHeaderFields ?? "")
+            Constants.logger.debug(request.httpBody ?? "")
+            Constants.logger.debug(request.allHTTPHeaderFields ?? "")
             
             let dataTask = session.dataTask(with: request as URLRequest)
             {
@@ -71,6 +73,7 @@ class HyberAPI {
                 guard let httpResponse = response as? HTTPURLResponse, let receivedData = data
                     else {
                         print("error: not a valid http response")
+                        semaphore7.signal()
                         return
                 }
                 print(httpResponse)
@@ -100,10 +103,11 @@ class HyberAPI {
                     
                     let response = NSString (data: receivedData, encoding: String.Encoding.utf8.rawValue)
                     
-                    print(String(response ?? ""))
+                    Constants.logger.debug(String(response ?? ""))
                     
                     let str_resp = String(response ?? "")
-                    print(str_resp)
+                    
+                    Constants.logger.debug(str_resp)
                     
                     let resp_register_parsed = self.jsonparser.registerJParse(str_resp: str_resp)
                     
@@ -126,7 +130,7 @@ class HyberAPI {
                     
                     UserDefaults.standard.synchronize()
                     
-                    print(resp_register_parsed.token ?? "")
+                    Constants.logger.debug(resp_register_parsed.token ?? "")
                     
                     if response == "SUCCESS"
                     {
@@ -142,8 +146,6 @@ class HyberAPI {
             dataTask.resume()
             semaphore7.wait()
             return genAnsw
-        
-        
     }
     
     //2 procedure
@@ -156,7 +158,7 @@ class HyberAPI {
             let semaphore6 = DispatchSemaphore(value: 0)
             
             let params =  ["devices": dev_list] as Dictionary<String, AnyObject>
-            let urlString = NSString(format: Constants.url_Http_Revoke);
+            let urlString = NSString(format: Constants.platform_branch_active.url_Http_Revoke as NSString);
             
             print("params: \(dev_list)")
             
@@ -201,6 +203,7 @@ class HyberAPI {
                 guard let httpResponse = response as? HTTPURLResponse, let receivedData = data
                     else {
                         print("error: not a valid http response")
+                        semaphore6.signal()
                         return
                 }
                 
@@ -260,6 +263,7 @@ class HyberAPI {
     //3 procedure
     //for update device from hyber server
     func hyber_device_update(fcm_Token: String, os_Type: String, os_Version: String, device_Type: String, device_Name: String, sdk_Version: String, X_Hyber_Session_Id: String, X_Hyber_Auth_Token:String) -> HyberGeneralAnswerStruct {
+        Constants.logger.debug("Start function hyber_device_update")
             let procedure_name = "hyber_device_update"
             let configuration = URLSessionConfiguration .default
             let session = URLSession(configuration: configuration)
@@ -274,7 +278,7 @@ class HyberAPI {
                 "deviceName":device_Name,
                 "sdkVersion":sdk_Version
                 ] as Dictionary<String, AnyObject>
-            let urlString = NSString(format: Constants.url_Http_Update);
+        let urlString = NSString(format: Constants.platform_branch_active.url_Http_Update as NSString);
             processor.file_logger(message: "\(procedure_name) url string is \(urlString)", loglevel: ".debug")
             processor.file_logger(message: "\(procedure_name) params is \(params.description)", loglevel: ".debug")
             
@@ -303,8 +307,8 @@ class HyberAPI {
             
             request.httpBody  = try! JSONSerialization.data(withJSONObject: params, options: [])
             
-            print(request.allHTTPHeaderFields as Any)
-            print(params)
+            Constants.logger.debug(request.allHTTPHeaderFields as Any)
+            Constants.logger.debug(params)
             
             let dataTask = session.dataTask(with: request as URLRequest)
             {
@@ -313,6 +317,7 @@ class HyberAPI {
                 guard let httpResponse = response as? HTTPURLResponse, let receivedData = data
                     else {
                         print("error: not a valid http response")
+                        semaphore5.signal()
                         return
                 }
                 
@@ -332,15 +337,14 @@ class HyberAPI {
                 
                 self.processor.file_logger(message: "\(procedure_name) response debugDescription is \(httpResponse.debugDescription)", loglevel: ".debug")
                 
-                print(jsonData as Any)
-                print(httpResponse.statusCode)
+                Constants.logger.debug(jsonData as Any)
+                Constants.logger.debug(httpResponse.statusCode)
                 
                 switch (httpResponse.statusCode)
                 {
                 case 200:
                     
                     let response = NSString (data: receivedData, encoding: String.Encoding.utf8.rawValue)
-                    
                     
                     if response == "SUCCESS"
                     {
@@ -374,7 +378,7 @@ class HyberAPI {
             
             let escaped_utc = String(utc_time).addingPercentEncoding(withAllowedCharacters: CharacterSet.urlQueryAllowed)
             
-        let urlString = NSString(format: "\(Constants.url_Http_Mess_history)\(String(describing: escaped_utc))" as NSString);
+        let urlString = NSString(format: "\(Constants.platform_branch_active.url_Http_Mess_history)\(String(describing: escaped_utc))" as NSString);
             processor.file_logger(message: "\(procedure_name) url string is \(urlString)", loglevel: ".debug")
             
             let request : NSMutableURLRequest = NSMutableURLRequest()
@@ -410,6 +414,7 @@ class HyberAPI {
                 guard let httpResponse = response as? HTTPURLResponse, let receivedData = data
                     else {
                         print("error: not a valid http response")
+                        semaphore4.signal()
                         return
                 }
                 
@@ -482,7 +487,7 @@ class HyberAPI {
                     "messageId":message_Id
                     //"receivedAt":received_At
                     ] as Dictionary<String, AnyObject>
-                let urlString = NSString(format: Constants.url_Http_Mess_dr);
+                let urlString = NSString(format: Constants.platform_branch_active.url_Http_Mess_dr as NSString);
                 processor.file_logger(message: "\(procedure_name) url string is \(urlString)", loglevel: ".debug")
                 processor.file_logger(message: "\(procedure_name) params is \(params.description)", loglevel: ".debug")
                 
@@ -524,6 +529,7 @@ class HyberAPI {
                     guard let httpResponse = response as? HTTPURLResponse, let receivedData = data
                         else {
                             print("error: not a valid http response")
+                            semaphore3.signal()
                             return
                     }
                     
@@ -585,7 +591,7 @@ class HyberAPI {
                 "messageId": message_Id,
                 "answer": answer
                 ] as Dictionary<String, AnyObject>
-            let urlString = NSString(format: Constants.url_Http_Mess_callback);
+        let urlString = NSString(format: Constants.platform_branch_active.url_Http_Mess_callback as NSString);
             processor.file_logger(message: "\(procedure_name) url string is \(urlString)", loglevel: ".debug")
             processor.file_logger(message: "\(procedure_name) params is \(params.description)", loglevel: ".debug")
             
@@ -623,6 +629,7 @@ class HyberAPI {
                 guard let httpResponse = response as? HTTPURLResponse, let receivedData = data
                     else {
                         print("error: not a valid http response")
+                        semaphore2.signal()
                         return
                 }
                 
@@ -687,7 +694,7 @@ class HyberAPI {
             
             let semaphore = DispatchSemaphore(value: 0)
             
-            let urlString = NSString(format: Constants.url_Http_Device_getall);
+        let urlString = NSString(format: Constants.platform_branch_active.url_Http_Device_getall as NSString);
             processor.file_logger(message: "\(procedure_name) url string is \(urlString)", loglevel: ".debug")
             
             let request : NSMutableURLRequest = NSMutableURLRequest()
@@ -726,6 +733,7 @@ class HyberAPI {
                 guard let httpResponse = response as? HTTPURLResponse, let receivedData = data
                     else {
                         print("error: not a valid http response")
+                        semaphore.signal()
                         return
                 }
                 
@@ -842,7 +850,6 @@ class HyberAPI {
             print(new2String)
             let new3String = new2String.replacingOccurrences(of: "\"", with: "", options: .literal, range: nil)
             print(new3String)
-            
             listdev.append(new3String)
         }
         
@@ -861,7 +868,7 @@ class HyberAPI {
             let semaphore2 = DispatchSemaphore(value: 0)
             var answ: HyberFunAnswerGeneral?
             let params =  [:] as Dictionary<String, AnyObject>
-            let urlString = NSString(format: Constants.hyber_url_mess_queue);
+            let urlString = NSString(format: Constants.platform_branch_active.hyber_url_mess_queue as NSString);
             processor.file_logger(message: "\(procedure_name) url string is \(urlString)", loglevel: ".debug")
             processor.file_logger(message: "\(procedure_name) params is \(params.description)", loglevel: ".debug")
             
@@ -899,6 +906,7 @@ class HyberAPI {
                 guard let httpResponse = response as? HTTPURLResponse, let receivedData = data
                     else {
                         print("error: not a valid http response")
+                        semaphore2.signal()
                         return
                 }
                 

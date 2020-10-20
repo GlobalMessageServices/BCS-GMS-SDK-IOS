@@ -10,7 +10,7 @@
 import Foundation
 import UIKit
 import CryptoSwift
-//import SwiftyBeaver
+import SwiftyBeaver
 //
 //import CoreData
 //import FirebaseCore
@@ -29,10 +29,11 @@ public extension Notification.Name {
 
 public class HyberSDK {
     
+    private let log = SwiftyBeaver.self
+    
     public init(
-        //platform_branch: PushSdkParametersPublic,
-        log_level: String = "error",
-        kk: String = "h"
+        platform_branch: PushSdkParametersPublic.BranchStructObj = PushSdkParametersPublic.branchMasterValue,
+        log_level: String = "error"
         )
     {
         Constants.registrationstatus = UserDefaults.standard.bool(forKey: "registrationstatus")
@@ -41,9 +42,26 @@ public class HyberSDK {
         Constants.firebase_registration_token = UserDefaults.standard.string(forKey: "firebase_registration_token")
         Constants.hyber_user_msisdn = UserDefaults.standard.string(forKey: "hyber_user_msisdn")
         Constants.hyber_user_password = UserDefaults.standard.string(forKey: "hyber_user_password")
+        
+        Constants.platform_branch_active = platform_branch
+        Constants.log_level_active = log_level
+        
+        let console = ConsoleDestination()
+        console.format = "$DHH:mm:ss$d $L $M"
+        let file = FileDestination()
+        Constants.logger.addDestination(console)
+        
+        Constants.logger.addDestination(file)
+        if (log_level == "debug")
+        {
+            let debug_out = Constants.logger.Level.debug
+            print(debug_out)
+        }
     }
     
     private let processor = Processing.init()
+    
+    
     
     //answer codes
     //200 - Ok
@@ -83,6 +101,8 @@ public class HyberSDK {
     //user_phone - subscribers msisdn
     //subscribers password (optional, for future use)
     public func hyber_register_new(user_phone: String, user_password: String, x_hyber_sesion_id: String, x_hyber_ios_bundle_id: String, X_Hyber_Client_API_Key: String)->HyberFunAnswerRegister {
+        
+        Constants.logger.debug("Any")
         
         
         if (Constants.registrationstatus==false){

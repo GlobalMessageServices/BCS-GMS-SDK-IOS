@@ -18,7 +18,7 @@ target 'HyberSDK' do
   pod 'CryptoSwift', '1.0.0'
   pod 'JSON'
   #pod 'RetrofireSwift'
-  #pod 'SwiftyBeaver'
+  pod 'SwiftyBeaver'
 
   target 'HyberSDKTests' do
     inherit! :search_paths

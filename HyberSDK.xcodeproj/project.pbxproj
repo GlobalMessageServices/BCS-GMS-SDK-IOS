@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		21CF6E7C440E8C87EFF44A94 /* Pods_HyberSDKTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 36BCB4E46C2F114CEAD245C7 /* Pods_HyberSDKTests.framework */; };
+		BA1A13B4253E85D700E93196 /* HyberSDK.podspec in Resources */ = {isa = PBXBuildFile; fileRef = BA1A13B3253E85D700E93196 /* HyberSDK.podspec */; };
 		BA1C39F6253CB69000052185 /* HyberSDK.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = BA1C39EC253CB69000052185 /* HyberSDK.framework */; };
 		BA1C39FB253CB69000052185 /* HyberSDKTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA1C39FA253CB69000052185 /* HyberSDKTests.swift */; };
 		BA1C39FD253CB69000052185 /* HyberSDK.h in Headers */ = {isa = PBXBuildFile; fileRef = BA1C39EF253CB69000052185 /* HyberSDK.h */; settings = {ATTRIBUTES = (Public, ); }; };
@@ -18,7 +19,6 @@
 		BA8D3418253CC12E005BDC33 /* hyber_answer_func.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA8D3415253CC12E005BDC33 /* hyber_answer_func.swift */; };
 		BA8D3419253CC12E005BDC33 /* params.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA8D3416253CC12E005BDC33 /* params.swift */; };
 		BA8D341C253CC14A005BDC33 /* hyber_adapter.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA8D341B253CC14A005BDC33 /* hyber_adapter.swift */; };
-		BA8D341E253CCA24005BDC33 /* HyberSDK.xcworkspace in Resources */ = {isa = PBXBuildFile; fileRef = BA8D341D253CCA24005BDC33 /* HyberSDK.xcworkspace */; };
 		C04482AA53327CA7596F1B6C /* Pods_HyberSDK.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8BE323D9F391699D4AA1D26E /* Pods_HyberSDK.framework */; };
 /* End PBXBuildFile section */
 
@@ -39,6 +39,7 @@
 		36BCB4E46C2F114CEAD245C7 /* Pods_HyberSDKTests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_HyberSDKTests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		62EFA8335FEA29B595B9A5BB /* Pods-HyberSDKTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-HyberSDKTests.debug.xcconfig"; path = "Target Support Files/Pods-HyberSDKTests/Pods-HyberSDKTests.debug.xcconfig"; sourceTree = "<group>"; };
 		8BE323D9F391699D4AA1D26E /* Pods_HyberSDK.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_HyberSDK.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		BA1A13B3253E85D700E93196 /* HyberSDK.podspec */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = HyberSDK.podspec; sourceTree = "<group>"; };
 		BA1C39EC253CB69000052185 /* HyberSDK.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = HyberSDK.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		BA1C39EF253CB69000052185 /* HyberSDK.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = HyberSDK.h; sourceTree = "<group>"; };
 		BA1C39F0253CB69000052185 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
@@ -52,7 +53,6 @@
 		BA8D3415253CC12E005BDC33 /* hyber_answer_func.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = hyber_answer_func.swift; sourceTree = "<group>"; };
 		BA8D3416253CC12E005BDC33 /* params.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = params.swift; sourceTree = "<group>"; };
 		BA8D341B253CC14A005BDC33 /* hyber_adapter.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = hyber_adapter.swift; sourceTree = "<group>"; };
-		BA8D341D253CCA24005BDC33 /* HyberSDK.xcworkspace */ = {isa = PBXFileReference; lastKnownFileType = wrapper.workspace; path = HyberSDK.xcworkspace; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -88,7 +88,7 @@
 		BA1C39E2253CB68F00052185 = {
 			isa = PBXGroup;
 			children = (
-				BA8D341D253CCA24005BDC33 /* HyberSDK.xcworkspace */,
+				BA1A13B3253E85D700E93196 /* HyberSDK.podspec */,
 				BA1C39EE253CB69000052185 /* HyberSDK */,
 				BA1C39F9253CB69000052185 /* HyberSDKTests */,
 				BA1C39ED253CB69000052185 /* Products */,
@@ -254,7 +254,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				BA8D341E253CCA24005BDC33 /* HyberSDK.xcworkspace in Resources */,
+				BA1A13B4253E85D700E93196 /* HyberSDK.podspec in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
