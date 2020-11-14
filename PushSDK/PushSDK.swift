@@ -53,6 +53,7 @@ public class PushSDK {
         let file = FileDestination()
         PushKConstants.logger.addDestination(console)
         PushKConstants.logger.addDestination(file)
+        PushKConstants.basePushURLactive = basePushURL
     }
     
     private let processor = Processing.init()

@@ -179,6 +179,8 @@ public struct PushKConstants {
     static let application_name = "test_app" as String
     
     public static var message_buffer = "" as String
+    
+    public static var basePushURLactive = "" as String
 }
 
 

@@ -17,8 +17,10 @@ target 'PushSDK' do
   pod 'BoringSSL-GRPC', '0.0.13'
   pod 'CryptoSwift', '1.0.0'
   pod 'JSON'
-  #pod 'RetrofireSwift'
   pod 'SwiftyBeaver'
+  pod 'Firebase/Messaging'
+  pod 'Firebase/Core'
+  pod 'FirebaseInstanceID'
 
   target 'PushSDKTests' do
     inherit! :search_paths
@@ -34,7 +36,9 @@ target 'PushSDK' do
     pod 'BoringSSL-GRPC'
     pod 'CryptoSwift', '1.0.0'
     pod 'JSON'
-    #pod 'RetrofireSwift'
     pod 'SwiftyBeaver'
+    pod 'Firebase/Messaging'
+    pod 'Firebase/Core'
+    pod 'FirebaseInstanceID'
   end
 end
