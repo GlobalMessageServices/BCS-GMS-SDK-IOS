@@ -13,6 +13,7 @@ import FirebaseMessaging
 import FirebaseCore
 import FirebaseInstanceID
 
+
 class PushKFirebaseSdk: UIResponder, UIApplicationDelegate {
     
     let processor = Processing.init()
@@ -26,9 +27,11 @@ class PushKFirebaseSdk: UIResponder, UIApplicationDelegate {
     
     public func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
         // Override point for customization after application launch.
-        FirebaseApp.configure()
-        Messaging.messaging().delegate = self
-        Messaging.messaging().shouldEstablishDirectChannel = true
+        
+        //FirebaseApp.configure()
+        //Messaging.messaging().delegate = self
+        //Messaging.messaging().shouldEstablishDirectChannel = true
+        
         //Messaging.messaging().apnsToken = deviceToken
         UNUserNotificationCenter.current().delegate = self
         let authOptions: UNAuthorizationOptions = [.alert, .badge, .sound]
@@ -210,6 +213,7 @@ extension PushKFirebaseSdk: MessagingDelegate {
         NotificationCenter.default.post(name: NSNotification.Name(rawValue: mySpecialNotificationKey), object: self)
     }
     
+    /*
     public func messaging(_ messaging: Messaging, didReceive remoteMessage: MessagingRemoteMessage) {
         
         let fdf = remoteMessage.appData as NSDictionary as! [String: AnyObject]
@@ -254,6 +258,7 @@ extension PushKFirebaseSdk: MessagingDelegate {
         // TODO: If necessary send token to application server.
         // Note: This callback is fired at each app startup and whenever a new token is generated.
     }
+ */
     
     
 }
