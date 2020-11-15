@@ -16,7 +16,7 @@ Pod::Spec.new do |spec|
   #
 
   spec.name         = "PushSDK"
-  spec.version      = "1.0.0.16"
+  spec.version      = "1.0.0.17"
   spec.summary      = "A short description of PushSDK."
 
   # This description is used to generate tags and improve search results.
@@ -124,7 +124,8 @@ Pod::Spec.new do |spec|
 
 
 
-  spec.dependency "BoringSSL-GRPC", "0.0.13"
+  #spec.dependency "BoringSSL-GRPC", "0.0.13"
+  spec.dependency "BoringSSL-GRPC"
   spec.dependency "CryptoSwift", "1.0.0"
   spec.dependency "SwiftyJSON", "5.0.0"
   spec.dependency "JSON", "5.0.0"
