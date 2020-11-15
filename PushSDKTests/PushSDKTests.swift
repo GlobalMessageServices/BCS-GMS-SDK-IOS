@@ -14,6 +14,8 @@ class PushSDKTests: XCTestCase {
     
     static let logLevel: SwiftyBeaver.Level = .debug
     var sdkInitPush = PushSDK.init(platform_branch: PushSdkParametersPublic.branchMasterValue, log_level: logLevel, basePushURL: "https://example.com")
+    
+    let parser_class = PusherKParser.init()
 
 
     override func setUp() {
@@ -94,6 +96,11 @@ class PushSDKTests: XCTestCase {
         log.addDestination(console)
         
         log.debug("test 11111")
+    }
+    
+    func testParser()  {
+        parser_class.urls_initialization(branchUrl: "https://test/", method_paths: PushSdkParametersPublic.branchMasterValue)
+        
     }
 
 

@@ -30,6 +30,7 @@ public extension Notification.Name {
 public class PushSDK {
     
     private let log = SwiftyBeaver.self
+    private let parser_class_adapter = PusherKParser.init()
     
     public init(
         platform_branch: PushSdkParametersPublic.BranchStructObj = PushSdkParametersPublic.branchMasterValue,
@@ -44,8 +45,8 @@ public class PushSDK {
         PushKConstants.firebase_registration_token = UserDefaults.standard.string(forKey: "firebase_registration_token")
         PushKConstants.push_user_msisdn = UserDefaults.standard.string(forKey: "push_user_msisdn")
         PushKConstants.push_user_password = UserDefaults.standard.string(forKey: "push_user_password")
-        
-        PushKConstants.platform_branch_active = platform_branch
+        parser_class_adapter.urls_initialization(branchUrl: basePushURL, method_paths: platform_branch)
+        PushKConstants.basePushURLactive = basePushURL
         //Constants.log_level_active = log_level
         let console = ConsoleDestination()
         console.format = "$Dyyyy-MM-dd HH:mm:ss.SSS$d PushSDK $T $N.$F:$l $L: $M"
@@ -53,7 +54,6 @@ public class PushSDK {
         let file = FileDestination()
         PushKConstants.logger.addDestination(console)
         PushKConstants.logger.addDestination(file)
-        PushKConstants.basePushURLactive = basePushURL
     }
     
     private let processor = Processing.init()
