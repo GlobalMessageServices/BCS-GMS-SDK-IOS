@@ -16,7 +16,7 @@ Pod::Spec.new do |spec|
   #
 
   spec.name         = "PushSDK"
-  spec.version      = "1.0.0.14"
+  spec.version      = "1.0.0.15"
   spec.summary      = "A short description of PushSDK."
 
   # This description is used to generate tags and improve search results.
@@ -131,7 +131,7 @@ Pod::Spec.new do |spec|
   spec.dependency 'SwiftyBeaver', "1.9.2"
   spec.dependency 'Firebase/Messaging'
   #spec.dependency 'Firebase/Core'
-  #spec.dependency 'FirebaseInstanceID'
+  spec.dependency 'FirebaseInstallations'
 
   # ――― Project Settings ――――――――――――――――――――――――――――――――――――――――――――――――――――――――― #
   #
