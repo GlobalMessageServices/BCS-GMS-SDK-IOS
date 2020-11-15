@@ -56,7 +56,7 @@ public class PushSDK {
         PushKConstants.logger.addDestination(file)
     }
     
-    private let processor = Processing.init()
+    private let processor = PushKProcessing.init()
     
     
     

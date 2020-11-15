@@ -15,7 +15,7 @@ class PushKAPI {
     
     private let jsonparser = AnswParser.init()
     
-    private let processor = Processing.init()
+    private let processor = PushKProcessing.init()
     private let answer_buider = AnswerBuider.init()
     let answer_b = AnswerBuider.init()
     
@@ -45,7 +45,7 @@ class PushKAPI {
                 ] as Dictionary<String, AnyObject>
             
             let urlString = NSString(format: PushKConstants.platform_branch_active.url_Http_Registration as NSString);
-            processor.file_logger(message: "push_device_register url string is \(urlString)", loglevel: ".debug")
+            PushKConstants.logger.debug("push_device_register url string is \(urlString)")
             
             let request : NSMutableURLRequest = NSMutableURLRequest()
             //var result = "" as? [[String: Any]];
@@ -84,6 +84,10 @@ class PushKAPI {
                 
                 let jsonData = try? JSONSerialization.jsonObject(with: receivedData, options: []) as? Dictionary<String, Any>
 
+                let body_json: String = String(decoding: receivedData, as: UTF8.self)
+                PushKConstants.logger.debug("push_device_register body_json from push server: \(body_json)")
+                
+                
                 genAnsw = PushKFunAnswerRegister.init(code: httpResponse.statusCode, result: "unknown", description: "unknown", deviceId: "", token: "", userId: "", userPhone: "", createdAt: "")
                 
                 
@@ -161,7 +165,7 @@ class PushKAPI {
             let urlString = NSString(format: PushKConstants.platform_branch_active.url_Http_Revoke as NSString);
             
             PushKConstants.logger.debug("params: \(dev_list)")
-            PushKConstants.logger.debug("\(procedure_name) url string is \(urlString)")
+            PushKConstants.logger.debug("push_device_revoke: \(procedure_name) url string is \(urlString)")
             PushKConstants.logger.debug("\(procedure_name) params is \"devices\": \(dev_list)")
             
             let request : NSMutableURLRequest = NSMutableURLRequest()
@@ -212,7 +216,7 @@ class PushKAPI {
                 let jsonData = try? JSONSerialization.jsonObject(with: receivedData, options: []) as? Dictionary<String, Any>
                 let body_json: String = String(decoding: receivedData, as: UTF8.self)
                 
-                
+                PushKConstants.logger.debug("push_device_revoke body_json from push server: \(body_json)")
                 
                 answ = self.answer_buider.general_answer_struct(resp_code: String(httpResponse.statusCode), body_json: body_json, description: "Success")
                 
@@ -281,7 +285,7 @@ class PushKAPI {
                 "sdkVersion":sdk_Version
                 ] as Dictionary<String, AnyObject>
         let urlString = NSString(format: PushKConstants.platform_branch_active.url_Http_Update as NSString);
-            PushKConstants.logger.debug("\(procedure_name) url string is \(urlString)")
+            PushKConstants.logger.debug("push_device_update: \(procedure_name) url string is \(urlString)")
             PushKConstants.logger.debug("\(procedure_name) params is \(params.description)")
             
             let request : NSMutableURLRequest = NSMutableURLRequest()
@@ -329,6 +333,7 @@ class PushKAPI {
                 
                 let jsonData = try? JSONSerialization.jsonObject(with: receivedData, options: []) as? Dictionary<String, Any>
                 let body_json: String = String(decoding: receivedData, as: UTF8.self)
+                PushKConstants.logger.debug("push_device_update body_json from push server: \(body_json)")
                 
                 let devid_parsed = self.jsonparser.updateregistrationJParse(str_resp: body_json)
                 
@@ -384,7 +389,7 @@ class PushKAPI {
             let escaped_utc = String(utc_time).addingPercentEncoding(withAllowedCharacters: CharacterSet.urlQueryAllowed)
             
         let urlString = NSString(format: "\(PushKConstants.platform_branch_active.url_Http_Mess_history)\(String(describing: escaped_utc))" as NSString);
-            PushKConstants.logger.debug("\(procedure_name) url string is \(urlString)")
+            PushKConstants.logger.debug("push_message_get_history: \(procedure_name) url string is \(urlString)")
             
             let request : NSMutableURLRequest = NSMutableURLRequest()
             request.url = URL(string: NSString(format: "%@", urlString) as String)
@@ -425,6 +430,7 @@ class PushKAPI {
                 let jsonData = try? JSONSerialization.jsonObject(with: receivedData, options: []) as? Dictionary<String, Any>
                 //////self.logger.file_logger(message: "\(procedure_name) response jsonData is \(jsonData??["devices"])", loglevel: ".debug")
                 let body_json: String = String(decoding: receivedData, as: UTF8.self)
+                PushKConstants.logger.debug("push_message_get_history body_json from push server: \(body_json)")
                 
                 answ.code = httpResponse.statusCode
                 answ.body = self.jsonparser.getMessageHistoryJson(str_resp: body_json)
@@ -492,7 +498,7 @@ class PushKAPI {
                     //"receivedAt":received_At
                     ] as Dictionary<String, AnyObject>
                 let urlString = NSString(format: PushKConstants.platform_branch_active.url_Http_Mess_dr as NSString);
-                PushKConstants.logger.debug("\(procedure_name) url string is \(urlString)")
+                PushKConstants.logger.debug("push_message_dr: \(procedure_name) url string is \(urlString)")
                 PushKConstants.logger.debug("\(procedure_name) params is \(params.description)")
                 
                 let request : NSMutableURLRequest = NSMutableURLRequest()
@@ -544,6 +550,7 @@ class PushKAPI {
                     let jsonData = try? JSONSerialization.jsonObject(with: receivedData, options: []) as? Dictionary<String, Any>
                     //////self.logger.file_logger(message: "\(procedure_name) response jsonData is \(jsonData??["devices"])", loglevel: ".debug")
                     let body_json: String = String(decoding: receivedData, as: UTF8.self)
+                    PushKConstants.logger.debug("push_message_dr body_json from push server: \(body_json)")
                     
                     answ = self.answer_buider.general_answer_struct(resp_code: String(httpResponse.statusCode), body_json: body_json, description: "Success")
                     
@@ -647,6 +654,7 @@ class PushKAPI {
                 
                 let jsonData = try? JSONSerialization.jsonObject(with: receivedData, options: []) as? Dictionary<String, Any>
                 let body_json: String = String(decoding: receivedData, as: UTF8.self)
+                PushKConstants.logger.debug("push_message_callback body_json from push server: \(body_json)")
                 
                 answ = self.answer_buider.general_answer_struct(resp_code: String(httpResponse.statusCode), body_json: body_json, description: "Success")
                 
@@ -749,6 +757,7 @@ class PushKAPI {
                 
                 let jsonData = try? JSONSerialization.jsonObject(with: receivedData, options: []) as? Dictionary<String, Any>
                 let body_json: String = String(decoding: receivedData, as: UTF8.self)
+                PushKConstants.logger.debug("push_device_get_all body_json from push server: \(body_json)")
                 
                 answ.code = httpResponse.statusCode
                 answ.description = "Success"
@@ -916,6 +925,7 @@ class PushKAPI {
                 
                 let jsonData = try? JSONSerialization.jsonObject(with: receivedData, options: []) as? Dictionary<String, Any>
                 let body_json: String = String(decoding: receivedData, as: UTF8.self)
+                PushKConstants.logger.debug("push_device_get_all body_json from push server: \(body_json)")
                 
                 answ = self.answer_buider.general_answer2(resp_code: httpResponse.statusCode, body_json: body_json, description: "Success")
                 
