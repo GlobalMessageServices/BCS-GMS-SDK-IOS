@@ -12,6 +12,7 @@ import UserNotifications
 import FirebaseMessaging
 import FirebaseCore
 import FirebaseInstanceID
+import FirebaseInstallations
 
 
 public class PushKFirebaseSdk: UIResponder, UIApplicationDelegate {
@@ -60,17 +61,18 @@ public class PushKFirebaseSdk: UIResponder, UIApplicationDelegate {
             }
         }
         
-        //get application instance ID
-        InstanceID.instanceID().instanceID { (result, error) in
+        Installations.installations().authTokenForcingRefresh(true, completion: { (token, error) in
             if let error = error {
                 PushKConstants.logger.debug("Error fetching remote instance ID: \(error)")
-            } else if let result = result {
-                UserDefaults.standard.set(result.token, forKey: "firebase_registration_token")
-                PushKConstants.firebase_registration_token = result.token
-                UserDefaults.standard.synchronize()
-                PushKConstants.logger.debug("Remote instance ID token: \(result.token)")
+                return
             }
-        }
+            guard let token = token else { return }
+            UserDefaults.standard.set(token.authToken, forKey: "firebase_registration_token")
+            PushKConstants.firebase_registration_token = token.authToken
+            UserDefaults.standard.synchronize()
+            PushKConstants.logger.debug("Remote instance ID token: \(token.authToken)")
+        })
+        
     }
     
     public func fb_fun1_application(didReceiveRemoteNotification userInfo: [NSObject : AnyObject],  fetchCompletionHandler completionHandler: (UIBackgroundFetchResult) -> Void) {

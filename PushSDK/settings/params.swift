@@ -20,6 +20,10 @@ public struct PushKFunAnswerRegister {
     public var userId: String
     public var userPhone: String
     public var createdAt: String
+    
+    public func toString() -> String {
+        return "PushKFunAnswerRegister(code: \(self.code), result: \(self.result), description: \(self.description), deviceId: \(self.deviceId), token: \(self.token), userId: \(self.userId), userPhone: \(self.userPhone), createdAt: \(self.createdAt))"
+    }
 }
 
 public struct PushKFunAnswerGeneral {
@@ -27,7 +31,13 @@ public struct PushKFunAnswerGeneral {
     public var result: String
     public var description: String
     public var body: String
+    
+    public func toString() -> String {
+        return "PushKFunAnswerGeneral(code: \(self.code), result: \(self.result), description: \(self.description), body: \(self.body))"
+    }
 }
+
+
 
 struct RegisterJsonParse {
     var deviceId: String?=nil
@@ -55,10 +65,29 @@ public struct PushKGetDevice {
     public var sdkVersion: String
     public var createdAt: String
     public var updatedAt: String
+    
+    public func toString() -> String {
+        return "PushKGetDevice(id: \(self.id), osType: \(self.osType), osVersion: \(self.osVersion), deviceType: \(self.deviceType), deviceName: \(self.deviceName), sdkVersion: \(self.sdkVersion), createdAt: \(self.createdAt), updatedAt: \(self.updatedAt))"
+    }
 }
 
 public struct PushKGetDeviceList {
     public var devices: [PushKGetDevice]
+    
+    public func toString() -> String {
+        var answ_result = ""
+        for h in devices {
+            let current_str = h.toString()
+            if answ_result == "" {
+                answ_result = "[" + answ_result + current_str
+            }
+            else {
+                answ_result = answ_result + ", " + current_str
+            }
+        }
+        answ_result = answ_result + "]"
+        return answ_result
+    }
 }
 
 public struct PushKFunAnswerGetDeviceList {
@@ -66,15 +95,27 @@ public struct PushKFunAnswerGetDeviceList {
     public var result: String
     public var description: String
     public var body: PushKGetDeviceList? = nil
+    
+    public func toString() -> String {
+        return "PushKFunAnswerGetDeviceList(code: \(self.code), result: \(self.result), description: \(self.description), body: \(self.body?.toString() ?? "[]"))"
+    }
 }
 
 public struct ImageResponse {
     public var url: String?=nil
+    
+    public func toString() -> String {
+        return "ImageResponse(url: \(self.url ?? ""))"
+    }
 }
 
 public struct ButtonResponse {
     public var text: String?=nil
     public var url: String?=nil
+    
+    public func toString() -> String {
+        return "ButtonResponse(text: \(self.text ?? ""), url: \(self.url ?? ""))"
+    }
 }
 
 public struct MessagesResponseStr {
@@ -86,6 +127,10 @@ public struct MessagesResponseStr {
     public var button: ButtonResponse?=nil
     public var time: String?=nil
     public var partner: String?=nil
+    
+    public func toString() -> String {
+        return "MessagesResponseStr(phone: \(self.phone ?? ""), messageId: \(self.messageId ?? ""), title: \(self.title ?? ""), body: \(self.body ?? ""), image: \(self.image?.toString() ?? ""), button: \(self.button?.toString() ?? ""), time: \(self.time ?? ""), partner: \(self.partner ?? ""))"
+    }
 }
 
 public struct MessagesListResponse {
@@ -93,6 +138,23 @@ public struct MessagesListResponse {
     public var limitMessages: Int?=nil
     public var lastTime: Int?=nil
     public var messages: [MessagesResponseStr]
+    
+    public func toString() -> String {
+        var answ_result = "MessagesListResponse(limitDays: \(limitDays ?? 0), limitMessages: \(limitMessages ?? 0), lastTime: \(lastTime ?? 0), messages: "
+        var ans_mess = ""
+        for h in messages {
+            let current_str = h.toString()
+            if ans_mess == "" {
+                ans_mess = "[" + ans_mess + current_str
+            }
+            else {
+                ans_mess = ans_mess + ", " + ans_mess
+            }
+        }
+        ans_mess = ans_mess + "]"
+        answ_result = answ_result + ans_mess + ")"
+        return answ_result
+    }
 }
 
 public struct PushKFunAnswerGetMessageHistory {
@@ -100,6 +162,10 @@ public struct PushKFunAnswerGetMessageHistory {
     public var result: String?=nil
     public var description: String?=nil
     public var body: MessagesListResponse? = nil
+    
+    public func toString() -> String {
+        return "PushKFunAnswerGetMessageHistory(code: \(self.code ?? 0), result: \(self.result ?? ""), description: \(self.description ?? ""), body: \(self.body?.toString() ?? ""))"
+    }
 }
 
 public struct PushKGeneralAnswerStruct {
@@ -107,6 +173,10 @@ public struct PushKGeneralAnswerStruct {
     public var result: String
     public var description: String
     public var body: String
+    
+    public func toString() -> String {
+        return "PushKGeneralAnswerStruct(code: \(self.code), result: \(self.result), description: \(self.description), body: \(self.body))"
+    }
 }
 
 
@@ -147,6 +217,9 @@ public struct PushKConstants {
     public static var registrationstatus = UserDefaults.standard.bool(forKey: "registrationstatus")
     public static var push_registration_token = UserDefaults.standard.string(forKey: "push_registration_token")
     public static var deviceId = UserDefaults.standard.string(forKey: "deviceId")
+    public static var userId = UserDefaults.standard.string(forKey: "userId")
+    public static var created_at = UserDefaults.standard.string(forKey: "created_at")
+    
     public static var push_user_msisdn = UserDefaults.standard.string(forKey: "push_user_msisdn")
     public static var push_user_password = UserDefaults.standard.string(forKey: "push_user_password")
     public static var firebase_registration_token = UserDefaults.standard.string(forKey: "firebase_registration_token")
@@ -160,7 +233,7 @@ public struct PushKConstants {
     
     
     let kOSType = "ios"
-    static let sdkVersion = "1.0.0.9"
+    static let sdkVersion = "1.0.0.13"
     static let dev_os_Version = UIDevice.current.systemVersion
     static let kDeviceType = "\(UIDevice.current.model)"
     static let kDeviceType2 = "\(UIDevice.current.batteryLevel)"

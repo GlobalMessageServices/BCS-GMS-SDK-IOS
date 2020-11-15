@@ -14,6 +14,7 @@ import CryptoSwift
 class PushKAPI {
     
     private let jsonparser = AnswParser.init()
+    private let push_database_adapter = PushKDatabase.init()
     
     private let processor = PushKProcessing.init()
     private let answer_buider = AnswerBuider.init()
@@ -115,10 +116,7 @@ class PushKAPI {
                     
                     let resp_register_parsed = self.jsonparser.registerJParse(str_resp: str_resp)
                     
-                    UserDefaults.standard.set(resp_register_parsed.deviceId, forKey: "deviceId")
-                    PushKConstants.deviceId = resp_register_parsed.deviceId as String?
-                    //UserDefaults.standard.synchronize()
-                    
+
                     genAnsw.result = "Success"
                     genAnsw.description = "Procedure completed"
                     genAnsw.createdAt = resp_register_parsed.createdAt ??  "empty"
@@ -126,13 +124,14 @@ class PushKAPI {
                     genAnsw.token = resp_register_parsed.token ?? "empty_token"
                     genAnsw.userId = String(resp_register_parsed.userId ?? 0)
 
-                    UserDefaults.standard.set(resp_register_parsed.token, forKey: "push_registration_token")
-                    PushKConstants.push_registration_token = resp_register_parsed.token
-                    
-                    UserDefaults.standard.set(true, forKey: "registrationstatus")
-                    PushKConstants.registrationstatus = true
-                    
-                    UserDefaults.standard.synchronize()
+                    self.push_database_adapter.save_data_after_register_ok(
+                        user_Phone: user_Phone,
+                        token: resp_register_parsed.token ?? "empty_token",
+                        device_id: resp_register_parsed.deviceId ?? "unknown",
+                        user_Password: user_Pass,
+                        created_at: resp_register_parsed.createdAt ??  "empty",
+                        user_id: String(resp_register_parsed.userId ?? 0)
+                    )
                     
                     PushKConstants.logger.debug(resp_register_parsed.token ?? "")
                     

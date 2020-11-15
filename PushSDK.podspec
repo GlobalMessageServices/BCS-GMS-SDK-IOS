@@ -130,6 +130,7 @@ Pod::Spec.new do |spec|
   spec.dependency "JSON", "5.0.0"
   spec.dependency 'SwiftyBeaver', "1.9.2"
   spec.dependency 'Firebase/Messaging'
+  spec.dependency 'Firebase/Installations'
   #spec.dependency 'Firebase/Core'
   #spec.dependency 'FirebaseInstanceID'
 
