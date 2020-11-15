@@ -19,7 +19,6 @@ target 'PushSDK' do
   pod 'JSON'
   pod 'SwiftyBeaver'
   pod 'Firebase/Messaging'
-  pod 'Firebase/Installations'
   #pod 'Firebase/Core'
   #pod 'FirebaseInstanceID'
 
@@ -39,7 +38,6 @@ target 'PushSDK' do
     pod 'JSON'
     pod 'SwiftyBeaver'
     pod 'Firebase/Messaging'
-    pod 'Firebase/Installations'
     #pod 'Firebase/Core'
     #pod 'FirebaseInstanceID'
   end
