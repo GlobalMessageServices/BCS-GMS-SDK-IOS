@@ -61,6 +61,19 @@ public class PushKFirebaseSdk: UIResponder, UIApplicationDelegate {
             }
         }
         
+        //get application instance ID
+        InstanceID.instanceID().instanceID { (result, error) in
+            if let error = error {
+                print("Error fetching remote instance ID: \(error)")
+            } else if let result = result {
+                UserDefaults.standard.set(result.token, forKey: "firebase_registration_token")
+                PushKConstants.firebase_registration_token = result.token
+                UserDefaults.standard.synchronize()
+                print("Remote instance ID token: \(result.token)")
+            }
+        }
+
+        /*
         Installations.installations().authTokenForcingRefresh(true, completion: { (token, error) in
             if let error = error {
                 PushKConstants.logger.debug("Error fetching remote instance ID: \(error)")
@@ -72,6 +85,7 @@ public class PushKFirebaseSdk: UIResponder, UIApplicationDelegate {
             UserDefaults.standard.synchronize()
             PushKConstants.logger.debug("Remote instance ID token: \(token.authToken)")
         })
+ */
         
     }
     
