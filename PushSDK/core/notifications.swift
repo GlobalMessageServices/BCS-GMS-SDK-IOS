@@ -2,7 +2,7 @@
 //  notifications.swift
 //  PushSDK
 //
-//  Created by Дмитрий Буйновский on 16/11/2020.
+//  Created by Kirill Kotov on 10/11/2020.
 //  Copyright © 2020 PUSHER. All rights reserved.
 //
 
@@ -31,6 +31,7 @@ class PushKNotification {
         
         content.sound = UNNotificationSound.default
         
+        PushKConstants.logger.debug("push_notification_manual_wImage started")
         if (image_url != "") {
             
             if let url = URL(string: image_url) {
@@ -85,6 +86,8 @@ class PushKNotification {
                 }
             })
         }
+        
+        PushKConstants.logger.debug("push_notification_manual_wImage finished")
         
     }
     

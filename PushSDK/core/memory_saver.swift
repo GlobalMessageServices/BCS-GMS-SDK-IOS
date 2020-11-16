@@ -2,7 +2,7 @@
 //  memory_saver.swift
 //  PushSDK
 //
-//  Created by Дмитрий Буйновский on 15/11/2020.
+//  Created by Kirill Kotov on 11/11/2020.
 //  Copyright © 2020 PUSHER. All rights reserved.
 //
 
