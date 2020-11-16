@@ -24,6 +24,7 @@
 		BAB6CB2C2558FBF0007A4C56 /* push_answer_func.swift in Sources */ = {isa = PBXBuildFile; fileRef = BAB6CB282558FBF0007A4C56 /* push_answer_func.swift */; };
 		BAB6CB2D2558FBF0007A4C56 /* add_functions.swift in Sources */ = {isa = PBXBuildFile; fileRef = BAB6CB292558FBF0007A4C56 /* add_functions.swift */; };
 		BAB6CB302559036A007A4C56 /* parser.swift in Sources */ = {isa = PBXBuildFile; fileRef = BAB6CB2F2559036A007A4C56 /* parser.swift */; };
+		BAC30CCE25623AE300559536 /* notifications.swift in Sources */ = {isa = PBXBuildFile; fileRef = BAC30CCD25623AE300559536 /* notifications.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -59,6 +60,7 @@
 		BAB6CB282558FBF0007A4C56 /* push_answer_func.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = push_answer_func.swift; sourceTree = "<group>"; };
 		BAB6CB292558FBF0007A4C56 /* add_functions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = add_functions.swift; sourceTree = "<group>"; };
 		BAB6CB2F2559036A007A4C56 /* parser.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = parser.swift; sourceTree = "<group>"; };
+		BAC30CCD25623AE300559536 /* notifications.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = notifications.swift; sourceTree = "<group>"; };
 		DB23670992AE5E80D58C36B9 /* Pods-PushSDK.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-PushSDK.debug.xcconfig"; path = "Target Support Files/Pods-PushSDK/Pods-PushSDK.debug.xcconfig"; sourceTree = "<group>"; };
 		FC2F1AA721CE7964E04010E6 /* Pods-PushSDK.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-PushSDK.release.xcconfig"; path = "Target Support Files/Pods-PushSDK/Pods-PushSDK.release.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -173,6 +175,7 @@
 			children = (
 				BAB6CB2F2559036A007A4C56 /* parser.swift */,
 				BA3B7E0625618B6C009658E3 /* memory_saver.swift */,
+				BAC30CCD25623AE300559536 /* notifications.swift */,
 			);
 			path = core;
 			sourceTree = "<group>";
@@ -366,6 +369,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				BAC30CCE25623AE300559536 /* notifications.swift in Sources */,
 				BAB6CB302559036A007A4C56 /* parser.swift in Sources */,
 				BAB6CB2A2558FBF0007A4C56 /* json_parser.swift in Sources */,
 				BA3B7E0725618B6C009658E3 /* memory_saver.swift in Sources */,

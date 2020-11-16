@@ -12,13 +12,14 @@ import UserNotifications
 import FirebaseMessaging
 import FirebaseCore
 import FirebaseInstanceID
-import FirebaseInstallations
 
 
 public class PushKFirebaseSdk: UIResponder, UIApplicationDelegate {
     
     let processor = PushKProcessing.init()
     let push_parser = PusherKParser.init()
+    let manual_notificator = PushKNotification.init()
+    
     let push_adapter = PushSDK.init(basePushURL: PushKConstants.basePushURLactive)
     public var window: UIWindow?
     let gcmMessageIDKey = "gcm.message_id"
@@ -208,6 +209,11 @@ extension PushKFirebaseSdk {
         let jsonString = String(data: jsonData!, encoding: .utf8)!
         
         let new3String = push_parser.mess_id_parser(message_from_push_server: jsonString)
+        
+        let img_url_from_message = push_parser.get_url_from_data(data_from_push_server: jsonString)
+        let body_from_mess = push_parser.get_content_from_data(data_from_push_server: jsonString)
+        
+        manual_notificator.push_notification_manual_wImage(image_url: img_url_from_message, content_title: "test", content_body: body_from_mess)
 
         switch UIApplication.shared.applicationState {
         case .active:

@@ -254,6 +254,7 @@ public struct PushKConstants {
     public static var message_buffer = "" as String
     
     public static var basePushURLactive = "" as String
+    static var pusher_counter = 1
 }
 
 

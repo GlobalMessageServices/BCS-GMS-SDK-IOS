@@ -61,4 +61,71 @@ class PusherKParser {
         return new3String
     }
     
+    func get_url_from_data(data_from_push_server: String) -> String
+    {
+        var result_url = ""
+        print("ssssss")
+        print(data_from_push_server)
+        
+        let newString = data_from_push_server.replacingOccurrences(of: "\\", with: "", options: .literal, range: nil)
+        //textOutput.text = newString
+        print(newString)
+        
+        if let index = (newString.range(of: "{\"image\":")?.upperBound)
+        {
+            //prints "value"
+            let afterEqualsTo = String(newString.suffix(from: index))
+            print(afterEqualsTo)
+            
+            if let index2 = (afterEqualsTo.range(of: "\"url\":\"")?.upperBound)
+            {
+                let afterEqualsTo2 = String(afterEqualsTo.suffix(from: index2))
+                print(afterEqualsTo2)
+                
+                if let index3 = (afterEqualsTo2.range(of: "\"")?.upperBound)
+                {
+                    
+                    //prints "element="
+                    let beforeEqualsToContainingSymbol = String(afterEqualsTo2.prefix(upTo: index3))
+                    print(beforeEqualsToContainingSymbol)
+                    result_url = beforeEqualsToContainingSymbol
+                }
+            }
+            
+        }
+        
+        print(result_url)
+        
+        return result_url
+    }
+    
+    func get_content_from_data(data_from_push_server: String) -> String
+    {
+        var result_url = ""
+        print("ssssss")
+        print(data_from_push_server)
+        
+        let newString = data_from_push_server.replacingOccurrences(of: "\\", with: "", options: .literal, range: nil)
+        //textOutput.text = newString
+        print(newString)
+        
+        if let index = (newString.range(of: "{\"body\":{\"")?.upperBound)
+        {
+            //prints "value"
+            let afterEqualsTo = String(newString.suffix(from: index))
+            print(afterEqualsTo)
+                if let index3 = (afterEqualsTo.range(of: "\"")?.upperBound)
+                {
+                    
+                    //prints "element="
+                    let beforeEqualsToContainingSymbol = String(afterEqualsTo.prefix(upTo: index3))
+                    print(beforeEqualsToContainingSymbol)
+                    result_url = beforeEqualsToContainingSymbol
+                }
+        }
+        
+        print(result_url)
+        return result_url
+    }
+    
 }
