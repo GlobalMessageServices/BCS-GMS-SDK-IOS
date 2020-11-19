@@ -60,6 +60,8 @@ class AnswParser {
         }
     }
     
+
+    
     func updateregistrationJParse(str_resp: String) -> UpdateRegJsonParse
     {
         struct RegisterUpdate: Decodable {
@@ -169,6 +171,8 @@ class AnswParser {
             var lastTime: Int?=nil
             var messages: [PushKMessageListParse]
         }
+        
+        
         
         guard let jsonData = str_resp.data(using: .utf8) else { return MessagesListResponse(limitDays: 0, limitMessages: 0, lastTime: 0, messages: [])}
 

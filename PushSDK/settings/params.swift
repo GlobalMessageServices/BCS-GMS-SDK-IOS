@@ -142,6 +142,7 @@ public struct MessagesListResponse {
     public func toString() -> String {
         var answ_result = "MessagesListResponse(limitDays: \(limitDays ?? 0), limitMessages: \(limitMessages ?? 0), lastTime: \(lastTime ?? 0), messages: "
         var ans_mess = ""
+        if (messages.count != 0) {
         for h in messages {
             let current_str = h.toString()
             if ans_mess == "" {
@@ -153,6 +154,12 @@ public struct MessagesListResponse {
         }
         ans_mess = ans_mess + "]"
         answ_result = answ_result + ans_mess + ")"
+            }
+            
+        else {
+            answ_result = answ_result + "[])"
+        }
+        
         return answ_result
     }
 }
@@ -233,7 +240,8 @@ public struct PushKConstants {
     
     
     let kOSType = "ios"
-    static let sdkVersion = "1.0.0.14"
+    static let serverSdkVersion = "2.3"
+    static let sdkVersion = "1.0.0.20"
     static let dev_os_Version = UIDevice.current.systemVersion
     static let kDeviceType = "\(UIDevice.current.model)"
     static let kDeviceType2 = "\(UIDevice.current.batteryLevel)"

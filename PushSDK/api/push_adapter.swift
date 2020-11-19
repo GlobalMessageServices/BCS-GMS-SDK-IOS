@@ -385,9 +385,22 @@ class PushKAPI {
             let session = URLSession(configuration: configuration)
             let semaphore4 = DispatchSemaphore(value: 0)
             
-            let escaped_utc = String(utc_time).addingPercentEncoding(withAllowedCharacters: CharacterSet.urlQueryAllowed)
-            
-        let urlString = NSString(format: "\(PushKConstants.platform_branch_active.url_Http_Mess_history)\(String(describing: escaped_utc))" as NSString);
+            //let escaped_utc = String(utc_time).addingPercentEncoding(withAllowedCharacters: CharacterSet.urlQueryAllowed)
+        
+            let timeInterval =  NSDate().timeIntervalSince1970
+            let timet = Int(round(timeInterval) as Double)
+        
+            PushKConstants.logger.debug("Generated Timestamp: \(timet)")
+            let auth_token = X_Push_Auth_Token + ":" + String(timet)
+            let sha256_auth_token = auth_token.sha256()
+        
+            PushKConstants.logger.debug("Generated sha256_auth_token: \(sha256_auth_token)")
+        
+            let timestampForServerUrl = timet - utc_time
+        
+        
+            let urlString = NSString(format: "\(PushKConstants.platform_branch_active.url_Http_Mess_history)\(String(timestampForServerUrl))" as NSString);
+        
             PushKConstants.logger.debug("push_message_get_history: \(procedure_name) url string is \(urlString)")
             
             let request : NSMutableURLRequest = NSMutableURLRequest()
@@ -402,10 +415,7 @@ class PushKAPI {
             //request.addValue("1", forHTTPHeaderField: "X-Hyber-App-Fingerprint")
             
             
-            let timeInterval =  NSDate().timeIntervalSince1970
-            let timet = Int(round(timeInterval) as Double)
-            let auth_token = X_Push_Auth_Token + ":" + String(timet)
-            let sha256_auth_token = auth_token.sha256()
+
             
             PushKConstants.logger.debug("\(procedure_name) request X-Hyber-Timestamp is \(String(timet))")
             request.addValue(String(timet), forHTTPHeaderField: "X-Hyber-Timestamp")

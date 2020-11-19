@@ -17,30 +17,30 @@ class PusherKParser {
         if (branchUrl.last == "/")
         {
             PushKConstants.platform_branch_active = PushSdkParametersPublic.BranchStructObj(
-                url_Http_Update: branchUrl + method_paths.url_Http_Update,
-                url_Http_Registration: branchUrl + method_paths.url_Http_Registration,
-                url_Http_Revoke: branchUrl + method_paths.url_Http_Revoke,
-                url_Http_Device_getall: branchUrl + method_paths.url_Http_Device_getall,
-                url_Http_Mess_callback: branchUrl + method_paths.url_Http_Mess_callback,
-                url_Http_Mess_dr: branchUrl + method_paths.url_Http_Mess_dr,
-                push_url_mess_queue: branchUrl + method_paths.push_url_mess_queue,
-                url_Http_Mess_history: branchUrl + method_paths.url_Http_Mess_history)
+                url_Http_Update: branchUrl + PushKConstants.serverSdkVersion + "/" + method_paths.url_Http_Update,
+                url_Http_Registration: branchUrl + PushKConstants.serverSdkVersion + "/" + method_paths.url_Http_Registration,
+                url_Http_Revoke: branchUrl + PushKConstants.serverSdkVersion + "/" + method_paths.url_Http_Revoke,
+                url_Http_Device_getall: branchUrl + PushKConstants.serverSdkVersion + "/" + method_paths.url_Http_Device_getall,
+                url_Http_Mess_callback: branchUrl + PushKConstants.serverSdkVersion + "/" + method_paths.url_Http_Mess_callback,
+                url_Http_Mess_dr: branchUrl + PushKConstants.serverSdkVersion + "/" + method_paths.url_Http_Mess_dr,
+                push_url_mess_queue: branchUrl + PushKConstants.serverSdkVersion + "/" + method_paths.push_url_mess_queue,
+                url_Http_Mess_history: branchUrl + PushKConstants.serverSdkVersion + "/" + method_paths.url_Http_Mess_history)
         }
         else
         {
             PushKConstants.platform_branch_active = PushSdkParametersPublic.BranchStructObj(
-                url_Http_Update: branchUrl + "/" + method_paths.url_Http_Update,
-                url_Http_Registration: branchUrl + "/" + method_paths.url_Http_Registration,
-                url_Http_Revoke: branchUrl + "/" + method_paths.url_Http_Revoke,
-                url_Http_Device_getall: branchUrl + "/" + method_paths.url_Http_Device_getall,
-                url_Http_Mess_callback: branchUrl + "/" + method_paths.url_Http_Mess_callback,
-                url_Http_Mess_dr: branchUrl + "/" + method_paths.url_Http_Mess_dr,
-                push_url_mess_queue: branchUrl + "/" + method_paths.push_url_mess_queue,
-                url_Http_Mess_history: branchUrl + "/" + method_paths.url_Http_Mess_history)
+                url_Http_Update: branchUrl + "/" + PushKConstants.serverSdkVersion + "/" + method_paths.url_Http_Update,
+                url_Http_Registration: branchUrl + "/" + PushKConstants.serverSdkVersion + "/" + method_paths.url_Http_Registration,
+                url_Http_Revoke: branchUrl + "/" + PushKConstants.serverSdkVersion + "/" + method_paths.url_Http_Revoke,
+                url_Http_Device_getall: branchUrl + "/" + PushKConstants.serverSdkVersion + "/" + method_paths.url_Http_Device_getall,
+                url_Http_Mess_callback: branchUrl + "/" + PushKConstants.serverSdkVersion + "/" + method_paths.url_Http_Mess_callback,
+                url_Http_Mess_dr: branchUrl + "/" + PushKConstants.serverSdkVersion + "/" + method_paths.url_Http_Mess_dr,
+                push_url_mess_queue: branchUrl + "/" + PushKConstants.serverSdkVersion + "/" + method_paths.push_url_mess_queue,
+                url_Http_Mess_history: branchUrl + "/" + PushKConstants.serverSdkVersion + "/" + method_paths.url_Http_Mess_history)
         }
     }
     
-    func mess_id_parser(message_from_push_server: String) -> String
+    public func mess_id_parser(message_from_push_server: String) -> String
     {
         
         let newString = message_from_push_server.replacingOccurrences(of: "\\", with: "", options: .literal, range: nil)
@@ -61,7 +61,7 @@ class PusherKParser {
         return new3String
     }
     
-    func get_url_from_data(data_from_push_server: String) -> String
+    public func get_url_from_data(data_from_push_server: String) -> String
     {
         var result_url = ""
         print("ssssss")
@@ -71,7 +71,7 @@ class PusherKParser {
         //textOutput.text = newString
         print(newString)
         
-        if let index = (newString.range(of: "{\"image\":")?.upperBound)
+        if let index = (newString.range(of: "\"image\":")?.upperBound)
         {
             //prints "value"
             let afterEqualsTo = String(newString.suffix(from: index))
@@ -99,7 +99,7 @@ class PusherKParser {
         return result_url
     }
     
-    func get_content_from_data(data_from_push_server: String) -> String
+    public func get_content_from_data(data_from_push_server: String) -> String
     {
         var result_url = ""
         print("ssssss")
@@ -109,7 +109,7 @@ class PusherKParser {
         //textOutput.text = newString
         print(newString)
         
-        if let index = (newString.range(of: "{\"body\":{\"")?.upperBound)
+        if let index = (newString.range(of: "\"body\":\"")?.upperBound)
         {
             //prints "value"
             let afterEqualsTo = String(newString.suffix(from: index))
@@ -127,5 +127,6 @@ class PusherKParser {
         print(result_url)
         return result_url
     }
+    
     
 }

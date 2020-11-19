@@ -100,7 +100,14 @@ class PushSDKTests: XCTestCase {
     
     func testParser()  {
         parser_class.urls_initialization(branchUrl: "https://test/", method_paths: PushSdkParametersPublic.branchMasterValue)
-        
+    }
+    
+    func testGetInfo() {
+        let appVersion = Bundle.main.infoDictionary?["CFBundleShortVersionString"] as? String
+        print(appVersion)
+        let object = NSStringFromClass(PushSDK.self) as NSString
+        let module = object.components(separatedBy: ".").first!
+        print(module)
     }
 
 
