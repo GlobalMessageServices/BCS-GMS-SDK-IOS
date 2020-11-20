@@ -198,5 +198,74 @@ class AnswParser {
     }
     
     
+    func messageIncomingJson(str_resp: String) -> MessagesResponseStr
+    {
+        
+        struct ImageResponseParse: Decodable {
+            enum Category: String, Decodable {
+                case swift, combine, debugging, xcode
+            }
+            var url: String?=nil
+        }
+        
+        struct ButtonResponseParse: Decodable {
+            enum Category: String, Decodable {
+                case swift, combine, debugging, xcode
+            }
+            var text: String?=nil
+            var url: String?=nil
+        }
+        
+        struct PushKMessageListParse: Decodable {
+            enum Category: String, Decodable {
+                case swift, combine, debugging, xcode
+            }
+            var phone: String?=nil
+            var messageId: String?=nil
+            var title: String?=nil
+            var body: String?=nil
+            var image: ImageResponseParse?=nil
+            var button: ButtonResponseParse?=nil
+            var time: String?=nil
+            var partner: String?=nil
+        }
+        
+        guard let jsonData = str_resp.data(using: .utf8) else { return MessagesResponseStr(phone: "",
+            messageId: "",
+            title: "",
+            body: "",
+            image: nil,
+            button: nil,
+            time: nil,
+            partner: nil)}
+
+        do {
+            let parsedJson: PushKMessageListParse = try JSONDecoder().decode(PushKMessageListParse.self, from: jsonData)
+            
+            
+            let res = MessagesResponseStr.init(phone: parsedJson.phone,
+                                               messageId: parsedJson.messageId,
+                                               title: parsedJson.title,
+                                               body: parsedJson.body,
+                                               image: ImageResponse.init(url: parsedJson.image?.url),
+                                               button: ButtonResponse.init(text: parsedJson.button?.text, url: parsedJson.button?.url),
+                                               time: parsedJson.time,
+                                               partner: parsedJson.partner)
+            return res
+        } catch {
+            //handle error
+            let res = MessagesResponseStr.init(phone: "",
+                                               messageId: "",
+                                               title: "",
+                                               body: "",
+                                               image: nil,
+                                               button: nil,
+                                               time: nil,
+                                               partner: nil)
+            return res
+        }
+    }
+    
+    
 }
 

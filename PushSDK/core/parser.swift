@@ -9,11 +9,13 @@
 import Foundation
 
 
-class PusherKParser {
+public class PusherKParser {
+    
+    public init() {}
     
     let processor = PushKProcessing.init()
     
-    func urls_initialization(branchUrl: String, method_paths: PushSdkParametersPublic.BranchStructObj) {
+    public func urls_initialization(branchUrl: String, method_paths: PushSdkParametersPublic.BranchStructObj) {
         if (branchUrl.last == "/")
         {
             PushKConstants.platform_branch_active = PushSdkParametersPublic.BranchStructObj(
@@ -50,8 +52,8 @@ class PusherKParser {
         let deviceid_func = self.processor.matches(for: "\"messageId\":\"(.{4,9}-.{3,9}-.{3,9}-.{3,9}-.{4,15})\"", in: newString)
         print(deviceid_func)
         
-        let jsonData2 = try? JSONSerialization.data(withJSONObject: deviceid_func, options: [])
-        let jsonString2 = String(data: jsonData2!, encoding: .utf8)!
+        guard let jsonData2 = try? JSONSerialization.data(withJSONObject: deviceid_func, options: []) else { return "" }
+        let jsonString2 = String(data: jsonData2, encoding: .utf8) ?? ""
         let new1String = String(jsonString2).replacingOccurrences(of: "\\", with: "", options: .literal, range: nil)
         print(new1String)
         

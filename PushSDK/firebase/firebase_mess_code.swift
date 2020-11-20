@@ -12,7 +12,6 @@ import UserNotifications
 import FirebaseMessaging
 import FirebaseCore
 import FirebaseInstanceID
-import FirebaseInstallations
 
 
 public class PushKFirebaseSdk: UIResponder, UIApplicationDelegate {
@@ -20,12 +19,13 @@ public class PushKFirebaseSdk: UIResponder, UIApplicationDelegate {
     let processor = PushKProcessing.init()
     let push_parser = PusherKParser.init()
     let manual_notificator = PushKNotification.init()
+    let answer_adapter = AnswParser.init()
     
     let push_adapter = PushSDK.init(basePushURL: PushKConstants.basePushURLactive)
     public var window: UIWindow?
     let gcmMessageIDKey = "gcm.message_id"
     let mySpecialNotificationKey = "com.hyber.specialNotificationKey"
-    @IBOutlet weak var sentNotificationLabel: UILabel!
+    @IBOutlet weak var sentNotificationLabel: UILabel?
     
     public func registerForPushNotifications() {
         UNUserNotificationCenter.current()
@@ -58,13 +58,12 @@ public class PushKFirebaseSdk: UIResponder, UIApplicationDelegate {
         //Solicit permission from user to receive notifications
         UNUserNotificationCenter.current().requestAuthorization(options: authOptions) { (_, error) in
             guard error == nil else{
-                PushKConstants.logger.debug(String(error!.localizedDescription))
+                PushKConstants.logger.debug(String(error?.localizedDescription ?? ""))
                 return
             }
         }
         
         //get application instance ID
-        /*
         InstanceID.instanceID().instanceID { (result, error) in
             if let error = error {
                 print("Error fetching remote instance ID: \(error)")
@@ -75,9 +74,9 @@ public class PushKFirebaseSdk: UIResponder, UIApplicationDelegate {
                 print("Remote instance ID token: \(result.token)")
             }
         }
- */
+ 
 
-        
+            /*
         Installations.installations().authTokenForcingRefresh(true, completion: { (token, error) in
             if let error = error {
                 PushKConstants.logger.debug("Error fetching remote instance ID: \(error)")
@@ -89,20 +88,20 @@ public class PushKFirebaseSdk: UIResponder, UIApplicationDelegate {
             UserDefaults.standard.synchronize()
             PushKConstants.logger.debug("Remote instance ID token: \(token.authToken)")
         })
+ */
     }
     
     internal func firebase_update_token() -> String {
-        Installations.installations().authTokenForcingRefresh(true, completion: { (token, error) in
+        InstanceID.instanceID().instanceID { (result, error) in
             if let error = error {
-                PushKConstants.logger.debug("Error fetching remote instance ID: \(error)")
-                return
+                print("Error fetching remote instance ID: \(error)")
+            } else if let result = result {
+                UserDefaults.standard.set(result.token, forKey: "firebase_registration_token")
+                PushKConstants.firebase_registration_token = result.token
+                UserDefaults.standard.synchronize()
+                print("Remote instance ID token: \(result.token)")
             }
-            guard let token = token else { return }
-            UserDefaults.standard.set(token.authToken, forKey: "firebase_registration_token")
-            PushKConstants.firebase_registration_token = token.authToken
-            UserDefaults.standard.synchronize()
-            PushKConstants.logger.debug("Remote instance ID token: \(token.authToken)")
-        })
+        }
         
         return PushKConstants.firebase_registration_token ?? ""
     }
@@ -146,10 +145,16 @@ public class PushKFirebaseSdk: UIResponder, UIApplicationDelegate {
         // Print full message.
         PushKConstants.logger.debug("userInfo: \(userInfo)")
         
+        
+        
         //here  is delivery report
-        let jsonData = try? JSONSerialization.data(withJSONObject: userInfo, options: [])
-        let jsonString = String(data: jsonData!, encoding: .utf8)!
-        let newString = String(jsonString).replacingOccurrences(of: "\\", with: "", options: .literal, range: nil)
+        guard let jsonData = try? JSONSerialization.data(withJSONObject: userInfo, options: []) else { return  }
+        let jsonString = String(data: jsonData, encoding: .utf8)
+        let parsed_message = answer_adapter.messageIncomingJson(str_resp: jsonString ?? "")
+        print(parsed_message)
+        print("test another")
+        
+        let newString = String(jsonString ?? "").replacingOccurrences(of: "\\", with: "", options: .literal, range: nil)
         //textOutput.text = newString
         PushKConstants.logger.debug("newString: \(newString)")
         PushKConstants.logger.debug("findProcessor")
@@ -157,13 +162,13 @@ public class PushKFirebaseSdk: UIResponder, UIApplicationDelegate {
         let deviceid_func = self.processor.matches(for: "\"messageId\":\"(.{4,9}-.{3,9}-.{3,9}-.{3,9}-.{4,15})\"", in: newString)
         PushKConstants.logger.debug("deviceid_func: \(deviceid_func)")
         
-        let jsonData2 = try? JSONSerialization.data(withJSONObject: deviceid_func, options: [])
+        guard let jsonData2 = (try? JSONSerialization.data(withJSONObject: deviceid_func, options: [])) else { return  }
         
-        let jsonString2 = String(data: jsonData2!, encoding: .utf8)!
+        let jsonString2 = String(data: jsonData2, encoding: .utf8)
         
-        PushKConstants.message_buffer = jsonString2
+        PushKConstants.message_buffer = jsonString2 ?? ""
         
-        let new3String = push_parser.mess_id_parser(message_from_push_server: jsonString)
+        let new3String = push_parser.mess_id_parser(message_from_push_server: jsonString ?? "")
         
         PushKConstants.logger.debug("new3String: \(new3String)")
         
@@ -220,15 +225,15 @@ extension PushKFirebaseSdk {
     
     public func fb_remote_messaging(remoteMessage: NSDictionary) {
         
-        let fdf = remoteMessage as NSDictionary as! [String: AnyObject]
+        let fdf = remoteMessage as NSDictionary as? [String: AnyObject]
         
-        let jsonData = try? JSONSerialization.data(withJSONObject: fdf, options: [])
-        let jsonString = String(data: jsonData!, encoding: .utf8)!
+        guard let jsonData = (try? JSONSerialization.data(withJSONObject: fdf ?? "", options: [])) else { return  }
+        let jsonString = String(data: jsonData, encoding: .utf8)
         
-        let new3String = push_parser.mess_id_parser(message_from_push_server: jsonString)
+        let new3String = push_parser.mess_id_parser(message_from_push_server: jsonString ?? "")
         
-        let img_url_from_message = push_parser.get_url_from_data(data_from_push_server: jsonString)
-        let body_from_mess = push_parser.get_content_from_data(data_from_push_server: jsonString)
+        let img_url_from_message = push_parser.get_url_from_data(data_from_push_server: jsonString ?? "")
+        let body_from_mess = push_parser.get_content_from_data(data_from_push_server: jsonString ?? "")
         
         manual_notificator.push_notification_manual_wImage(image_url: img_url_from_message, content_title: "test", content_body: body_from_mess)
 

@@ -41,7 +41,7 @@ public class PushKProcessing {
             let results = regex.matches(in: text,
                                         range: NSRange(text.startIndex..., in: text))
             let resp = results.map {
-                String(text[Range($0.range, in: text)!])
+                String(text[Range($0.range, in: text)! ])
             }
             return resp
         } catch let error {

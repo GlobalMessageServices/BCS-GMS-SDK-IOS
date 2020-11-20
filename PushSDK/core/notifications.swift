@@ -10,9 +10,11 @@ import Foundation
 import UserNotifications
 
 
-class PushKNotification {
+public class PushKNotification {
     
-    func push_notification_manual_wImage(image_url: String = "",
+    public init() {}
+    
+    public func push_notification_manual_wImage(image_url: String = "",
                 time_delay: TimeInterval = 0.1,
                 content_title: String = "",
                 content_subtitle: String = "",

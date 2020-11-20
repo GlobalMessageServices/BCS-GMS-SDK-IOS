@@ -238,13 +238,6 @@ public class PushSDK {
                 
                 let dev_list_all = getdev.body
                 
-                /*
-                 let jsonData2 = try? JSONSerialization.data(withJSONObject: string1, options: [])
-                 let jsonString2 = String(data: jsonData2!, encoding: .utf8)!
-                 let string2 = String(jsonString2).replacingOccurrences(of: "\\", with: "", options: .literal, range: nil)
-                 print(string2)
-                 */
-                
                 for jj in dev_list_all?.devices ?? []
                 {
                     listdev.append(String(jj.id))
