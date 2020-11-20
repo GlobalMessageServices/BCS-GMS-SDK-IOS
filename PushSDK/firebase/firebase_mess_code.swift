@@ -227,8 +227,14 @@ extension PushKFirebaseSdk {
         
         let fdf = remoteMessage as NSDictionary as? [String: AnyObject]
         
+        
+        
         guard let jsonData = (try? JSONSerialization.data(withJSONObject: fdf ?? "", options: [])) else { return  }
         let jsonString = String(data: jsonData, encoding: .utf8)
+        
+        let parsed_message = answer_adapter.messageIncomingJson(str_resp: jsonString ?? "")
+        print("fb_remote_messaging  mmmmmmm")
+        print(parsed_message)
         
         let new3String = push_parser.mess_id_parser(message_from_push_server: jsonString ?? "")
         

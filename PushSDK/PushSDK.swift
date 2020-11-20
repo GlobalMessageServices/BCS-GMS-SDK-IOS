@@ -15,7 +15,7 @@ import SwiftyBeaver
 //import CoreData
 //import FirebaseCore
 //import FirebaseMessaging
-//import FirebaseInstanceID
+import FirebaseInstanceID
 
 //coredata
 //https://medium.com/@ankurvekariya/core-data-crud-with-swift-4-2-for-beginners-40efe4e7d1cc
@@ -129,7 +129,7 @@ public class PushSDK {
         
         PushKConstants.logger.debug("Used constants: registrationstatus: \(PushKConstants.registrationstatus)")
         
-        let x_push_sesion_id = fb_init_adapter.firebase_update_token()
+        let x_push_sesion_id = self.firebase_update_token()
         
         if (PushKConstants.registrationstatus==false){
             if (user_phone != "" && x_push_sesion_id != "" && X_Push_Client_API_Key != "" ) {
@@ -284,6 +284,22 @@ public class PushSDK {
             else {
                 return answer_b.general_answer2(resp_code: 704, body_json: "error", description: "Not registered")
             }
+    }
+    
+    
+    internal func firebase_update_token() -> String {
+        InstanceID.instanceID().instanceID { (result, error) in
+            if let error = error {
+                print("Error fetching remote instance ID: \(error)")
+            } else if let result = result {
+                UserDefaults.standard.set(result.token, forKey: "firebase_registration_token")
+                PushKConstants.firebase_registration_token = result.token
+                UserDefaults.standard.synchronize()
+                print("Remote instance ID token: \(result.token)")
+            }
+        }
+        
+        return PushKConstants.firebase_registration_token ?? ""
     }
 }
 
