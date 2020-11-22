@@ -150,17 +150,22 @@ public class PushKFirebaseSdk: UIResponder, UIApplicationDelegate {
         //here  is delivery report
         guard let jsonData = try? JSONSerialization.data(withJSONObject: userInfo, options: []) else { return  }
         let jsonString = String(data: jsonData, encoding: .utf8)
-        let parsed_message = answer_adapter.messageIncomingJson(str_resp: jsonString ?? "")
+        let newString = String(jsonString ?? "").replacingOccurrences(of: "\\", with: "", options: .literal, range: nil)
+        let parsed_message = answer_adapter.messageIncomingJson(str_resp: newString)
         print(parsed_message)
         print("test another")
         
-        let newString = String(jsonString ?? "").replacingOccurrences(of: "\\", with: "", options: .literal, range: nil)
+        manual_notificator.push_notification_manual_wImage(image_url: String(parsed_message.message.image?.url ?? ""), content_title: String(parsed_message.message.title ?? ""), content_body: String(parsed_message.message.body ?? ""))
+        
+        
         //textOutput.text = newString
         PushKConstants.logger.debug("newString: \(newString)")
         PushKConstants.logger.debug("findProcessor")
 
         let deviceid_func = self.processor.matches(for: "\"messageId\":\"(.{4,9}-.{3,9}-.{3,9}-.{3,9}-.{4,15})\"", in: newString)
         PushKConstants.logger.debug("deviceid_func: \(deviceid_func)")
+        
+        
         
         guard let jsonData2 = (try? JSONSerialization.data(withJSONObject: deviceid_func, options: [])) else { return  }
         
@@ -263,3 +268,4 @@ extension PushKFirebaseSdk {
         // Note: This callback is fired at each app startup and whenever a new token is generated.
     }
 }
+

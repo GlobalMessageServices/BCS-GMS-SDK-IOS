@@ -20,6 +20,8 @@ public class PushKNotification {
                 content_subtitle: String = "",
                 content_body: String
         ) {
+        PushKConstants.logger.debug("push_notification_manual_wImage input: image_url: \(image_url), time_delay: \(time_delay), content_title: \(content_title), content_subtitle: \(content_subtitle), content_body: \(content_body)")
+        
         let content = UNMutableNotificationContent()
         PushKConstants.pusher_counter += 1
         let ident = PushKConstants.pusher_counter
