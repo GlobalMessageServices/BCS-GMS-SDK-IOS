@@ -198,15 +198,13 @@ class AnswParser {
     }
     
     
-    func messageIncomingJson(str_resp: String) -> MessagesResponseStr
+    
+    func messageIncomingJson(str_resp: String) -> FullFirebaseMessageStr
     {
+        PushKConstants.logger.debug("messageIncomingJson start: str_resp: \(str_resp)")
         
-        struct ImageResponseParse: Decodable {
-            enum Category: String, Decodable {
-                case swift, combine, debugging, xcode
-            }
-            var url: String?=nil
-        }
+        let str_resp_transform = str_resp.replacingOccurrences(of: "\"{", with: "{", options: .literal, range: nil).replacingOccurrences(of: "}\"", with: "}", options: .literal, range: nil)
+        
         
         struct ButtonResponseParse: Decodable {
             enum Category: String, Decodable {
@@ -216,56 +214,91 @@ class AnswParser {
             var url: String?=nil
         }
         
+        struct MessApsData: Decodable {
+            enum Category: String, Decodable {
+                case swift, combine, debugging, xcode
+            }
+            enum CodingKeys: String, CodingKey {
+                    case contentavailable = "content-available"
+                }
+            var contentavailable: String? = ""
+        }
+        
+        struct ImageResponseParse: Decodable {
+            enum Category: String, Decodable {
+                case swift, combine, debugging, xcode
+            }
+            var url: String?=nil
+        }
+        
         struct PushKMessageListParse: Decodable {
             enum Category: String, Decodable {
                 case swift, combine, debugging, xcode
             }
-            var phone: String?=nil
-            var messageId: String?=nil
-            var title: String?=nil
-            var body: String?=nil
             var image: ImageResponseParse?=nil
             var button: ButtonResponseParse?=nil
-            var time: String?=nil
             var partner: String?=nil
+            var phone: String?=nil
+            var messageId: String?=nil
+            var time: String?=nil
+            var body: String?=nil
+            var title: String?=nil
         }
         
-        guard let jsonData = str_resp.data(using: .utf8) else { return MessagesResponseStr(phone: "",
-            messageId: "",
-            title: "",
-            body: "",
-            image: nil,
-            button: nil,
-            time: nil,
-            partner: nil)}
+        struct FullFirebaseMessage: Decodable {
+            enum Category: String, Decodable {
+                case swift, combine, debugging, xcode
+            }
+            enum CodingKeys: String, CodingKey {
+                    case gcmmessageid = "gcm.message_id"
+                    case message = "message"
+                    case googlecsenderid = "google.c.sender.id"
+                    case aps = "aps"
+                }
+            var aps: MessApsData?=nil
+            var googlecsenderid: String? = ""
+            var message: PushKMessageListParse?=nil
+            var gcmmessageid: String? = ""
+        }
 
+        
+        PushKConstants.logger.debug("messageIncomingJson before decoding: str_resp_transform: \(str_resp_transform)")
+        
+        
+        guard let jsonData = str_resp_transform.data(using: .utf8) else { return FullFirebaseMessageStr(aps: MessApsDataStr(contentAvailable: ""), message: MessagesResponseStr(phone: "", messageId: "", title: "", body: "", image: ImageResponse(url: ""), button: ButtonResponse(text: "", url: ""), time: "", partner: ""),googleCSenderId: "",           gcmMessageId: "")}
+        
+        PushKConstants.logger.debug("messageIncomingJson transformed to data")
+        
         do {
-            let parsedJson: PushKMessageListParse = try JSONDecoder().decode(PushKMessageListParse.self, from: jsonData)
+            let parsedJson: FullFirebaseMessage = try JSONDecoder().decode(FullFirebaseMessage.self, from: jsonData)
             
+            PushKConstants.logger.debug("messageIncomingJson parsedJson: \(parsedJson)")
             
-            let res = MessagesResponseStr.init(phone: parsedJson.phone,
-                                               messageId: parsedJson.messageId,
-                                               title: parsedJson.title,
-                                               body: parsedJson.body,
-                                               image: ImageResponse.init(url: parsedJson.image?.url),
-                                               button: ButtonResponse.init(text: parsedJson.button?.text, url: parsedJson.button?.url),
-                                               time: parsedJson.time,
-                                               partner: parsedJson.partner)
+            let elem1: ImageResponse = ImageResponse.init(url: parsedJson.message?.image?.url)
+            let elem2: ButtonResponse = ButtonResponse.init(text: parsedJson.message?.button?.text, url: parsedJson.message?.button?.url)
+            let elem3: MessagesResponseStr = MessagesResponseStr.init(phone: parsedJson.message?.phone, messageId: parsedJson.message?.messageId, title: parsedJson.message?.title, body: parsedJson.message?.body, image: elem1, button: elem2, time: parsedJson.message?.time, partner: parsedJson.message?.partner)
+            
+            let res = FullFirebaseMessageStr.init(aps: MessApsDataStr(contentAvailable: parsedJson.aps?.contentavailable ?? ""),
+                                               message: elem3,
+                                               googleCSenderId: parsedJson.googlecsenderid ?? "",
+                                               gcmMessageId: parsedJson.gcmmessageid ?? "")
+            
+            PushKConstants.logger.debug("messageIncomingJson parsedJson2.message?.body: \(String(parsedJson.message?.body ?? "empty"))")
+            PushKConstants.logger.debug("messageIncomingJson parsedJson2.message?.messageId: \(String(parsedJson.message?.messageId ?? "empty"))")
+            
             return res
         } catch {
             //handle error
-            let res = MessagesResponseStr.init(phone: "",
-                                               messageId: "",
-                                               title: "",
-                                               body: "",
-                                               image: nil,
-                                               button: nil,
-                                               time: nil,
-                                               partner: nil)
+            let res = FullFirebaseMessageStr.init(aps: MessApsDataStr(contentAvailable: ""),
+                                                  message: MessagesResponseStr(phone: "", messageId: "", title: "", body: "", image: ImageResponse(url: ""), button: ButtonResponse(text: "", url: ""), time: "", partner: ""),
+                                                  googleCSenderId: "",
+                                               gcmMessageId: "")
             return res
         }
     }
     
+    
+
     
 }
 

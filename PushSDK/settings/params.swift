@@ -133,6 +133,17 @@ public struct MessagesResponseStr {
     }
 }
 
+public struct MessApsDataStr {
+    var contentAvailable: String
+}
+
+public struct FullFirebaseMessageStr {
+    var aps: MessApsDataStr
+    var message: MessagesResponseStr
+    var googleCSenderId: String
+    var gcmMessageId: String
+}
+
 public struct MessagesListResponse {
     public var limitDays: Int?=nil
     public var limitMessages: Int?=nil
@@ -241,7 +252,7 @@ public struct PushKConstants {
     
     let kOSType = "ios"
     static let serverSdkVersion = "2.3"
-    static let sdkVersion = "1.0.0.20"
+    static let sdkVersion = "1.0.0.23"
     static let dev_os_Version = UIDevice.current.systemVersion
     static let kDeviceType = "\(UIDevice.current.model)"
     static let kDeviceType2 = "\(UIDevice.current.batteryLevel)"
@@ -352,3 +363,4 @@ public extension UIDevice {
     }()
     
 }
+

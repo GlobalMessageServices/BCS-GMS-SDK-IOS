@@ -227,21 +227,15 @@ extension PushKFirebaseSdk {
         
         let fdf = remoteMessage as NSDictionary as? [String: AnyObject]
         
-        
-        
         guard let jsonData = (try? JSONSerialization.data(withJSONObject: fdf ?? "", options: [])) else { return  }
         let jsonString = String(data: jsonData, encoding: .utf8)
         
         let parsed_message = answer_adapter.messageIncomingJson(str_resp: jsonString ?? "")
-        print("fb_remote_messaging  mmmmmmm")
         print(parsed_message)
         
         let new3String = push_parser.mess_id_parser(message_from_push_server: jsonString ?? "")
         
-        let img_url_from_message = push_parser.get_url_from_data(data_from_push_server: jsonString ?? "")
-        let body_from_mess = push_parser.get_content_from_data(data_from_push_server: jsonString ?? "")
-        
-        manual_notificator.push_notification_manual_wImage(image_url: img_url_from_message, content_title: "test", content_body: body_from_mess)
+        manual_notificator.push_notification_manual_wImage(image_url: parsed_message.message.image?.url ?? "", content_title: parsed_message.message.title ?? "", content_body: parsed_message.message.body ?? "")
 
         switch UIApplication.shared.applicationState {
         case .active:
