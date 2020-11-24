@@ -131,14 +131,22 @@ public struct MessagesResponseStr {
 }
 
 public struct MessApsDataStr {
-    var contentAvailable: String
+    public var contentAvailable: String
+    
+    public func toString() -> String{
+        return "MessApsDataStr(contentAvailable: \(contentAvailable)"
+    }
 }
 
 public struct FullFirebaseMessageStr {
-    var aps: MessApsDataStr
-    var message: MessagesResponseStr
-    var googleCSenderId: String
-    var gcmMessageId: String
+    public var aps: MessApsDataStr
+    public var message: MessagesResponseStr
+    public var googleCSenderId: String
+    public var gcmMessageId: String
+    
+    public func toString() -> String {
+        return "FullFirebaseMessageStr(aps: \(aps.toString()), message: \(message.toString()), googleCSenderId: \(googleCSenderId), gcmMessageId: \(gcmMessageId)"
+    }
 }
 
 public struct MessagesListResponse {
@@ -198,6 +206,10 @@ public struct PushKMess {
     public var code: Int
     public var result: String
     public var message: FullFirebaseMessageStr?=nil
+    
+    public func toString() -> String {
+        return "PushKMess(code: \(code), result: \(result), message: \(message?.toString() ?? "nil")"
+    }
 }
 
 public struct BranchStructObj {

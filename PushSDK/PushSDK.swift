@@ -49,7 +49,7 @@ public class PushSDK {
     private let log = SwiftyBeaver.self
     private let parser_class_adapter = PusherKParser.init()
     private let parserJson = PushKAnswParser.init()
-    private let fb_init_adapter = PushKFirebaseSdk.init()
+    //private let fb_init_adapter = PushKFirebaseSdk.init()
     
     public init(
         platform_branch: BranchStructObj = PushSDKVar.branchMasterValue,
