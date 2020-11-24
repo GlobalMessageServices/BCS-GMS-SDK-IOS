@@ -9,17 +9,19 @@
 /* Begin PBXBuildFile section */
 		17353A8116D8B2D722AEAE4E /* Pods_PushSDKTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2E3C3EAD2A52182056F7FD9A /* Pods_PushSDKTests.framework */; };
 		1E0731F77AB2021A620CCA88 /* Pods_PushSDK.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 01DA8B18CC69D8BA318C9153 /* Pods_PushSDK.framework */; };
-		BA3B7E0725618B6C009658E3 /* memory_saver.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA3B7E0625618B6C009658E3 /* memory_saver.swift */; };
 		BA48A2DC255FF77A00748CAA /* Podfile in Resources */ = {isa = PBXBuildFile; fileRef = BA48A2DB255FF77A00748CAA /* Podfile */; };
 		BA48A2DE2560895500748CAA /* PushSDK.podspec in Resources */ = {isa = PBXBuildFile; fileRef = BA48A2DD2560895500748CAA /* PushSDK.podspec */; };
-		BA48A2E22560B5E000748CAA /* firebase_mess_code.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA48A2E12560B5E000748CAA /* firebase_mess_code.swift */; };
+		BA7283C8256D74BC00509E06 /* DataStructures.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA7283C7256D74BC00509E06 /* DataStructures.swift */; };
+		BA7283CD256D771200509E06 /* Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA7283CC256D771200509E06 /* Extensions.swift */; };
+		BA7283D3256D7C8B00509E06 /* MemorySaver.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA7283D2256D7C8B00509E06 /* MemorySaver.swift */; };
+		BA7283D9256D811F00509E06 /* FirebaseMessCode.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA7283D8256D811F00509E06 /* FirebaseMessCode.swift */; };
+		BA7283DF256D820600509E06 /* PushAdapter.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA7283DE256D820600509E06 /* PushAdapter.swift */; };
+		BA7283E3256D825E00509E06 /* JsonParser.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA7283E2256D825E00509E06 /* JsonParser.swift */; };
 		BAB6CB0A2558FA59007A4C56 /* PushSDK.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = BAB6CB002558FA59007A4C56 /* PushSDK.framework */; };
 		BAB6CB0F2558FA59007A4C56 /* PushSDKTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = BAB6CB0E2558FA59007A4C56 /* PushSDKTests.swift */; };
 		BAB6CB112558FA59007A4C56 /* PushSDK.h in Headers */ = {isa = PBXBuildFile; fileRef = BAB6CB032558FA59007A4C56 /* PushSDK.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		BAB6CB1B2558FAD5007A4C56 /* PushSDK.swift in Sources */ = {isa = PBXBuildFile; fileRef = BAB6CB1A2558FAD5007A4C56 /* PushSDK.swift */; };
 		BAB6CB1D2558FAE2007A4C56 /* BridgingHeader.h in Headers */ = {isa = PBXBuildFile; fileRef = BAB6CB1C2558FAE2007A4C56 /* BridgingHeader.h */; };
-		BAB6CB252558FBE8007A4C56 /* push_adapter.swift in Sources */ = {isa = PBXBuildFile; fileRef = BAB6CB242558FBE8007A4C56 /* push_adapter.swift */; };
-		BAB6CB2A2558FBF0007A4C56 /* json_parser.swift in Sources */ = {isa = PBXBuildFile; fileRef = BAB6CB262558FBF0007A4C56 /* json_parser.swift */; };
 		BAB6CB2B2558FBF0007A4C56 /* params.swift in Sources */ = {isa = PBXBuildFile; fileRef = BAB6CB272558FBF0007A4C56 /* params.swift */; };
 		BAB6CB2C2558FBF0007A4C56 /* push_answer_func.swift in Sources */ = {isa = PBXBuildFile; fileRef = BAB6CB282558FBF0007A4C56 /* push_answer_func.swift */; };
 		BAB6CB2D2558FBF0007A4C56 /* add_functions.swift in Sources */ = {isa = PBXBuildFile; fileRef = BAB6CB292558FBF0007A4C56 /* add_functions.swift */; };
@@ -42,10 +44,14 @@
 		04CA99672BD76447A0C03E67 /* Pods-PushSDKTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-PushSDKTests.debug.xcconfig"; path = "Target Support Files/Pods-PushSDKTests/Pods-PushSDKTests.debug.xcconfig"; sourceTree = "<group>"; };
 		2E3C3EAD2A52182056F7FD9A /* Pods_PushSDKTests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_PushSDKTests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		539D81DE5ADFA9DC0A5BC86D /* Pods-PushSDKTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-PushSDKTests.release.xcconfig"; path = "Target Support Files/Pods-PushSDKTests/Pods-PushSDKTests.release.xcconfig"; sourceTree = "<group>"; };
-		BA3B7E0625618B6C009658E3 /* memory_saver.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = memory_saver.swift; sourceTree = "<group>"; };
 		BA48A2DB255FF77A00748CAA /* Podfile */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = Podfile; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.ruby; };
 		BA48A2DD2560895500748CAA /* PushSDK.podspec */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = PushSDK.podspec; sourceTree = "<group>"; };
-		BA48A2E12560B5E000748CAA /* firebase_mess_code.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = firebase_mess_code.swift; sourceTree = "<group>"; };
+		BA7283C7256D74BC00509E06 /* DataStructures.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DataStructures.swift; sourceTree = "<group>"; };
+		BA7283CC256D771200509E06 /* Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Extensions.swift; sourceTree = "<group>"; };
+		BA7283D2256D7C8B00509E06 /* MemorySaver.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MemorySaver.swift; sourceTree = "<group>"; };
+		BA7283D8256D811F00509E06 /* FirebaseMessCode.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FirebaseMessCode.swift; sourceTree = "<group>"; };
+		BA7283DE256D820600509E06 /* PushAdapter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PushAdapter.swift; sourceTree = "<group>"; };
+		BA7283E2256D825E00509E06 /* JsonParser.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JsonParser.swift; sourceTree = "<group>"; };
 		BAB6CB002558FA59007A4C56 /* PushSDK.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = PushSDK.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		BAB6CB032558FA59007A4C56 /* PushSDK.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = PushSDK.h; sourceTree = "<group>"; };
 		BAB6CB042558FA59007A4C56 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
@@ -54,8 +60,6 @@
 		BAB6CB102558FA59007A4C56 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		BAB6CB1A2558FAD5007A4C56 /* PushSDK.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PushSDK.swift; sourceTree = "<group>"; };
 		BAB6CB1C2558FAE2007A4C56 /* BridgingHeader.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BridgingHeader.h; sourceTree = "<group>"; };
-		BAB6CB242558FBE8007A4C56 /* push_adapter.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = push_adapter.swift; sourceTree = "<group>"; };
-		BAB6CB262558FBF0007A4C56 /* json_parser.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = json_parser.swift; sourceTree = "<group>"; };
 		BAB6CB272558FBF0007A4C56 /* params.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = params.swift; sourceTree = "<group>"; };
 		BAB6CB282558FBF0007A4C56 /* push_answer_func.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = push_answer_func.swift; sourceTree = "<group>"; };
 		BAB6CB292558FBF0007A4C56 /* add_functions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = add_functions.swift; sourceTree = "<group>"; };
@@ -100,9 +104,17 @@
 		BA27F02D255FE3D70019EFA2 /* firebase */ = {
 			isa = PBXGroup;
 			children = (
-				BA48A2E12560B5E000748CAA /* firebase_mess_code.swift */,
+				BA7283D8256D811F00509E06 /* FirebaseMessCode.swift */,
 			);
 			path = firebase;
+			sourceTree = "<group>";
+		};
+		BA7283C6256D748100509E06 /* models */ = {
+			isa = PBXGroup;
+			children = (
+				BA7283C7256D74BC00509E06 /* DataStructures.swift */,
+			);
+			path = models;
 			sourceTree = "<group>";
 		};
 		BAB6CAF62558FA59007A4C56 = {
@@ -130,6 +142,7 @@
 		BAB6CB022558FA59007A4C56 /* PushSDK */ = {
 			isa = PBXGroup;
 			children = (
+				BA7283C6256D748100509E06 /* models */,
 				BA27F02D255FE3D70019EFA2 /* firebase */,
 				BAB6CB2E25590354007A4C56 /* core */,
 				BAB6CB232558FB3D007A4C56 /* settings */,
@@ -138,6 +151,7 @@
 				BAB6CB1A2558FAD5007A4C56 /* PushSDK.swift */,
 				BAB6CB032558FA59007A4C56 /* PushSDK.h */,
 				BAB6CB042558FA59007A4C56 /* Info.plist */,
+				BA7283CC256D771200509E06 /* Extensions.swift */,
 			);
 			path = PushSDK;
 			sourceTree = "<group>";
@@ -154,7 +168,7 @@
 		BAB6CB222558FB35007A4C56 /* api */ = {
 			isa = PBXGroup;
 			children = (
-				BAB6CB242558FBE8007A4C56 /* push_adapter.swift */,
+				BA7283DE256D820600509E06 /* PushAdapter.swift */,
 			);
 			path = api;
 			sourceTree = "<group>";
@@ -163,9 +177,9 @@
 			isa = PBXGroup;
 			children = (
 				BAB6CB292558FBF0007A4C56 /* add_functions.swift */,
-				BAB6CB262558FBF0007A4C56 /* json_parser.swift */,
 				BAB6CB272558FBF0007A4C56 /* params.swift */,
 				BAB6CB282558FBF0007A4C56 /* push_answer_func.swift */,
+				BA7283E2256D825E00509E06 /* JsonParser.swift */,
 			);
 			path = settings;
 			sourceTree = "<group>";
@@ -174,8 +188,8 @@
 			isa = PBXGroup;
 			children = (
 				BAB6CB2F2559036A007A4C56 /* parser.swift */,
-				BA3B7E0625618B6C009658E3 /* memory_saver.swift */,
 				BAC30CCD25623AE300559536 /* notifications.swift */,
+				BA7283D2256D7C8B00509E06 /* MemorySaver.swift */,
 			);
 			path = core;
 			sourceTree = "<group>";
@@ -370,15 +384,17 @@
 			buildActionMask = 2147483647;
 			files = (
 				BAC30CCE25623AE300559536 /* notifications.swift in Sources */,
+				BA7283D3256D7C8B00509E06 /* MemorySaver.swift in Sources */,
 				BAB6CB302559036A007A4C56 /* parser.swift in Sources */,
-				BAB6CB2A2558FBF0007A4C56 /* json_parser.swift in Sources */,
-				BA3B7E0725618B6C009658E3 /* memory_saver.swift in Sources */,
 				BAB6CB2C2558FBF0007A4C56 /* push_answer_func.swift in Sources */,
 				BAB6CB1B2558FAD5007A4C56 /* PushSDK.swift in Sources */,
-				BAB6CB252558FBE8007A4C56 /* push_adapter.swift in Sources */,
-				BA48A2E22560B5E000748CAA /* firebase_mess_code.swift in Sources */,
+				BA7283C8256D74BC00509E06 /* DataStructures.swift in Sources */,
+				BA7283CD256D771200509E06 /* Extensions.swift in Sources */,
+				BA7283DF256D820600509E06 /* PushAdapter.swift in Sources */,
 				BAB6CB2B2558FBF0007A4C56 /* params.swift in Sources */,
+				BA7283D9256D811F00509E06 /* FirebaseMessCode.swift in Sources */,
 				BAB6CB2D2558FBF0007A4C56 /* add_functions.swift in Sources */,
+				BA7283E3256D825E00509E06 /* JsonParser.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

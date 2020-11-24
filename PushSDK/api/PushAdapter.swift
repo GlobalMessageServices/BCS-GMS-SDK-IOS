@@ -1,3 +1,4 @@
+
 //
 //  push_adapter.swift
 //  test222
@@ -8,8 +9,6 @@
 
 import Foundation
 import CryptoSwift
-
-//import RetrofireSwift
 
 class PushKAPI {
     
@@ -124,7 +123,7 @@ class PushKAPI {
                     genAnsw.token = resp_register_parsed.token ?? "empty_token"
                     genAnsw.userId = String(resp_register_parsed.userId ?? 0)
 
-                    self.push_database_adapter.save_data_after_register_ok(
+                    self.push_database_adapter.saveDataAfterRegisterOk(
                         user_Phone: user_Phone,
                         token: resp_register_parsed.token ?? "empty_token",
                         device_id: resp_register_parsed.deviceId ?? "unknown",
@@ -913,8 +912,6 @@ class PushKAPI {
             request.addValue(sha256_auth_token, forHTTPHeaderField: "X-Hyber-Auth-Token")
             PushKConstants.logger.debug(request.allHTTPHeaderFields as Any)
             PushKConstants.logger.debug(request.httpBody as Any)
-            
-            
         do {
             request.httpBody  = try JSONSerialization.data(withJSONObject: params, options: [])
         } catch {

@@ -16,7 +16,7 @@ Pod::Spec.new do |spec|
   #
 
   spec.name         = "PushSDK"
-  spec.version      = "1.0.0.24"
+  spec.version      = "1.0.0.25"
   spec.summary      = "SDK for sending push messages to iOS devices."
 
   # This description is used to generate tags and improve search results.
@@ -89,7 +89,7 @@ Pod::Spec.new do |spec|
   #  Not including the public_header_files will make all headers public.
   #
 
-  spec.source_files  = "Classes", "Classes/**/*.{h,m}", "PushSDK/*.{h,m}", "PushSDK", "PushSDK/api", "PushSDK/core", "PushSDK/settings", "PushSDK/firebase"
+  spec.source_files  = "Classes", "Classes/**/*.{h,m}", "PushSDK/*.{h,m}", "PushSDK", "PushSDK/api", "PushSDK/core", "PushSDK/settings", "PushSDK/firebase", "PushSDK/models"
   spec.exclude_files = "Classes/Exclude"
 
   # spec.public_header_files = "Classes/**/*.h"

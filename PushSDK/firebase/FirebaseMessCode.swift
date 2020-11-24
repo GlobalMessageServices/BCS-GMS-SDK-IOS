@@ -1,3 +1,4 @@
+
 //
 //  firebase_message_code.swift
 //  PushSDK
@@ -16,10 +17,10 @@ import FirebaseInstanceID
 
 public class PushKFirebaseSdk: UIResponder, UIApplicationDelegate {
     
-    let processor = PushKProcessing.init()
-    let push_parser = PusherKParser.init()
-    let manual_notificator = PushKNotification.init()
-    let answer_adapter = AnswParser.init()
+    let processorPush = PushKProcessing.init()
+    let pushParser = PusherKParser.init()
+    let manualNotificator = PushKNotification.init()
+    let answerAdapter = AnswParser.init()
     
     let push_adapter = PushSDK.init(basePushURL: PushKConstants.basePushURLactive)
     public var window: UIWindow?
@@ -66,12 +67,12 @@ public class PushKFirebaseSdk: UIResponder, UIApplicationDelegate {
         //get application instance ID
         InstanceID.instanceID().instanceID { (result, error) in
             if let error = error {
-                print("Error fetching remote instance ID: \(error)")
+                PushKConstants.logger.debug("Error fetching remote instance ID: \(error)")
             } else if let result = result {
                 UserDefaults.standard.set(result.token, forKey: "firebase_registration_token")
                 PushKConstants.firebase_registration_token = result.token
                 UserDefaults.standard.synchronize()
-                print("Remote instance ID token: \(result.token)")
+                PushKConstants.logger.debug("Remote instance ID token: \(result.token)")
             }
         }
  
@@ -94,12 +95,12 @@ public class PushKFirebaseSdk: UIResponder, UIApplicationDelegate {
     internal func firebase_update_token() -> String {
         InstanceID.instanceID().instanceID { (result, error) in
             if let error = error {
-                print("Error fetching remote instance ID: \(error)")
+                PushKConstants.logger.debug("Error fetching remote instance ID: \(error)")
             } else if let result = result {
                 UserDefaults.standard.set(result.token, forKey: "firebase_registration_token")
                 PushKConstants.firebase_registration_token = result.token
                 UserDefaults.standard.synchronize()
-                print("Remote instance ID token: \(result.token)")
+                PushKConstants.logger.debug("Remote instance ID token: \(result.token)")
             }
         }
         
@@ -151,18 +152,21 @@ public class PushKFirebaseSdk: UIResponder, UIApplicationDelegate {
         guard let jsonData = try? JSONSerialization.data(withJSONObject: userInfo, options: []) else { return  }
         let jsonString = String(data: jsonData, encoding: .utf8)
         let newString = String(jsonString ?? "").replacingOccurrences(of: "\\", with: "", options: .literal, range: nil)
-        let parsed_message = answer_adapter.messageIncomingJson(str_resp: newString)
-        print(parsed_message)
-        print("test another")
+        let parsed_message = answerAdapter.messageIncomingJson(str_resp: newString)
+        PushKConstants.logger.debug(parsed_message)
+        PushKConstants.logger.debug("test another")
         
-        manual_notificator.push_notification_manual_wImage(image_url: String(parsed_message.message.image?.url ?? ""), content_title: String(parsed_message.message.title ?? ""), content_body: String(parsed_message.message.body ?? ""))
+        manualNotificator.pushNotificationManualWithImage(
+            image_url: String(parsed_message.message.image?.url ?? ""),
+            content_title: String(parsed_message.message.title ?? ""),
+            content_body: String(parsed_message.message.body ?? ""))
         
         
         //textOutput.text = newString
         PushKConstants.logger.debug("newString: \(newString)")
         PushKConstants.logger.debug("findProcessor")
 
-        let deviceid_func = self.processor.matches(for: "\"messageId\":\"(.{4,9}-.{3,9}-.{3,9}-.{3,9}-.{4,15})\"", in: newString)
+        let deviceid_func = self.processorPush.matches(for: "\"messageId\":\"(.{4,9}-.{3,9}-.{3,9}-.{3,9}-.{4,15})\"", in: newString)
         PushKConstants.logger.debug("deviceid_func: \(deviceid_func)")
         
         
@@ -173,7 +177,7 @@ public class PushKFirebaseSdk: UIResponder, UIApplicationDelegate {
         
         PushKConstants.message_buffer = jsonString2 ?? ""
         
-        let new3String = push_parser.mess_id_parser(message_from_push_server: jsonString ?? "")
+        let new3String = pushParser.messIdParser(message_from_push_server: jsonString ?? "")
         
         PushKConstants.logger.debug("new3String: \(new3String)")
         
@@ -229,18 +233,16 @@ extension PushKFirebaseSdk {
     }
     
     public func fb_remote_messaging(remoteMessage: NSDictionary) {
-        
         let fdf = remoteMessage as NSDictionary as? [String: AnyObject]
-        
         guard let jsonData = (try? JSONSerialization.data(withJSONObject: fdf ?? "", options: [])) else { return  }
         let jsonString = String(data: jsonData, encoding: .utf8)
-        
-        let parsed_message = answer_adapter.messageIncomingJson(str_resp: jsonString ?? "")
-        print(parsed_message)
-        
-        let new3String = push_parser.mess_id_parser(message_from_push_server: jsonString ?? "")
-        
-        manual_notificator.push_notification_manual_wImage(image_url: parsed_message.message.image?.url ?? "", content_title: parsed_message.message.title ?? "", content_body: parsed_message.message.body ?? "")
+        let parsed_message = answerAdapter.messageIncomingJson(str_resp: jsonString ?? "")
+        PushKConstants.logger.debug(parsed_message)
+        let new3String = pushParser.messIdParser(message_from_push_server: jsonString ?? "")
+        manualNotificator.pushNotificationManualWithImage(
+            image_url: String(parsed_message.message.image?.url ?? ""),
+            content_title: String(parsed_message.message.title ?? ""),
+            content_body: String(parsed_message.message.body ?? ""))
 
         switch UIApplication.shared.applicationState {
         case .active:

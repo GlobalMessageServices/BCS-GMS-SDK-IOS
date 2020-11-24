@@ -99,7 +99,7 @@ class PushSDKTests: XCTestCase {
     }
     
     func testParser()  {
-        parser_class.urls_initialization(branchUrl: "https://test/", method_paths: PushSdkParametersPublic.branchMasterValue)
+        parser_class.urlsInitialization(branchUrl: "https://test/", method_paths: PushSdkParametersPublic.branchMasterValue)
     }
     
     func testGetInfo() {

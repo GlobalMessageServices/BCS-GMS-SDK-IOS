@@ -10,7 +10,7 @@ import Foundation
 
 
 class PushKDatabase {
-    func save_data_after_register_ok(user_Phone: String,
+    func saveDataAfterRegisterOk(user_Phone: String,
                                      token: String,
                                      device_id: String,
                                      user_Password: String,
@@ -38,8 +38,7 @@ class PushKDatabase {
         UserDefaults.standard.set(user_Password, forKey: "push_user_password")
         PushKConstants.push_user_password = user_Password
         
-        
         UserDefaults.standard.synchronize()
-        
     }
 }
+

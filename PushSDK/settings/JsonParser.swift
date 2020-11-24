@@ -7,7 +7,6 @@
 //
 
 import Foundation
-
 import JSON
 
 class AnswParser {
@@ -254,11 +253,13 @@ class AnswParser {
                     case message = "message"
                     case googlecsenderid = "google.c.sender.id"
                     case aps = "aps"
+                    case source = "source"
                 }
             var aps: MessApsData?=nil
             var googlecsenderid: String? = ""
             var message: PushKMessageListParse?=nil
             var gcmmessageid: String? = ""
+            var source: String? = ""
         }
 
         
@@ -301,4 +302,5 @@ class AnswParser {
 
     
 }
+
 
