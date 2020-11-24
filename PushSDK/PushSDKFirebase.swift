@@ -109,13 +109,13 @@ public class PushSDKFirebase: UIResponder, UIApplicationDelegate {
         return PushKConstants.firebase_registration_token ?? ""
     }
     
-    public func fb_fun1_application(didReceiveRemoteNotification userInfo: [NSObject : AnyObject],  fetchCompletionHandler completionHandler: (UIBackgroundFetchResult) -> Void) {
+    public func fbInitApplication(didReceiveRemoteNotification userInfo: [NSObject : AnyObject],  fetchCompletionHandler completionHandler: (UIBackgroundFetchResult) -> Void) {
         PushKConstants.logger.debug("application:didReceiveRemoteNotification:fetchCompletionHandler: \(userInfo)")
         completionHandler(.newData)
     }
     
     
-    public func fb_fun2_application(didReceiveRemoteNotification userInfo: [AnyHashable: Any]) {
+    public func fbInitApplication(didReceiveRemoteNotification userInfo: [AnyHashable: Any]) {
         // If you are receiving a notification message while your app is in the background,
         // this callback will not be fired till the user taps on the notification launching the application.
         // TODO: Handle data of notification
@@ -131,7 +131,7 @@ public class PushSDKFirebase: UIResponder, UIApplicationDelegate {
     }
     
     
-    public func fb_fun3_application(didReceiveRemoteNotification userInfo: [AnyHashable: Any],
+    public func fbInitApplication(didReceiveRemoteNotification userInfo: [AnyHashable: Any],
                             fetchCompletionHandler completionHandler: @escaping (UIBackgroundFetchResult) -> Void) {
         // If you are receiving a notification message while your app is in the background,
         // this callback will not be fired till the user taps on the notification launching the application.
@@ -191,7 +191,7 @@ public class PushSDKFirebase: UIResponder, UIApplicationDelegate {
     }
     
     
-    public func fb_fun4_application(didRegisterForRemoteNotificationsWithDeviceToken deviceToken: Data) {
+    public func fbInitApplication(didRegisterForRemoteNotificationsWithDeviceToken deviceToken: Data) {
         PushKConstants.logger.debug("APNs token retrieved: \(deviceToken)")
         // With swizzling disabled you must set the APNs token here.
         Messaging.messaging().apnsToken = deviceToken
