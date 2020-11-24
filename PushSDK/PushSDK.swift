@@ -31,7 +31,8 @@ public class PushSDK {
     
     private let log = SwiftyBeaver.self
     private let parser_class_adapter = PusherKParser.init()
-    //private let fb_init_adapter = PushKFirebaseSdk.init()
+    private let parserJson = PushKAnswParser.init()
+    private let fb_init_adapter = PushKFirebaseSdk.init()
     
     public init(
         platform_branch: PushSdkParametersPublic.BranchStructObj = PushSdkParametersPublic.branchMasterValue,
@@ -90,6 +91,9 @@ public class PushSDK {
     
     
     let answer_b = AnswerBuider.init()
+    
+    
+
     
     
     //Procedure 1. new device registration
@@ -301,6 +305,20 @@ public class PushSDK {
         
         return PushKConstants.firebase_registration_token ?? ""
     }
+    
+    
+
+    
+    //function for parsing incoming message from firebase
+    public static func parseIncomingPush(message: Notification) -> PushKMess {
+        guard let jsonData = try? JSONSerialization.data(withJSONObject: message.userInfo ?? "", options: []) else { return  PushKMess(code: 500, result: "Error in process message")}
+        let jsonString = String(data: jsonData, encoding: .utf8)
+        let newString = String(jsonString ?? "").replacingOccurrences(of: "\\", with: "", options: .literal, range: nil)
+        let parsed_message = PushKAnswParser.messageIncomingJson(str_resp: newString)
+        return PushKMess(code: 200, result: "Success", message: parsed_message)
+    }
+    
+    
 }
 
 

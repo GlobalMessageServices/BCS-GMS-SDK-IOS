@@ -12,7 +12,7 @@ import CryptoSwift
 
 class PushKAPI {
     
-    private let jsonparser = AnswParser.init()
+    private let jsonparser = PushKAnswParser.init()
     private let push_database_adapter = PushKDatabase.init()
     
     private let processor = PushKProcessing.init()

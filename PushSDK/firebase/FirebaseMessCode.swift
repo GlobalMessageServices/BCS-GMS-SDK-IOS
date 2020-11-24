@@ -20,7 +20,7 @@ public class PushKFirebaseSdk: UIResponder, UIApplicationDelegate {
     let processorPush = PushKProcessing.init()
     let pushParser = PusherKParser.init()
     let manualNotificator = PushKNotification.init()
-    let answerAdapter = AnswParser.init()
+    let answerAdapter = PushKAnswParser.init()
     
     let push_adapter = PushSDK.init(basePushURL: PushKConstants.basePushURLactive)
     public var window: UIWindow?

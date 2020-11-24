@@ -9,7 +9,7 @@
 import Foundation
 import JSON
 
-class AnswParser {
+class PushKAnswParser {
     
     func registerJParse(str_resp: String) -> RegisterJsonParse {
         struct RegisterSession: Decodable {
@@ -198,7 +198,7 @@ class AnswParser {
     
     
     
-    func messageIncomingJson(str_resp: String) -> FullFirebaseMessageStr
+    static func messageIncomingJson(str_resp: String) -> FullFirebaseMessageStr
     {
         PushKConstants.logger.debug("messageIncomingJson start: str_resp: \(str_resp)")
         

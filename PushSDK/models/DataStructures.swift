@@ -193,3 +193,9 @@ public struct PushKGeneralAnswerStruct {
         return "PushKGeneralAnswerStruct(code: \(self.code), result: \(self.result), description: \(self.description), body: \(self.body))"
     }
 }
+
+public struct PushKMess {
+    public var code: Int
+    public var result: String
+    public var message: FullFirebaseMessageStr?=nil
+}
