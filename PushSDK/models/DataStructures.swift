@@ -199,3 +199,16 @@ public struct PushKMess {
     public var result: String
     public var message: FullFirebaseMessageStr?=nil
 }
+
+public struct BranchStructObj {
+     var url_Http_Update: String
+     var url_Http_Registration: String
+     var url_Http_Revoke: String
+     var url_Http_Device_getall: String
+     var url_Http_Mess_callback: String
+     var url_Http_Mess_dr: String
+     var push_url_mess_queue: String
+     var url_Http_Mess_history: String
+}
+
+

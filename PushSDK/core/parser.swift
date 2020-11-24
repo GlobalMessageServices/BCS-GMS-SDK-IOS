@@ -15,10 +15,10 @@ public class PusherKParser {
     
     let processor = PushKProcessing.init()
     
-    public func urlsInitialization(branchUrl: String, method_paths: PushSdkParametersPublic.BranchStructObj) {
+    public func urlsInitialization(branchUrl: String, method_paths: BranchStructObj) {
         if (branchUrl.last == "/")
         {
-            PushKConstants.platform_branch_active = PushSdkParametersPublic.BranchStructObj(
+            PushKConstants.platform_branch_active = BranchStructObj(
                 url_Http_Update: branchUrl + PushKConstants.serverSdkVersion + "/" + method_paths.url_Http_Update,
                 url_Http_Registration: branchUrl + PushKConstants.serverSdkVersion + "/" + method_paths.url_Http_Registration,
                 url_Http_Revoke: branchUrl + PushKConstants.serverSdkVersion + "/" + method_paths.url_Http_Revoke,
@@ -30,7 +30,7 @@ public class PusherKParser {
         }
         else
         {
-            PushKConstants.platform_branch_active = PushSdkParametersPublic.BranchStructObj(
+            PushKConstants.platform_branch_active = BranchStructObj(
                 url_Http_Update: branchUrl + "/" + PushKConstants.serverSdkVersion + "/" + method_paths.url_Http_Update,
                 url_Http_Registration: branchUrl + "/" + PushKConstants.serverSdkVersion + "/" + method_paths.url_Http_Registration,
                 url_Http_Revoke: branchUrl + "/" + PushKConstants.serverSdkVersion + "/" + method_paths.url_Http_Revoke,

@@ -27,6 +27,23 @@ public extension Notification.Name {
     static let completedLengthyDownload = Notification.Name("completedLengthyDownload")
 }
 
+
+public class PushSDKVar {
+    public static let LOGLEVEL_DEBUG = SwiftyBeaver.Level.debug
+    public static let LOGLEVEL_ERROR = SwiftyBeaver.Level.error
+    
+    public static var branchMasterValue: BranchStructObj = BranchStructObj(
+        url_Http_Update: "device/update",
+        url_Http_Registration: "device/registration",
+        url_Http_Revoke: "device/revoke",
+        url_Http_Device_getall: "device/all",
+        url_Http_Mess_callback: "message/callback",
+        url_Http_Mess_dr: "message/dr",
+        push_url_mess_queue: "message/queue",
+        url_Http_Mess_history: "message/history?startDate="
+    )
+}
+
 public class PushSDK {
     
     private let log = SwiftyBeaver.self
@@ -35,8 +52,8 @@ public class PushSDK {
     private let fb_init_adapter = PushKFirebaseSdk.init()
     
     public init(
-        platform_branch: PushSdkParametersPublic.BranchStructObj = PushSdkParametersPublic.branchMasterValue,
-        log_level: SwiftyBeaver.Level = .error,
+        platform_branch: BranchStructObj = PushSDKVar.branchMasterValue,
+        log_level: SwiftyBeaver.Level = PushSDKVar.LOGLEVEL_ERROR,
         push_style: Int = 0,
         basePushURL: String
         )

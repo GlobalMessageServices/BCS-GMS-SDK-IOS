@@ -23,28 +23,10 @@ import SwiftyBeaver
 
 public struct PushSdkParametersPublic {
     
-    public struct BranchStructObj {
-         var url_Http_Update: String
-         var url_Http_Registration: String
-         var url_Http_Revoke: String
-         var url_Http_Device_getall: String
-         var url_Http_Mess_callback: String
-         var url_Http_Mess_dr: String
-         var push_url_mess_queue: String
-         var url_Http_Mess_history: String
-    }
+
     
     //urls for push rest server Master Server
-    public static var branchMasterValue: BranchStructObj = BranchStructObj(
-        url_Http_Update: "device/update",
-        url_Http_Registration: "device/registration",
-        url_Http_Revoke: "device/revoke",
-        url_Http_Device_getall: "device/all",
-        url_Http_Mess_callback: "message/callback",
-        url_Http_Mess_dr: "message/dr",
-        push_url_mess_queue: "message/queue",
-        url_Http_Mess_history: "message/history?startDate="
-    )
+    
     
 
     static let TAG_LOGGING = "PushSDK"
@@ -64,7 +46,7 @@ public struct PushKConstants {
     public static var push_user_msisdn = UserDefaults.standard.string(forKey: "push_user_msisdn")
     public static var push_user_password = UserDefaults.standard.string(forKey: "push_user_password")
     public static var firebase_registration_token = UserDefaults.standard.string(forKey: "firebase_registration_token")
-    public static var platform_branch_active: PushSdkParametersPublic.BranchStructObj = PushSdkParametersPublic.branchMasterValue
+    public static var platform_branch_active: BranchStructObj = PushSDKVar.branchMasterValue
     public static var log_level_active: String = "error"
     
     public static let logger = SwiftyBeaver.self
@@ -75,7 +57,7 @@ public struct PushKConstants {
     
     let kOSType = "ios"
     static let serverSdkVersion = "2.3"
-    static let sdkVersion = "1.0.0.27"
+    static let sdkVersion = "1.0.0.28"
     static let dev_os_Version = UIDevice.current.systemVersion
     static let kDeviceType = "\(UIDevice.current.model)"
     static let kDeviceType2 = "\(UIDevice.current.batteryLevel)"

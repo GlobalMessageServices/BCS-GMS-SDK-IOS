@@ -152,7 +152,7 @@ public class PushKFirebaseSdk: UIResponder, UIApplicationDelegate {
         guard let jsonData = try? JSONSerialization.data(withJSONObject: userInfo, options: []) else { return  }
         let jsonString = String(data: jsonData, encoding: .utf8)
         let newString = String(jsonString ?? "").replacingOccurrences(of: "\\", with: "", options: .literal, range: nil)
-        let parsed_message = answerAdapter.messageIncomingJson(str_resp: newString)
+        let parsed_message = PushKAnswParser.messageIncomingJson(str_resp: newString)
         PushKConstants.logger.debug(parsed_message)
         PushKConstants.logger.debug("test another")
         
@@ -236,7 +236,7 @@ extension PushKFirebaseSdk {
         let fdf = remoteMessage as NSDictionary as? [String: AnyObject]
         guard let jsonData = (try? JSONSerialization.data(withJSONObject: fdf ?? "", options: [])) else { return  }
         let jsonString = String(data: jsonData, encoding: .utf8)
-        let parsed_message = answerAdapter.messageIncomingJson(str_resp: jsonString ?? "")
+        let parsed_message = PushKAnswParser.messageIncomingJson(str_resp: jsonString ?? "")
         PushKConstants.logger.debug(parsed_message)
         let new3String = pushParser.messIdParser(message_from_push_server: jsonString ?? "")
         manualNotificator.pushNotificationManualWithImage(
