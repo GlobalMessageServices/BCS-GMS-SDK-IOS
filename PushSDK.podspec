@@ -16,7 +16,7 @@ Pod::Spec.new do |spec|
   #
 
   spec.name         = "PushSDK"
-  spec.version      = "1.0.0.27"
+  spec.version      = "1.0.0.28"
   spec.summary      = "SDK for sending push messages to iOS devices."
 
   # This description is used to generate tags and improve search results.
