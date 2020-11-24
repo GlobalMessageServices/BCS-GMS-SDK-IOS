@@ -15,7 +15,7 @@ import FirebaseCore
 import FirebaseInstanceID
 
 
-public class PushKFirebaseSdk: UIResponder, UIApplicationDelegate {
+public class PushSDKFirebase: UIResponder, UIApplicationDelegate {
     
     let processorPush = PushKProcessing.init()
     let pushParser = PusherKParser.init()
@@ -25,7 +25,7 @@ public class PushKFirebaseSdk: UIResponder, UIApplicationDelegate {
     let push_adapter = PushSDK.init(basePushURL: PushKConstants.basePushURLactive)
     public var window: UIWindow?
     let gcmMessageIDKey = "gcm.message_id"
-    let mySpecialNotificationKey = "com.hyber.specialNotificationKey"
+    let mySpecialNotificationKey = "com.push.specialNotificationKey"
     @IBOutlet weak var sentNotificationLabel: UILabel?
     
     public func registerForPushNotifications() {
@@ -45,7 +45,7 @@ public class PushKFirebaseSdk: UIResponder, UIApplicationDelegate {
     }
     
     
-    public func fb_fun0_application(didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?){
+    public func fbInitApplication(didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?){
         // Override point for customization after application launch.
         
         //FirebaseApp.configure()
@@ -53,7 +53,7 @@ public class PushKFirebaseSdk: UIResponder, UIApplicationDelegate {
         //Messaging.messaging().shouldEstablishDirectChannel = true
         
         //Messaging.messaging().apnsToken = deviceToken
-        UNUserNotificationCenter.current().delegate = self
+        //UNUserNotificationCenter.current().delegate = self
         let authOptions: UNAuthorizationOptions = [.alert, .badge, .sound]
         
         //Solicit permission from user to receive notifications
@@ -90,6 +90,8 @@ public class PushKFirebaseSdk: UIResponder, UIApplicationDelegate {
             PushKConstants.logger.debug("Remote instance ID token: \(token.authToken)")
         })
  */
+        
+        registerForPushNotifications()
     }
     
     internal func firebase_update_token() -> String {
@@ -183,7 +185,7 @@ public class PushKFirebaseSdk: UIResponder, UIApplicationDelegate {
         
         let deliv_rep_answ = push_adapter.push_message_delivery_report(message_id: new3String)
         PushKConstants.logger.debug("deliv_rep_answ: \(deliv_rep_answ)")
-        NotificationCenter.default.post(name: .didReceiveData, object: nil, userInfo: userInfo)
+        NotificationCenter.default.post(name: .receivePushKData, object: nil, userInfo: userInfo)
         
         completionHandler(UIBackgroundFetchResult.newData)
     }
@@ -197,7 +199,7 @@ public class PushKFirebaseSdk: UIResponder, UIApplicationDelegate {
 }
 
 
-extension PushKFirebaseSdk: UNUserNotificationCenterDelegate{
+extension PushSDKFirebase: UNUserNotificationCenterDelegate{
     
     public func userNotificationCenter(_ center: UNUserNotificationCenter,
                                        willPresent notification: UNNotification,
@@ -226,7 +228,7 @@ extension PushKFirebaseSdk: UNUserNotificationCenterDelegate{
 }
 
 
-extension PushKFirebaseSdk {
+extension PushSDKFirebase {
     
     public func fb_notify_messaging() {
         NotificationCenter.default.post(name: NSNotification.Name(rawValue: mySpecialNotificationKey), object: self)
@@ -258,7 +260,7 @@ extension PushKFirebaseSdk {
         }
         let deliv_rep = push_adapter.push_message_delivery_report(message_id: new3String)
         PushKConstants.logger.debug("Delivery report: \(deliv_rep)")
-        NotificationCenter.default.post(name: .didReceiveData, object: nil, userInfo: fdf)
+        NotificationCenter.default.post(name: .receivePushKData, object: nil, userInfo: fdf)
     }
     
     public func fb_token_messaging(didReceiveRegistrationToken fcmToken: String) {
@@ -270,4 +272,5 @@ extension PushKFirebaseSdk {
         // Note: This callback is fired at each app startup and whenever a new token is generated.
     }
 }
+
 

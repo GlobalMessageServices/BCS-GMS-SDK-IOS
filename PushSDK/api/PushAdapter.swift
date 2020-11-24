@@ -838,7 +838,7 @@ class PushKAPI {
                 
                 let messs2 = ["message": queue_answer as AnyObject] as [String: AnyObject]
                 
-                NotificationCenter.default.post(name: .didReceiveData, object: nil, userInfo: messs2 )
+                NotificationCenter.default.post(name: .receivePushKData, object: nil, userInfo: messs2 )
                 let res_dr = push_message_dr(message_Id: i, received_At: "123123122341", X_Push_Session_Id: X_Push_Session_Id, X_Push_Auth_Token: X_Push_Auth_Token)
                 PushKConstants.logger.debug(res_dr)
             }

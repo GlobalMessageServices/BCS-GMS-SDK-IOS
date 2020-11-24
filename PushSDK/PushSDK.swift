@@ -22,9 +22,9 @@ import FirebaseInstanceID
 
 
 public extension Notification.Name {
-    static let didReceiveData = Notification.Name("pushKSdkReceiveData")
-    static let didCompleteTask = Notification.Name("didCompleteTask")
-    static let completedLengthyDownload = Notification.Name("completedLengthyDownload")
+    static let receivePushKData = Notification.Name("pushKSdkReceiveData")
+    //static let didCompleteTask = Notification.Name("didCompleteTask")
+    //static let completedLengthyDownload = Notification.Name("completedLengthyDownload")
 }
 
 
@@ -328,11 +328,11 @@ public class PushSDK {
     
     //function for parsing incoming message from firebase
     public static func parseIncomingPush(message: Notification) -> PushKMess {
-        guard let jsonData = try? JSONSerialization.data(withJSONObject: message.userInfo ?? "", options: []) else { return  PushKMess(code: 500, result: "Error in process message")}
+        guard let jsonData = try? JSONSerialization.data(withJSONObject: message.userInfo ?? "", options: []) else { return  PushKMess(code: 500, result: "Error in process message", messageFir: FullFirebaseMessageStr(aps: MessApsDataStr(contentAvailable: ""), message: MessagesResponseStr(), googleCSenderId: "", gcmMessageId: ""))}
         let jsonString = String(data: jsonData, encoding: .utf8)
         let newString = String(jsonString ?? "").replacingOccurrences(of: "\\", with: "", options: .literal, range: nil)
         let parsed_message = PushKAnswParser.messageIncomingJson(str_resp: newString)
-        return PushKMess(code: 200, result: "Success", message: parsed_message)
+        return PushKMess(code: 200, result: "Success", messageFir: parsed_message)
     }
     
     

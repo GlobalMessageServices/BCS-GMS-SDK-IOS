@@ -205,10 +205,10 @@ public struct PushKGeneralAnswerStruct {
 public struct PushKMess {
     public var code: Int
     public var result: String
-    public var message: FullFirebaseMessageStr?=nil
+    public var messageFir: FullFirebaseMessageStr
     
     public func toString() -> String {
-        return "PushKMess(code: \(code), result: \(result), message: \(message?.toString() ?? "nil")"
+        return "PushKMess(code: \(code), result: \(result), message: \(messageFir.toString() )"
     }
 }
 

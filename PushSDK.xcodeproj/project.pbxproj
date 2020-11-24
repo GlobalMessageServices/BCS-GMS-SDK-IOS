@@ -14,9 +14,9 @@
 		BA7283C8256D74BC00509E06 /* DataStructures.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA7283C7256D74BC00509E06 /* DataStructures.swift */; };
 		BA7283CD256D771200509E06 /* Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA7283CC256D771200509E06 /* Extensions.swift */; };
 		BA7283D3256D7C8B00509E06 /* MemorySaver.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA7283D2256D7C8B00509E06 /* MemorySaver.swift */; };
-		BA7283D9256D811F00509E06 /* FirebaseMessCode.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA7283D8256D811F00509E06 /* FirebaseMessCode.swift */; };
 		BA7283DF256D820600509E06 /* PushAdapter.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA7283DE256D820600509E06 /* PushAdapter.swift */; };
 		BA7283E3256D825E00509E06 /* JsonParser.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA7283E2256D825E00509E06 /* JsonParser.swift */; };
+		BA728675256DB83900509E06 /* PushSDKFirebase.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA728674256DB83900509E06 /* PushSDKFirebase.swift */; };
 		BAB6CB0A2558FA59007A4C56 /* PushSDK.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = BAB6CB002558FA59007A4C56 /* PushSDK.framework */; };
 		BAB6CB0F2558FA59007A4C56 /* PushSDKTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = BAB6CB0E2558FA59007A4C56 /* PushSDKTests.swift */; };
 		BAB6CB112558FA59007A4C56 /* PushSDK.h in Headers */ = {isa = PBXBuildFile; fileRef = BAB6CB032558FA59007A4C56 /* PushSDK.h */; settings = {ATTRIBUTES = (Public, ); }; };
@@ -49,9 +49,9 @@
 		BA7283C7256D74BC00509E06 /* DataStructures.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DataStructures.swift; sourceTree = "<group>"; };
 		BA7283CC256D771200509E06 /* Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Extensions.swift; sourceTree = "<group>"; };
 		BA7283D2256D7C8B00509E06 /* MemorySaver.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MemorySaver.swift; sourceTree = "<group>"; };
-		BA7283D8256D811F00509E06 /* FirebaseMessCode.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FirebaseMessCode.swift; sourceTree = "<group>"; };
 		BA7283DE256D820600509E06 /* PushAdapter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PushAdapter.swift; sourceTree = "<group>"; };
 		BA7283E2256D825E00509E06 /* JsonParser.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JsonParser.swift; sourceTree = "<group>"; };
+		BA728674256DB83900509E06 /* PushSDKFirebase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PushSDKFirebase.swift; sourceTree = "<group>"; };
 		BAB6CB002558FA59007A4C56 /* PushSDK.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = PushSDK.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		BAB6CB032558FA59007A4C56 /* PushSDK.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = PushSDK.h; sourceTree = "<group>"; };
 		BAB6CB042558FA59007A4C56 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
@@ -101,14 +101,6 @@
 			path = Pods;
 			sourceTree = "<group>";
 		};
-		BA27F02D255FE3D70019EFA2 /* firebase */ = {
-			isa = PBXGroup;
-			children = (
-				BA7283D8256D811F00509E06 /* FirebaseMessCode.swift */,
-			);
-			path = firebase;
-			sourceTree = "<group>";
-		};
 		BA7283C6256D748100509E06 /* models */ = {
 			isa = PBXGroup;
 			children = (
@@ -143,7 +135,6 @@
 			isa = PBXGroup;
 			children = (
 				BA7283C6256D748100509E06 /* models */,
-				BA27F02D255FE3D70019EFA2 /* firebase */,
 				BAB6CB2E25590354007A4C56 /* core */,
 				BAB6CB232558FB3D007A4C56 /* settings */,
 				BAB6CB222558FB35007A4C56 /* api */,
@@ -152,6 +143,7 @@
 				BAB6CB032558FA59007A4C56 /* PushSDK.h */,
 				BAB6CB042558FA59007A4C56 /* Info.plist */,
 				BA7283CC256D771200509E06 /* Extensions.swift */,
+				BA728674256DB83900509E06 /* PushSDKFirebase.swift */,
 			);
 			path = PushSDK;
 			sourceTree = "<group>";
@@ -387,12 +379,12 @@
 				BA7283D3256D7C8B00509E06 /* MemorySaver.swift in Sources */,
 				BAB6CB302559036A007A4C56 /* parser.swift in Sources */,
 				BAB6CB2C2558FBF0007A4C56 /* push_answer_func.swift in Sources */,
+				BA728675256DB83900509E06 /* PushSDKFirebase.swift in Sources */,
 				BAB6CB1B2558FAD5007A4C56 /* PushSDK.swift in Sources */,
 				BA7283C8256D74BC00509E06 /* DataStructures.swift in Sources */,
 				BA7283CD256D771200509E06 /* Extensions.swift in Sources */,
 				BA7283DF256D820600509E06 /* PushAdapter.swift in Sources */,
 				BAB6CB2B2558FBF0007A4C56 /* params.swift in Sources */,
-				BA7283D9256D811F00509E06 /* FirebaseMessCode.swift in Sources */,
 				BAB6CB2D2558FBF0007A4C56 /* add_functions.swift in Sources */,
 				BA7283E3256D825E00509E06 /* JsonParser.swift in Sources */,
 			);
