@@ -3,7 +3,12 @@ Push-SDK-IOS
 
 ## Using SDK
 
-Initialization firebase in AppDelegate.swift
+Important ! Before start using SDK, configure firebase project first
+
+* [Setting up your project to work with the SDK](https://github.com/kirillkotov/Push-SDK-IOS/wiki/Creating-App-Id-and-APNS-key)
+
+Then add firebase functions into your AppDelegate.swift
+
 ```
  import UIKit
  import PushSDK
@@ -62,6 +67,7 @@ Configure incoming messaging processing in ViewController.swift
  //processing incoming data message
  @objc func onReceiveFromPushServer(_ notification: Notification) {
     // Do something now
+    // You can process your message here
     let incomMessage = PushSDK.parseIncomingPush(message: notification).messageFir
     print(incomMessage.message.toString())
     textOutput.text = textOutput.text + "\n" + incomMessage.message.toString()
@@ -72,9 +78,10 @@ Configure incoming messaging processing in ViewController.swift
 Using SDK procedures
 
 ```
-let pushAdapterSdk = PushSDK.init(basePushURL: "https://push.hyber.im/api/")
+let pushAdapterSdk = PushSDK.init(basePushURL: "https://push.example.com/api/")
 let registrator: PushKFunAnswerRegister = pushAdapterSdk.push_register_new(user_phone: "375291234567", user_password: "1", x_push_sesion_id: PushKConstants.firebase_registration_token ?? "", x_push_ios_bundle_id: "12345678", X_Push_Client_API_Key: "test")
 
 pushAdapterSdk.push_update_registration()
 
 ```
+
