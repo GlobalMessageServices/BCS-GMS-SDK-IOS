@@ -8,12 +8,10 @@
 
 import XCTest
 @testable import PushSDK
-import SwiftyBeaver
 
 class PushSDKTests: XCTestCase {
     
-    static let logLevel: SwiftyBeaver.Level = .debug
-    var sdkInitPush = PushSDK.init(platform_branch: PushSdkParametersPublic.branchMasterValue, log_level: logLevel, basePushURL: "https://example.com")
+    var sdkInitPush = PushSDK.init(platform_branch: PushSDKVar.branchMasterValue, log_level: PushSDKVar.LOGLEVEL_DEBUG, basePushURL: "https://example.com")
     
     let parser_class = PusherKParser.init()
 
@@ -39,68 +37,48 @@ class PushSDKTests: XCTestCase {
     }
     
     func testRegistrar() {
-        let resp = sdkInitPush.push_register_new(user_phone: "375291234567", user_password: "1", x_push_sesion_id: "123", x_push_ios_bundle_id: "123456789", X_Push_Client_API_Key: "test")
+        let resp = sdkInitPush.pushRegisterNew(user_phone: "375291234567", user_password: "1", x_push_sesion_id: "123", x_push_ios_bundle_id: "123456789", X_Push_Client_API_Key: "test")
         print(resp)
     }
     
     func testGetDeviceAll() {
-        let resp = sdkInitPush.push_get_device_all_from_server().result
+        let resp = sdkInitPush.pushGetDeviceAllFromServer().result
         print(resp)
     }
     
     func testGetMessHistory() {
-        let resp = sdkInitPush.push_get_message_history(period_in_seconds: 12345)
+        let resp = sdkInitPush.pushGetMessageHistory(period_in_seconds: 12345)
         print(resp)
     }
     
     func testUpdateRegistration() {
-        let resp = sdkInitPush.push_update_registration().description
+        let resp = sdkInitPush.pushUpdateRegistration().description
         print(resp)
     }
     
     func testSendDeliveryReport() {
-        let resp = sdkInitPush.push_message_delivery_report(message_id: "1251fqf4").description
+        let resp = sdkInitPush.pushMessageDeliveryReport(message_id: "1251fqf4").description
         print(resp)
     }
     
     func testSendMessageCallback() {
-        let resp = sdkInitPush.push_send_message_callback(message_id: "test", message_text: "privet").description
+        let resp = sdkInitPush.pushSendMessageCallback(message_id: "test", message_text: "privet").description
         print(resp)
     }
     
     func testReqQueue() {
-        let resp = sdkInitPush.push_check_queue()
+        let resp = sdkInitPush.pushCheckQueue()
         print(resp)
     }
     
     func testClearDeviceAll() {
-        let resp = sdkInitPush.push_clear_all_device()
+        let resp = sdkInitPush.pushClearAllDevice()
         print(resp)
     }
     
     
-    
-    func testPrint() {
-        print("error: not a valid http response")
-    }
-    
-    
-    func testLogger () {
-        let log = SwiftyBeaver.self
-        let console = ConsoleDestination()
-        console.format = "$Dyyyy-MM-dd HH:mm:ss.SSS$d PushSDK $T $N.$F:$l $L: $M"
-        console.minLevel = .debug
-        //let file = FileDestination()
-        
-        //log.addDestination(file)
-        log.addDestination(console)
-        
-        log.debug("test 11111")
-    }
-    
-    func testParser()  {
-        parser_class.urlsInitialization(branchUrl: "https://test/", method_paths: PushSdkParametersPublic.branchMasterValue)
-    }
+
+
     
     func testGetInfo() {
         let appVersion = Bundle.main.infoDictionary?["CFBundleShortVersionString"] as? String

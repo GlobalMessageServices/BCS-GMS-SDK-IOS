@@ -47,7 +47,7 @@ public class PushSDKVar {
 public class PushSDK {
     
     private let log = SwiftyBeaver.self
-    private let parser_class_adapter = PusherKParser.init()
+    private let parserClassAdapter = PusherKParser.init()
     private let parserJson = PushKAnswParser.init()
     //private let fb_init_adapter = PushKFirebaseSdk.init()
     
@@ -64,7 +64,7 @@ public class PushSDK {
         PushKConstants.firebase_registration_token = UserDefaults.standard.string(forKey: "firebase_registration_token")
         PushKConstants.push_user_msisdn = UserDefaults.standard.string(forKey: "push_user_msisdn")
         PushKConstants.push_user_password = UserDefaults.standard.string(forKey: "push_user_password")
-        parser_class_adapter.urlsInitialization(branchUrl: basePushURL, method_paths: platform_branch)
+        parserClassAdapter.urlsInitialization(branchUrl: basePushURL, method_paths: platform_branch)
         PushKConstants.basePushURLactive = basePushURL
         //Constants.log_level_active = log_level
         let console = ConsoleDestination()
@@ -119,7 +119,7 @@ public class PushSDK {
     //X_Push_Client_API_Key - provide by hub administrator
     //user_phone - subscribers msisdn
     //subscribers password (optional, for future use)
-    public func push_register_new(user_phone: String, user_password: String, x_push_sesion_id: String, x_push_ios_bundle_id: String, X_Push_Client_API_Key: String)->PushKFunAnswerRegister {
+    public func pushRegisterNew(user_phone: String, user_password: String, x_push_sesion_id: String, x_push_ios_bundle_id: String, X_Push_Client_API_Key: String)->PushKFunAnswerRegister {
         
         PushKConstants.logger.debug("Start function registrar main")
         PushKConstants.logger.debug("Input func push_register_new: user_phone: \(user_phone),  user_password: \(user_password), x_push_sesion_id: \(x_push_sesion_id), x_push_ios_bundle_id: \(x_push_ios_bundle_id), X_Push_Client_API_Key: \(X_Push_Client_API_Key)")
@@ -143,14 +143,14 @@ public class PushSDK {
         }
     }
     
-    public func push_register_new(user_phone: String, user_password: String, x_push_ios_bundle_id: String, X_Push_Client_API_Key: String)->PushKFunAnswerRegister {
+    public func pushRegisterNew(user_phone: String, user_password: String, x_push_ios_bundle_id: String, X_Push_Client_API_Key: String)->PushKFunAnswerRegister {
         
         PushKConstants.logger.debug("Start function registrar main")
         PushKConstants.logger.debug("Input func push_register_new2: user_phone: \(user_phone),  user_password: \(user_password), x_push_ios_bundle_id: \(x_push_ios_bundle_id), X_Push_Client_API_Key: \(X_Push_Client_API_Key)")
         
         PushKConstants.logger.debug("Used constants: registrationstatus: \(PushKConstants.registrationstatus)")
         
-        let x_push_sesion_id = self.firebase_update_token()
+        let x_push_sesion_id = self.firebaseUpdateToken()
         
         if (PushKConstants.registrationstatus==false){
             if (user_phone != "" && x_push_sesion_id != "" && X_Push_Client_API_Key != "" ) {
@@ -169,7 +169,7 @@ public class PushSDK {
     }
     
     //Procedure 2. Delete registration
-    public func push_clear_current_device()->PushKGeneralAnswerStruct {
+    public func pushClearCurrentDevice()->PushKGeneralAnswerStruct {
             if (PushKConstants.registrationstatus==true){
                 let X_Push_Session_Id: String = PushKConstants.firebase_registration_token ?? "firebase_empty"
                 let push_rest_server = PushKAPI.init()
@@ -181,7 +181,7 @@ public class PushSDK {
     }
     
     
-    public func push_get_device_all_from_server() -> PushKFunAnswerGetDeviceList {
+    public func pushGetDeviceAllFromServer() -> PushKFunAnswerGetDeviceList {
             if (PushKConstants.registrationstatus==true){
                 let X_Push_Session_Id: String = PushKConstants.firebase_registration_token ?? "firebase_empty"
                 let push_rest_server = PushKAPI.init()
@@ -193,7 +193,7 @@ public class PushSDK {
             }
     }
     
-    public func push_send_message_callback(message_id: String, message_text: String) -> PushKGeneralAnswerStruct {
+    public func pushSendMessageCallback(message_id: String, message_text: String) -> PushKGeneralAnswerStruct {
             if (PushKConstants.registrationstatus==true){
                 let X_Push_Session_Id: String = PushKConstants.firebase_registration_token ?? "firebase_empty"
                 let push_rest_server = PushKAPI.init()
@@ -205,7 +205,7 @@ public class PushSDK {
             }
     }
     
-    public func push_message_delivery_report(message_id: String) -> PushKGeneralAnswerStruct {
+    public func pushMessageDeliveryReport(message_id: String) -> PushKGeneralAnswerStruct {
             if (PushKConstants.registrationstatus==true) {
                 let X_Push_Session_Id: String = PushKConstants.firebase_registration_token ?? "firebase_empty"
                 let push_rest_server = PushKAPI.init()
@@ -221,7 +221,7 @@ public class PushSDK {
             }
     }
     
-    public func push_update_registration() -> PushKGeneralAnswerStruct {
+    public func pushUpdateRegistration() -> PushKGeneralAnswerStruct {
             if (PushKConstants.registrationstatus==true) {
                 let X_Push_Session_Id: String = PushKConstants.firebase_registration_token ?? "firebase_empty"
                 let push_rest_server = PushKAPI.init()
@@ -237,7 +237,7 @@ public class PushSDK {
         case FoundNil(String)
     }
     
-    public func push_get_message_history(period_in_seconds: Int) -> PushKFunAnswerGetMessageHistory {
+    public func pushGetMessageHistory(period_in_seconds: Int) -> PushKFunAnswerGetMessageHistory {
             if (PushKConstants.registrationstatus==true) {
                 let X_Push_Session_Id: String = PushKConstants.firebase_registration_token ?? "firebase_empty"
                 let push_rest_server = PushKAPI.init()
@@ -250,10 +250,10 @@ public class PushSDK {
     }
     
     
-    public func push_clear_all_device()->PushKGeneralAnswerStruct {
+    public func pushClearAllDevice()->PushKGeneralAnswerStruct {
 
             if (PushKConstants.registrationstatus==true) {
-                let getdev = push_get_device_all_from_server()
+                let getdev = pushGetDeviceAllFromServer()
                 
                 var listdev: [String] = []
                 
@@ -295,7 +295,7 @@ public class PushSDK {
     }
     
     
-    public func push_check_queue() -> PushKFunAnswerGeneral {
+    public func pushCheckQueue() -> PushKFunAnswerGeneral {
             if (PushKConstants.registrationstatus==true) {
                 let X_Push_Session_Id: String = PushKConstants.firebase_registration_token ?? "firebase_empty"
                 let push_rest_server = PushKAPI.init()
@@ -308,7 +308,7 @@ public class PushSDK {
     }
     
     
-    internal func firebase_update_token() -> String {
+    internal func firebaseUpdateToken() -> String {
         InstanceID.instanceID().instanceID { (result, error) in
             if let error = error {
                 print("Error fetching remote instance ID: \(error)")

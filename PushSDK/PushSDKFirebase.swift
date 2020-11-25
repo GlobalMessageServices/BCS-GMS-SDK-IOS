@@ -183,7 +183,7 @@ public class PushSDKFirebase: UIResponder, UIApplicationDelegate {
         
         PushKConstants.logger.debug("new3String: \(new3String)")
         
-        let deliv_rep_answ = push_adapter.push_message_delivery_report(message_id: new3String)
+        let deliv_rep_answ = push_adapter.pushMessageDeliveryReport(message_id: new3String)
         PushKConstants.logger.debug("deliv_rep_answ: \(deliv_rep_answ)")
         NotificationCenter.default.post(name: .receivePushKData, object: nil, userInfo: userInfo)
         
@@ -258,7 +258,7 @@ extension PushSDKFirebase {
         @unknown default:
             PushKConstants.logger.debug("Fatal application error for UIApplication.shared.applicationState")
         }
-        let deliv_rep = push_adapter.push_message_delivery_report(message_id: new3String)
+        let deliv_rep = push_adapter.pushMessageDeliveryReport(message_id: new3String)
         PushKConstants.logger.debug("Delivery report: \(deliv_rep)")
         NotificationCenter.default.post(name: .receivePushKData, object: nil, userInfo: fdf)
     }
