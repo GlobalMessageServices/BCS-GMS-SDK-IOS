@@ -11,6 +11,7 @@
 		1E0731F77AB2021A620CCA88 /* Pods_PushSDK.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 01DA8B18CC69D8BA318C9153 /* Pods_PushSDK.framework */; };
 		BA48A2DC255FF77A00748CAA /* Podfile in Resources */ = {isa = PBXBuildFile; fileRef = BA48A2DB255FF77A00748CAA /* Podfile */; };
 		BA48A2DE2560895500748CAA /* PushSDK.podspec in Resources */ = {isa = PBXBuildFile; fileRef = BA48A2DD2560895500748CAA /* PushSDK.podspec */; };
+		BA5DBF76256DDFDE00590993 /* README.md in Resources */ = {isa = PBXBuildFile; fileRef = BA5DBF75256DDFDE00590993 /* README.md */; };
 		BA7283C8256D74BC00509E06 /* DataStructures.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA7283C7256D74BC00509E06 /* DataStructures.swift */; };
 		BA7283CD256D771200509E06 /* Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA7283CC256D771200509E06 /* Extensions.swift */; };
 		BA7283D3256D7C8B00509E06 /* MemorySaver.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA7283D2256D7C8B00509E06 /* MemorySaver.swift */; };
@@ -46,6 +47,7 @@
 		539D81DE5ADFA9DC0A5BC86D /* Pods-PushSDKTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-PushSDKTests.release.xcconfig"; path = "Target Support Files/Pods-PushSDKTests/Pods-PushSDKTests.release.xcconfig"; sourceTree = "<group>"; };
 		BA48A2DB255FF77A00748CAA /* Podfile */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = Podfile; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.ruby; };
 		BA48A2DD2560895500748CAA /* PushSDK.podspec */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = PushSDK.podspec; sourceTree = "<group>"; };
+		BA5DBF75256DDFDE00590993 /* README.md */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = net.daringfireball.markdown; path = README.md; sourceTree = "<group>"; };
 		BA7283C7256D74BC00509E06 /* DataStructures.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DataStructures.swift; sourceTree = "<group>"; };
 		BA7283CC256D771200509E06 /* Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Extensions.swift; sourceTree = "<group>"; };
 		BA7283D2256D7C8B00509E06 /* MemorySaver.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MemorySaver.swift; sourceTree = "<group>"; };
@@ -112,6 +114,7 @@
 		BAB6CAF62558FA59007A4C56 = {
 			isa = PBXGroup;
 			children = (
+				BA5DBF75256DDFDE00590993 /* README.md */,
 				BA48A2DD2560895500748CAA /* PushSDK.podspec */,
 				BA48A2DB255FF77A00748CAA /* Podfile */,
 				BAB6CB022558FA59007A4C56 /* PushSDK */,
@@ -292,6 +295,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				BA5DBF76256DDFDE00590993 /* README.md in Resources */,
 				BA48A2DC255FF77A00748CAA /* Podfile in Resources */,
 				BA48A2DE2560895500748CAA /* PushSDK.podspec in Resources */,
 			);
