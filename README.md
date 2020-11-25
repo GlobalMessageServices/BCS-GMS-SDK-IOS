@@ -3,7 +3,7 @@ Push-SDK-IOS
 
 ## Using SDK
 
-Important ! Before start using SDK, configure firebase project first
+Important ! Before start using SDK, configure firebase project first and upload your google-services.json file into your project
 
 * [Setting up your project to work with the SDK](https://github.com/kirillkotov/Push-SDK-IOS/wiki/Creating-App-Id-and-APNS-key)
 
@@ -75,13 +75,56 @@ Configure incoming messaging processing in ViewController.swift
 ```
 
 
-Using SDK procedures
+Using SDK functions
 
 ```
 let pushAdapterSdk = PushSDK.init(basePushURL: "https://push.example.com/api/")
-let registrator: PushKFunAnswerRegister = pushAdapterSdk.push_register_new(user_phone: "375291234567", user_password: "1", x_push_sesion_id: PushKConstants.firebase_registration_token ?? "", x_push_ios_bundle_id: "12345678", X_Push_Client_API_Key: "test")
+let registrator: PushKFunAnswerRegister = pushAdapterSdk.pushRegisterNew(user_phone: "375291234567", user_password: "1", x_push_sesion_id: PushKConstants.firebase_registration_token ?? "", x_push_ios_bundle_id: "12345678", X_Push_Client_API_Key: "test")
 
-pushAdapterSdk.push_update_registration()
+pushAdapterSdk.pushUpdateRegistration()
 
 ```
 
+Full list of SDK functions
+
+* New device registration
+```
+pushRegisterNew(user_phone: String, user_password: String, x_push_sesion_id: String, x_push_ios_bundle_id: String, X_Push_Client_API_Key: String)->PushKFunAnswerRegister
+
+pushRegisterNew(user_phone: String, user_password: String, x_push_ios_bundle_id: String, X_Push_Client_API_Key: String)->PushKFunAnswerRegister
+```
+
+* Clear local device on server
+```
+pushClearCurrentDevice()->PushKGeneralAnswerStruct
+```
+
+* get message history
+```
+public func pushGetMessageHistory(period_in_seconds: Int) -> PushKFunAnswerGetMessageHistory
+```
+
+* Get all devices from server
+```
+pushGetDeviceAllFromServer() -> PushKFunAnswerGetDeviceList
+```
+
+* update firebase token on push server
+```
+pushUpdateRegistration() -> PushKGeneralAnswerStruct
+```
+
+* message callback
+```
+pushSendMessageCallback(message_id: String, message_text: String) -> PushKGeneralAnswerStruct
+```
+
+* Send delivery report to server
+```
+pushMessageDeliveryReport(message_id: String) -> PushKGeneralAnswerStruct
+```
+
+* Clear all devices registered with current msisdn
+```
+pushClearAllDevice()->PushKGeneralAnswerStruct
+```
