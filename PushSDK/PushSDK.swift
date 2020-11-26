@@ -73,6 +73,9 @@ public class PushSDK {
         let file = FileDestination()
         PushKConstants.logger.addDestination(console)
         PushKConstants.logger.addDestination(file)
+        
+        let push_sesion_id = PushSdkFirHelpers.firebaseUpdateToken()
+        PushKConstants.logger.debug("Init PushSDK: push_sesion_id: \(push_sesion_id)")
     }
     
     private let processor = PushKProcessing.init()
@@ -121,7 +124,7 @@ public class PushSDK {
     //subscribers password (optional, for future use)
     public func pushRegisterNew(user_phone: String, user_password: String, x_push_sesion_id: String, x_push_ios_bundle_id: String, X_Push_Client_API_Key: String)->PushKFunAnswerRegister {
         
-        PushKConstants.logger.debug("Start function registrar main")
+        PushKConstants.logger.debug("Start function registrar push_register_new")
         PushKConstants.logger.debug("Input func push_register_new: user_phone: \(user_phone),  user_password: \(user_password), x_push_sesion_id: \(x_push_sesion_id), x_push_ios_bundle_id: \(x_push_ios_bundle_id), X_Push_Client_API_Key: \(X_Push_Client_API_Key)")
         
         PushKConstants.logger.debug("Used constants: registrationstatus: \(PushKConstants.registrationstatus)")
@@ -145,21 +148,25 @@ public class PushSDK {
     
     public func pushRegisterNew(user_phone: String, user_password: String, x_push_ios_bundle_id: String, X_Push_Client_API_Key: String)->PushKFunAnswerRegister {
         
-        PushKConstants.logger.debug("Start function registrar main")
+        PushKConstants.logger.debug("Start function registrar push_register_new2")
         PushKConstants.logger.debug("Input func push_register_new2: user_phone: \(user_phone),  user_password: \(user_password), x_push_ios_bundle_id: \(x_push_ios_bundle_id), X_Push_Client_API_Key: \(X_Push_Client_API_Key)")
         
         PushKConstants.logger.debug("Used constants: registrationstatus: \(PushKConstants.registrationstatus)")
         
-        let x_push_sesion_id = self.firebaseUpdateToken()
+        let x_push_sesion_id = PushSdkFirHelpers.firebaseUpdateToken()
+        
+        PushKConstants.logger.debug("Token updated for registration: x_push_sesion_id: \(x_push_sesion_id)")
         
         if (PushKConstants.registrationstatus==false){
             if (user_phone != "" && x_push_sesion_id != "" && X_Push_Client_API_Key != "" ) {
-                UserDefaults.standard.set(x_push_sesion_id, forKey: "firebase_registration_token")
                 let push_rest_server = PushKAPI.init()
                 let push_register_new_answer = push_rest_server.push_device_register(X_Push_Client_API_Key: X_Push_Client_API_Key, X_Push_Session_Id: x_push_sesion_id, X_Push_IOS_Bundle_Id: x_push_ios_bundle_id,  device_Name:UIDevice.modelName, device_Type: PushKConstants.localizedModel, os_Type: "ios", sdk_Version: PushKConstants.sdkVersion, user_Pass: user_password, user_Phone: user_phone)
                 return push_register_new_answer
             }
             else {
+                
+                PushKConstants.logger.debug("Error pushRegisterNew. Incorrect input parameters: user_phone: \(user_phone), x_push_sesion_id: \(x_push_sesion_id), X_Push_Client_API_Key: \(X_Push_Client_API_Key)")
+                
                 return PushKFunAnswerRegister.init(code: 701, result: "error", description: "Incorrect input parameters", deviceId: PushKConstants.deviceId ?? "unknown", token: PushKConstants.push_registration_token ?? "firebase_empty", userId: "", userPhone: PushKConstants.push_user_msisdn ?? "", createdAt: "")
             }
         }
@@ -305,22 +312,6 @@ public class PushSDK {
             else {
                 return answer_b.general_answer2(resp_code: 704, body_json: "error", description: "Not registered")
             }
-    }
-    
-    
-    internal func firebaseUpdateToken() -> String {
-        InstanceID.instanceID().instanceID { (result, error) in
-            if let error = error {
-                print("Error fetching remote instance ID: \(error)")
-            } else if let result = result {
-                UserDefaults.standard.set(result.token, forKey: "firebase_registration_token")
-                PushKConstants.firebase_registration_token = result.token
-                UserDefaults.standard.synchronize()
-                print("Remote instance ID token: \(result.token)")
-            }
-        }
-        
-        return PushKConstants.firebase_registration_token ?? ""
     }
     
     

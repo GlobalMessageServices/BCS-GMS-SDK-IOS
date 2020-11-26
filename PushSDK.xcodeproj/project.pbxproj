@@ -18,6 +18,7 @@
 		BA7283DF256D820600509E06 /* PushAdapter.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA7283DE256D820600509E06 /* PushAdapter.swift */; };
 		BA7283E3256D825E00509E06 /* JsonParser.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA7283E2256D825E00509E06 /* JsonParser.swift */; };
 		BA728675256DB83900509E06 /* PushSDKFirebase.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA728674256DB83900509E06 /* PushSDKFirebase.swift */; };
+		BAA1F2512570425E00728318 /* FirebaseHelpers.swift in Sources */ = {isa = PBXBuildFile; fileRef = BAA1F2502570425E00728318 /* FirebaseHelpers.swift */; };
 		BAB6CB0A2558FA59007A4C56 /* PushSDK.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = BAB6CB002558FA59007A4C56 /* PushSDK.framework */; };
 		BAB6CB0F2558FA59007A4C56 /* PushSDKTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = BAB6CB0E2558FA59007A4C56 /* PushSDKTests.swift */; };
 		BAB6CB112558FA59007A4C56 /* PushSDK.h in Headers */ = {isa = PBXBuildFile; fileRef = BAB6CB032558FA59007A4C56 /* PushSDK.h */; settings = {ATTRIBUTES = (Public, ); }; };
@@ -54,6 +55,7 @@
 		BA7283DE256D820600509E06 /* PushAdapter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PushAdapter.swift; sourceTree = "<group>"; };
 		BA7283E2256D825E00509E06 /* JsonParser.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JsonParser.swift; sourceTree = "<group>"; };
 		BA728674256DB83900509E06 /* PushSDKFirebase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PushSDKFirebase.swift; sourceTree = "<group>"; };
+		BAA1F2502570425E00728318 /* FirebaseHelpers.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FirebaseHelpers.swift; sourceTree = "<group>"; };
 		BAB6CB002558FA59007A4C56 /* PushSDK.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = PushSDK.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		BAB6CB032558FA59007A4C56 /* PushSDK.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = PushSDK.h; sourceTree = "<group>"; };
 		BAB6CB042558FA59007A4C56 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
@@ -111,6 +113,14 @@
 			path = models;
 			sourceTree = "<group>";
 		};
+		BAA1F24F2570424D00728318 /* firebase */ = {
+			isa = PBXGroup;
+			children = (
+				BAA1F2502570425E00728318 /* FirebaseHelpers.swift */,
+			);
+			path = firebase;
+			sourceTree = "<group>";
+		};
 		BAB6CAF62558FA59007A4C56 = {
 			isa = PBXGroup;
 			children = (
@@ -137,6 +147,7 @@
 		BAB6CB022558FA59007A4C56 /* PushSDK */ = {
 			isa = PBXGroup;
 			children = (
+				BAA1F24F2570424D00728318 /* firebase */,
 				BA7283C6256D748100509E06 /* models */,
 				BAB6CB2E25590354007A4C56 /* core */,
 				BAB6CB232558FB3D007A4C56 /* settings */,
@@ -380,6 +391,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				BAC30CCE25623AE300559536 /* notifications.swift in Sources */,
+				BAA1F2512570425E00728318 /* FirebaseHelpers.swift in Sources */,
 				BA7283D3256D7C8B00509E06 /* MemorySaver.swift in Sources */,
 				BAB6CB302559036A007A4C56 /* parser.swift in Sources */,
 				BAB6CB2C2558FBF0007A4C56 /* push_answer_func.swift in Sources */,

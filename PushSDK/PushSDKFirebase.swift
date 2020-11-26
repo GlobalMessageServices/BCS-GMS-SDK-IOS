@@ -48,6 +48,9 @@ public class PushSDKFirebase: UIResponder, UIApplicationDelegate {
     public func fbInitApplication(didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?){
         // Override point for customization after application launch.
         
+        //fbInitApplication0
+        PushKConstants.logger.debug("Call fbInitApplication: fbInitApplication0")
+        
         //FirebaseApp.configure()
         //Messaging.messaging().delegate = self
         //Messaging.messaging().shouldEstablishDirectChannel = true
@@ -65,57 +68,26 @@ public class PushSDKFirebase: UIResponder, UIApplicationDelegate {
         }
         
         //get application instance ID
-        InstanceID.instanceID().instanceID { (result, error) in
-            if let error = error {
-                PushKConstants.logger.debug("Error fetching remote instance ID: \(error)")
-            } else if let result = result {
-                UserDefaults.standard.set(result.token, forKey: "firebase_registration_token")
-                PushKConstants.firebase_registration_token = result.token
-                UserDefaults.standard.synchronize()
-                PushKConstants.logger.debug("Remote instance ID token: \(result.token)")
-            }
-        }
- 
+        let fbToken = PushSdkFirHelpers.firebaseUpdateToken()
+        PushKConstants.logger.debug("fbToken updated: \(fbToken)")
 
-            /*
-        Installations.installations().authTokenForcingRefresh(true, completion: { (token, error) in
-            if let error = error {
-                PushKConstants.logger.debug("Error fetching remote instance ID: \(error)")
-                return
-            }
-            guard let token = token else { return }
-            UserDefaults.standard.set(token.authToken, forKey: "firebase_registration_token")
-            PushKConstants.firebase_registration_token = token.authToken
-            UserDefaults.standard.synchronize()
-            PushKConstants.logger.debug("Remote instance ID token: \(token.authToken)")
-        })
- */
-        
         registerForPushNotifications()
     }
     
-    internal func firebase_update_token() -> String {
-        InstanceID.instanceID().instanceID { (result, error) in
-            if let error = error {
-                PushKConstants.logger.debug("Error fetching remote instance ID: \(error)")
-            } else if let result = result {
-                UserDefaults.standard.set(result.token, forKey: "firebase_registration_token")
-                PushKConstants.firebase_registration_token = result.token
-                UserDefaults.standard.synchronize()
-                PushKConstants.logger.debug("Remote instance ID token: \(result.token)")
-            }
-        }
-        
-        return PushKConstants.firebase_registration_token ?? ""
-    }
+
     
     public func fbInitApplication(didReceiveRemoteNotification userInfo: [NSObject : AnyObject],  fetchCompletionHandler completionHandler: (UIBackgroundFetchResult) -> Void) {
+        //fbInitApplication1
+        PushKConstants.logger.debug("Call fbInitApplication: fbInitApplication1")
         PushKConstants.logger.debug("application:didReceiveRemoteNotification:fetchCompletionHandler: \(userInfo)")
         completionHandler(.newData)
     }
     
     
     public func fbInitApplication(didReceiveRemoteNotification userInfo: [AnyHashable: Any]) {
+        
+        //fbInitApplication2
+        PushKConstants.logger.debug("Call fbInitApplication: fbInitApplication2")
         // If you are receiving a notification message while your app is in the background,
         // this callback will not be fired till the user taps on the notification launching the application.
         // TODO: Handle data of notification
@@ -133,6 +105,8 @@ public class PushSDKFirebase: UIResponder, UIApplicationDelegate {
     
     public func fbInitApplication(didReceiveRemoteNotification userInfo: [AnyHashable: Any],
                             fetchCompletionHandler completionHandler: @escaping (UIBackgroundFetchResult) -> Void) {
+        //fbInitApplication3
+        PushKConstants.logger.debug("Call fbInitApplication: fbInitApplication3")
         // If you are receiving a notification message while your app is in the background,
         // this callback will not be fired till the user taps on the notification launching the application.
         // TODO: Handle data of notification
@@ -192,6 +166,8 @@ public class PushSDKFirebase: UIResponder, UIApplicationDelegate {
     
     
     public func fbInitApplication(didRegisterForRemoteNotificationsWithDeviceToken deviceToken: Data) {
+        //fbInitApplication4
+        PushKConstants.logger.debug("Call fbInitApplication: fbInitApplication4")
         PushKConstants.logger.debug("APNs token retrieved: \(deviceToken)")
         // With swizzling disabled you must set the APNs token here.
         Messaging.messaging().apnsToken = deviceToken
