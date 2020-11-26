@@ -3,6 +3,12 @@ Push-SDK-IOS
 
 ## Using SDK
 
+
+***
+IMPORTANT information
+last actual version SDK 1.0.0.31
+***
+
 Important ! Before start using SDK, configure firebase project first and upload your google-services.json file into your project
 
 * [Setting up your project to work with the SDK](https://github.com/kirillkotov/Push-SDK-IOS/wiki/Creating-App-Id-and-APNS-key)
