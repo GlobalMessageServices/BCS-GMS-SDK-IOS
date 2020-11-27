@@ -26,7 +26,8 @@ Important ! Before start using SDK, configure firebase project first and upload 
 
 Then initialize firebase helper functions into your AppDelegate.swift
 
-```
+```swift
+
  import UIKit
  import PushSDK
  import SwiftyBeaver
@@ -70,7 +71,8 @@ Then initialize firebase helper functions into your AppDelegate.swift
 
 Put extension for processing messages in background state and kill state
 
-```
+```swift
+
 extension AppDelegate: MessagingDelegate {
     
     @IBAction func notify() {
@@ -89,7 +91,8 @@ extension AppDelegate: MessagingDelegate {
 
 Configure processing incoming messages  in ViewController.swift
 
-```
+```swift
+
  override func viewDidLoad() {
     super.viewDidLoad()
     
@@ -114,7 +117,8 @@ Then you can communicate with push platform by the following functions
 [SDK functions list](https://github.com/kirillkotov/Push-SDK-IOS/wiki/SDK-functions-description)
 
 Example using SDK functions:
-```
+```swift
+
 let pushAdapterSdk = PushSDK.init(basePushURL: "https://push.example.com/api/")
 let registrator: PushKFunAnswerRegister = pushAdapterSdk.pushRegisterNew(user_phone: "375291234567", user_password: "1", x_push_sesion_id: PushKConstants.firebase_registration_token ?? "", x_push_ios_bundle_id: "12345678", X_Push_Client_API_Key: "test")
 
