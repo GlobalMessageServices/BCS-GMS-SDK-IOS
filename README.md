@@ -1,13 +1,16 @@
 
-#Push-SDK-IOS
+# Push-SDK-IOS
+
 
 ***
-IMPORTANT information
-last actual version SDK 1.0.0.31
+### IMPORTANT information <br>
+last actual SDK version: 1.0.0.31
+
+Integrate PushSDK to your project with COCOAPODS (https://guides.cocoapods.org/using/the-podfile.html) <br>
+```pod 'PushSDK', :git => 'https://github.com/kirillkotov/Push-SDK-IOS', :branch => 'master'```
 ***
 
 ## Using SDK
-
 
 
 
@@ -15,7 +18,13 @@ Important ! Before start using SDK, configure firebase project first and upload 
 
 * [Setting up your project to work with the SDK](https://github.com/kirillkotov/Push-SDK-IOS/wiki/Creating-App-Id-and-APNS-key)
 
-Then add firebase functions into your AppDelegate.swift
+* [SDK functions list](https://github.com/kirillkotov/Push-SDK-IOS/wiki/SDK-functions-description)
+
+* [SDK answers](https://github.com/kirillkotov/Push-SDK-IOS/wiki/SDK-answers)
+
+
+
+Then initialize firebase helper functions into your AppDelegate.swift
 
 ```
  import UIKit
@@ -59,7 +68,26 @@ Then add firebase functions into your AppDelegate.swift
  }
 ```
 
-Configure incoming messaging processing in ViewController.swift
+Put extension for processing messages in background state and kill state
+
+```
+extension AppDelegate: MessagingDelegate {
+    
+    @IBAction func notify() {
+        fb_ad.fb_notify_messaging()
+    }
+    
+    public func messaging(_ messaging: Messaging, didReceive remoteMessage: MessagingRemoteMessage) {
+        fb_ad.fb_remote_messaging(remoteMessage: remoteMessage.appData as NSDictionary)
+    }
+    
+    public func messaging(_ messaging: Messaging, didReceiveRegistrationToken fcmToken: String) {
+        fb_ad.fb_token_messaging(didReceiveRegistrationToken: fcmToken )
+    }
+}
+```
+
+Configure processing incoming messages  in ViewController.swift
 
 ```
  override func viewDidLoad() {
@@ -72,7 +100,7 @@ Configure incoming messaging processing in ViewController.swift
  }
 
 
- //processing incoming data message
+ //processing incoming data message function
  @objc func onReceiveFromPushServer(_ notification: Notification) {
     // Do something now
     // You can process your message here
@@ -82,8 +110,9 @@ Configure incoming messaging processing in ViewController.swift
  }
 ```
 
+Then you can communicate with push platform by the following functions
 
-Using SDK functions
+Example using SDK functions
 
 ```
 let pushAdapterSdk = PushSDK.init(basePushURL: "https://push.example.com/api/")
@@ -91,48 +120,8 @@ let registrator: PushKFunAnswerRegister = pushAdapterSdk.pushRegisterNew(user_ph
 
 pushAdapterSdk.pushUpdateRegistration()
 
-```
+pushAdapterSdk.pushGetDeviceAllFromServer()
 
-Full list of SDK functions
+pushAdapterSdk.pushClearAllDevice()
 
-* New device registration
-```
-pushRegisterNew(user_phone: String, user_password: String, x_push_sesion_id: String, x_push_ios_bundle_id: String, X_Push_Client_API_Key: String)->PushKFunAnswerRegister
-
-pushRegisterNew(user_phone: String, user_password: String, x_push_ios_bundle_id: String, X_Push_Client_API_Key: String)->PushKFunAnswerRegister
-```
-
-* Clear local device on server
-```
-pushClearCurrentDevice()->PushKGeneralAnswerStruct
-```
-
-* get message history
-```
-public func pushGetMessageHistory(period_in_seconds: Int) -> PushKFunAnswerGetMessageHistory
-```
-
-* Get all devices from server
-```
-pushGetDeviceAllFromServer() -> PushKFunAnswerGetDeviceList
-```
-
-* update firebase token on push server
-```
-pushUpdateRegistration() -> PushKGeneralAnswerStruct
-```
-
-* message callback
-```
-pushSendMessageCallback(message_id: String, message_text: String) -> PushKGeneralAnswerStruct
-```
-
-* Send delivery report to server
-```
-pushMessageDeliveryReport(message_id: String) -> PushKGeneralAnswerStruct
-```
-
-* Clear all devices registered with current msisdn
-```
-pushClearAllDevice()->PushKGeneralAnswerStruct
 ```
