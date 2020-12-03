@@ -122,7 +122,7 @@ public class PushSDK {
     //X_Push_Client_API_Key - provide by hub administrator
     //user_phone - subscribers msisdn
     //subscribers password (optional, for future use)
-    public func pushRegisterNew(user_phone: String, user_password: String, x_push_sesion_id: String, x_push_ios_bundle_id: String, X_Push_Client_API_Key: String)->PushKFunAnswerRegister {
+    public func pushRegisterNew(user_phone: String, user_password: String, x_push_sesion_id: String, x_push_ios_bundle_id: String, X_Push_Client_API_Key: String) -> PushKFunAnswerRegister {
         
         PushKConstants.logger.debug("Start function registrar push_register_new")
         PushKConstants.logger.debug("Input func push_register_new: user_phone: \(user_phone),  user_password: \(user_password), x_push_sesion_id: \(x_push_sesion_id), x_push_ios_bundle_id: \(x_push_ios_bundle_id), X_Push_Client_API_Key: \(X_Push_Client_API_Key)")
@@ -183,7 +183,7 @@ public class PushSDK {
                 let answer = push_rest_server.push_device_revoke(dev_list: [PushKConstants.deviceId ?? "unknown"], X_Push_Session_Id: X_Push_Session_Id, X_Push_Auth_Token: PushKConstants.push_registration_token ?? "firebase_empty")
                 return answer
             } else {
-                return answer_b.general_answer_struct(resp_code: "704", body_json: "error", description: "Not registered")
+                return answer_b.generalAnswerStruct(resp_code: "704", body_json: "error", description: "Not registered")
             }
     }
     
@@ -208,7 +208,7 @@ public class PushSDK {
                 
                 return anss}
             else {
-                return answer_b.general_answer_struct(resp_code: "704", body_json: "error", description: "Not registered")
+                return answer_b.generalAnswerStruct(resp_code: "704", body_json: "error", description: "Not registered")
             }
     }
     
@@ -224,7 +224,7 @@ public class PushSDK {
                 
                 return asaa}
             else {
-                return answer_b.general_answer_struct(resp_code: "704", body_json: "error", description: "Not registered")
+                return answer_b.generalAnswerStruct(resp_code: "704", body_json: "error", description: "Not registered")
             }
     }
     
@@ -236,7 +236,7 @@ public class PushSDK {
                 let ansss = push_rest_server.push_device_update(fcm_Token: PushKConstants.firebase_registration_token ?? "firebase_empty", os_Type: "ios", os_Version: PushKConstants.dev_os_Version, device_Type: PushKConstants.localizedModel, device_Name: UIDevice.modelName, sdk_Version: PushKConstants.sdkVersion, X_Push_Session_Id: X_Push_Session_Id, X_Push_Auth_Token:PushKConstants.push_registration_token ?? "token_empty")
                 return ansss }
             else {
-                return answer_b.general_answer_struct(resp_code: "704", body_json: "error", description: "Not registered")
+                return answer_b.generalAnswerStruct(resp_code: "704", body_json: "error", description: "Not registered")
             }
     }
     
@@ -285,9 +285,10 @@ public class PushSDK {
                 
             }
             else {
-                return answer_b.general_answer_struct(resp_code: "704", body_json: "error", description: "Not registered")
+                return answer_b.generalAnswerStruct(resp_code: "704", body_json: "error", description: "Not registered")
             }
     }
+    
     
     public func rewrite_msisdn(newmsisdn: String) -> PushKGeneralAnswerStruct {
         UserDefaults.standard.set(newmsisdn, forKey: "push_user_msisdn")
@@ -310,12 +311,10 @@ public class PushSDK {
                 return ansss
             }
             else {
-                return answer_b.general_answer2(resp_code: 704, body_json: "error", description: "Not registered")
+                return answer_b.generalAnswer(resp_code: 704, body_json: "error", description: "Not registered")
             }
     }
     
-    
-
     
     //function for parsing incoming message from firebase
     public static func parseIncomingPush(message: Notification) -> PushKMess {

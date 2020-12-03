@@ -9,8 +9,8 @@
 import Foundation
 
 
-class PushKDatabase {
-    func saveDataAfterRegisterOk(user_Phone: String,
+internal class PushKDatabase {
+    internal func saveDataAfterRegisterOk(user_Phone: String,
                                      token: String,
                                      device_id: String,
                                      user_Password: String,

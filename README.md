@@ -4,10 +4,10 @@
 
 ***
 ### IMPORTANT information <br>
-last actual SDK version: 1.0.0.31
+last actual SDK version: 1.0.0.32
 
 Integrate PushSDK to your project with COCOAPODS (https://guides.cocoapods.org/using/the-podfile.html) <br>
-```pod 'PushSDK', :git => 'https://github.com/GlobalMessageServices/Hyber-GMS-SDK-IOS', :branch => 'masterapi'```
+```pod 'PushSDK', :git => 'https://github.com/kirillkotov/Push-SDK-IOS', :branch => 'master'```
 ***
 
 ## Using SDK
@@ -16,11 +16,11 @@ Integrate PushSDK to your project with COCOAPODS (https://guides.cocoapods.org/u
 
 Important ! Before start using SDK, configure firebase project first and upload your google-services.json file into your application directory
 
-* [Setting up your project to work with the SDK](https://github.com/GlobalMessageServices/Hyber-GMS-SDK-IOS/wiki/Creating-App-Id-and-APNS-key)
+* [Setting up your project to work with the SDK](https://github.com/kirillkotov/Push-SDK-IOS/wiki/Creating-App-Id-and-APNS-key)
 
-* [SDK functions list](https://github.com/GlobalMessageServices/Hyber-GMS-SDK-IOS/wiki/SDK-functions-description)
+* [SDK functions list](https://github.com/kirillkotov/Push-SDK-IOS/wiki/SDK-functions-description)
 
-* [SDK answers](https://github.com/GlobalMessageServices/Hyber-GMS-SDK-IOS/wiki/SDK-answers)
+* [SDK answers](https://github.com/kirillkotov/Push-SDK-IOS/wiki/SDK-answers)
 
 
 
@@ -116,7 +116,7 @@ Configure processing incoming messages  in ViewController.swift
 Then you can communicate with push platform by the following functions
 [SDK functions list](https://github.com/kirillkotov/Push-SDK-IOS/wiki/SDK-functions-description)
 
-Example using SDK functions:
+An example of using SDK functions:
 ```swift
 
 let pushAdapterSdk = PushSDK.init(basePushURL: "https://push.example.com/api/")

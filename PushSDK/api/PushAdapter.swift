@@ -10,7 +10,7 @@
 import Foundation
 import CryptoSwift
 
-class PushKAPI {
+internal class PushKAPI {
     
     private let jsonparser = PushKAnswParser.init()
     private let push_database_adapter = PushKDatabase.init()
@@ -216,7 +216,7 @@ class PushKAPI {
                 
                 PushKConstants.logger.debug("push_device_revoke body_json from push server: \(body_json)")
                 
-                answ = self.answer_buider.general_answer_struct(resp_code: String(httpResponse.statusCode), body_json: body_json, description: "Success")
+                answ = self.answer_buider.generalAnswerStruct(resp_code: String(httpResponse.statusCode), body_json: body_json, description: "Success")
                 
                 PushKConstants.logger.debug(jsonData as Any)
                 PushKConstants.logger.debug("\(procedure_name) response jsonData is \(String(describing: jsonData))")
@@ -335,7 +335,7 @@ class PushKAPI {
                 
                 let devid_parsed = self.jsonparser.updateregistrationJParse(str_resp: body_json)
                 
-                answ = self.answer_buider.general_answer_struct(resp_code: String(httpResponse.statusCode), body_json: "deviceId: \(devid_parsed.deviceId)", description: "Success")
+                answ = self.answer_buider.generalAnswerStruct(resp_code: String(httpResponse.statusCode), body_json: "deviceId: \(devid_parsed.deviceId)", description: "Success")
                 
                 PushKConstants.logger.debug("\(procedure_name) response jsonData is \(String(describing: jsonData))")
                 
@@ -560,7 +560,7 @@ class PushKAPI {
                     let body_json: String = String(decoding: receivedData, as: UTF8.self)
                     PushKConstants.logger.debug("push_message_dr body_json from push server: \(body_json)")
                     
-                    answ = self.answer_buider.general_answer_struct(resp_code: String(httpResponse.statusCode), body_json: body_json, description: "Success")
+                    answ = self.answer_buider.generalAnswerStruct(resp_code: String(httpResponse.statusCode), body_json: body_json, description: "Success")
                     
                     PushKConstants.logger.debug("\(procedure_name) response jsonData is \(String(describing: jsonData))")
                     
@@ -597,7 +597,7 @@ class PushKAPI {
                 semaphore3.wait()
                 return answ
             } else {
-                return self.answer_buider.general_answer_struct(resp_code: "700", body_json: "{\"error\":\"Incorrect input\"}", description: "Failed")
+                return self.answer_buider.generalAnswerStruct(resp_code: "700", body_json: "{\"error\":\"Incorrect input\"}", description: "Failed")
             }
         
     }
@@ -664,7 +664,7 @@ class PushKAPI {
                 let body_json: String = String(decoding: receivedData, as: UTF8.self)
                 PushKConstants.logger.debug("push_message_callback body_json from push server: \(body_json)")
                 
-                answ = self.answer_buider.general_answer_struct(resp_code: String(httpResponse.statusCode), body_json: body_json, description: "Success")
+                answ = self.answer_buider.generalAnswerStruct(resp_code: String(httpResponse.statusCode), body_json: body_json, description: "Success")
                 
                 PushKConstants.logger.debug("\(procedure_name) response jsonData is \(String(describing: jsonData))")
                 
@@ -906,8 +906,8 @@ class PushKAPI {
             let auth_token = X_Push_Auth_Token + ":" + String(timet)
             let sha256_auth_token = auth_token.sha256()
             PushKConstants.logger.debug(sha256_auth_token)
-            
-            self.processor.file_logger(message: "\(procedure_name) request X-Hyber-Timestamp is \(String(timet))", loglevel: ".debug")
+            PushKConstants.logger.debug("\(procedure_name) request X-Hyber-Timestamp is \(String(timet))")
+        
             request.addValue(String(timet), forHTTPHeaderField: "X-Hyber-Timestamp")
             request.addValue(sha256_auth_token, forHTTPHeaderField: "X-Hyber-Auth-Token")
             PushKConstants.logger.debug(request.allHTTPHeaderFields as Any)
@@ -933,7 +933,7 @@ class PushKAPI {
                 let body_json: String = String(decoding: receivedData, as: UTF8.self)
                 PushKConstants.logger.debug("push_device_get_all body_json from push server: \(body_json)")
                 
-                answ = self.answer_buider.general_answer2(resp_code: httpResponse.statusCode, body_json: body_json, description: "Success")
+                answ = self.answer_buider.generalAnswer(resp_code: httpResponse.statusCode, body_json: body_json, description: "Success")
                 
                 PushKConstants.logger.debug("\(procedure_name) response jsonData is \(String(describing: jsonData))")
                 PushKConstants.logger.debug("\(procedure_name) response code is \(httpResponse.statusCode)")

@@ -130,13 +130,16 @@ public class PushSDKFirebase: UIResponder, UIApplicationDelegate {
         let newString = String(jsonString ?? "").replacingOccurrences(of: "\\", with: "", options: .literal, range: nil)
         let parsed_message = PushKAnswParser.messageIncomingJson(str_resp: newString)
         PushKConstants.logger.debug(parsed_message)
-        PushKConstants.logger.debug("test another")
+        PushKConstants.logger.debug("test step before notification")
         
-        manualNotificator.pushNotificationManualWithImage(
+        let state = UIApplication.shared.applicationState
+        if state == .background || state == .inactive {
+          manualNotificator.pushNotificationManualWithImage(
             image_url: String(parsed_message.message.image?.url ?? ""),
             content_title: String(parsed_message.message.title ?? ""),
             content_body: String(parsed_message.message.body ?? ""))
-        
+            PushKConstants.logger.debug("App in Background")
+        }
         
         //textOutput.text = newString
         PushKConstants.logger.debug("newString: \(newString)")
@@ -214,19 +217,25 @@ extension PushSDKFirebase {
         let fdf = remoteMessage as NSDictionary as? [String: AnyObject]
         guard let jsonData = (try? JSONSerialization.data(withJSONObject: fdf ?? "", options: [])) else { return  }
         let jsonString = String(data: jsonData, encoding: .utf8)
-        let parsed_message = PushKAnswParser.messageIncomingJson(str_resp: jsonString ?? "")
-        PushKConstants.logger.debug(parsed_message)
-        let new3String = pushParser.messIdParser(message_from_push_server: jsonString ?? "")
-        manualNotificator.pushNotificationManualWithImage(
-            image_url: String(parsed_message.message.image?.url ?? ""),
-            content_title: String(parsed_message.message.title ?? ""),
-            content_body: String(parsed_message.message.body ?? ""))
+        let parsedMessage = PushKAnswParser.messageIncomingJson(str_resp: jsonString ?? "")
+        PushKConstants.logger.debug(parsedMessage)
+        let parsedMessageUserData = pushParser.messIdParser(message_from_push_server: jsonString ?? "")
+        
+        let state = UIApplication.shared.applicationState
+        if state == .background || state == .inactive {
+            manualNotificator.pushNotificationManualWithImage(
+                image_url: String(parsedMessage.message.image?.url ?? ""),
+                content_title: String(parsedMessage.message.title ?? ""),
+                content_body: String(parsedMessage.message.body ?? ""))
+            PushKConstants.logger.debug("App in Background")
+        }
+        
 
         switch UIApplication.shared.applicationState {
         case .active:
             PushKConstants.logger.debug("active")
         case .background:
-            PushKConstants.logger.debug("App is backgrounded. Next number = \(new3String)")
+            PushKConstants.logger.debug("App is backgrounded. Next number = \(parsedMessageUserData)")
             PushKConstants.logger.debug("Background time remaining = " +
                 "\(UIApplication.shared.backgroundTimeRemaining) seconds")
         case .inactive:
@@ -234,7 +243,7 @@ extension PushSDKFirebase {
         @unknown default:
             PushKConstants.logger.debug("Fatal application error for UIApplication.shared.applicationState")
         }
-        let deliv_rep = push_adapter.pushMessageDeliveryReport(message_id: new3String)
+        let deliv_rep = push_adapter.pushMessageDeliveryReport(message_id: parsedMessageUserData)
         PushKConstants.logger.debug("Delivery report: \(deliv_rep)")
         NotificationCenter.default.post(name: .receivePushKData, object: nil, userInfo: fdf)
     }

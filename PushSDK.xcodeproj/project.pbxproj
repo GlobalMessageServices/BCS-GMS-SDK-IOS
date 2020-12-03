@@ -24,11 +24,11 @@
 		BAB6CB112558FA59007A4C56 /* PushSDK.h in Headers */ = {isa = PBXBuildFile; fileRef = BAB6CB032558FA59007A4C56 /* PushSDK.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		BAB6CB1B2558FAD5007A4C56 /* PushSDK.swift in Sources */ = {isa = PBXBuildFile; fileRef = BAB6CB1A2558FAD5007A4C56 /* PushSDK.swift */; };
 		BAB6CB1D2558FAE2007A4C56 /* BridgingHeader.h in Headers */ = {isa = PBXBuildFile; fileRef = BAB6CB1C2558FAE2007A4C56 /* BridgingHeader.h */; };
-		BAB6CB2B2558FBF0007A4C56 /* params.swift in Sources */ = {isa = PBXBuildFile; fileRef = BAB6CB272558FBF0007A4C56 /* params.swift */; };
-		BAB6CB2C2558FBF0007A4C56 /* push_answer_func.swift in Sources */ = {isa = PBXBuildFile; fileRef = BAB6CB282558FBF0007A4C56 /* push_answer_func.swift */; };
-		BAB6CB2D2558FBF0007A4C56 /* add_functions.swift in Sources */ = {isa = PBXBuildFile; fileRef = BAB6CB292558FBF0007A4C56 /* add_functions.swift */; };
-		BAB6CB302559036A007A4C56 /* parser.swift in Sources */ = {isa = PBXBuildFile; fileRef = BAB6CB2F2559036A007A4C56 /* parser.swift */; };
-		BAC30CCE25623AE300559536 /* notifications.swift in Sources */ = {isa = PBXBuildFile; fileRef = BAC30CCD25623AE300559536 /* notifications.swift */; };
+		BAB6CB2B2558FBF0007A4C56 /* Params.swift in Sources */ = {isa = PBXBuildFile; fileRef = BAB6CB272558FBF0007A4C56 /* Params.swift */; };
+		BAB6CB2C2558FBF0007A4C56 /* PushAnswerFunc.swift in Sources */ = {isa = PBXBuildFile; fileRef = BAB6CB282558FBF0007A4C56 /* PushAnswerFunc.swift */; };
+		BAB6CB2D2558FBF0007A4C56 /* AddFunctions.swift in Sources */ = {isa = PBXBuildFile; fileRef = BAB6CB292558FBF0007A4C56 /* AddFunctions.swift */; };
+		BAB6CB302559036A007A4C56 /* Parser.swift in Sources */ = {isa = PBXBuildFile; fileRef = BAB6CB2F2559036A007A4C56 /* Parser.swift */; };
+		BAC30CCE25623AE300559536 /* Notifications.swift in Sources */ = {isa = PBXBuildFile; fileRef = BAC30CCD25623AE300559536 /* Notifications.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -64,11 +64,11 @@
 		BAB6CB102558FA59007A4C56 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		BAB6CB1A2558FAD5007A4C56 /* PushSDK.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PushSDK.swift; sourceTree = "<group>"; };
 		BAB6CB1C2558FAE2007A4C56 /* BridgingHeader.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BridgingHeader.h; sourceTree = "<group>"; };
-		BAB6CB272558FBF0007A4C56 /* params.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = params.swift; sourceTree = "<group>"; };
-		BAB6CB282558FBF0007A4C56 /* push_answer_func.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = push_answer_func.swift; sourceTree = "<group>"; };
-		BAB6CB292558FBF0007A4C56 /* add_functions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = add_functions.swift; sourceTree = "<group>"; };
-		BAB6CB2F2559036A007A4C56 /* parser.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = parser.swift; sourceTree = "<group>"; };
-		BAC30CCD25623AE300559536 /* notifications.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = notifications.swift; sourceTree = "<group>"; };
+		BAB6CB272558FBF0007A4C56 /* Params.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Params.swift; sourceTree = "<group>"; };
+		BAB6CB282558FBF0007A4C56 /* PushAnswerFunc.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PushAnswerFunc.swift; sourceTree = "<group>"; };
+		BAB6CB292558FBF0007A4C56 /* AddFunctions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AddFunctions.swift; sourceTree = "<group>"; };
+		BAB6CB2F2559036A007A4C56 /* Parser.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Parser.swift; sourceTree = "<group>"; };
+		BAC30CCD25623AE300559536 /* Notifications.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Notifications.swift; sourceTree = "<group>"; };
 		DB23670992AE5E80D58C36B9 /* Pods-PushSDK.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-PushSDK.debug.xcconfig"; path = "Target Support Files/Pods-PushSDK/Pods-PushSDK.debug.xcconfig"; sourceTree = "<group>"; };
 		FC2F1AA721CE7964E04010E6 /* Pods-PushSDK.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-PushSDK.release.xcconfig"; path = "Target Support Files/Pods-PushSDK/Pods-PushSDK.release.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -182,9 +182,9 @@
 		BAB6CB232558FB3D007A4C56 /* settings */ = {
 			isa = PBXGroup;
 			children = (
-				BAB6CB292558FBF0007A4C56 /* add_functions.swift */,
-				BAB6CB272558FBF0007A4C56 /* params.swift */,
-				BAB6CB282558FBF0007A4C56 /* push_answer_func.swift */,
+				BAB6CB292558FBF0007A4C56 /* AddFunctions.swift */,
+				BAB6CB272558FBF0007A4C56 /* Params.swift */,
+				BAB6CB282558FBF0007A4C56 /* PushAnswerFunc.swift */,
 				BA7283E2256D825E00509E06 /* JsonParser.swift */,
 			);
 			path = settings;
@@ -193,8 +193,8 @@
 		BAB6CB2E25590354007A4C56 /* core */ = {
 			isa = PBXGroup;
 			children = (
-				BAB6CB2F2559036A007A4C56 /* parser.swift */,
-				BAC30CCD25623AE300559536 /* notifications.swift */,
+				BAB6CB2F2559036A007A4C56 /* Parser.swift */,
+				BAC30CCD25623AE300559536 /* Notifications.swift */,
 				BA7283D2256D7C8B00509E06 /* MemorySaver.swift */,
 			);
 			path = core;
@@ -390,18 +390,18 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				BAC30CCE25623AE300559536 /* notifications.swift in Sources */,
+				BAC30CCE25623AE300559536 /* Notifications.swift in Sources */,
 				BAA1F2512570425E00728318 /* FirebaseHelpers.swift in Sources */,
 				BA7283D3256D7C8B00509E06 /* MemorySaver.swift in Sources */,
-				BAB6CB302559036A007A4C56 /* parser.swift in Sources */,
-				BAB6CB2C2558FBF0007A4C56 /* push_answer_func.swift in Sources */,
+				BAB6CB302559036A007A4C56 /* Parser.swift in Sources */,
+				BAB6CB2C2558FBF0007A4C56 /* PushAnswerFunc.swift in Sources */,
 				BA728675256DB83900509E06 /* PushSDKFirebase.swift in Sources */,
 				BAB6CB1B2558FAD5007A4C56 /* PushSDK.swift in Sources */,
 				BA7283C8256D74BC00509E06 /* DataStructures.swift in Sources */,
 				BA7283CD256D771200509E06 /* Extensions.swift in Sources */,
 				BA7283DF256D820600509E06 /* PushAdapter.swift in Sources */,
-				BAB6CB2B2558FBF0007A4C56 /* params.swift in Sources */,
-				BAB6CB2D2558FBF0007A4C56 /* add_functions.swift in Sources */,
+				BAB6CB2B2558FBF0007A4C56 /* Params.swift in Sources */,
+				BAB6CB2D2558FBF0007A4C56 /* AddFunctions.swift in Sources */,
 				BA7283E3256D825E00509E06 /* JsonParser.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
