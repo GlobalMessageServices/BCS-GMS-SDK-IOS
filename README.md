@@ -4,7 +4,7 @@
 
 ***
 ### IMPORTANT information <br>
-last actual SDK version: 1.0.0.32
+last actual SDK version: 1.0.0.33
 
 Integrate PushSDK to your project with COCOAPODS (https://guides.cocoapods.org/using/the-podfile.html) <br>
 ```pod 'PushSDK', :git => 'https://github.com/kirillkotov/Push-SDK-IOS', :branch => 'master'```
@@ -67,26 +67,6 @@ Then initialize firebase helper functions into your AppDelegate.swift
         fb_ad.fbInitApplication(didRegisterForRemoteNotificationsWithDeviceToken: deviceToken)
     }
  }
-```
-
-Put extension for processing messages in background state and kill state
-
-```swift
-
-extension AppDelegate: MessagingDelegate {
-    
-    @IBAction func notify() {
-        fb_ad.fb_notify_messaging()
-    }
-    
-    public func messaging(_ messaging: Messaging, didReceive remoteMessage: MessagingRemoteMessage) {
-        fb_ad.fb_remote_messaging(remoteMessage: remoteMessage.appData as NSDictionary)
-    }
-    
-    public func messaging(_ messaging: Messaging, didReceiveRegistrationToken fcmToken: String) {
-        fb_ad.fb_token_messaging(didReceiveRegistrationToken: fcmToken )
-    }
-}
 ```
 
 Configure processing incoming messages  in ViewController.swift
