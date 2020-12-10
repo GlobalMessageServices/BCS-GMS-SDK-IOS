@@ -74,8 +74,8 @@ public class PushSDK {
         PushKConstants.logger.addDestination(console)
         PushKConstants.logger.addDestination(file)
         
-        let push_sesion_id = PushSdkFirHelpers.firebaseUpdateToken()
-        PushKConstants.logger.debug("Init PushSDK: push_sesion_id: \(push_sesion_id)")
+        //let push_sesion_id = PushSdkFirHelpers.firebaseUpdateToken()
+        //PushKConstants.logger.debug("Init PushSDK: push_sesion_id: \(push_sesion_id)")
     }
     
     private let processor = PushKProcessing.init()
