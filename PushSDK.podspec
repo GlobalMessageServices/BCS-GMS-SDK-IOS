@@ -124,7 +124,7 @@ Pod::Spec.new do |spec|
 
 
 
-  spec.dependency "BoringSSL-GRPC", "0.0.13"
+  spec.dependency "BoringSSL-GRPC"
   #spec.dependency "BoringSSL-GRPC"
   spec.dependency "CryptoSwift", "1.0.0"
   spec.dependency "SwiftyJSON", "5.0.0"
@@ -132,7 +132,9 @@ Pod::Spec.new do |spec|
   spec.dependency 'SwiftyBeaver', "1.9.2"
   spec.dependency 'Firebase/Messaging'
   spec.dependency 'FirebaseCore'
-  #spec.dependency 'FirebaseInstallations'
+  spec.dependency 'Firebase/Installations'
+  spec.dependency 'FirebaseInstanceID'
+  
 
   # ――― Project Settings ――――――――――――――――――――――――――――――――――――――――――――――――――――――――― #
   #

@@ -275,12 +275,12 @@ internal class PushKAPI {
             let semaphore5 = DispatchSemaphore(value: 0)
             
             let params =  [
-                "fcmToken":fcm_Token,
-                "osType":os_Type,
-                "osVersion":os_Version,
-                "deviceType":device_Type,
-                "deviceName":device_Name,
-                "sdkVersion":sdk_Version
+                "fcmToken": fcm_Token,
+                "osType": os_Type,
+                "osVersion": os_Version,
+                "deviceType": device_Type,
+                "deviceName": device_Name,
+                "sdkVersion": sdk_Version
                 ] as Dictionary<String, AnyObject>
         let urlString = NSString(format: PushKConstants.platform_branch_active.url_Http_Update as NSString);
             PushKConstants.logger.debug("push_device_update: \(procedure_name) url string is \(urlString)")

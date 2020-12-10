@@ -9,11 +9,14 @@
 import Foundation
 import FirebaseMessaging
 import FirebaseCore
-import FirebaseInstanceID
+//import FirebaseInstanceID
+import FirebaseInstallations
 
 class PushSdkFirHelpers {
     static func firebaseUpdateToken() -> String {
         PushKConstants.logger.debug("Start firebaseUpdateToken")
+        
+        /*
         InstanceID.instanceID().instanceID { (result, error) in
             PushKConstants.logger.debug("Processing firebaseUpdateToken result: \(result?.token ?? ""), error: \(error.debugDescription )")
             if let error = error {
@@ -29,21 +32,26 @@ class PushSdkFirHelpers {
         }
         
         PushKConstants.logger.debug("answToken token: \(PushKConstants.firebase_registration_token ?? "")")
+        */
         
         
-        /*
     Installations.installations().authTokenForcingRefresh(true, completion: { (token, error) in
         if let error = error {
             PushKConstants.logger.debug("Error fetching remote instance ID: \(error)")
             return
         }
         guard let token = token else { return }
-        UserDefaults.standard.set(token.authToken, forKey: "firebase_registration_token")
-        PushKConstants.firebase_registration_token = token.authToken
-        UserDefaults.standard.synchronize()
-        PushKConstants.logger.debug("Remote instance ID token: \(token.authToken)")
+        
+        if (token.authToken != "") {
+            UserDefaults.standard.set(token.authToken, forKey: "firebase_registration_token")
+            PushKConstants.firebase_registration_token = token.authToken
+            UserDefaults.standard.synchronize()
+            PushKConstants.logger.debug("Remote instance ID token: \(token.authToken)")
+        }
     })
-*/
+        
+        PushKConstants.logger.debug("answToken token: \(PushKConstants.firebase_registration_token ?? "")")
+
         
         return PushKConstants.firebase_registration_token ?? ""
     }

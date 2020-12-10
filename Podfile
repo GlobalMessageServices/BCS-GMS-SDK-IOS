@@ -14,7 +14,7 @@ target 'PushSDK' do
   #pod 'Firebase/Storage'
   #pod 'Firebase/Firestore'
   #pod 'Google-Mobile-Ads-SDK'
-  pod 'BoringSSL-GRPC', '0.0.13'
+  pod 'BoringSSL-GRPC'
   pod 'CryptoSwift', '1.0.0'
   pod 'JSON'
   pod 'SwiftyBeaver'
@@ -22,7 +22,7 @@ target 'PushSDK' do
   pod 'Firebase/Installations'
   pod 'FirebaseCore'
   #pod 'Firebase/Core'
-  #pod 'FirebaseInstanceID'
+  pod 'FirebaseInstanceID'
 
   target 'PushSDKTests' do
     inherit! :search_paths
