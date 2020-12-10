@@ -20,9 +20,9 @@ target 'PushSDK' do
   pod 'SwiftyBeaver'
   pod 'Firebase/Messaging'
   pod 'Firebase/Installations'
-  pod 'FirebaseCore'
+  #pod 'FirebaseCore'
   #pod 'Firebase/Core'
-  pod 'FirebaseInstanceID'
+  #pod 'FirebaseInstanceID'
 
   target 'PushSDKTests' do
     inherit! :search_paths
@@ -39,9 +39,9 @@ target 'PushSDK' do
     pod 'CryptoSwift', '1.0.0'
     pod 'JSON'
     pod 'SwiftyBeaver'
-    pod 'Firebase/Messaging'
-    pod 'FirebaseInstallations'
-    pod 'FirebaseCore'
+    #pod 'Firebase/Messaging'
+    #pod 'Firebase/Installations'
+    #pod 'FirebaseCore'
     #pod 'Firebase/Core'
     #pod 'FirebaseInstanceID'
   end
