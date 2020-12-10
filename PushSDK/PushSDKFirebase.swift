@@ -132,6 +132,7 @@ public class PushSDKFirebase: UIResponder, UIApplicationDelegate {
         PushKConstants.logger.debug(parsed_message)
         PushKConstants.logger.debug("test step before notification")
         
+        /*
         let state = UIApplication.shared.applicationState
         if state == .background || state == .inactive {
           manualNotificator.pushNotificationManualWithImage(
@@ -140,6 +141,13 @@ public class PushSDKFirebase: UIResponder, UIApplicationDelegate {
             content_body: String(parsed_message.message.body ?? ""))
             PushKConstants.logger.debug("App in Background")
         }
+ */
+        manualNotificator.pushNotificationManualWithImage(
+          image_url: String(parsed_message.message.image?.url ?? ""),
+          content_title: String(parsed_message.message.title ?? ""),
+          content_body: String(parsed_message.message.body ?? ""))
+          PushKConstants.logger.debug("App in Background")
+        
         
         //textOutput.text = newString
         PushKConstants.logger.debug("newString: \(newString)")
@@ -221,6 +229,8 @@ extension PushSDKFirebase {
         PushKConstants.logger.debug(parsedMessage)
         let parsedMessageUserData = pushParser.messIdParser(message_from_push_server: jsonString ?? "")
         
+        
+        /*
         let state = UIApplication.shared.applicationState
         if state == .background || state == .inactive {
             manualNotificator.pushNotificationManualWithImage(
@@ -229,7 +239,12 @@ extension PushSDKFirebase {
                 content_body: String(parsedMessage.message.body ?? ""))
             PushKConstants.logger.debug("App in Background")
         }
-        
+ */
+        manualNotificator.pushNotificationManualWithImage(
+            image_url: String(parsedMessage.message.image?.url ?? ""),
+            content_title: String(parsedMessage.message.title ?? ""),
+            content_body: String(parsedMessage.message.body ?? ""))
+        PushKConstants.logger.debug("App in Background")
 
         switch UIApplication.shared.applicationState {
         case .active:
