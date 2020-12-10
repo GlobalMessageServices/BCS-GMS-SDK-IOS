@@ -230,7 +230,8 @@ public class PushSDK {
     
     public func pushUpdateRegistration() -> PushKGeneralAnswerStruct {
             if (PushKConstants.registrationstatus==true) {
-                let X_Push_Session_Id: String = PushKConstants.firebase_registration_token ?? "firebase_empty"
+                
+                let X_Push_Session_Id: String = PushSdkFirHelpers.firebaseUpdateToken()
                 let push_rest_server = PushKAPI.init()
                 
                 let ansss = push_rest_server.push_device_update(fcm_Token: PushKConstants.firebase_registration_token ?? "firebase_empty", os_Type: "ios", os_Version: PushKConstants.dev_os_Version, device_Type: PushKConstants.localizedModel, device_Name: UIDevice.modelName, sdk_Version: PushKConstants.sdkVersion, X_Push_Session_Id: X_Push_Session_Id, X_Push_Auth_Token:PushKConstants.push_registration_token ?? "token_empty")

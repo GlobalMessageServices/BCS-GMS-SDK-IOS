@@ -42,16 +42,19 @@ class PushSdkFirHelpers {
         }
         guard let token = token else { return }
         
-        if (token.authToken != "") {
-            UserDefaults.standard.set(token.authToken, forKey: "firebase_registration_token")
-            PushKConstants.firebase_registration_token = token.authToken
-            UserDefaults.standard.synchronize()
-            PushKConstants.logger.debug("Remote instance ID token: \(token.authToken)")
-        }
+        PushKConstants.logger.debug("Remote Instance ID token: \(token.authToken)")
+
     })
         
         PushKConstants.logger.debug("answToken token: \(PushKConstants.firebase_registration_token ?? "")")
-
+        
+        let tokenFcm = String(Messaging.messaging().fcmToken ?? "")
+        if (tokenFcm != "") {
+            UserDefaults.standard.set(tokenFcm, forKey: "firebase_registration_token")
+            PushKConstants.firebase_registration_token = tokenFcm
+            UserDefaults.standard.synchronize()
+            PushKConstants.logger.debug("FCM token: \(tokenFcm)")
+        }
         
         return PushKConstants.firebase_registration_token ?? ""
     }
