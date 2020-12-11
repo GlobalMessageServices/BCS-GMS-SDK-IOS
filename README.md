@@ -41,7 +41,6 @@ Then initialize firebase helper functions into your AppDelegate.swift
         // Override point for customization after application launch.
         FirebaseApp.configure()
         fb_ad.fbInitApplication(didFinishLaunchingWithOptions: launchOptions)
-        //application.registerForRemoteNotifications()
         UNUserNotificationCenter.current().delegate = self
         return true
     }
