@@ -16,7 +16,8 @@ class PushKNotification {
                 time_delay: TimeInterval = 0.1,
                 content_title: String = "",
                 content_subtitle: String = "",
-                content_body: String
+                content_body: String,
+                userInfo: [AnyHashable: Any]
         ) {
         PushKConstants.logger.debug("push_notification_manual_wImage input: image_url: \(image_url), time_delay: \(time_delay), content_title: \(content_title), content_subtitle: \(content_subtitle), content_body: \(content_body)")
         
@@ -25,6 +26,7 @@ class PushKNotification {
         let ident = PushKConstants.pusher_counter
         PushKConstants.logger.debug("content.badge ident: \(ident)")
         content.badge = ident as NSNumber
+        content.userInfo = userInfo
         
         if content_title != "" {content.title = content_title}
         if content_subtitle != "" {content.subtitle = content_subtitle}

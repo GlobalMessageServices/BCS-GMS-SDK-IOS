@@ -145,7 +145,8 @@ public class PushSDKFirebase: UIResponder, UIApplicationDelegate {
         manualNotificator.pushNotificationManualWithImage(
           image_url: String(parsed_message.message.image?.url ?? ""),
           content_title: String(parsed_message.message.title ?? ""),
-          content_body: String(parsed_message.message.body ?? ""))
+          content_body: String(parsed_message.message.body ?? ""),
+            userInfo: userInfo)
           PushKConstants.logger.debug("App in Background")
         
         
@@ -243,7 +244,8 @@ extension PushSDKFirebase {
         manualNotificator.pushNotificationManualWithImage(
             image_url: String(parsedMessage.message.image?.url ?? ""),
             content_title: String(parsedMessage.message.title ?? ""),
-            content_body: String(parsedMessage.message.body ?? ""))
+            content_body: String(parsedMessage.message.body ?? ""),
+            userInfo: fdf ?? [:])
         PushKConstants.logger.debug("App in Background")
 
         switch UIApplication.shared.applicationState {

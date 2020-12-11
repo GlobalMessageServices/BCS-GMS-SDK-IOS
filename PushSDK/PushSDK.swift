@@ -326,6 +326,16 @@ public class PushSDK {
         return PushKMess(code: 200, result: "Success", messageFir: parsed_message)
     }
     
+    //userInfo parse
+    public static func parseIncomingPush(message:  [AnyHashable : Any]) -> PushKMess {
+        guard let jsonData = try? JSONSerialization.data(withJSONObject: message , options: []) else { return  PushKMess(code: 500, result: "Error in process message", messageFir: FullFirebaseMessageStr(aps: MessApsDataStr(contentAvailable: ""), message: MessagesResponseStr(), googleCSenderId: "", gcmMessageId: ""))}
+        
+        let jsonString = String(data: jsonData, encoding: .utf8)
+        let newString = String(jsonString ?? "").replacingOccurrences(of: "\\", with: "", options: .literal, range: nil)
+        let parsed_message = PushKAnswParser.messageIncomingJson(str_resp: newString)
+        return PushKMess(code: 200, result: "Success", messageFir: parsed_message)
+    }
+    
     
 }
 

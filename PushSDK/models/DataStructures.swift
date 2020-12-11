@@ -36,11 +36,11 @@ public struct PushKFunAnswerGeneral {
 }
 
 struct RegisterJsonParse {
-    var deviceId: String?=nil
-    var token: String?=nil
+    var deviceId: String?=""
+    var token: String?=""
     var userId: Int?=0
-    var userPhone: String?=nil
-    var createdAt: String?=nil
+    var userPhone: String?=""
+    var createdAt: String?=""
 }
 
 struct UpdateRegJsonParse {
@@ -99,7 +99,7 @@ public struct PushKFunAnswerGetDeviceList {
 }
 
 public struct ImageResponse {
-    public var url: String?=nil
+    public var url: String?=""
     
     public func toString() -> String {
         return "ImageResponse(url: \(self.url ?? ""))"
@@ -107,8 +107,8 @@ public struct ImageResponse {
 }
 
 public struct ButtonResponse {
-    public var text: String?=nil
-    public var url: String?=nil
+    public var text: String?=""
+    public var url: String?=""
     
     public func toString() -> String {
         return "ButtonResponse(text: \(self.text ?? ""), url: \(self.url ?? ""))"
@@ -116,14 +116,14 @@ public struct ButtonResponse {
 }
 
 public struct MessagesResponseStr {
-    public var phone: String?=nil
-    public var messageId: String?=nil
-    public var title: String?=nil
-    public var body: String?=nil
+    public var phone: String?=""
+    public var messageId: String?=""
+    public var title: String?=""
+    public var body: String?=""
     public var image: ImageResponse?=nil
     public var button: ButtonResponse?=nil
-    public var time: String?=nil
-    public var partner: String?=nil
+    public var time: String?=""
+    public var partner: String?=""
     
     public func toString() -> String {
         return "MessagesResponseStr(phone: \(self.phone ?? ""), messageId: \(self.messageId ?? ""), title: \(self.title ?? ""), body: \(self.body ?? ""), image: \(self.image?.toString() ?? ""), button: \(self.button?.toString() ?? ""), time: \(self.time ?? ""), partner: \(self.partner ?? ""))"
@@ -150,9 +150,9 @@ public struct FullFirebaseMessageStr {
 }
 
 public struct MessagesListResponse {
-    public var limitDays: Int?=nil
-    public var limitMessages: Int?=nil
-    public var lastTime: Int?=nil
+    public var limitDays: Int?=0
+    public var limitMessages: Int?=0
+    public var lastTime: Int?=0
     public var messages: [MessagesResponseStr]
     
     public func toString() -> String {
@@ -181,9 +181,9 @@ public struct MessagesListResponse {
 }
 
 public struct PushKFunAnswerGetMessageHistory {
-    public var code: Int?=nil
-    public var result: String?=nil
-    public var description: String?=nil
+    public var code: Int?=0
+    public var result: String?=""
+    public var description: String?=""
     public var body: MessagesListResponse? = nil
     
     public func toString() -> String {
