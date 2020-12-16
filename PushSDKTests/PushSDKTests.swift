@@ -77,12 +77,9 @@ class PushSDKTests: XCTestCase {
     }
     
     
-
-
-    
     func testGetInfo() {
         let appVersion = Bundle.main.infoDictionary?["CFBundleShortVersionString"] as? String
-        print(appVersion)
+        print(appVersion ?? "unknown_empty")
         let object = NSStringFromClass(PushSDK.self) as NSString
         let module = object.components(separatedBy: ".").first!
         print(module)

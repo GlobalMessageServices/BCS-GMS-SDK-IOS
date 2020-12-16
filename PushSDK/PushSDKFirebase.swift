@@ -21,11 +21,12 @@ public class PushSDKFirebase: UIResponder, UIApplicationDelegate {
     let pushParser = PusherKParser.init()
     let manualNotificator = PushKNotification.init()
     let answerAdapter = PushKAnswParser.init()
-    
     let push_adapter = PushSDK.init(basePushURL: PushKConstants.basePushURLactive)
-    public var window: UIWindow?
     let gcmMessageIDKey = "gcm.message_id"
     let mySpecialNotificationKey = "com.push.specialNotificationKey"
+    
+    public var window: UIWindow?
+
     @IBOutlet weak var sentNotificationLabel: UILabel?
     
     public func registerForPushNotifications() {
@@ -51,14 +52,7 @@ public class PushSDKFirebase: UIResponder, UIApplicationDelegate {
         //fbInitApplication0
         PushKConstants.logger.debug("Call fbInitApplication: fbInitApplication0")
         
-        //FirebaseApp.configure()
-        //Messaging.messaging().delegate = self
-        //Messaging.messaging().shouldEstablishDirectChannel = true
-        
-        //Messaging.messaging().apnsToken = deviceToken
-        //UNUserNotificationCenter.current().delegate = self
         let authOptions: UNAuthorizationOptions = [.alert, .badge, .sound]
-        
         //Solicit permission from user to receive notifications
         UNUserNotificationCenter.current().requestAuthorization(options: authOptions) { (_, error) in
             guard error == nil else{
@@ -153,17 +147,6 @@ public class PushSDKFirebase: UIResponder, UIApplicationDelegate {
         //textOutput.text = newString
         PushKConstants.logger.debug("newString: \(newString)")
         PushKConstants.logger.debug("findProcessor")
-
-        let deviceid_func = self.processorPush.matches(for: "\"messageId\":\"(.{4,9}-.{3,9}-.{3,9}-.{3,9}-.{4,15})\"", in: newString)
-        PushKConstants.logger.debug("deviceid_func: \(deviceid_func)")
-        
-        
-        
-        guard let jsonData2 = (try? JSONSerialization.data(withJSONObject: deviceid_func, options: [])) else { return  }
-        
-        let jsonString2 = String(data: jsonData2, encoding: .utf8)
-        
-        PushKConstants.message_buffer = jsonString2 ?? ""
         
         let new3String = pushParser.messIdParser(message_from_push_server: jsonString ?? "")
         

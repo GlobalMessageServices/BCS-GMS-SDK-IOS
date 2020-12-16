@@ -107,13 +107,7 @@ public class PushSDK {
     //}
     //}
     
-    
-    
-    
     let answer_b = AnswerBuider.init()
-    
-    
-
     
     
     //Procedure 1. new device registration

@@ -12,7 +12,7 @@ import FirebaseCore
 //import FirebaseInstanceID
 import FirebaseInstallations
 
-class PushSdkFirHelpers {
+internal class PushSdkFirHelpers {
     static func firebaseUpdateToken() -> String {
         PushKConstants.logger.debug("Start firebaseUpdateToken")
         
