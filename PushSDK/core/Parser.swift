@@ -45,24 +45,21 @@ public class PusherKParser {
     public func messIdParser(message_from_push_server: String) -> String
     {
         
-        let newString = message_from_push_server.replacingOccurrences(of: "\\", with: "", options: .literal, range: nil)
+        let newStringFun = message_from_push_server.replacingOccurrences(of: "\\", with: "", options: .literal, range: nil)
         //textOutput.text = newString
+        PushKConstants.logger.debug(newStringFun)
+        
+        let deviceIdFunc = self.processor.matches(for: "\"messageId\":\"(.{4,9}-.{3,9}-.{3,9}-.{3,9}-.{4,15})\"", in: newStringFun)
+        PushKConstants.logger.debug(deviceIdFunc)
+        
+        guard let jsonDataTransf = try? JSONSerialization.data(withJSONObject: deviceIdFunc, options: []) else { return "" }
+        let jsonString = String(data: jsonDataTransf, encoding: .utf8) ?? ""
+        let newString = String(jsonString).replacingOccurrences(of: "\\", with: "", options: .literal, range: nil)
         PushKConstants.logger.debug(newString)
         
-        let deviceid_func = self.processor.matches(for: "\"messageId\":\"(.{4,9}-.{3,9}-.{3,9}-.{3,9}-.{4,15})\"", in: newString)
-        PushKConstants.logger.debug(deviceid_func)
+        let iterationString = newString.replacingOccurrences(of: "[\"\"messageId\":\"", with: "", options: .literal, range: nil)
+        let finalString = iterationString.replacingOccurrences(of: "\",\"\"]", with: "", options: .literal, range: nil)
         
-        guard let jsonData2 = try? JSONSerialization.data(withJSONObject: deviceid_func, options: []) else { return "" }
-        let jsonString2 = String(data: jsonData2, encoding: .utf8) ?? ""
-        let new1String = String(jsonString2).replacingOccurrences(of: "\\", with: "", options: .literal, range: nil)
-        PushKConstants.logger.debug(new1String)
-        
-        let new2String = new1String.replacingOccurrences(of: "[\"\"messageId\":\"", with: "", options: .literal, range: nil)
-        let new3String = new2String.replacingOccurrences(of: "\",\"\"]", with: "", options: .literal, range: nil)
-        
-        return new3String
+        return finalString
     }
-    
-
-    
 }
