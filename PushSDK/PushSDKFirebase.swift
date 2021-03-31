@@ -271,13 +271,13 @@ extension PushSDKFirebase {
                 manualNotificator.areNotificationsEnabled { (notificationStatus) in
                     debugPrint(notificationStatus)
                     if (notificationStatus == true) {
-                        let deliv_rep_answ = self.push_adapter.pushMessageDeliveryReport(message_id: new3String)
+                        let deliv_rep_answ = self.push_adapter.pushMessageDeliveryReport(message_id: parsedMessageUserData)
                         PushKConstants.logger.debug("deliv_rep_answ: \(deliv_rep_answ)")
                     }
                 }
             } else if (PushKConstants.deliveryReportLogicFlag == 2)
             {
-                let deliv_rep_answ = self.push_adapter.pushMessageDeliveryReport(message_id: new3String)
+                let deliv_rep_answ = self.push_adapter.pushMessageDeliveryReport(message_id: parsedMessageUserData)
                 PushKConstants.logger.debug("deliv_rep_answ: \(deliv_rep_answ)")
             }
         }

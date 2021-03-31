@@ -848,7 +848,7 @@ internal class PushKAPI {
                         functionNotificator.areNotificationsEnabled { (notificationStatus) in
                             debugPrint(notificationStatus)
                             if (notificationStatus == true) {
-                                let res_dr = push_message_dr(message_Id: i, received_At: "123123122341", X_Push_Session_Id: X_Push_Session_Id, X_Push_Auth_Token: X_Push_Auth_Token)
+                                let res_dr = self.push_message_dr(message_Id: i, received_At: "123123122341", X_Push_Session_Id: X_Push_Session_Id, X_Push_Auth_Token: X_Push_Auth_Token)
                                 PushKConstants.logger.debug(res_dr)
                             }
                         }
