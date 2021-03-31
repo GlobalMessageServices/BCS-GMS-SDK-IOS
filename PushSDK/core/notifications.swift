@@ -102,40 +102,39 @@ class PushKNotification {
                 current.getNotificationSettings(completionHandler: { permission in
                     switch permission.authorizationStatus  {
                     case .authorized:
-                        print("User granted permission for notification")
+                        PushKConstants.logger.debug("User granted permission for notification")
                         notificationStatus = true
                         completion(notificationStatus)
                         break
                     case .denied:
-                        print("User denied notification permission")
+                        PushKConstants.logger.debug("User denied notification permission")
                         notificationStatus = false
                         completion(notificationStatus)
                         break
                     case .notDetermined:
-                        print("Notification permission haven't been asked yet")
+                        PushKConstants.logger.debug("Notification permission haven't been asked yet")
                         notificationStatus = false
                         completion(notificationStatus)
                         break
                     case .provisional:
                         // @available(iOS 12.0, *)
-                        print("The application is authorized to post non-interruptive user notifications.")
+                        PushKConstants.logger.debug("The application is authorized to post non-interruptive user notifications.")
                         notificationStatus = true
                         completion(notificationStatus)
                         break
                     case .ephemeral:
                         // @available(iOS 14.0, *)
-                        print("The application is temporarily authorized to post notifications. Only available to app clips.")
+                        PushKConstants.logger.debug("The application is temporarily authorized to post notifications. Only available to app clips.")
                         notificationStatus = false
                         completion(notificationStatus)
                         break
                     @unknown default:
-                        print("Unknow Status")
+                        PushKConstants.logger.debug("Unknow Status")
                         notificationStatus = false
                         completion(notificationStatus)
                         break
                     }
                 })
-        print(notificationStatus)
     }
     
     
