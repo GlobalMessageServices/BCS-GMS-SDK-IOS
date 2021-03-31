@@ -136,13 +136,14 @@ public class PushSDKFirebase: UIResponder, UIApplicationDelegate {
             PushKConstants.logger.debug("App in Background")
         }
  */
+        if (PushKConstants.enableNotificationFlag == true) {
         manualNotificator.pushNotificationManualWithImage(
           image_url: String(parsed_message.message.image?.url ?? ""),
           content_title: String(parsed_message.message.title ?? ""),
           content_body: String(parsed_message.message.body ?? ""),
             userInfo: userInfo)
           PushKConstants.logger.debug("App in Background")
-        
+        }
         
         //textOutput.text = newString
         PushKConstants.logger.debug("newString: \(newString)")
@@ -152,8 +153,24 @@ public class PushSDKFirebase: UIResponder, UIApplicationDelegate {
         
         PushKConstants.logger.debug("new3String: \(new3String)")
         
-        let deliv_rep_answ = push_adapter.pushMessageDeliveryReport(message_id: new3String)
-        PushKConstants.logger.debug("deliv_rep_answ: \(deliv_rep_answ)")
+        //if (PushKConstants.enableDeliveryReportAutoFlag == true) {
+        //    let deliv_rep_answ = push_adapter.pushMessageDeliveryReport(message_id: new3String)
+        //    PushKConstants.logger.debug("deliv_rep_answ: \(deliv_rep_answ)")
+        //}
+        
+        if (PushKConstants.enableDeliveryReportAutoFlag == true) {
+            if (PushKConstants.deliveryReportLogicFlag == 1) {
+                manualNotificator.areNotificationsEnabled { (notificationStatus) in
+                    debugPrint(notificationStatus)
+                    
+                    if (notificationStatus == true) {
+                        let deliv_rep_answ = self.push_adapter.pushMessageDeliveryReport(message_id: new3String)
+                        PushKConstants.logger.debug("deliv_rep_answ: \(deliv_rep_answ)")
+                    }
+                }
+            }
+        }
+
         NotificationCenter.default.post(name: .receivePushKData, object: nil, userInfo: userInfo)
         
         completionHandler(UIBackgroundFetchResult.newData)
@@ -224,11 +241,13 @@ extension PushSDKFirebase {
             PushKConstants.logger.debug("App in Background")
         }
  */
+        if (PushKConstants.enableNotificationFlag == true) {
         manualNotificator.pushNotificationManualWithImage(
             image_url: String(parsedMessage.message.image?.url ?? ""),
             content_title: String(parsedMessage.message.title ?? ""),
             content_body: String(parsedMessage.message.body ?? ""),
             userInfo: fdf ?? [:])
+        }
         PushKConstants.logger.debug("App in Background")
 
         switch UIApplication.shared.applicationState {
@@ -243,8 +262,20 @@ extension PushSDKFirebase {
         @unknown default:
             PushKConstants.logger.debug("Fatal application error for UIApplication.shared.applicationState")
         }
-        let deliv_rep = push_adapter.pushMessageDeliveryReport(message_id: parsedMessageUserData)
-        PushKConstants.logger.debug("Delivery report: \(deliv_rep)")
+        
+        if (PushKConstants.enableDeliveryReportAutoFlag == true) {
+            if (PushKConstants.deliveryReportLogicFlag == 1) {
+                manualNotificator.areNotificationsEnabled { (notificationStatus) in
+                    debugPrint(notificationStatus)
+                    
+                    if (notificationStatus == true) {
+                        let deliv_rep = self.push_adapter.pushMessageDeliveryReport(message_id: parsedMessageUserData)
+                        PushKConstants.logger.debug("Delivery report: \(deliv_rep)")
+                    }
+                }
+            }
+        }
+        
         NotificationCenter.default.post(name: .receivePushKData, object: nil, userInfo: fdf)
     }
     

@@ -55,7 +55,19 @@ public class PushSDK {
         platform_branch: BranchStructObj = PushSDKVar.branchMasterValue,
         log_level: SwiftyBeaver.Level = PushSDKVar.LOGLEVEL_ERROR,
         push_style: Int = 0,
-        basePushURL: String
+        basePushURL: String,
+        
+        //display notification auto
+        enableNotification: Bool = true,
+        
+        //enable delivery report auto
+        enableDeliveryReportAuto: Bool = true,
+        
+        // Working if enableNotification is true and enableDeliveryReportAuto is true
+        // 0 - no special logic
+        // 1 - if notification permitted in application settings then send delivery report. Else not send report
+        // 2 - always send delivery report if receive
+        deliveryReportLogic: Int = 1
         )
     {
         PushKConstants.registrationstatus = UserDefaults.standard.bool(forKey: "registrationstatus")
@@ -76,6 +88,10 @@ public class PushSDK {
         
         //let push_sesion_id = PushSdkFirHelpers.firebaseUpdateToken()
         //PushKConstants.logger.debug("Init PushSDK: push_sesion_id: \(push_sesion_id)")
+        
+        PushKConstants.enableNotificationFlag = enableNotification
+        PushKConstants.deliveryReportLogicFlag = deliveryReportLogic
+        PushKConstants.enableDeliveryReportAutoFlag = enableDeliveryReportAuto
     }
     
     private let processor = PushKProcessing.init()
@@ -297,6 +313,8 @@ public class PushSDK {
         return PushKGeneralAnswerStruct.init(code: 200, result: "Ok", description: "Success", body: "newpassword: \(newpassword)")
     }
     
+    
+
     
     public func pushCheckQueue() -> PushKFunAnswerGeneral {
             if (PushKConstants.registrationstatus==true) {

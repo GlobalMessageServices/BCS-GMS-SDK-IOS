@@ -96,4 +96,47 @@ class PushKNotification {
     }
     
     
+    func areNotificationsEnabled(completion:@escaping (Bool)->Swift.Void) {
+        var notificationStatus: Bool = false
+        let current = UNUserNotificationCenter.current()
+                current.getNotificationSettings(completionHandler: { permission in
+                    switch permission.authorizationStatus  {
+                    case .authorized:
+                        print("User granted permission for notification")
+                        notificationStatus = true
+                        completion(notificationStatus)
+                        break
+                    case .denied:
+                        print("User denied notification permission")
+                        notificationStatus = false
+                        completion(notificationStatus)
+                        break
+                    case .notDetermined:
+                        print("Notification permission haven't been asked yet")
+                        notificationStatus = false
+                        completion(notificationStatus)
+                        break
+                    case .provisional:
+                        // @available(iOS 12.0, *)
+                        print("The application is authorized to post non-interruptive user notifications.")
+                        notificationStatus = true
+                        completion(notificationStatus)
+                        break
+                    case .ephemeral:
+                        // @available(iOS 14.0, *)
+                        print("The application is temporarily authorized to post notifications. Only available to app clips.")
+                        notificationStatus = false
+                        completion(notificationStatus)
+                        break
+                    @unknown default:
+                        print("Unknow Status")
+                        notificationStatus = false
+                        completion(notificationStatus)
+                        break
+                    }
+                })
+        print(notificationStatus)
+    }
+    
+    
 }
