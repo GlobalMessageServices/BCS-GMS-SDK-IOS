@@ -158,16 +158,19 @@ public class PushSDKFirebase: UIResponder, UIApplicationDelegate {
         //    PushKConstants.logger.debug("deliv_rep_answ: \(deliv_rep_answ)")
         //}
         
-        if (PushKConstants.enableDeliveryReportAutoFlag == true) {
+        if (PushKConstants.enableDeliveryReportAutoFlag == true && PushKConstants.enableNotificationFlag == true) {
             if (PushKConstants.deliveryReportLogicFlag == 1) {
                 manualNotificator.areNotificationsEnabled { (notificationStatus) in
                     debugPrint(notificationStatus)
-                    
                     if (notificationStatus == true) {
                         let deliv_rep_answ = self.push_adapter.pushMessageDeliveryReport(message_id: new3String)
                         PushKConstants.logger.debug("deliv_rep_answ: \(deliv_rep_answ)")
                     }
                 }
+            } else if (PushKConstants.deliveryReportLogicFlag == 2)
+            {
+                let deliv_rep_answ = self.push_adapter.pushMessageDeliveryReport(message_id: new3String)
+                PushKConstants.logger.debug("deliv_rep_answ: \(deliv_rep_answ)")
             }
         }
 
@@ -263,16 +266,19 @@ extension PushSDKFirebase {
             PushKConstants.logger.debug("Fatal application error for UIApplication.shared.applicationState")
         }
         
-        if (PushKConstants.enableDeliveryReportAutoFlag == true) {
+        if (PushKConstants.enableDeliveryReportAutoFlag == true && PushKConstants.enableNotificationFlag == true) {
             if (PushKConstants.deliveryReportLogicFlag == 1) {
                 manualNotificator.areNotificationsEnabled { (notificationStatus) in
                     debugPrint(notificationStatus)
-                    
                     if (notificationStatus == true) {
-                        let deliv_rep = self.push_adapter.pushMessageDeliveryReport(message_id: parsedMessageUserData)
-                        PushKConstants.logger.debug("Delivery report: \(deliv_rep)")
+                        let deliv_rep_answ = self.push_adapter.pushMessageDeliveryReport(message_id: new3String)
+                        PushKConstants.logger.debug("deliv_rep_answ: \(deliv_rep_answ)")
                     }
                 }
+            } else if (PushKConstants.deliveryReportLogicFlag == 2)
+            {
+                let deliv_rep_answ = self.push_adapter.pushMessageDeliveryReport(message_id: new3String)
+                PushKConstants.logger.debug("deliv_rep_answ: \(deliv_rep_answ)")
             }
         }
         

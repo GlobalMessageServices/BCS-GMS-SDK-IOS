@@ -50,6 +50,7 @@ public class PushSDK {
     private let parserClassAdapter = PusherKParser.init()
     private let parserJson = PushKAnswParser.init()
     //private let fb_init_adapter = PushKFirebaseSdk.init()
+
     
     public init(
         platform_branch: BranchStructObj = PushSDKVar.branchMasterValue,
@@ -95,7 +96,7 @@ public class PushSDK {
     }
     
     private let processor = PushKProcessing.init()
-    
+    private let funNotificator = PushKNotification.init()
     
     
     //answer codes
@@ -311,6 +312,63 @@ public class PushSDK {
         UserDefaults.standard.set(newpassword, forKey: "push_user_password")
         PushKConstants.firebase_registration_token = newpassword
         return PushKGeneralAnswerStruct.init(code: 200, result: "Ok", description: "Success", body: "newpassword: \(newpassword)")
+    }
+    
+
+
+    //check if notification permitted (Sync procedure)
+    public func areNotificationsEnabled() -> Bool {
+        
+        let semaphore = DispatchSemaphore(value: 0)
+        funNotificator.areNotificationsEnabled { (notificationStatus) in
+            debugPrint(notificationStatus)
+            PushKConstants.notificationPermission = notificationStatus
+            semaphore.signal()
+        }
+        semaphore.wait()
+        return PushKConstants.notificationPermission
+    }
+    
+    //check if notification permitted (Async procedure)
+    public func areNotificationsEnabled(completion:@escaping (Bool)->Swift.Void) {
+        var notificationStatus: Bool = false
+        let current = UNUserNotificationCenter.current()
+                current.getNotificationSettings(completionHandler: { permission in
+                    switch permission.authorizationStatus  {
+                    case .authorized:
+                        PushKConstants.logger.debug("User granted permission for notification")
+                        notificationStatus = true
+                        completion(notificationStatus)
+                        break
+                    case .denied:
+                        PushKConstants.logger.debug("User denied notification permission")
+                        notificationStatus = false
+                        completion(notificationStatus)
+                        break
+                    case .notDetermined:
+                        PushKConstants.logger.debug("Notification permission haven't been asked yet")
+                        notificationStatus = false
+                        completion(notificationStatus)
+                        break
+                    case .provisional:
+                        // @available(iOS 12.0, *)
+                        PushKConstants.logger.debug("The application is authorized to post non-interruptive user notifications.")
+                        notificationStatus = true
+                        completion(notificationStatus)
+                        break
+                    case .ephemeral:
+                        // @available(iOS 14.0, *)
+                        PushKConstants.logger.debug("The application is temporarily authorized to post notifications. Only available to app clips.")
+                        notificationStatus = false
+                        completion(notificationStatus)
+                        break
+                    @unknown default:
+                        PushKConstants.logger.debug("Unknow Status")
+                        notificationStatus = false
+                        completion(notificationStatus)
+                        break
+                    }
+                })
     }
     
     

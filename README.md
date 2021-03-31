@@ -4,7 +4,7 @@
 
 ***
 ### IMPORTANT information <br>
-last actual SDK version: 1.0.0.37
+last actual SDK version: 1.0.0.39
 
 Integrate PushSDK to your project with COCOAPODS (https://guides.cocoapods.org/using/the-podfile.html) <br>
 ```pod 'PushSDK', :git => 'https://github.com/kirillkotov/Push-SDK-IOS', :branch => 'master'```
@@ -108,3 +108,51 @@ pushAdapterSdk.pushGetDeviceAllFromServer()
 pushAdapterSdk.pushClearAllDevice()
 
 ```
+
+## Notification/delivery reports control
+
+You can enable/disable display notification and sending delivery reports with the following optional parameters:
+
+//enable/disable display notification. Default is true (enabled)
+enableNotification: Bool
+
+//enable/disable sending delivery report. Default is true (enabled)
+enableDeliveryReportAuto: Bool
+
+// Working if enableNotification is true and enableDeliveryReportAuto is true
+// 1 - if notification permitted in application settings, then send delivery report. Else not send report
+// 2 - always send delivery report if receive message
+deliveryReportLogic: Int
+
+Then you can check notification permission with areNotificationsEnabled() public function
+You can use it in synchronous and asynchronous mode
+
+Example:
+```swift
+let pushAdapterSdk = PushSDK.init(basePushURL: "https://push.example.com/api/")
+
+
+//synchronous mode
+let permission = pushAdapterSdk.areNotificationsEnabled()
+
+
+//asynchronous mode
+pushAdapterSdk.areNotificationsEnabled { (notificationStatus) in
+    debugPrint(notificationStatus)
+}
+
+```
+
+Example class init:
+
+```swift
+
+let pushAdapterSdk = PushSDK.init(
+        basePushURL: "https://push.example.com/api/",
+        enableNotification: true,
+        enableDeliveryReportAuto: true,
+        deliveryReportLogic: 1
+)
+
+```
+

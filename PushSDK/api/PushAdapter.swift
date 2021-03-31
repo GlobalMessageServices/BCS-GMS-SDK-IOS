@@ -17,6 +17,9 @@ internal class PushKAPI {
     
     private let processor = PushKProcessing.init()
     private let answer_buider = AnswerBuider.init()
+    
+    private let functionNotificator = PushKNotification.init()
+    
     let answer_b = AnswerBuider.init()
     
     //rest function for device registration
@@ -839,8 +842,23 @@ internal class PushKAPI {
                 let messs2 = ["message": queue_answer as AnyObject] as [String: AnyObject]
                 
                 NotificationCenter.default.post(name: .receivePushKData, object: nil, userInfo: messs2 )
-                let res_dr = push_message_dr(message_Id: i, received_At: "123123122341", X_Push_Session_Id: X_Push_Session_Id, X_Push_Auth_Token: X_Push_Auth_Token)
-                PushKConstants.logger.debug(res_dr)
+                
+                if (PushKConstants.enableDeliveryReportAutoFlag == true && PushKConstants.enableNotificationFlag == true) {
+                    if (PushKConstants.deliveryReportLogicFlag == 1) {
+                        functionNotificator.areNotificationsEnabled { (notificationStatus) in
+                            debugPrint(notificationStatus)
+                            if (notificationStatus == true) {
+                                let res_dr = push_message_dr(message_Id: i, received_At: "123123122341", X_Push_Session_Id: X_Push_Session_Id, X_Push_Auth_Token: X_Push_Auth_Token)
+                                PushKConstants.logger.debug(res_dr)
+                            }
+                        }
+                    } else if (PushKConstants.deliveryReportLogicFlag == 2)
+                    {
+                        let res_dr = push_message_dr(message_Id: i, received_At: "123123122341", X_Push_Session_Id: X_Push_Session_Id, X_Push_Auth_Token: X_Push_Auth_Token)
+                        PushKConstants.logger.debug(res_dr)
+                    }
+                }
+                
             }
             PushKConstants.logger.debug(list)
         }

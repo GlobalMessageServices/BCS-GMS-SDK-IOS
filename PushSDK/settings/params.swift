@@ -45,9 +45,10 @@ public struct PushKConstants {
     public static var basePushURLactive = "" as String
     public static var pusher_counter = 1
     
-    public static var enableNotificationFlag
-    public static var deliveryReportLogicFlag
-    public static var enableDeliveryReportAutoFlag
+    public static var enableNotificationFlag = true as Bool
+    public static var deliveryReportLogicFlag = 1 as Int
+    public static var enableDeliveryReportAutoFlag = true as Bool
+    public static var notificationPermission = false
 }
 
 
