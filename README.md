@@ -4,7 +4,7 @@
 
 ***
 ### IMPORTANT information <br>
-last actual SDK version: 1.0.0.39
+last actual SDK version: 1.0.0.40
 
 Integrate PushSDK to your project with COCOAPODS (https://guides.cocoapods.org/using/the-podfile.html) <br>
 ```pod 'PushSDK', :git => 'https://github.com/kirillkotov/Push-SDK-IOS', :branch => 'master'```
