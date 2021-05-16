@@ -15,7 +15,7 @@ import SwiftyBeaver
 //import CoreData
 //import FirebaseCore
 //import FirebaseMessaging
-import FirebaseInstanceID
+//import FirebaseInstanceID
 
 //coredata
 //https://medium.com/@ankurvekariya/core-data-crud-with-swift-4-2-for-beginners-40efe4e7d1cc

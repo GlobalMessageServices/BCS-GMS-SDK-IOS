@@ -12,7 +12,7 @@ import Foundation
 import UserNotifications
 import FirebaseMessaging
 import FirebaseCore
-import FirebaseInstanceID
+//import FirebaseInstanceID
 
 
 public class PushSDKFirebase: UIResponder, UIApplicationDelegate {
