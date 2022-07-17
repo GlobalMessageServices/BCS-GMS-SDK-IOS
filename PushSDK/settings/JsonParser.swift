@@ -220,7 +220,7 @@ class PushKAnswParser {
             enum CodingKeys: String, CodingKey {
                     case contentavailable = "content-available"
                 }
-            var contentavailable: String? = ""
+            var contentavailable: Int? = 0
         }
         
         struct ImageResponseParse: Decodable {
@@ -266,7 +266,7 @@ class PushKAnswParser {
         PushKConstants.logger.debug("messageIncomingJson before decoding: str_resp_transform: \(str_resp_transform)")
         
         
-        guard let jsonData = str_resp_transform.data(using: .utf8) else { return FullFirebaseMessageStr(aps: MessApsDataStr(contentAvailable: ""), message: MessagesResponseStr(phone: "", messageId: "", title: "", body: "", image: ImageResponse(url: ""), button: ButtonResponse(text: "", url: ""), time: "", partner: ""),googleCSenderId: "",           gcmMessageId: "")}
+        guard let jsonData = str_resp_transform.data(using: .utf8) else { return FullFirebaseMessageStr(aps: MessApsDataStr(contentAvailable: 0), message: MessagesResponseStr(phone: "", messageId: "", title: "", body: "", image: ImageResponse(url: ""), button: ButtonResponse(text: "", url: ""), time: "", partner: ""),googleCSenderId: "",           gcmMessageId: "")}
         
         PushKConstants.logger.debug("messageIncomingJson transformed to data")
         
@@ -279,7 +279,7 @@ class PushKAnswParser {
             let elem2: ButtonResponse = ButtonResponse.init(text: parsedJson.message?.button?.text, url: parsedJson.message?.button?.url)
             let elem3: MessagesResponseStr = MessagesResponseStr.init(phone: parsedJson.message?.phone, messageId: parsedJson.message?.messageId, title: parsedJson.message?.title, body: parsedJson.message?.body, image: elem1, button: elem2, time: parsedJson.message?.time, partner: parsedJson.message?.partner)
             
-            let res = FullFirebaseMessageStr.init(aps: MessApsDataStr(contentAvailable: parsedJson.aps?.contentavailable ?? ""),
+            let res = FullFirebaseMessageStr.init(aps: MessApsDataStr(contentAvailable: parsedJson.aps?.contentavailable ?? 0),
                                                message: elem3,
                                                googleCSenderId: parsedJson.googlecsenderid ?? "",
                                                gcmMessageId: parsedJson.gcmmessageid ?? "")
@@ -290,7 +290,7 @@ class PushKAnswParser {
             return res
         } catch {
             //handle error
-            let res = FullFirebaseMessageStr.init(aps: MessApsDataStr(contentAvailable: ""),
+            let res = FullFirebaseMessageStr.init(aps: MessApsDataStr(contentAvailable: 0),
                                                   message: MessagesResponseStr(phone: "", messageId: "", title: "", body: "", image: ImageResponse(url: ""), button: ButtonResponse(text: "", url: ""), time: "", partner: ""),
                                                   googleCSenderId: "",
                                                gcmMessageId: "")

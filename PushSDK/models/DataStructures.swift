@@ -131,7 +131,7 @@ public struct MessagesResponseStr {
 }
 
 public struct MessApsDataStr {
-    public var contentAvailable: String
+    public var contentAvailable: Int
     
     public func toString() -> String{
         return "MessApsDataStr(contentAvailable: \(contentAvailable)"
