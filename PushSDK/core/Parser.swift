@@ -1,9 +1,8 @@
 //
-//  parser.swift
-//  PushSDK
+//  Parser.swift
+//  GMSPushSDKIOS
 //
-//  Created by Kirill Kotov on 09/01/2020.
-//  Copyright © 2020 PUSHER. All rights reserved.
+//  Created by o.korniienko on 22.08.22.
 //
 
 import Foundation
@@ -13,43 +12,43 @@ public class PusherKParser {
     
     public init() {}
     
-    let processor = PushKProcessing.init()
+    //let processor = PushProcessing.init()
     
-    public func urlsInitialization(branchUrl: String, method_paths: BranchStructObj) {
+    public func urlsInitialization(branchUrl: String, methodPaths: BranchStructObj) {
         if (branchUrl.last == "/")
         {
-            PushKConstants.platform_branch_active = BranchStructObj(
-                url_Http_Update: branchUrl + PushKConstants.serverSdkVersion + "/" + method_paths.url_Http_Update,
-                url_Http_Registration: branchUrl + PushKConstants.serverSdkVersion + "/" + method_paths.url_Http_Registration,
-                url_Http_Revoke: branchUrl + PushKConstants.serverSdkVersion + "/" + method_paths.url_Http_Revoke,
-                url_Http_Device_getall: branchUrl + PushKConstants.serverSdkVersion + "/" + method_paths.url_Http_Device_getall,
-                url_Http_Mess_callback: branchUrl + PushKConstants.serverSdkVersion + "/" + method_paths.url_Http_Mess_callback,
-                url_Http_Mess_dr: branchUrl + PushKConstants.serverSdkVersion + "/" + method_paths.url_Http_Mess_dr,
-                push_url_mess_queue: branchUrl + PushKConstants.serverSdkVersion + "/" + method_paths.push_url_mess_queue,
-                url_Http_Mess_history: branchUrl + PushKConstants.serverSdkVersion + "/" + method_paths.url_Http_Mess_history)
+            PushKConstants.platformBrancActive = BranchStructObj(
+                urlHttpUpdate: branchUrl + PushKConstants.serverSdkVersion + "/" + methodPaths.urlHttpUpdate,
+                urlHttpRegistration: branchUrl + PushKConstants.serverSdkVersion + "/" + methodPaths.urlHttpRegistration,
+                urlHttpRevoke: branchUrl + PushKConstants.serverSdkVersion + "/" + methodPaths.urlHttpRevoke,
+                urlHttpDeviceGetAll: branchUrl + PushKConstants.serverSdkVersion + "/" + methodPaths.urlHttpDeviceGetAll,
+                urlHttpMesscallback: branchUrl + PushKConstants.serverSdkVersion + "/" + methodPaths.urlHttpMesscallback,
+                urlHttpMessDr: branchUrl + PushKConstants.serverSdkVersion + "/" + methodPaths.urlHttpMessDr,
+                pusUrlMessQueue: branchUrl + PushKConstants.serverSdkVersion + "/" + methodPaths.pusUrlMessQueue,
+                urlHttpMessHistory: branchUrl + PushKConstants.serverSdkVersion + "/" + methodPaths.urlHttpMessHistory)
         }
         else
         {
-            PushKConstants.platform_branch_active = BranchStructObj(
-                url_Http_Update: branchUrl + "/" + PushKConstants.serverSdkVersion + "/" + method_paths.url_Http_Update,
-                url_Http_Registration: branchUrl + "/" + PushKConstants.serverSdkVersion + "/" + method_paths.url_Http_Registration,
-                url_Http_Revoke: branchUrl + "/" + PushKConstants.serverSdkVersion + "/" + method_paths.url_Http_Revoke,
-                url_Http_Device_getall: branchUrl + "/" + PushKConstants.serverSdkVersion + "/" + method_paths.url_Http_Device_getall,
-                url_Http_Mess_callback: branchUrl + "/" + PushKConstants.serverSdkVersion + "/" + method_paths.url_Http_Mess_callback,
-                url_Http_Mess_dr: branchUrl + "/" + PushKConstants.serverSdkVersion + "/" + method_paths.url_Http_Mess_dr,
-                push_url_mess_queue: branchUrl + "/" + PushKConstants.serverSdkVersion + "/" + method_paths.push_url_mess_queue,
-                url_Http_Mess_history: branchUrl + "/" + PushKConstants.serverSdkVersion + "/" + method_paths.url_Http_Mess_history)
+            PushKConstants.platformBrancActive = BranchStructObj(
+                urlHttpUpdate: branchUrl + "/" + PushKConstants.serverSdkVersion + "/" + methodPaths.urlHttpUpdate,
+                urlHttpRegistration: branchUrl + "/" + PushKConstants.serverSdkVersion + "/" + methodPaths.urlHttpRegistration,
+                urlHttpRevoke: branchUrl + "/" + PushKConstants.serverSdkVersion + "/" + methodPaths.urlHttpRevoke,
+                urlHttpDeviceGetAll: branchUrl + "/" + PushKConstants.serverSdkVersion + "/" + methodPaths.urlHttpDeviceGetAll,
+                urlHttpMesscallback: branchUrl + "/" + PushKConstants.serverSdkVersion + "/" + methodPaths.urlHttpMesscallback,
+                urlHttpMessDr: branchUrl + "/" + PushKConstants.serverSdkVersion + "/" + methodPaths.urlHttpMessDr,
+                pusUrlMessQueue: branchUrl + "/" + PushKConstants.serverSdkVersion + "/" + methodPaths.pusUrlMessQueue,
+                urlHttpMessHistory: branchUrl + "/" + PushKConstants.serverSdkVersion + "/" + methodPaths.urlHttpMessHistory)
         }
     }
     
-    public func messIdParser(message_from_push_server: String) -> String
+    public func messIdParser(messageFromPushServer: String) -> String
     {
         
-        let newStringFun = message_from_push_server.replacingOccurrences(of: "\\", with: "", options: .literal, range: nil)
+        let newStringFun = messageFromPushServer.replacingOccurrences(of: "\\", with: "", options: .literal, range: nil)
         //textOutput.text = newString
         PushKConstants.logger.debug(newStringFun)
         
-        let deviceIdFunc = self.processor.matches(for: "\"messageId\":\"(.{4,9}-.{3,9}-.{3,9}-.{3,9}-.{4,15})\"", in: newStringFun)
+        let deviceIdFunc = self.matches(for: "\"messageId\":\"(.{4,9}-.{3,9}-.{3,9}-.{3,9}-.{4,15})\"", in: newStringFun)
         PushKConstants.logger.debug(deviceIdFunc)
         
         guard let jsonDataTransf = try? JSONSerialization.data(withJSONObject: deviceIdFunc, options: []) else { return "" }
@@ -62,4 +61,21 @@ public class PusherKParser {
         
         return finalString
     }
+    
+    public func matches(for regex: String, in text: String) -> [String] {
+        do {
+            let regex = try NSRegularExpression(pattern: regex)
+            let results = regex.matches(in: text,
+                                        range: NSRange(text.startIndex..., in: text))
+
+              let resp = results.map {
+                String(text[Range($0.range, in: text)!])
+              }
+            return resp
+        } catch let error {
+            PushKConstants.logger.error("invalid regex: \(error.localizedDescription)")
+            return []
+        }
+    }
 }
+

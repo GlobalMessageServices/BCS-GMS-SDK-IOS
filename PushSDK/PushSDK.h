@@ -2,13 +2,12 @@
 //  PushSDK.h
 //  PushSDK
 //
-//  Created by Kirill Kotov on 01/10/2020.
-//  Copyright © 2020 HYBER. All rights reserved.
+//  Created by o.korniienko on 01.09.22.
 //
 
+#import <Foundation/Foundation.h>
 #import <UIKit/UIKit.h>
 #import <CommonCrypto/CommonHMAC.h>
-
 
 //! Project version number for PushSDK.
 FOUNDATION_EXPORT double PushSDKVersionNumber;

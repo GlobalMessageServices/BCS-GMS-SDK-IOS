@@ -1,158 +1,106 @@
-
-# Push-SDK-IOS
-
+# IOS PushSDK
 
 ***
-### IMPORTANT information <br>
-last actual SDK version: 1.0.0.44
+Install and init Cocoapods.<br>
+Open a terminal window and run $ sudo gem install cocoapods to instal Cocoapods.<br>
+Then $ cd into your project directory and run $ pod init to create a Podfile. Important ! Before run $ pod init your project should be closed.<br>
+To update dependencies in the Podfile run - $ pod update.<br>
+To open your project run $ open ProjectName.xcworkspace<br>
+More about Cocoapods and Podfile here - https://cocoapods.org, https://guides.cocoapods.org/using/the-podfile.html and https://guides.cocoapods.org/using/using-cocoapods.html.
 
-Integrate PushSDK to your project with COCOAPODS (https://guides.cocoapods.org/using/the-podfile.html) <br>
-```pod 'PushSDK', :git => 'https://github.com/GlobalMessageServices/BCS-GMS-SDK-IOS', :branch => 'masterapi'```
+last actual SDK version: 1.0.0.45<br>
+To integrate PushSDK to your project with COCOAPODS (https://guides.cocoapods.org/using/the-podfile.html) add the next line in Podfile.<br>
+pod 'PushSDK', :git => 'https://github.com/GlobalMessageServices/BCS-GMS-SDK-IOS', :branch => 'gmsapi'
+
 ***
 
-## Using SDK
-
-
-
-Important ! Before start using SDK, configure firebase project first and upload your google-services.json file into your application directory
-
-* [Setting up your project to work with the SDK](https://github.com/GlobalMessageServices/BCS-GMS-SDK-IOS/wiki/Creating-App-Id-and-APNS-key)
-
-* [SDK functions list](https://github.com/GlobalMessageServices/BCS-GMS-SDK-IOS/wiki/SDK-functions-description)
-
-* [SDK answers](https://github.com/GlobalMessageServices/BCS-GMS-SDK-IOS/wiki/SDK-answers)
-
-
-
-Then initialize firebase helper functions into your AppDelegate.swift
-
+* Example of PushSDK initializing
 ```swift
-
- import UIKit
- import PushSDK
- import SwiftyBeaver
- import UserNotifications
-
- @UIApplicationMain
- public class AppDelegate: UIResponder, UIApplicationDelegate {
-    let fb_ad = PushSDKFirebase.init()
-    
-    public func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
-        // Override point for customization after application launch.
-        FirebaseApp.configure()
-        fb_ad.fbInitApplication(didFinishLaunchingWithOptions: launchOptions)
-        UNUserNotificationCenter.current().delegate = self
-        return true
-    }
-    
-    func application(application: UIApplication,  didReceiveRemoteNotification userInfo: [NSObject : AnyObject],  fetchCompletionHandler completionHandler: (UIBackgroundFetchResult) -> Void) {
-        
-        fb_ad.fbInitApplication(didReceiveRemoteNotification: userInfo, fetchCompletionHandler: completionHandler)
-    }
-    
-    public func application(_ application: UIApplication, didReceiveRemoteNotification userInfo: [AnyHashable: Any]) {
-        fb_ad.fbInitApplication(didReceiveRemoteNotification: userInfo)
-    }
-    
-    
-    public func application(_ application: UIApplication, didReceiveRemoteNotification userInfo: [AnyHashable: Any],
-                            fetchCompletionHandler completionHandler: @escaping (UIBackgroundFetchResult) -> Void) {
-        
-        fb_ad.fbInitApplication(didReceiveRemoteNotification: userInfo, fetchCompletionHandler: completionHandler)
-    }
-    
-    
-    public func application(_ application: UIApplication, didRegisterForRemoteNotificationsWithDeviceToken deviceToken: Data) {
-        fb_ad.fbInitApplication(didRegisterForRemoteNotificationsWithDeviceToken: deviceToken)
-    }
- }
+let pushAdapterSdk = PushSDK.init(basePushURL: "https://push.example.com/api/", enableNotification: true, enableDeliveryReportAuto: true, deliveryReportLogic:1)
 ```
+***
 
-Configure processing incoming messages  in ViewController.swift
+***
+Notification/delivery reports control
+You can enable/disable displaying notification and sending delivery reports with the following optional parameters in PushSDK:
+-	enableNotification: Bool - enable/disable display notification. Default is true (enabled) 
+-	enableDeliveryReportAuto: Bool - enable/disable sending delivery report. Default is true (enabled) 
+-	deliveryReportLogic: Int - working if enableNotification is true and enableDeliveryReportAuto is true. Options of deliveryReportLogic:<br>
+                   1 - if notification permitted in application settings, then send delivery report. Else not send report<br>
+                   2 - always send delivery report if receive message
+***
 
+
+#SDK functions description
+
+All this functions are available from PushSDK class
+For using it, create this class new instance first
+
+***
+* New device registration. Register your device on push server
 ```swift
+public func pushRegisterNew(userPhone: String, userPassword: String, xPushSessionId: String, xPushIOSBundleId: String, xPushClientAPIKey: String) -> PushKFunAnswerRegister
 
- override func viewDidLoad() {
-    super.viewDidLoad()
-    
-    //register in notification center
-    NotificationCenter.default.addObserver(self, selector: #selector(onReceiveFromPushServer(_:)), name: .receivePushKData, object: nil)
-    UNUserNotificationCenter.current().delegate = self
-
- }
-
-
- //processing incoming data message function
- @objc func onReceiveFromPushServer(_ notification: Notification) {
-    // Do something now
-    // You can process your message here
-    let incomMessage = PushSDK.parseIncomingPush(message: notification).messageFir
-    print(incomMessage.message.toString())
-    textOutput.text = textOutput.text + "\n" + incomMessage.message.toString()
- }
+public func pushRegisterNew(userPhone: String, userPassword: String, xPushIOSBundleId: String, xPushClientAPIKey: String)->PushKFunAnswerRegister
 ```
+***
 
-Then you can communicate with push platform by the following functions
-[SDK functions list](https://github.com/GlobalMessageServices/BCS-GMS-SDK-IOS/wiki/SDK-functions-description)
-
-An example of using SDK functions:
+* Clear local device on server. This function clear on push server only locally saved device id
 ```swift
-
-let pushAdapterSdk = PushSDK.init(basePushURL: "https://push.example.com/api/")
-let registrator: PushKFunAnswerRegister = pushAdapterSdk.pushRegisterNew(user_phone: "375291234567", user_password: "1", x_push_sesion_id: PushKConstants.firebase_registration_token ?? "", x_push_ios_bundle_id: "12345678", X_Push_Client_API_Key: "test")
-
-pushAdapterSdk.pushUpdateRegistration()
-
-pushAdapterSdk.pushGetDeviceAllFromServer()
-
-pushAdapterSdk.pushClearAllDevice()
-
+public func pushClearCurrentDevice()->PushKGeneralAnswerStruct
 ```
+***
 
-## Notification/delivery reports control
-
-You can enable/disable display notification and sending delivery reports with the following optional parameters:
-
-//enable/disable display notification. Default is true (enabled)
-enableNotification: Bool
-
-//enable/disable sending delivery report. Default is true (enabled)
-enableDeliveryReportAuto: Bool
-
-// Working if enableNotification is true and enableDeliveryReportAuto is true
-// 1 - if notification permitted in application settings, then send delivery report. Else not send report
-// 2 - always send delivery report if receive message
-deliveryReportLogic: Int
-
-Then you can check notification permission with areNotificationsEnabled() public function
-You can use it in synchronous and asynchronous mode
-
-Example:
+* get message history
 ```swift
-let pushAdapterSdk = PushSDK.init(basePushURL: "https://push.example.com/api/")
-
-
-//synchronous mode
-let permission = pushAdapterSdk.areNotificationsEnabled()
-
-
-//asynchronous mode
-pushAdapterSdk.areNotificationsEnabled { (notificationStatus) in
-    debugPrint(notificationStatus)
-}
-
+public func pushGetMessageHistory(periodInSeconds: Int) -> PushKFunAnswerGetMessageHistory
 ```
+***
 
-Example class init:
-
+* Check message queue
 ```swift
-
-let pushAdapterSdk = PushSDK.init(
-        basePushURL: "https://push.example.com/api/",
-        enableNotification: true,
-        enableDeliveryReportAuto: true,
-        deliveryReportLogic: 1
-)
-
+public func pushCheckQueue() -> PushKFunAnswerGeneral
 ```
+***
 
+* Get all devices from server
+```swift
+public func pushGetDeviceAllFromServer() -> PushKFunAnswerGetDeviceList
+```
+***
+
+* update firebase token on push server. Update your token on firebase platform first
+```swift
+public func pushUpdateRegistration() -> PushKGeneralAnswerStruct
+```
+***
+
+* message callback
+```swift
+public func pushSendMessageCallback(messageId: String, callbackText: String) -> PushKGeneralAnswerStruct
+```
+***
+
+* Send delivery report to server
+```swift
+public func pushMessageDeliveryReport(messageId: String) -> PushKGeneralAnswerStruct
+```
+***
+
+* Clear all devices registered with current msisdn
+```swift
+public func pushClearAllDevice()->PushKGeneralAnswerStruct 
+```
+***
+
+* Parse incoming notification
+```swift
+public static func parseIncomingPush(message: Notification) -> PushKMess 
+```
+***
+
+* Parse incoming notification UserInfo
+```swift
+public static func parseIncomingPush(message:  [AnyHashable : Any]) -> PushKMess
+```
+***
