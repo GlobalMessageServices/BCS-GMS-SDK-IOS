@@ -199,4 +199,88 @@ public class PushSDK {
     }
     
     
+    //Delete registration of all devices related to number
+    public func pushClearAllDevice()->PushKGeneralAnswerStruct {
+
+            if (PushKConstants.registrationstatus==true) {
+                let getdev = pushGetDeviceAllFromServer()
+
+                var listDevId: [String] = []
+
+                let dev_list_all = getdev.body
+
+                for device in dev_list_all?.devices ?? []
+                {
+                    listDevId.append(String(device.id))
+                }
+
+                PushKConstants.logger.debug(listDevId)
+
+                let X_Push_Session_Id: String = PushKConstants.firebase_registration_token ?? "firebase_empty"
+                PushKConstants.logger.debug(String(PushKConstants.deviceId ?? "unknown"))
+                PushKConstants.logger.debug(X_Push_Session_Id)
+                PushKConstants.logger.debug(String(PushKConstants.push_registration_token ?? "token_empty"))
+
+                //let push_rest_server = PushAPI.init()
+                let result = push_rest_server.pushDeviceRevoke(dev_list: listDevId, X_Push_Session_Id: X_Push_Session_Id, X_Push_Auth_Token: PushKConstants.push_registration_token ?? "empty_token")
+
+                return result
+
+            }
+            else {
+                return answer_b.generalAnswerStruct(resp_code: 704, body_json: "error", description: "Not registered")
+            }
+    }
+    
+    //Get message history related to current device
+    public func pushGetMessageHistory(period_in_seconds: Int) -> PushKFunAnswerGetMessageHistory {
+            if (PushKConstants.registrationstatus==true) {
+                let X_Push_Session_Id: String = PushKConstants.firebase_registration_token ?? "firebase_empty"
+                //let push_rest_server = PushAPI.init()
+                
+                let ansss = push_rest_server.pushGetMessageHistory( utc_time: period_in_seconds, X_Push_Session_Id: X_Push_Session_Id, X_Push_Auth_Token: PushKConstants.push_registration_token ?? "token_empty" )
+                return ansss }
+            else {
+                return PushKFunAnswerGetMessageHistory.init(code: 704, result: "error", description: "Not registered", body: nil)
+            }
+    }
+    
+    
+    public func pushCheckQueue() -> PushKFunAnswerGeneral {
+            if (PushKConstants.registrationstatus==true) {
+                let X_Push_Session_Id: String = PushKConstants.firebase_registration_token ?? "firebase_empty"
+                //let push_rest_server = PushKAPI.init()
+                let ansss = push_rest_server.checkQueue(X_Push_Session_Id: X_Push_Session_Id, X_Push_Auth_Token: PushKConstants.push_registration_token ?? "token_empty" )
+                return ansss
+            }
+            else {
+                return answer_b.generalAnswer(resp_code: 704, body_json: "error", description: "Not registered")
+            }
+    }
+    
+    
+    
+    
+    
+    
+    //function for parsing incoming message from firebase
+    public static func parseIncomingPush(message: Notification) -> PushKMess {
+        guard let jsonData = try? JSONSerialization.data(withJSONObject: message.userInfo ?? "", options: []) else { return  PushKMess(code: 500, result: "Error in process message", messageFir: FullFirebaseMessageStr(aps: MessApsDataStr(contentAvailable: 0), message: MessagesResponseStr(), googleCSenderId: "", gcmMessageId: ""))}
+        let jsonString = String(data: jsonData, encoding: .utf8)
+        let newString = String(jsonString ?? "").replacingOccurrences(of: "\\", with: "", options: .literal, range: nil)
+        let parsed_message = PushServerAnswParser.messageIncomingJson(str_resp: newString)
+        return PushKMess(code: 200, result: "Success", messageFir: parsed_message)
+    }
+    
+    //userInfo parse
+    public static func parseIncomingPush(message:  [AnyHashable : Any]) -> PushKMess {
+        guard let jsonData = try? JSONSerialization.data(withJSONObject: message , options: []) else { return  PushKMess(code: 500, result: "Error in process message", messageFir: FullFirebaseMessageStr(aps: MessApsDataStr(contentAvailable: 0), message: MessagesResponseStr(), googleCSenderId: "", gcmMessageId: ""))}
+        
+        let jsonString = String(data: jsonData, encoding: .utf8)
+        let newString = String(jsonString ?? "").replacingOccurrences(of: "\\", with: "", options: .literal, range: nil)
+        let parsed_message = PushServerAnswParser.messageIncomingJson(str_resp: newString)
+        return PushKMess(code: 200, result: "Success", messageFir: parsed_message)
+    }
+    
+    
 }
