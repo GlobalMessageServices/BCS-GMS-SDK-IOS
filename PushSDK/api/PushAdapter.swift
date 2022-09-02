@@ -482,6 +482,154 @@ internal class PushAPI {
     }
     
     
+    //send delivery report to push server
+    func sendMessageDR(message_Id: String, received_At: String, X_Push_Session_Id: String, X_Push_Auth_Token:String)->PushKGeneralAnswerStruct {
+        if (message_Id != "" && message_Id != "[]" ) {
+            var genAnsw: PushKGeneralAnswerStruct = PushKGeneralAnswerStruct.init(code: 0, result: "unknown", description: "unknown", body: "unknown")
+            
+            let requestURL = PushKConstants.platform_branch_active.url_Http_Mess_dr
+            PushKConstants.logger.debug("sendMessageDR url string is \(requestURL)")
+            
+            let semaphore = DispatchSemaphore(value: 0)
+            
+            let timeInterval =  NSDate().timeIntervalSince1970
+            let timet = Int(round(timeInterval) as Double)
+            PushKConstants.logger.debug("sendMessageDR request X-Hyber-Timestamp is \(String(timet))")
+            
+            let auth_token = X_Push_Auth_Token + ":" + String(timet)
+            let sha256_auth_token = auth_token.sha256()
+            PushKConstants.logger.debug(sha256_auth_token)
+            
+            let params = ["messageId":message_Id] as Dictionary<String, AnyObject>
+            
+            let headersRequest: HTTPHeaders = [
+                "Content-Type": "application/json",
+                "Accept": "application/json",
+                "X-Hyber-Session-Id": X_Push_Session_Id,
+                "X-Hyber-Timestamp": String(timet),
+                "X-Hyber-Auth-Token": sha256_auth_token
+            ]
+            PushKConstants.logger.debug(params)
+            PushKConstants.logger.debug(headersRequest)
+
+            Task{
+                serverDataResponses.revokeDeviceResponse = await makePostRequest(headersRequest: headersRequest, params: params, url: requestURL)
+                semaphore.signal()
+            }
+            semaphore.wait()
+            
+            let response = serverDataResponses.revokeDeviceResponse
+            PushKConstants.logger.debug("sendMessageDR response is \(String(describing: response))")
+            genAnsw.code = response?.response?.statusCode ?? 500
+            
+            if response != nil && response?.error == nil{
+                PushKConstants.logger.debug("sendMessageDR response data is \(String(describing: response?.data))")
+                
+                PushKConstants.logger.debug("sendMessageDR response debugDescription is \(String(describing: response?.debugDescription))")
+                
+                switch response?.response?.statusCode {
+                    case 200:
+                        
+                        let body_json: String = String(decoding: (response?.data)!, as: UTF8.self)
+                        PushKConstants.logger.debug("sendMessageDR body_json from push server: \(body_json)")
+                    
+                        genAnsw = self.answer_buider.generalAnswerStruct(resp_code: response?.response!.statusCode ?? 0, body_json: body_json, description: "Success")
+                        
+                        PushKConstants.logger.debug("sendMessageDR response code is \(String(describing: response?.response!.statusCode))")
+                    
+                    case 401:
+                        PushKConstants.registrationstatus = false
+                        UserDefaults.standard.set(false, forKey: "registrationstatus")
+                        UserDefaults.standard.synchronize()
+                        
+                        PushKConstants.logger.debug("sendMessageDR response code is \(String(describing: response?.response!.statusCode))")
+                    default:
+                        PushKConstants.logger.debug("sendMessageDR response code is \(String(describing: response?.response!.statusCode))")
+                }
+            }
+            
+            return genAnsw
+        }else{
+            PushKConstants.logger.debug("sendMessageDR message_Id is \(message_Id)")
+            return self.answer_buider.generalAnswerStruct(resp_code: 700, body_json: "{\"error\":\"Incorrect input\"}", description: "Failed")
+        }
+    }
+    
+    
+    //send message callback to push server
+    func sendMessageCallBack(message_Id: String, answer: String, X_Push_Session_Id: String, X_Push_Auth_Token:String)->PushKGeneralAnswerStruct {
+        
+        let semaphore = DispatchSemaphore(value: 0)
+        var genAnsw: PushKGeneralAnswerStruct = PushKGeneralAnswerStruct.init(code: 0, result: "unknown", description: "unknown", body: "unknown")
+        
+        let requestURL = PushKConstants.platform_branch_active.url_Http_Mess_callback
+        PushKConstants.logger.debug("sendMessaeCallBack url string is \(requestURL)")
+        
+        let timeInterval =  NSDate().timeIntervalSince1970
+        let timet = Int(round(timeInterval) as Double)
+        PushKConstants.logger.debug("sendMessaeCallBack request X-Hyber-Timestamp is \(String(timet))")
+        
+        let auth_token = X_Push_Auth_Token + ":" + String(timet)
+        let sha256_auth_token = auth_token.sha256()
+        PushKConstants.logger.debug(sha256_auth_token)
+        
+        let params =  [
+            "messageId": message_Id,
+            "answer": answer
+        ] as Dictionary<String, AnyObject>
+        
+        let headersRequest: HTTPHeaders = [
+            "Content-Type": "application/json",
+            "Accept": "application/json",
+            "X-Hyber-Session-Id": X_Push_Session_Id,
+            "X-Hyber-Timestamp": String(timet),
+            "X-Hyber-Auth-Token": sha256_auth_token
+        ]
+        PushKConstants.logger.debug(params)
+        PushKConstants.logger.debug(headersRequest)
+
+        Task{
+            serverDataResponses.revokeDeviceResponse = await makePostRequest(headersRequest: headersRequest, params: params, url: requestURL)
+            semaphore.signal()
+        }
+        semaphore.wait()
+        
+        let response = serverDataResponses.revokeDeviceResponse
+        PushKConstants.logger.debug("sendMessaeCallBack response is \(String(describing: response))")
+        genAnsw.code = response?.response?.statusCode ?? 500
+        
+        if response != nil && response?.error == nil{
+            PushKConstants.logger.debug("sendMessaeCallBack response data is \(String(describing: response?.data))")
+            
+            PushKConstants.logger.debug("sendMessaeCallBack response debugDescription is \(String(describing: response?.debugDescription))")
+            
+            switch response?.response?.statusCode {
+                case 200:
+                    
+                    let body_json: String = String(decoding: (response?.data)!, as: UTF8.self)
+                    PushKConstants.logger.debug("sendMessaeCallBack body_json from push server: \(body_json)")
+                
+                    genAnsw  = self.answer_buider.generalAnswerStruct(resp_code: response?.response!.statusCode ?? 0, body_json: body_json, description: "Success")
+                    
+                    PushKConstants.logger.debug("sendMessaeCallBack response code is \(String(describing: response?.response!.statusCode))")
+                
+                
+                case 401:
+                    PushKConstants.registrationstatus = false
+                    UserDefaults.standard.set(false, forKey: "registrationstatus")
+                    UserDefaults.standard.synchronize()
+                    
+                    PushKConstants.logger.debug("sendMessaeCallBack response code is \(String(describing: response?.response!.statusCode))")
+                default:
+                    PushKConstants.logger.debug("sendMessaeCallBack response code is \(String(describing: response?.response!.statusCode))")
+            }
+        }
+        
+        
+        return genAnsw
+    }
+    
+    
     
     func makePostRequest(headersRequest: HTTPHeaders, params: Parameters, url: String) async -> DataResponse<String, AFError>{
         let task = AF.request(url, method: .post, parameters: params, encoding:JSONEncoding.default, headers: headersRequest){$0.timeoutInterval = 15}.serializingString()

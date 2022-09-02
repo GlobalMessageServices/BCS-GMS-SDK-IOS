@@ -259,8 +259,36 @@ public class PushSDK {
     }
     
     
+    //send message DR
+    public func pushMessageDeliveryReport(message_id: String) -> PushKGeneralAnswerStruct {
+            if (PushKConstants.registrationstatus==true) {
+                let X_Push_Session_Id: String = PushKConstants.firebase_registration_token ?? "firebase_empty"
+                //let push_rest_server = PushAPI.init()
+                PushKConstants.logger.debug(X_Push_Session_Id)
+                PushKConstants.logger.debug(message_id)
+                PushKConstants.logger.debug(String(PushKConstants.push_registration_token ?? "firebase_empty"))
+                
+                let asaa = push_rest_server.sendMessageDR(message_Id: message_id, received_At: "0", X_Push_Session_Id: X_Push_Session_Id, X_Push_Auth_Token: PushKConstants.push_registration_token ?? "token_empty")
+                
+                return asaa}
+            else {
+                return answer_b.generalAnswerStruct(resp_code: 704, body_json: "error", description: "Not registered")
+            }
+    }
     
     
+    
+    public func pushSendMessageCallback(message_id: String, message_text: String) -> PushKGeneralAnswerStruct {
+            if (PushKConstants.registrationstatus==true){
+                let X_Push_Session_Id: String = PushKConstants.firebase_registration_token ?? "firebase_empty"
+                //let push_rest_server = PushAPI.init()
+                let anss = push_rest_server.sendMessageCallBack(message_Id: message_id, answer: message_text, X_Push_Session_Id: X_Push_Session_Id, X_Push_Auth_Token: PushKConstants.push_registration_token ?? "token_empty")
+                
+                return anss}
+            else {
+                return answer_b.generalAnswerStruct(resp_code: 704, body_json: "error", description: "Not registered")
+            }
+    }
     
     
     //function for parsing incoming message from firebase
