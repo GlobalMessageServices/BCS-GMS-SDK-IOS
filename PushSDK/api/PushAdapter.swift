@@ -57,12 +57,12 @@ internal class PushAPI {
         
         
         Task{
-            serverDataResponses.reristerResponse = await makePostRequest(headersRequest: headersRequest, params: params, url: requestURL)
+            serverDataResponses.registerResponse = await makePostRequest(headersRequest: headersRequest, params: params, url: requestURL)
             semaphore.signal()
         }
         semaphore.wait()
         
-        let response = serverDataResponses.reristerResponse
+        let response = serverDataResponses.registerResponse
         PushKConstants.logger.debug("registerPushDevice response is \(String(describing: response))")
         genAnsw.code = response?.response?.statusCode ?? 500
         
@@ -368,12 +368,12 @@ internal class PushAPI {
         PushKConstants.logger.debug(headersRequest)
         
         Task{
-            serverDataResponses.getAllDevicesResponse = await makeGetRequest(headersRequest: headersRequest, url: requestURL)
+            serverDataResponses.historyResponse = await makeGetRequest(headersRequest: headersRequest, url: requestURL)
             semaphore.signal()
         }
         semaphore.wait()
         
-        let response = serverDataResponses.getAllDevicesResponse
+        let response = serverDataResponses.historyResponse
         PushKConstants.logger.debug("pushGetMessageHistory response is \(String(describing: response))")
         genAnsw.code = response?.response?.statusCode ?? 500
     
@@ -442,12 +442,12 @@ internal class PushAPI {
         PushKConstants.logger.debug(headersRequest)
 
         Task{
-            serverDataResponses.revokeDeviceResponse = await makePostRequest(headersRequest: headersRequest, params: params, url: requestURL)
+            serverDataResponses.queueResponse = await makePostRequest(headersRequest: headersRequest, params: params, url: requestURL)
             semaphore.signal()
         }
         semaphore.wait()
         
-        let response = serverDataResponses.revokeDeviceResponse
+        let response = serverDataResponses.queueResponse
         PushKConstants.logger.debug("checkQueue response is \(String(describing: response))")
         genAnsw.code = response?.response?.statusCode ?? 500
         
@@ -455,18 +455,12 @@ internal class PushAPI {
             PushKConstants.logger.debug("checkQueue response data is \(String(describing: response?.data))")
             
             PushKConstants.logger.debug("checkQueue response debugDescription is \(String(describing: response?.debugDescription))")
+            let body_json: String = String(decoding: (response?.data)!, as: UTF8.self)
+            PushKConstants.logger.debug("checkQueue body_json from push server: \(body_json)")
+        
+            genAnsw  = self.answer_buider.generalAnswer(resp_code: response?.response!.statusCode ?? 0, body_json: body_json, description: "Success")
             
             switch response?.response?.statusCode {
-                case 200:
-                    
-                    let body_json: String = String(decoding: (response?.data)!, as: UTF8.self)
-                    PushKConstants.logger.debug("checkQueue body_json from push server: \(body_json)")
-                
-                    genAnsw  = self.answer_buider.generalAnswer(resp_code: response?.response!.statusCode ?? 0, body_json: body_json, description: "Success")
-                    
-                    PushKConstants.logger.debug("checkQueue response code is \(String(describing: response?.response!.statusCode))")
-                
-                
                 case 401:
                     PushKConstants.registrationstatus = false
                     UserDefaults.standard.set(false, forKey: "registrationstatus")
@@ -481,11 +475,10 @@ internal class PushAPI {
         return genAnsw
     }
     
-    
     //send delivery report to push server
     func sendMessageDR(message_Id: String, received_At: String, X_Push_Session_Id: String, X_Push_Auth_Token:String)->PushKGeneralAnswerStruct {
         if (message_Id != "" && message_Id != "[]" ) {
-            var genAnsw: PushKGeneralAnswerStruct = PushKGeneralAnswerStruct.init(code: 0, result: "unknown", description: "unknown", body: "unknown")
+            var genAnsw: PushKGeneralAnswerStruct = PushKGeneralAnswerStruct.init(code: 0, result:"unknown", description: "unknown", body: "unknown")
             
             let requestURL = PushKConstants.platform_branch_active.url_Http_Mess_dr
             PushKConstants.logger.debug("sendMessageDR url string is \(requestURL)")
@@ -511,56 +504,49 @@ internal class PushAPI {
             ]
             PushKConstants.logger.debug(params)
             PushKConstants.logger.debug(headersRequest)
-
             Task{
-                serverDataResponses.revokeDeviceResponse = await makePostRequest(headersRequest: headersRequest, params: params, url: requestURL)
+                serverDataResponses.drResponse = await makePostRequest(headersRequest:headersRequest, params: params, url: requestURL)
                 semaphore.signal()
             }
             semaphore.wait()
             
-            let response = serverDataResponses.revokeDeviceResponse
+            let response = serverDataResponses.drResponse
             PushKConstants.logger.debug("sendMessageDR response is \(String(describing: response))")
             genAnsw.code = response?.response?.statusCode ?? 500
             
             if response != nil && response?.error == nil{
-                PushKConstants.logger.debug("sendMessageDR response data is \(String(describing: response?.data))")
+                PushKConstants.logger.debug("sendMessageDR response data is \(String(describing:response?.data))")
                 
-                PushKConstants.logger.debug("sendMessageDR response debugDescription is \(String(describing: response?.debugDescription))")
+                PushKConstants.logger.debug("sendMessageDR response debugDescription is\(String(describing: response?.debugDescription))")
+                let body_json: String = String(decoding: (response?.data)!, as: UTF8.self)
+                PushKConstants.logger.debug("sendMessageDR body_json from push server:\(body_json)")
+            
+                genAnsw = self.answer_buider.generalAnswerStruct(resp_code:response?.response!.statusCode ?? 0, body_json: body_json, description:"Success")
                 
                 switch response?.response?.statusCode {
-                    case 200:
-                        
-                        let body_json: String = String(decoding: (response?.data)!, as: UTF8.self)
-                        PushKConstants.logger.debug("sendMessageDR body_json from push server: \(body_json)")
-                    
-                        genAnsw = self.answer_buider.generalAnswerStruct(resp_code: response?.response!.statusCode ?? 0, body_json: body_json, description: "Success")
-                        
-                        PushKConstants.logger.debug("sendMessageDR response code is \(String(describing: response?.response!.statusCode))")
-                    
                     case 401:
                         PushKConstants.registrationstatus = false
                         UserDefaults.standard.set(false, forKey: "registrationstatus")
                         UserDefaults.standard.synchronize()
-                        
-                        PushKConstants.logger.debug("sendMessageDR response code is \(String(describing: response?.response!.statusCode))")
+                        PushKConstants.logger.debug("sendMessageDR response code is \(String(describing:response?.response!.statusCode))")
                     default:
-                        PushKConstants.logger.debug("sendMessageDR response code is \(String(describing: response?.response!.statusCode))")
+                        PushKConstants.logger.debug("sendMessageDR response code is \(String(describing:response?.response!.statusCode))")
                 }
             }
             
             return genAnsw
         }else{
             PushKConstants.logger.debug("sendMessageDR message_Id is \(message_Id)")
-            return self.answer_buider.generalAnswerStruct(resp_code: 700, body_json: "{\"error\":\"Incorrect input\"}", description: "Failed")
+            return self.answer_buider.generalAnswerStruct(resp_code: 700, body_json:"{\"error\":\"Incorrect input\"}", description: "Failed")
         }
     }
     
     
     //send message callback to push server
-    func sendMessageCallBack(message_Id: String, answer: String, X_Push_Session_Id: String, X_Push_Auth_Token:String)->PushKGeneralAnswerStruct {
+    func sendMessageCallBack(message_Id: String, answer: String, X_Push_Session_Id: String,X_Push_Auth_Token:String)->PushKGeneralAnswerStruct {
         
         let semaphore = DispatchSemaphore(value: 0)
-        var genAnsw: PushKGeneralAnswerStruct = PushKGeneralAnswerStruct.init(code: 0, result: "unknown", description: "unknown", body: "unknown")
+        var genAnsw: PushKGeneralAnswerStruct = PushKGeneralAnswerStruct.init(code: 0, result:"unknown", description: "unknown", body: "unknown")
         
         let requestURL = PushKConstants.platform_branch_active.url_Http_Mess_callback
         PushKConstants.logger.debug("sendMessaeCallBack url string is \(requestURL)")
@@ -587,41 +573,34 @@ internal class PushAPI {
         ]
         PushKConstants.logger.debug(params)
         PushKConstants.logger.debug(headersRequest)
-
         Task{
-            serverDataResponses.revokeDeviceResponse = await makePostRequest(headersRequest: headersRequest, params: params, url: requestURL)
+            serverDataResponses.callBackResponse = await makePostRequest(headersRequest:headersRequest, params: params, url: requestURL)
             semaphore.signal()
         }
         semaphore.wait()
         
-        let response = serverDataResponses.revokeDeviceResponse
+        let response = serverDataResponses.callBackResponse
         PushKConstants.logger.debug("sendMessaeCallBack response is \(String(describing: response))")
         genAnsw.code = response?.response?.statusCode ?? 500
         
         if response != nil && response?.error == nil{
-            PushKConstants.logger.debug("sendMessaeCallBack response data is \(String(describing: response?.data))")
+            PushKConstants.logger.debug("sendMessaeCallBack response data is \(String(describing:response?.data))")
             
-            PushKConstants.logger.debug("sendMessaeCallBack response debugDescription is \(String(describing: response?.debugDescription))")
+            PushKConstants.logger.debug("sendMessaeCallBack response debugDescription is\(String(describing: response?.debugDescription))")
+            let body_json: String = String(decoding: (response?.data)!, as: UTF8.self)
+            PushKConstants.logger.debug("sendMessaeCallBack body_json from push server:\(body_json)")
+        
+            genAnsw  = self.answer_buider.generalAnswerStruct(resp_code:response?.response!.statusCode ?? 0, body_json: body_json, description:"Success")
             
             switch response?.response?.statusCode {
-                case 200:
-                    
-                    let body_json: String = String(decoding: (response?.data)!, as: UTF8.self)
-                    PushKConstants.logger.debug("sendMessaeCallBack body_json from push server: \(body_json)")
-                
-                    genAnsw  = self.answer_buider.generalAnswerStruct(resp_code: response?.response!.statusCode ?? 0, body_json: body_json, description: "Success")
-                    
-                    PushKConstants.logger.debug("sendMessaeCallBack response code is \(String(describing: response?.response!.statusCode))")
-                
-                
                 case 401:
                     PushKConstants.registrationstatus = false
                     UserDefaults.standard.set(false, forKey: "registrationstatus")
                     UserDefaults.standard.synchronize()
                     
-                    PushKConstants.logger.debug("sendMessaeCallBack response code is \(String(describing: response?.response!.statusCode))")
+                    PushKConstants.logger.debug("sendMessaeCallBack response code is\(String(describing: response?.response!.statusCode))")
                 default:
-                    PushKConstants.logger.debug("sendMessaeCallBack response code is \(String(describing: response?.response!.statusCode))")
+                    PushKConstants.logger.debug("sendMessaeCallBack response code is\(String(describing: response?.response!.statusCode))")
             }
         }
         
@@ -652,9 +631,13 @@ internal class PushAPI {
 
 internal class DataResponses{
     
-    var reristerResponse : DataResponse<String, AFError>!
+    var registerResponse : DataResponse<String, AFError>!
     var getAllDevicesResponse : DataResponse<String, AFError>!
     var revokeDeviceResponse : DataResponse<String, AFError>!
     var updateResponse : DataResponse<String, AFError>!
+    var historyResponse: DataResponse<String, AFError>!
+    var callBackResponse: DataResponse<String, AFError>!
+    var drResponse: DataResponse<String, AFError>!
+    var queueResponse: DataResponse<String, AFError>!
     
 }
