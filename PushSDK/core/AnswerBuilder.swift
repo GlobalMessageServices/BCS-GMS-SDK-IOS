@@ -18,7 +18,7 @@ internal class AnswerBuilder {
             resp = PushKGeneralAnswerStruct.init(code: 400, result: "Failed", description: "Failed", body: "unknown")
         } else {
             
-            resp = PushKGeneralAnswerStruct.init(code: resp_code, result: "Failed", description: "Failed", body: body_json)
+            resp = PushKGeneralAnswerStruct.init(code: resp_code, result: "Failed", description: description, body: body_json)
         }
         return resp
     }

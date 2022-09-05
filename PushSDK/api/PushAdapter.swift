@@ -170,19 +170,22 @@ internal class PushAPI {
             PushKConstants.logger.debug("pushUpdateRegistration body_json from push server: \(body_json)")
     
             let devis_parsed = self.jsonparser.updateregistrationJParse(str_resp: body_json)
-            genAnsw = self.answer_buider.generalAnswerStruct(resp_code: response?.response!.statusCode ?? 0, body_json: "deviceId: \(devis_parsed.deviceId)", description: "Success")
+            
+            var description = "Success"
             
             switch response?.response?.statusCode {
                 case 401:
+                    description = "Failed"
                     UserDefaults.standard.set(false, forKey: "registrationstatus")
                     PushKConstants.registrationstatus = false
                     UserDefaults.standard.synchronize()
                     PushKConstants.logger.debug("pushUpdateRegistration response code is \(String(describing: response?.response!.statusCode))")
                 default:
+                    description = "Failed"
                     PushKConstants.logger.debug("pushUpdateRegistration response code is \(String(describing: response?.response!.statusCode))")
-        
-        
             }
+            
+            genAnsw = self.answer_buider.generalAnswerStruct(resp_code: response?.response!.statusCode ?? 0, body_json: "deviceId: \(devis_parsed.deviceId)", description: description)
             
         }
         
@@ -238,7 +241,7 @@ internal class PushAPI {
     
             PushKConstants.logger.debug("pushDeviceRevoke body_json from push server: \(body_json)")
     
-            genAnsw = self.answer_buider.generalAnswerStruct(resp_code: response?.response!.statusCode ?? 0, body_json: body_json, description: "Success")
+            var description = "Success"
     
             PushKConstants.logger.debug("pushDeviceRevoke response debugDescription is \(response.debugDescription)")
         
@@ -250,10 +253,12 @@ internal class PushAPI {
                     UserDefaults.standard.synchronize()
                     PushKConstants.logger.debug("pushDeviceRevoke response code is \(String(describing: response?.response!.statusCode))")
                 default:
+                    description = "Failed"
                     PushKConstants.logger.debug("pushDeviceRevoke response code is \(String(describing: response?.response!.statusCode))")
         
         
             }
+            genAnsw = self.answer_buider.generalAnswerStruct(resp_code: response?.response!.statusCode ?? 0, body_json: body_json, description: description)
             
         }
                     
@@ -458,18 +463,21 @@ internal class PushAPI {
             let body_json: String = String(decoding: (response?.data)!, as: UTF8.self)
             PushKConstants.logger.debug("checkQueue body_json from push server: \(body_json)")
         
-            genAnsw  = self.answer_buider.generalAnswer(resp_code: response?.response!.statusCode ?? 0, body_json: body_json, description: "Success")
+            var description = "Success"
             
             switch response?.response?.statusCode {
                 case 401:
+                    description = "Failed"
                     PushKConstants.registrationstatus = false
                     UserDefaults.standard.set(false, forKey: "registrationstatus")
                     UserDefaults.standard.synchronize()
                     
                     PushKConstants.logger.debug("checkQueue response code is \(String(describing: response?.response!.statusCode))")
                 default:
+                    description = "Failed"
                     PushKConstants.logger.debug("checkQueue response code is \(String(describing: response?.response!.statusCode))")
             }
+            genAnsw  = self.answer_buider.generalAnswer(resp_code: response?.response!.statusCode ?? 0, body_json: body_json, description: description)
         }
         
         return genAnsw
@@ -521,17 +529,20 @@ internal class PushAPI {
                 let body_json: String = String(decoding: (response?.data)!, as: UTF8.self)
                 PushKConstants.logger.debug("sendMessageDR body_json from push server:\(body_json)")
             
-                genAnsw = self.answer_buider.generalAnswerStruct(resp_code:response?.response!.statusCode ?? 0, body_json: body_json, description:"Success")
+                var description = "Success"
                 
                 switch response?.response?.statusCode {
                     case 401:
+                        description = "Failed"
                         PushKConstants.registrationstatus = false
                         UserDefaults.standard.set(false, forKey: "registrationstatus")
                         UserDefaults.standard.synchronize()
                         PushKConstants.logger.debug("sendMessageDR response code is \(String(describing:response?.response!.statusCode))")
                     default:
+                        description = "Failed"
                         PushKConstants.logger.debug("sendMessageDR response code is \(String(describing:response?.response!.statusCode))")
                 }
+                genAnsw = self.answer_buider.generalAnswerStruct(resp_code:response?.response!.statusCode ?? 0, body_json: body_json, description:description)
             }
             
             return genAnsw
@@ -590,18 +601,21 @@ internal class PushAPI {
             let body_json: String = String(decoding: (response?.data)!, as: UTF8.self)
             PushKConstants.logger.debug("sendMessaeCallBack body_json from push server:\(body_json)")
         
-            genAnsw  = self.answer_buider.generalAnswerStruct(resp_code:response?.response!.statusCode ?? 0, body_json: body_json, description:"Success")
+            var description = "Success"
             
             switch response?.response?.statusCode {
                 case 401:
+                    description = "Failed"
                     PushKConstants.registrationstatus = false
                     UserDefaults.standard.set(false, forKey: "registrationstatus")
                     UserDefaults.standard.synchronize()
                     
                     PushKConstants.logger.debug("sendMessaeCallBack response code is\(String(describing: response?.response!.statusCode))")
                 default:
+                    description = "Failed"
                     PushKConstants.logger.debug("sendMessaeCallBack response code is\(String(describing: response?.response!.statusCode))")
             }
+            genAnsw  = self.answer_buider.generalAnswerStruct(resp_code:response?.response!.statusCode ?? 0, body_json: body_json, description:description)
         }
         
         
