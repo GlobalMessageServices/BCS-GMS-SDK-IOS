@@ -8,33 +8,33 @@
 import Foundation
 
 internal class PushKDatabase {
-    internal func saveDataAfterRegisterOk(user_Phone: String,
+    internal func saveDataAfterRegisterOk(userPhone: String,
                                      token: String,
-                                     device_id: String,
-                                     user_Password: String,
-                                     created_at: String,
-                                     user_id: String
+                                     deviceId: String,
+                                     userPassword: String,
+                                     createdAt: String,
+                                     userId: String
         ) {
-        UserDefaults.standard.set(user_Phone, forKey: "push_user_msisdn")
-        PushKConstants.push_user_msisdn = user_Phone
+        UserDefaults.standard.set(userPhone, forKey: "push_user_msisdn")
+        PushKConstants.pushUserMsisdn = userPhone
         
         UserDefaults.standard.set(token, forKey: "push_registration_token")
-        PushKConstants.push_registration_token = token
+        PushKConstants.pushRegistratioToken = token
         
         UserDefaults.standard.set(true, forKey: "registrationstatus")
         PushKConstants.registrationstatus = true
         
-        UserDefaults.standard.set(device_id, forKey: "deviceId")
-        PushKConstants.deviceId = device_id
+        UserDefaults.standard.set(deviceId, forKey: "deviceId")
+        PushKConstants.deviceId = deviceId
         
-        UserDefaults.standard.set(user_id, forKey: "userId")
-        PushKConstants.userId = user_id
+        UserDefaults.standard.set(userId, forKey: "userId")
+        PushKConstants.userId = userId
         
-        UserDefaults.standard.set(created_at, forKey: "created_at")
-        PushKConstants.created_at = created_at
+        UserDefaults.standard.set(createdAt, forKey: "created_at")
+        PushKConstants.createdAt = createdAt
         
-        UserDefaults.standard.set(user_Password, forKey: "push_user_password")
-        PushKConstants.push_user_password = user_Password
+        UserDefaults.standard.set(userPassword, forKey: "push_user_password")
+        PushKConstants.pushUserPassword = userPassword
         
         UserDefaults.standard.synchronize()
     }

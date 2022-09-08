@@ -26,16 +26,16 @@ internal class PushSdkFirHelpers {
 
     })
         
-        PushKConstants.logger.debug("answToken token: \(PushKConstants.firebase_registration_token ?? "")")
+        PushKConstants.logger.debug("answToken token: \(PushKConstants.firebaseRegistrationToken ?? "")")
         
         let tokenFcm = String(Messaging.messaging().fcmToken ?? "")
         if (tokenFcm != "") {
             UserDefaults.standard.set(tokenFcm, forKey: "firebase_registration_token")
-            PushKConstants.firebase_registration_token = tokenFcm
+            PushKConstants.firebaseRegistrationToken = tokenFcm
             UserDefaults.standard.synchronize()
             PushKConstants.logger.debug("FCM token: \(tokenFcm)")
         }
         
-        return PushKConstants.firebase_registration_token ?? ""
+        return PushKConstants.firebaseRegistrationToken ?? ""
     }
 }

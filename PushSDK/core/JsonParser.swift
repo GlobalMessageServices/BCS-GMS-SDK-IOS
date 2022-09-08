@@ -9,7 +9,7 @@ import Foundation
 
 class PushServerAnswParser {
     
-    func registerJParse(str_resp: String) -> RegisterJsonParse {
+    func registerJParse(strResp: String) -> RegisterJsonParse {
         struct RegisterSession: Decodable {
             enum Category: String, Decodable {
                 case swift, combine, debugging, xcode
@@ -43,7 +43,7 @@ class PushServerAnswParser {
         }
         
 
-        guard let jsonData = str_resp.data(using: .utf8) else { return RegisterJsonParse(deviceId: "", token: "", userId: 0, userPhone: "", createdAt: "")}
+        guard let jsonData = strResp.data(using: .utf8) else { return RegisterJsonParse(deviceId: "", token: "", userId: 0, userPhone: "", createdAt: "")}
         //let jsonData = JSON.self(using: .utf8)!
         do {
            let parsedJson: FullRegister = try JSONDecoder().decode(FullRegister.self, from: jsonData)
@@ -59,7 +59,7 @@ class PushServerAnswParser {
     
 
     
-    func updateregistrationJParse(str_resp: String) -> UpdateRegJsonParse
+    func updateregistrationJParse(strResp: String) -> UpdateRegJsonParse
     {
         struct RegisterUpdate: Decodable {
             enum Category: String, Decodable {
@@ -68,7 +68,7 @@ class PushServerAnswParser {
             let deviceId: Int
         }
         
-        guard let jsonData = str_resp.data(using: .utf8) else { return UpdateRegJsonParse(deviceId: "")}
+        guard let jsonData = strResp.data(using: .utf8) else { return UpdateRegJsonParse(deviceId: "")}
         //let jsonData = JSON.self(using: .utf8)!
         
         do {
@@ -82,7 +82,7 @@ class PushServerAnswParser {
         
     }
     
-    func getDeviceListJson(str_resp: String) -> PushKGetDeviceList
+    func getDeviceListJson(strResp: String) -> PushKGetDeviceList
     {
 
         struct PushKGetDeviceListParse: Decodable {
@@ -106,7 +106,7 @@ class PushServerAnswParser {
         let devices: [PushKGetDeviceListParse]
     }
         
-        guard let jsonData = str_resp.data(using: .utf8) else { return PushKGetDeviceList(devices: [])}
+        guard let jsonData = strResp.data(using: .utf8) else { return PushKGetDeviceList(devices: [])}
         do {
         let parsedJson: DevListRespAll = try JSONDecoder().decode(DevListRespAll.self, from: jsonData)
         
@@ -127,7 +127,7 @@ class PushServerAnswParser {
     }
     
     
-    func getMessageHistoryJson(str_resp: String) -> MessagesListResponse
+    func getMessageHistoryJson(strResp: String) -> MessagesListResponse
     {
         
         struct ImageResponseParse: Decodable {
@@ -171,7 +171,7 @@ class PushServerAnswParser {
         
         
         
-        guard let jsonData = str_resp.data(using: .utf8) else { return MessagesListResponse(limitDays: 0, limitMessages: 0, lastTime: 0, messages: [])}
+        guard let jsonData = strResp.data(using: .utf8) else { return MessagesListResponse(limitDays: 0, limitMessages: 0, lastTime: 0, messages: [])}
 
         do {
             let parsedJson: MessagesListRespAll = try JSONDecoder().decode(MessagesListRespAll.self, from: jsonData)
@@ -196,11 +196,11 @@ class PushServerAnswParser {
     
     
     
-    static func messageIncomingJson(str_resp: String) -> FullFirebaseMessageStr
+    static func messageIncomingJson(strResp: String) -> FullFirebaseMessageStr
     {
-        PushKConstants.logger.debug("messageIncomingJson start: str_resp: \(str_resp)")
+        PushKConstants.logger.debug("messageIncomingJson start: strResp: \(strResp)")
         
-        let str_resp_transform = str_resp.replacingOccurrences(of: "\"{", with: "{", options: .literal, range: nil).replacingOccurrences(of: "}\"", with: "}", options: .literal, range: nil)
+        let strRespTransform = strResp.replacingOccurrences(of: "\"{", with: "{", options: .literal, range: nil).replacingOccurrences(of: "}\"", with: "}", options: .literal, range: nil)
         
         
         struct ButtonResponseParse: Decodable {
@@ -261,10 +261,10 @@ class PushServerAnswParser {
         }
 
         
-        PushKConstants.logger.debug("messageIncomingJson before decoding: str_resp_transform: \(str_resp_transform)")
+        PushKConstants.logger.debug("messageIncomingJson before decoding: strRespTransform: \(strRespTransform)")
         
         
-        guard let jsonData = str_resp_transform.data(using: .utf8) else { return FullFirebaseMessageStr(aps: MessApsDataStr(contentAvailable: 0), message: MessagesResponseStr(phone: "", messageId: "", title: "", body: "", image: ImageResponse(url: ""), button: ButtonResponse(text: "", url: ""), time: "", partner: ""),googleCSenderId: "",           gcmMessageId: "")}
+        guard let jsonData = strRespTransform.data(using: .utf8) else { return FullFirebaseMessageStr(aps: MessApsDataStr(contentAvailable: 0), message: MessagesResponseStr(phone: "", messageId: "", title: "", body: "", image: ImageResponse(url: ""), button: ButtonResponse(text: "", url: ""), time: "", partner: ""),googleCSenderId: "",           gcmMessageId: "")}
         
         PushKConstants.logger.debug("messageIncomingJson transformed to data")
         

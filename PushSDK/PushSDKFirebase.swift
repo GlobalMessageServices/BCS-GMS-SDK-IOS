@@ -17,7 +17,7 @@ public class PushSDKFirebase: UIResponder, UIApplicationDelegate {
     let pushParser = PusherKParser.init()
     //let manualNotificator = PushNotification.init()
     let answerAdapter = PushServerAnswParser.init()
-    let push_adapter = PushSDK.init(basePushURL: PushKConstants.basePushURLactive)
+    let pushAdapter = PushSDK.init(basePushURL: PushKConstants.basePushURLactive)
     let gcmMessageIDKey = "gcm.message_id"
     let mySpecialNotificationKey = "com.push.specialNotificationKey"
     
@@ -89,7 +89,7 @@ public class PushSDKFirebase: UIResponder, UIApplicationDelegate {
         }
         
         // Print full message.
-        PushKConstants.logger.debug("fb_fun2_application userInfo: \(userInfo)")
+        PushKConstants.logger.debug("fb_init_application_fun2 userInfo: \(userInfo)")
     }
     
     
@@ -136,7 +136,7 @@ extension PushSDKFirebase: UNUserNotificationCenterDelegate{
 
 extension PushSDKFirebase {
     
-    public func fb_notify_messaging() {
+    public func fbNotifyMessaging() {
         NotificationCenter.default.post(name: NSNotification.Name(rawValue: mySpecialNotificationKey), object: self)
     }
     

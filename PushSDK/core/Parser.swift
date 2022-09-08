@@ -14,37 +14,37 @@ public class PusherKParser {
     
     //let processor = PushProcessing.init()
     
-    public func urlsInitialization(branchUrl: String, method_paths: BranchStructObj) {
+    public func urlsInitialization(branchUrl: String, methodPaths: BranchStructObj) {
         if (branchUrl.last == "/")
         {
-            PushKConstants.platform_branch_active = BranchStructObj(
-                url_Http_Update: branchUrl + PushKConstants.serverSdkVersion + "/" + method_paths.url_Http_Update,
-                url_Http_Registration: branchUrl + PushKConstants.serverSdkVersion + "/" + method_paths.url_Http_Registration,
-                url_Http_Revoke: branchUrl + PushKConstants.serverSdkVersion + "/" + method_paths.url_Http_Revoke,
-                url_Http_Device_getall: branchUrl + PushKConstants.serverSdkVersion + "/" + method_paths.url_Http_Device_getall,
-                url_Http_Mess_callback: branchUrl + PushKConstants.serverSdkVersion + "/" + method_paths.url_Http_Mess_callback,
-                url_Http_Mess_dr: branchUrl + PushKConstants.serverSdkVersion + "/" + method_paths.url_Http_Mess_dr,
-                push_url_mess_queue: branchUrl + PushKConstants.serverSdkVersion + "/" + method_paths.push_url_mess_queue,
-                url_Http_Mess_history: branchUrl + PushKConstants.serverSdkVersion + "/" + method_paths.url_Http_Mess_history)
+            PushKConstants.platformBrancActive = BranchStructObj(
+                urlHttpUpdate: branchUrl + PushKConstants.serverSdkVersion + "/" + methodPaths.urlHttpUpdate,
+                urlHttpRegistration: branchUrl + PushKConstants.serverSdkVersion + "/" + methodPaths.urlHttpRegistration,
+                urlHttpRevoke: branchUrl + PushKConstants.serverSdkVersion + "/" + methodPaths.urlHttpRevoke,
+                urlHttpDeviceGetAll: branchUrl + PushKConstants.serverSdkVersion + "/" + methodPaths.urlHttpDeviceGetAll,
+                urlHttpMesscallback: branchUrl + PushKConstants.serverSdkVersion + "/" + methodPaths.urlHttpMesscallback,
+                urlHttpMessDr: branchUrl + PushKConstants.serverSdkVersion + "/" + methodPaths.urlHttpMessDr,
+                pusUrlMessQueue: branchUrl + PushKConstants.serverSdkVersion + "/" + methodPaths.pusUrlMessQueue,
+                urlHttpMessHistory: branchUrl + PushKConstants.serverSdkVersion + "/" + methodPaths.urlHttpMessHistory)
         }
         else
         {
-            PushKConstants.platform_branch_active = BranchStructObj(
-                url_Http_Update: branchUrl + "/" + PushKConstants.serverSdkVersion + "/" + method_paths.url_Http_Update,
-                url_Http_Registration: branchUrl + "/" + PushKConstants.serverSdkVersion + "/" + method_paths.url_Http_Registration,
-                url_Http_Revoke: branchUrl + "/" + PushKConstants.serverSdkVersion + "/" + method_paths.url_Http_Revoke,
-                url_Http_Device_getall: branchUrl + "/" + PushKConstants.serverSdkVersion + "/" + method_paths.url_Http_Device_getall,
-                url_Http_Mess_callback: branchUrl + "/" + PushKConstants.serverSdkVersion + "/" + method_paths.url_Http_Mess_callback,
-                url_Http_Mess_dr: branchUrl + "/" + PushKConstants.serverSdkVersion + "/" + method_paths.url_Http_Mess_dr,
-                push_url_mess_queue: branchUrl + "/" + PushKConstants.serverSdkVersion + "/" + method_paths.push_url_mess_queue,
-                url_Http_Mess_history: branchUrl + "/" + PushKConstants.serverSdkVersion + "/" + method_paths.url_Http_Mess_history)
+            PushKConstants.platformBrancActive = BranchStructObj(
+                urlHttpUpdate: branchUrl + "/" + PushKConstants.serverSdkVersion + "/" + methodPaths.urlHttpUpdate,
+                urlHttpRegistration: branchUrl + "/" + PushKConstants.serverSdkVersion + "/" + methodPaths.urlHttpRegistration,
+                urlHttpRevoke: branchUrl + "/" + PushKConstants.serverSdkVersion + "/" + methodPaths.urlHttpRevoke,
+                urlHttpDeviceGetAll: branchUrl + "/" + PushKConstants.serverSdkVersion + "/" + methodPaths.urlHttpDeviceGetAll,
+                urlHttpMesscallback: branchUrl + "/" + PushKConstants.serverSdkVersion + "/" + methodPaths.urlHttpMesscallback,
+                urlHttpMessDr: branchUrl + "/" + PushKConstants.serverSdkVersion + "/" + methodPaths.urlHttpMessDr,
+                pusUrlMessQueue: branchUrl + "/" + PushKConstants.serverSdkVersion + "/" + methodPaths.pusUrlMessQueue,
+                urlHttpMessHistory: branchUrl + "/" + PushKConstants.serverSdkVersion + "/" + methodPaths.urlHttpMessHistory)
         }
     }
     
-    public func messIdParser(message_from_push_server: String) -> String
+    public func messIdParser(messageFromPushServer: String) -> String
     {
         
-        let newStringFun = message_from_push_server.replacingOccurrences(of: "\\", with: "", options: .literal, range: nil)
+        let newStringFun = messageFromPushServer.replacingOccurrences(of: "\\", with: "", options: .literal, range: nil)
         //textOutput.text = newString
         PushKConstants.logger.debug(newStringFun)
         

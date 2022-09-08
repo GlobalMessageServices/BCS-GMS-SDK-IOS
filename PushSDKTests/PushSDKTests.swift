@@ -25,7 +25,7 @@ class PushSDKTests: XCTestCase {
     override func setUp() {
         // Put setup code here. This method is called before the invocation of each test method in the class.
         super.setUp()
-        sdkInitPush = PushSDK.init(platform_branch: PushSDKVar.branchMasterValue, log_level: PushSDKVar.LOGLEVEL_DEBUG, basePushURL: "https://example.com")
+        sdkInitPush = PushSDK.init(platformBranch: PushSDKVar.branchMasterValue, logLevel: PushSDKVar.LOGLEVEL_DEBUG, basePushURL: "https://example.com")
         userInfo = ["google.c.sender.id":"c-znu3aVxkB3redvr1HRgk", "aps": "{\"content-available\" = 1;}", "message": "{\"button\":{},\"image\":{},\"partner\":\"push\",\"phone\":\"1234567890\",\"messageId\":\"70f3cb2d-0000-0000-0000-005056010cc1\",\"time\":\"2022-09-02T12:04:49.204689+00\",\"body\":\"Test Message IOS 1\",\"title\":\"Test title IOS\"}","gcm.message_id": 8730000458611]
     }
 
@@ -57,10 +57,9 @@ class PushSDKTests: XCTestCase {
         }
     }
     
-    func testRegistration() {
-        let resp = sdkInitPush.pushRegisterNew(user_phone: "1234567890", user_password: "1", x_push_sesion_id: "123", x_push_ios_bundle_id: "123456789", X_Push_Client_API_Key: "test")
-        print(resp)
-    }
+//    func testRegistration() {
+//
+//    }
 
     func testGetAllDevices() {
         let resp = sdkInitPush.pushGetDeviceAllFromServer().result
@@ -68,7 +67,7 @@ class PushSDKTests: XCTestCase {
     }
 
     func testGetMessHistory() {
-        let resp = sdkInitPush.pushGetMessageHistory(period_in_seconds: 12345)
+        let resp = sdkInitPush.pushGetMessageHistory(periodInSeconds: 12345)
         print(resp)
     }
 
@@ -78,12 +77,12 @@ class PushSDKTests: XCTestCase {
     }
 
     func testSendDeliveryReport() {
-        let resp = sdkInitPush.pushMessageDeliveryReport(message_id: "1251fqf4").description
+        let resp = sdkInitPush.pushMessageDeliveryReport(messagId: "1251fqf4").description
         print(resp)
     }
 
     func testSendMessageCallback() {
-        let resp = sdkInitPush.pushSendMessageCallback(message_id: "test", message_text: "privet").description
+        let resp = sdkInitPush.pushSendMessageCallback(messageId: "test-message-id", callbackText: "hello").description
         print(resp)
     }
 
@@ -121,22 +120,22 @@ class PushSDKTests: XCTestCase {
     
     
     func testRegParser(){
-        let response = parser_class.registerJParse(str_resp: reg_str)
+        let response = parser_class.registerJParse(strResp: reg_str)
         print(response)
     }
 
     func testUpdParser(){
-        let response = parser_class.updateregistrationJParse(str_resp: upd_str)
+        let response = parser_class.updateregistrationJParse(strResp: upd_str)
         print(response)
     }
     
     func testAllDeviceParser(){
-        let response = parser_class.getDeviceListJson(str_resp: all_device_str)
+        let response = parser_class.getDeviceListJson(strResp: all_device_str)
         print(response)
     }
     
     func testHistoryParser(){
-        let response = parser_class.getMessageHistoryJson(str_resp: history_str)
+        let response = parser_class.getMessageHistoryJson(strResp: history_str)
         print(response)
     }
     
