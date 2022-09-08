@@ -139,7 +139,7 @@ public class PushSDK {
         
         PushKConstants.logger.debug("Token updated for registration: xPushSessionId: \(xPushSessionId)")
         
-        if (!PushKConstants.registrationstatus==false){
+        if (!PushKConstants.registrationstatus){
             if (userPhone != "" && xPushSessionId != "" && xPushClientAPIKey != "" ) {
                 let pusRegisterNewAnswer = pushRestServer.registerPushDevice(xPushClientAPIKey: xPushClientAPIKey, xPushSessionId: xPushSessionId, xPushIOSBundleId: xPushIOSBundleId, userPass: userPassword, userPhone: userPhone)
                 return pusRegisterNewAnswer
