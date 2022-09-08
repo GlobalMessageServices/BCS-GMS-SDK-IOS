@@ -11,16 +11,16 @@ import XCTest
 class PushSDKTests: XCTestCase {
     
     var sdkInitPush: PushSDK!
-    let parser_class = PushServerAnswParser.init()
+    let parserClass = PushServerAnswParser.init()
     var userInfo : [AnyHashable:Any]!
     
-    let reg_str = "{\"session\": {\"token\": \"4fab048ae89f4b98890b3e5dc800000a\"}, \"profile\": {\"userId\": 1500051, \"userPhone\": \"1234567890\", \"createdAt\": \"2022-05-09T08:22:30.893636+00\"}, \"device\": {\"deviceId\": 13000522}}"
+    let regStr = "{\"session\": {\"token\": \"4fab048ae89f4b98890b3e5dc800000a\"}, \"profile\": {\"userId\": 1500051, \"userPhone\": \"1234567890\", \"createdAt\": \"2022-05-09T08:22:30.893636+00\"}, \"device\": {\"deviceId\": 13000522}}"
     
-    let upd_str = "{\"deviceId\": 13000522}"
+    let updStr = "{\"deviceId\": 13000522}"
     
-    let all_device_str = "{\"devices\": [{\"id\": 10002522, \"osType\": \"ios\", \"osVersion\": \"15.5\", \"deviceType\": \"iPhone\", \"deviceName\": \"Simulator iPhone 11\", \"sdkVersion\": \"1.0.0.01\", \"createdAt\": \"2022-09-03T09:08:30.749255+00\", \"updatedAt\": \"2022-09-03T09:16:24.199570+00\"}, {\"id\": 10002524, \"osType\": \"ios\", \"osVersion\": \"15.6.1\", \"deviceType\": \"iPhone\", \"deviceName\": \"iPhone 11\", \"sdkVersion\": \"0.0.01\", \"createdAt\": \"2022-09-03T09:18:17.623499+00\", \"updatedAt\": \"2022-09-03T09:18:17.623499+00\"}]}"
+    let allDeviceStr = "{\"devices\": [{\"id\": 10002522, \"osType\": \"ios\", \"osVersion\": \"15.5\", \"deviceType\": \"iPhone\", \"deviceName\": \"Simulator iPhone 11\", \"sdkVersion\": \"1.0.0.01\", \"createdAt\": \"2022-09-03T09:08:30.749255+00\", \"updatedAt\": \"2022-09-03T09:16:24.199570+00\"}, {\"id\": 10002524, \"osType\": \"ios\", \"osVersion\": \"15.6.1\", \"deviceType\": \"iPhone\", \"deviceName\": \"iPhone 11\", \"sdkVersion\": \"0.0.01\", \"createdAt\": \"2022-09-03T09:18:17.623499+00\", \"updatedAt\": \"2022-09-03T09:18:17.623499+00\"}]}"
     
-    let history_str = "{\"limitDays\": 92, \"limitMessages\": 1000, \"lastTime\": 1662197023, \"messages\": [{\"body\": \"Test Message IOS 2\", \"time\": \"2022-09-03T09:23:37.372843+00\", \"image\": {}, \"phone\": \"1234567890\", \"title\": \"Test title IOS\", \"button\": {}, \"partner\": \"push\", \"messageId\": \"16f68e44-0000-0000-0000-005056010cc1\"}, {\"body\": \"Test Message IOS 1\", \"time\": \"2022-09-03T09:23:24.414771+00\", \"image\": {}, \"phone\": \"1234567890\", \"title\": \"Test title IOS\", \"button\": {}, \"partner\": \"push\", \"messageId\": \"0f45dcae-0000-0000-0000-005056010cc1\"}]}"
+    let historyStr = "{\"limitDays\": 92, \"limitMessages\": 1000, \"lastTime\": 1662197023, \"messages\": [{\"body\": \"Test Message IOS 2\", \"time\": \"2022-09-03T09:23:37.372843+00\", \"image\": {}, \"phone\": \"1234567890\", \"title\": \"Test title IOS\", \"button\": {}, \"partner\": \"push\", \"messageId\": \"16f68e44-0000-0000-0000-005056010cc1\"}, {\"body\": \"Test Message IOS 1\", \"time\": \"2022-09-03T09:23:24.414771+00\", \"image\": {}, \"phone\": \"1234567890\", \"title\": \"Test title IOS\", \"button\": {}, \"partner\": \"push\", \"messageId\": \"0f45dcae-0000-0000-0000-005056010cc1\"}]}"
     
     override func setUp() {
         // Put setup code here. This method is called before the invocation of each test method in the class.
@@ -77,7 +77,7 @@ class PushSDKTests: XCTestCase {
     }
 
     func testSendDeliveryReport() {
-        let resp = sdkInitPush.pushMessageDeliveryReport(messagId: "1251fqf4").description
+        let resp = sdkInitPush.pushMessageDeliveryReport(messageId: "1251fqf4").description
         print(resp)
     }
 
@@ -120,22 +120,22 @@ class PushSDKTests: XCTestCase {
     
     
     func testRegParser(){
-        let response = parser_class.registerJParse(strResp: reg_str)
+        let response = parserClass.registerJParse(strResp: regStr)
         print(response)
     }
 
     func testUpdParser(){
-        let response = parser_class.updateregistrationJParse(strResp: upd_str)
+        let response = parserClass.updateregistrationJParse(strResp: updStr)
         print(response)
     }
     
     func testAllDeviceParser(){
-        let response = parser_class.getDeviceListJson(strResp: all_device_str)
+        let response = parserClass.getDeviceListJson(strResp: allDeviceStr)
         print(response)
     }
     
     func testHistoryParser(){
-        let response = parser_class.getMessageHistoryJson(strResp: history_str)
+        let response = parserClass.getMessageHistoryJson(strResp: historyStr)
         print(response)
     }
     

@@ -113,7 +113,7 @@ public class PushSDK {
         
         PushKConstants.logger.debug("Used constants: registrationstatus: \(PushKConstants.registrationstatus)")
         
-        if (PushKConstants.registrationstatus==false){
+        if (!PushKConstants.registrationstatus){
             if (userPhone != "" && xPushSessionId != "" && xPushClientAPIKey != "" ) {
                 UserDefaults.standard.set(xPushSessionId, forKey: "firebase_registration_token")
                 PushKConstants.firebaseRegistrationToken = xPushSessionId
@@ -139,7 +139,7 @@ public class PushSDK {
         
         PushKConstants.logger.debug("Token updated for registration: xPushSessionId: \(xPushSessionId)")
         
-        if (PushKConstants.registrationstatus==false){
+        if (!PushKConstants.registrationstatus==false){
             if (userPhone != "" && xPushSessionId != "" && xPushClientAPIKey != "" ) {
                 let pusRegisterNewAnswer = pushRestServer.registerPushDevice(xPushClientAPIKey: xPushClientAPIKey, xPushSessionId: xPushSessionId, xPushIOSBundleId: xPushIOSBundleId, userPass: userPassword, userPhone: userPhone)
                 return pusRegisterNewAnswer
@@ -157,7 +157,7 @@ public class PushSDK {
     }
     
     public func pushUpdateRegistration() -> PushKGeneralAnswerStruct {
-            if (PushKConstants.registrationstatus==true) {
+            if (PushKConstants.registrationstatus) {
                 
                 let xPushSessionId: String = PushSdkFirHelpers.firebaseUpdateToken()
                 
@@ -171,7 +171,7 @@ public class PushSDK {
     
     //Delete registration
     public func pushClearCurrentDevice()->PushKGeneralAnswerStruct {
-            if (PushKConstants.registrationstatus==true){
+            if (PushKConstants.registrationstatus){
                 let xPushSessionId: String = PushKConstants.firebaseRegistrationToken ?? "firebase_empty"
                 
                 let answer = pushRestServer.pushDeviceRevoke(devList: [PushKConstants.deviceId ?? "unknown"], xPushSessionId: xPushSessionId, xPushAuthToken: PushKConstants.pushRegistratioToken ?? "firebase_empty")
@@ -183,7 +183,7 @@ public class PushSDK {
     
     //Get all devices related to number
     public func pushGetDeviceAllFromServer() -> PushKFunAnswerGetDeviceList {
-            if (PushKConstants.registrationstatus==true){
+            if (PushKConstants.registrationstatus){
                 let xPushSessionId: String = PushKConstants.firebaseRegistrationToken ?? "firebase_empty"
                 let answer = pushRestServer.pushDevicesGetAll(xPushSessionId: xPushSessionId, xPushAuthToken: PushKConstants.pushRegistratioToken ?? "token_empty")
                 PushKConstants.logger.debug(answer)
@@ -197,7 +197,7 @@ public class PushSDK {
     //Delete registration of all devices related to number
     public func pushClearAllDevice()->PushKGeneralAnswerStruct {
 
-            if (PushKConstants.registrationstatus==true) {
+            if (PushKConstants.registrationstatus) {
                 let getdevResponse = pushGetDeviceAllFromServer()
 
                 var listDevId: [String] = []
@@ -228,7 +228,7 @@ public class PushSDK {
     
     //Get message history related to current device
     public func pushGetMessageHistory(periodInSeconds: Int) -> PushKFunAnswerGetMessageHistory {
-            if (PushKConstants.registrationstatus==true) {
+            if (PushKConstants.registrationstatus) {
                 let xPushSessionId: String = PushKConstants.firebaseRegistrationToken ?? "firebase_empty"
                 
                 let answer = pushRestServer.pushGetMessageHistory(utcTime: periodInSeconds, xPushSessionId: xPushSessionId, xPushAuthToken: PushKConstants.pushRegistratioToken ?? "token_empty" )
@@ -242,7 +242,7 @@ public class PushSDK {
     
     
     public func pushCheckQueue() -> PushKFunAnswerGeneral {
-            if (PushKConstants.registrationstatus==true) {
+            if (PushKConstants.registrationstatus) {
                 let xPushSessionId: String = PushKConstants.firebaseRegistrationToken ?? "firebase_empty"
                 let answer = pushRestServer.checkQueue(xPushSessionId: xPushSessionId, xPushAuthToken: PushKConstants.pushRegistratioToken ?? "token_empty" )
                 return answer
@@ -254,14 +254,14 @@ public class PushSDK {
     
     
     //send message DR
-    public func pushMessageDeliveryReport(messagId: String) -> PushKGeneralAnswerStruct {
-            if (PushKConstants.registrationstatus==true) {
+    public func pushMessageDeliveryReport(messageId: String) -> PushKGeneralAnswerStruct {
+            if (PushKConstants.registrationstatus) {
                 let xPushSessionId: String = PushKConstants.firebaseRegistrationToken ?? "firebase_empty"
                 PushKConstants.logger.debug(xPushSessionId)
-                PushKConstants.logger.debug(messagId)
+                PushKConstants.logger.debug(messageId)
                 PushKConstants.logger.debug(String(PushKConstants.pushRegistratioToken ?? "firebase_empty"))
                 
-                let answer = pushRestServer.sendMessageDR(messageId: messagId, xPushSessionId: xPushSessionId, xPushAuthToken: PushKConstants.pushRegistratioToken ?? "token_empty")
+                let answer = pushRestServer.sendMessageDR(messageId: messageId, xPushSessionId: xPushSessionId, xPushAuthToken: PushKConstants.pushRegistratioToken ?? "token_empty")
                 
                 return answer}
             else {
@@ -272,7 +272,7 @@ public class PushSDK {
     
     
     public func pushSendMessageCallback(messageId: String, callbackText: String) -> PushKGeneralAnswerStruct {
-            if (PushKConstants.registrationstatus==true){
+            if (PushKConstants.registrationstatus){
                 let xPushSessionId: String = PushKConstants.firebaseRegistrationToken ?? "firebase_empty"
                 let answer = pushRestServer.sendMessageCallBack(messageId: messageId, answer: callbackText, xPushSessionId: xPushSessionId, xPushAuthToken: PushKConstants.pushRegistratioToken ?? "token_empty")
                 
