@@ -9,6 +9,26 @@
 			<key>orderHint</key>
 			<integer>17</integer>
 		</dict>
+		<key>PushSDKTests.xcscheme_^#shared#^_</key>
+		<dict>
+			<key>isShown</key>
+			<false/>
+			<key>orderHint</key>
+			<integer>18</integer>
+		</dict>
+	</dict>
+	<key>SuppressBuildableAutocreation</key>
+	<dict>
+		<key>01FCADD028C0C15E00D77FA4</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
+		<key>01FCADD828C0C15E00D77FA4</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
 	</dict>
 </dict>
 </plist>
