@@ -55,3 +55,9 @@ jobs:
           pod install
           xcodebuild build -workspace PushSDK.xcworkspace -scheme PushSDK -destination 'platform=iOS Simulator,OS=15.5,name=iPhone 13 Pro Max'
           xcodebuild test -workspace PushSDK.xcworkspace -scheme PushSDKTests -destination 'platform=iOS Simulator,OS=15.5,name=iPhone 13 Pro Max'
+  
+      - name: Clean up keychain and provisioning profile
+        if: ${{ always() }}
+        run: |
+          security delete-keychain $RUNNER_TEMP/app-signing.keychain-db
+          rm ~/Library/MobileDevice/Provisioning\ Profiles/build_pp.mobileprovision
