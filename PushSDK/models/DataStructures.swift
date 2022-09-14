@@ -1,11 +1,9 @@
 //
 //  DataStructures.swift
-//  PushSDK
+//  GMSPushSDKIOS
 //
-//  Created by Kirill Kotov on 20.11.2020.
-//  Copyright © 2020 PUSHER. All rights reserved.
+//  Created by o.korniienko on 22.08.22.
 //
-
 
 import Foundation
 
@@ -71,18 +69,18 @@ public struct PushKGetDeviceList {
     public var devices: [PushKGetDevice]
     
     public func toString() -> String {
-        var answ_result = ""
+        var answResult = ""
         for h in devices {
-            let current_str = h.toString()
-            if answ_result == "" {
-                answ_result = "[" + answ_result + current_str
+            let currentStr = h.toString()
+            if answResult == "" {
+                answResult = "[" + answResult + currentStr
             }
             else {
-                answ_result = answ_result + ", " + current_str
+                answResult = answResult + ", " + currentStr
             }
         }
-        answ_result = answ_result + "]"
-        return answ_result
+        answResult = answResult + "]"
+        return answResult
     }
 }
 
@@ -156,27 +154,27 @@ public struct MessagesListResponse {
     public var messages: [MessagesResponseStr]
     
     public func toString() -> String {
-        var answ_result = "MessagesListResponse(limitDays: \(limitDays ?? 0), limitMessages: \(limitMessages ?? 0), lastTime: \(lastTime ?? 0), messages: "
-        var ans_mess = ""
+        var answResult = "MessagesListResponse(limitDays: \(limitDays ?? 0), limitMessages: \(limitMessages ?? 0), lastTime: \(lastTime ?? 0), messages: "
+        var ansMess = ""
         if (messages.count != 0) {
         for h in messages {
-            let current_str = h.toString()
-            if ans_mess == "" {
-                ans_mess = "[" + ans_mess + current_str
+            let currenStr = h.toString()
+            if ansMess == "" {
+                ansMess = "[" + ansMess + currenStr
             }
             else {
-                ans_mess = ans_mess + ", " + ans_mess
+                ansMess = ansMess + ", " + currenStr
             }
         }
-        ans_mess = ans_mess + "]"
-        answ_result = answ_result + ans_mess + ")"
+            ansMess = ansMess + "]"
+            answResult = answResult + ansMess + ")"
             }
             
         else {
-            answ_result = answ_result + "[])"
+            answResult = answResult + "[])"
         }
         
-        return answ_result
+        return answResult
     }
 }
 
@@ -213,14 +211,12 @@ public struct PushKMess {
 }
 
 public struct BranchStructObj {
-     var url_Http_Update: String
-     var url_Http_Registration: String
-     var url_Http_Revoke: String
-     var url_Http_Device_getall: String
-     var url_Http_Mess_callback: String
-     var url_Http_Mess_dr: String
-     var push_url_mess_queue: String
-     var url_Http_Mess_history: String
+     var urlHttpUpdate: String
+     var urlHttpRegistration: String
+     var urlHttpRevoke: String
+     var urlHttpDeviceGetAll: String
+     var urlHttpMesscallback: String
+     var urlHttpMessDr: String
+     var pusUrlMessQueue: String
+     var urlHttpMessHistory: String
 }
-
-

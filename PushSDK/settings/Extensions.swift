@@ -1,9 +1,8 @@
 //
 //  Extensions.swift
-//  PushSDK
+//  GMSPushSDKIOS
 //
-//  Created by Kirill Kotov on 20.11.2020.
-//  Copyright © 2020 PUSHER. All rights reserved.
+//  Created by o.korniienko on 22.08.22.
 //
 
 import Foundation
@@ -125,4 +124,3 @@ public extension UIDevice {
     }()
     
 }
-
