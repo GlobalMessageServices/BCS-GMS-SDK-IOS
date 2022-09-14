@@ -37,7 +37,7 @@ public class PushSDK {
     private let log = SwiftyBeaver.self
     private let parserClassAdapter = PusherKParser.init()
     private let pushRestServer = PushAPI.init()
-    //private let funNotificator = PushNotification.init()
+    private let funNotificator = PushNotification.init()
     let answerBuilder = AnswerBuilder.init()
     
     
@@ -300,6 +300,20 @@ public class PushSDK {
         let newString = String(jsonString ?? "").replacingOccurrences(of: "\\", with: "", options: .literal, range: nil)
         let parsedMessage = PushServerAnswParser.messageIncomingJson(strResp: newString)
         return PushKMess(code: 200, result: "Success", messageFir: parsedMessage)
+    }
+    
+    
+    //check if notification permitted (Sync procedure)
+    public func areNotificationsEnabled() -> Bool {
+        
+        let semaphore = DispatchSemaphore(value: 0)
+        funNotificator.areNotificationsEnabled { (notificationStatus) in
+            debugPrint(notificationStatus)
+            PushKConstants.notificationPermission = notificationStatus
+            semaphore.signal()
+        }
+        semaphore.wait()
+        return PushKConstants.notificationPermission
     }
     
     

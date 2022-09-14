@@ -8,7 +8,7 @@ To update dependencies in the Podfile run - $ pod update.<br>
 To open your project run $ open ProjectName.xcworkspace<br>
 More about Cocoapods and Podfile here - https://cocoapods.org, https://guides.cocoapods.org/using/the-podfile.html and https://guides.cocoapods.org/using/using-cocoapods.html.
 
-last actual SDK version: 1.0.0.45<br>
+last actual SDK version: 1.1.0.1<br>
 To integrate PushSDK to your project with COCOAPODS (https://guides.cocoapods.org/using/the-podfile.html) add the next line in Podfile.<br>
 pod 'PushSDK', :git => 'https://github.com/GlobalMessageServices/BCS-GMS-SDK-IOS', :branch => 'gmsapi'
 
