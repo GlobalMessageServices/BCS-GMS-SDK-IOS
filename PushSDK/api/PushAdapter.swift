@@ -546,7 +546,10 @@ internal class PushKAPI {
                 } catch {
                     PushKConstants.logger.debug("request.httpBody error")
                 }
-                
+                var backgroundTask = 0
+                backgroundTask = UIApplication.shared.beginBackgroundTask(withName: "BackgroundTask") { UIApplication.shared.endBackgroundTask(UIBackgroundTaskIdentifier(rawValue: backgroundTask))
+                backgroundTask = UIBackgroundTaskIdentifier.invalid.rawValue }.rawValue
+
                 let dataTask = session.dataTask(with: request as URLRequest)
                 {
                     ( data: Data?, response: URLResponse?, error: Error?) -> Void in
