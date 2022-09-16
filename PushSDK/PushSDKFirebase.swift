@@ -15,7 +15,7 @@ import FirebaseCore
 public class PushSDKFirebase: UIResponder, UIApplicationDelegate {
     
     let pushParser = PusherKParser.init()
-    //let manualNotificator = PushNotification.init()
+    let manualNotificator = PushNotification.init()
     let answerAdapter = PushServerAnswParser.init()
     let pushAdapter = PushSDK.init(basePushURL: PushKConstants.basePushURLactive)
     let gcmMessageIDKey = "gcm.message_id"
@@ -120,12 +120,12 @@ public class PushSDKFirebase: UIResponder, UIApplicationDelegate {
         
     
         if (PushKConstants.enableNotificationFlag == true) {
-//            manualNotificator.pushNotificationManualWithImage(
-//                imageUrl: String(parsedMessage.message.image?.url ?? ""),
-//                contentTitle: String(parsedMessage.message.title ?? ""),
-//                contentBody: String(parsedMessage.message.body ?? ""),
-//                userInfo: userInfo)
-//
+            manualNotificator.preparePushNotification(
+                imageUrl: String(parsedMessage.message.image?.url ?? ""),
+                contentTitle: String(parsedMessage.message.title ?? ""),
+                contentBody: String(parsedMessage.message.body ?? ""),
+                userInfo: userInfo)
+
         }
         
         //here is delivery report sending
@@ -193,7 +193,7 @@ extension PushSDKFirebase: UNUserNotificationCenterDelegate{
         if let gcmMessageID = userInfo[gcmMessageIDKey] {
             PushKConstants.logger.debug("gcm message ID: \(gcmMessageID)")
         }
-        Messaging.messaging().appDidReceiveMessage(userInfo)
+        
         completionHandler()
     }
 }
@@ -216,11 +216,11 @@ extension PushSDKFirebase {
         
         
         if (PushKConstants.enableNotificationFlag == true) {
-//        manualNotificator.pushNotificationManualWithImage(
-//            imageUrl: String(parsedMessage.message.image?.url ?? ""),
-//            contentTitle: String(parsedMessage.message.title ?? ""),
-//            contentBody: String(parsedMessage.message.body ?? ""),
-//            userInfo: fdf ?? [:])
+        manualNotificator.preparePushNotification(
+            imageUrl: String(parsedMessage.message.image?.url ?? ""),
+            contentTitle: String(parsedMessage.message.title ?? ""),
+            contentBody: String(parsedMessage.message.body ?? ""),
+            userInfo: fdf ?? [:])
         }
 
         switch UIApplication.shared.applicationState {
