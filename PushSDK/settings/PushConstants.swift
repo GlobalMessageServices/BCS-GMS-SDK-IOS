@@ -28,7 +28,7 @@ public struct PushKConstants {
     
     let kOSType = "ios"
     static let serverSdkVersion = "2.3"
-    static let sdkVersion = "1.1.0.1"
+    static let sdkVersion = "1.1.1"
     static let devOSVersion = UIDevice.current.systemVersion
     static let deviceType = "\(UIDevice.current.model)"
     static let deviceType2 = "\(UIDevice.current.batteryLevel)"
@@ -39,7 +39,7 @@ public struct PushKConstants {
     static let kPushClientAPIKey = UserDefaults.standard.string(forKey:"clientApiKey")
     static let FCMToken = UserDefaults.standard.string(forKey: "fcmToken")
     
-    static let branch = "master"
+    static let branch = "main"
     
     public static var messageBuffer = "" as String
     public static var basePushURLactive = "" as String
