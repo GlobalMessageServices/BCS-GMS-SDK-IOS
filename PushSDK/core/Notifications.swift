@@ -67,8 +67,6 @@ class PushNotification {
                 }
                 
             }else{
-                let request = UNNotificationRequest(identifier: Date().description, content: content, trigger: trigger)
-                
                 makeNotification(content: content, trigger: trigger)
                 PushKConstants.logger.debug("notification without image  was made - url error")
             }
