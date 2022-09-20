@@ -37,7 +37,7 @@ public class PushSDK {
     private let log = SwiftyBeaver.self
     private let parserClassAdapter = PusherKParser.init()
     private let pushRestServer = PushAPI.init()
-    //private let funNotificator = PushNotification.init()
+    private let funNotificator = PushNotification.init()
     let answerBuilder = AnswerBuilder.init()
     
     
@@ -300,6 +300,62 @@ public class PushSDK {
         let newString = String(jsonString ?? "").replacingOccurrences(of: "\\", with: "", options: .literal, range: nil)
         let parsedMessage = PushServerAnswParser.messageIncomingJson(strResp: newString)
         return PushKMess(code: 200, result: "Success", messageFir: parsedMessage)
+    }
+    
+    
+    //check if notification permitted (Sync procedure)
+    public func areNotificationsEnabled() -> Bool {
+        
+        let semaphore = DispatchSemaphore(value: 0)
+        funNotificator.areNotificationsEnabled { (notificationStatus) in
+            debugPrint(notificationStatus)
+            PushKConstants.notificationPermission = notificationStatus
+            semaphore.signal()
+        }
+        semaphore.wait()
+        return PushKConstants.notificationPermission
+    }
+    
+    //check if notification permitted (Async procedure)
+    public func areNotificationsEnabled(completion:@escaping (Bool)->Swift.Void) {
+        var notificationStatus: Bool = false
+        let current = UNUserNotificationCenter.current()
+                current.getNotificationSettings(completionHandler: { permission in
+                    switch permission.authorizationStatus  {
+                    case .authorized:
+                        PushKConstants.logger.debug("User granted permission for notification")
+                        notificationStatus = true
+                        completion(notificationStatus)
+                        break
+                    case .denied:
+                        PushKConstants.logger.debug("User denied notification permission")
+                        notificationStatus = false
+                        completion(notificationStatus)
+                        break
+                    case .notDetermined:
+                        PushKConstants.logger.debug("Notification permission haven't been asked yet")
+                        notificationStatus = false
+                        completion(notificationStatus)
+                        break
+                    case .provisional:
+                        // @available(iOS 12.0, *)
+                        PushKConstants.logger.debug("The application is authorized to post non-interruptive user notifications.")
+                        notificationStatus = true
+                        completion(notificationStatus)
+                        break
+                    case .ephemeral:
+                        // @available(iOS 14.0, *)
+                        PushKConstants.logger.debug("The application is temporarily authorized to post notifications. Only available to app clips.")
+                        notificationStatus = false
+                        completion(notificationStatus)
+                        break
+                    @unknown default:
+                        PushKConstants.logger.debug("Unknow Status")
+                        notificationStatus = false
+                        completion(notificationStatus)
+                        break
+                    }
+                })
     }
     
     

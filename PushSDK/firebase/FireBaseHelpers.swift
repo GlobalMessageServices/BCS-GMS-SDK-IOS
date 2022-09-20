@@ -26,7 +26,7 @@ internal class PushSdkFirHelpers {
 
     })
         
-        PushKConstants.logger.debug("answToken token: \(PushKConstants.firebaseRegistrationToken ?? "")")
+        PushKConstants.logger.debug("old token: \(PushKConstants.firebaseRegistrationToken ?? "")")
         
         let tokenFcm = String(Messaging.messaging().fcmToken ?? "")
         if (tokenFcm != "") {

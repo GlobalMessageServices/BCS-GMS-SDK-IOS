@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		016F280528D2063D00F7D1A1 /* Notifications.swift in Sources */ = {isa = PBXBuildFile; fileRef = 016F280428D2063D00F7D1A1 /* Notifications.swift */; };
 		01FCADDA28C0C15E00D77FA4 /* PushSDK.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 01FCADD128C0C15E00D77FA4 /* PushSDK.framework */; };
 		01FCADDF28C0C15E00D77FA4 /* PushSDKTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 01FCADDE28C0C15E00D77FA4 /* PushSDKTests.swift */; };
 		01FCADE028C0C15E00D77FA4 /* PushSDK.h in Headers */ = {isa = PBXBuildFile; fileRef = 01FCADD428C0C15E00D77FA4 /* PushSDK.h */; settings = {ATTRIBUTES = (Public, ); }; };
@@ -36,6 +37,7 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		016F280428D2063D00F7D1A1 /* Notifications.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Notifications.swift; sourceTree = "<group>"; };
 		01FCADD128C0C15E00D77FA4 /* PushSDK.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = PushSDK.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		01FCADD428C0C15E00D77FA4 /* PushSDK.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = PushSDK.h; sourceTree = "<group>"; };
 		01FCADD928C0C15E00D77FA4 /* PushSDKTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = PushSDKTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -147,6 +149,7 @@
 				01FCADF128C0C27D00D77FA4 /* DataSaver.swift */,
 				01FCADF228C0C27D00D77FA4 /* Parser.swift */,
 				01FCADF328C0C27D00D77FA4 /* JsonParser.swift */,
+				016F280428D2063D00F7D1A1 /* Notifications.swift */,
 			);
 			path = core;
 			sourceTree = "<group>";
@@ -364,6 +367,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				016F280528D2063D00F7D1A1 /* Notifications.swift in Sources */,
 				01FCAE0128C0C27D00D77FA4 /* DataStructures.swift in Sources */,
 				01FCADFB28C0C27D00D77FA4 /* PushConstants.swift in Sources */,
 				01FCADFD28C0C27D00D77FA4 /* AnswerBuilder.swift in Sources */,

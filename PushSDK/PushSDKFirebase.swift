@@ -15,7 +15,7 @@ import FirebaseCore
 public class PushSDKFirebase: UIResponder, UIApplicationDelegate {
     
     let pushParser = PusherKParser.init()
-    //let manualNotificator = PushNotification.init()
+    let manualNotificator = PushNotification.init()
     let answerAdapter = PushServerAnswParser.init()
     let pushAdapter = PushSDK.init(basePushURL: PushKConstants.basePushURLactive)
     let gcmMessageIDKey = "gcm.message_id"
@@ -43,7 +43,6 @@ public class PushSDKFirebase: UIResponder, UIApplicationDelegate {
     
     
     public func fbInitApplication(didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?){
-        // Override point for customization after application launch.
         
         //fbInitApplication0
         PushKConstants.logger.debug("Call fbInitApplication: fbInitApplication0")
@@ -78,14 +77,13 @@ public class PushSDKFirebase: UIResponder, UIApplicationDelegate {
         
         //fbInitApplication2
         PushKConstants.logger.debug("Call fbInitApplication: fbInitApplication2")
-        // If you are receiving a notification message while your app is in the background,
-        // this callback will not be fired till the user taps on the notification launching the application.
+
         
         // With swizzling disabled you must let Messaging know about the message, for Analytics
-        // Messaging.messaging().appDidReceiveMessage(userInfo)
-        // Print message ID.
-        if let messageID = userInfo[gcmMessageIDKey] {
-            PushKConstants.logger.debug("Message ID: \(messageID)")
+         Messaging.messaging().appDidReceiveMessage(userInfo)
+        
+        if let gcmMessageID = userInfo[gcmMessageIDKey] {
+            PushKConstants.logger.debug("gcm essage ID: \(gcmMessageID)")
         }
         
         // Print full message.
@@ -93,7 +91,67 @@ public class PushSDKFirebase: UIResponder, UIApplicationDelegate {
     }
     
     
+    public func fbInitApplication(didReceiveRemoteNotification userInfo: [AnyHashable: Any],
+                            fetchCompletionHandler completionHandler: @escaping (UIBackgroundFetchResult) -> Void) {
+        //fbInitApplication3
+        PushKConstants.logger.debug("Call fbInitApplication: fbInitApplication3")
+
+        
+        // With swizzling disabled you must let Messaging know about the message, for Analytics
+        // Messaging.messaging().appDidReceiveMessage(userInfo)
+        
+        
+        if let gcmMessageID = userInfo[gcmMessageIDKey] {
+            PushKConstants.logger.debug("gcm message ID: \(gcmMessageID)")
+            
+        }
+        
+        // Print full message.
+        PushKConstants.logger.debug("userInfo: \(userInfo)")
+        
+        
+        guard let jsonData = try? JSONSerialization.data(withJSONObject: userInfo, options: []) else { return  }
+        let jsonString = String(data: jsonData, encoding: .utf8)
+        PushKConstants.logger.debug("jsonString: \(jsonString ?? "empty")")
+        let newString = String(jsonString ?? "").replacingOccurrences(of: "\\", with: "", options: .literal, range: nil)
+        PushKConstants.logger.debug("newString: \(newString)")
+        let parsedMessage = PushServerAnswParser.messageIncomingJson(strResp: newString)
+        PushKConstants.logger.debug("parsedMessage: \(parsedMessage)")
+        
     
+        if (PushKConstants.enableNotificationFlag == true) {
+            manualNotificator.preparePushNotification(
+                imageUrl: String(parsedMessage.message.image?.url ?? ""),
+                contentTitle: String(parsedMessage.message.title ?? ""),
+                contentBody: String(parsedMessage.message.body ?? ""),
+                userInfo: userInfo)
+
+        }
+        
+        //here is delivery report sending
+        let messageId = parsedMessage.message.messageId
+        PushKConstants.logger.debug("messageId: \(messageId ?? "messageId error")")
+        
+        if (PushKConstants.enableDeliveryReportAutoFlag == true && PushKConstants.enableNotificationFlag == true) {
+            if (PushKConstants.deliveryReportLogicFlag == 1) {
+                let notificationStatus = pushAdapter.areNotificationsEnabled()
+                
+                if (notificationStatus == true) {
+                    let drAnswer = self.pushAdapter.pushMessageDeliveryReport(messageId: messageId ?? "")
+                    PushKConstants.logger.debug("delivery report answer: \(drAnswer)")
+                }
+            
+            } else if (PushKConstants.deliveryReportLogicFlag == 2)
+            {
+                let drAnswer = self.pushAdapter.pushMessageDeliveryReport(messageId: messageId ?? "")
+                PushKConstants.logger.debug("delivery report answer: \(drAnswer)")
+            }
+        }
+
+        NotificationCenter.default.post(name: .receivePushKData, object: nil, userInfo: userInfo)
+        
+        completionHandler(UIBackgroundFetchResult.newData)
+    }
     
     public func fbInitApplication(didRegisterForRemoteNotificationsWithDeviceToken deviceToken: Data) {
         //fbInitApplication4
@@ -111,24 +169,31 @@ extension PushSDKFirebase: UNUserNotificationCenterDelegate{
                                        willPresent notification: UNNotification,
                                        withCompletionHandler completionHandler: @escaping (UNNotificationPresentationOptions) -> Void) {
         let userInfo = notification.request.content.userInfo
-        
+        PushKConstants.logger.debug("userInfo: \(userInfo)")
         // With swizzling disabled you must let Messaging know about the message, for Analytics
-        // Messaging.messaging().appDidReceiveMessage(userInfo)
-        // Print message ID.
-        if let messageID = userInfo[gcmMessageIDKey] {
-            PushKConstants.logger.debug("Message ID: \(messageID)")
+        Messaging.messaging().appDidReceiveMessage(userInfo)
+        
+        if let gcmMessageID = userInfo[gcmMessageIDKey] {
+            PushKConstants.logger.debug("gcm message ID: \(gcmMessageID)")
         }
-        completionHandler([.alert, .sound, .badge])
+        
+        if #available(iOS 14.0, *){
+            completionHandler([.banner, .list, .sound, .badge])
+        }else{
+            completionHandler([.alert, .sound, .badge])
+        }
     }
     
     public func userNotificationCenter(_ center: UNUserNotificationCenter,
                                        didReceive response: UNNotificationResponse,
                                        withCompletionHandler completionHandler: @escaping () -> Void) {
         let userInfo = response.notification.request.content.userInfo
-        // Print message ID.
-        if let messageID = userInfo[gcmMessageIDKey] {
-            PushKConstants.logger.debug("Message ID: \(messageID)")
+        PushKConstants.logger.debug("userInfo: \(userInfo)")
+        
+        if let gcmMessageID = userInfo[gcmMessageIDKey] {
+            PushKConstants.logger.debug("gcm message ID: \(gcmMessageID)")
         }
+        
         completionHandler()
     }
 }
@@ -138,6 +203,61 @@ extension PushSDKFirebase {
     
     public func fbNotifyMessaging() {
         NotificationCenter.default.post(name: NSNotification.Name(rawValue: mySpecialNotificationKey), object: self)
+    }
+    
+    public func fb_remote_messaging(remoteMessage: NSDictionary) {
+        let fdf = remoteMessage as NSDictionary as? [String: AnyObject]
+        guard let jsonData = (try? JSONSerialization.data(withJSONObject: fdf ?? "", options: [])) else { return  }
+        let jsonString = String(data: jsonData, encoding: .utf8)
+        let parsedMessage = PushServerAnswParser.messageIncomingJson(strResp: jsonString ?? "")
+        PushKConstants.logger.debug(parsedMessage)
+        let parsedMessageUserData = pushParser.messIdParser(messageFromPushServer: jsonString ?? "")
+        PushKConstants.logger.debug("parsedMessageUserData: \(parsedMessageUserData)")
+        
+        
+        if (PushKConstants.enableNotificationFlag == true) {
+        manualNotificator.preparePushNotification(
+            imageUrl: String(parsedMessage.message.image?.url ?? ""),
+            contentTitle: String(parsedMessage.message.title ?? ""),
+            contentBody: String(parsedMessage.message.body ?? ""),
+            userInfo: fdf ?? [:])
+        }
+
+        switch UIApplication.shared.applicationState {
+        case .active:
+            PushKConstants.logger.debug("active")
+        case .background:
+            PushKConstants.logger.debug("App is backgrounded.")
+            PushKConstants.logger.debug("Background time remaining = " +
+                "\(UIApplication.shared.backgroundTimeRemaining) seconds")
+        case .inactive:
+            PushKConstants.logger.debug("App is inactive.")
+        @unknown default:
+            PushKConstants.logger.debug("Fatal application error for UIApplication.shared.applicationState")
+        }
+        
+        if (PushKConstants.enableDeliveryReportAutoFlag == true && PushKConstants.enableNotificationFlag == true) {
+            if (PushKConstants.deliveryReportLogicFlag == 1) {
+                let notificationStatus = pushAdapter.areNotificationsEnabled()
+                
+                if (notificationStatus == true) {
+                    let drAnswer = self.pushAdapter.pushMessageDeliveryReport(messageId: parsedMessageUserData)
+                    PushKConstants.logger.debug("delivery report answer: \(drAnswer)")
+                }
+            
+            } else if (PushKConstants.deliveryReportLogicFlag == 2)
+            {
+                let drAnswer = self.pushAdapter.pushMessageDeliveryReport(messageId: parsedMessageUserData)
+                PushKConstants.logger.debug("delivery report answer: \(drAnswer)")
+            }
+        }
+        
+        NotificationCenter.default.post(name: .receivePushKData, object: nil, userInfo: fdf)
+    }
+    public func fb_token_messaging(didReceiveRegistrationToken fcmToken: String) {
+        PushKConstants.logger.debug("Firebase registration token: \(fcmToken)")
+        let dataDict:[String: String] = ["token": fcmToken]
+        NotificationCenter.default.post(name: Notification.Name("FCMToken"), object: nil, userInfo: dataDict)
     }
     
 }
