@@ -10,9 +10,9 @@ To open your project run $ open ProjectName.xcworkspace<br>
 More about Cocoapods and Podfile here - https://cocoapods.org, https://guides.cocoapods.org/using/the-podfile.html and https://guides.cocoapods.org/using/using-cocoapods.html.
 
 ### Add sdk to your project.
-Last actual SDK version: 1.1.1<br>
+Last actual SDK version: 1.0.0.44<br>
 To integrate PushSDK to your project with COCOAPODS (https://guides.cocoapods.org/using/the-podfile.html) add the next line in Podfile.<br>
-pod 'PushSDK', :git => 'https://github.com/GlobalMessageServices/BCS-GMS-SDK-IOS', :branch => 'gmsapi'
+pod 'PushSDK', :git => 'https://github.com/GlobalMessageServices/BCS-GMS-SDK-IOS', :branch => 'masterapi'
 
 ***
 Important ! Before start using SDK, configure firebase project first and create App Id and APNS key.
