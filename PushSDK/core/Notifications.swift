@@ -17,6 +17,8 @@ class PushNotification {
                               contentTitle: String = "",
                               contentSubtitle: String = "",
                               contentBody: String,
+                                 btnText: String,
+                                 btnURL: String,
                               userInfo: [AnyHashable: Any]
     ) {
         PushKConstants.logger.debug("makePushNotification input: imageUrl: \(imageUrl), timeInterval: \(timeInterval), contentTitle: \(contentTitle), contentSubtitle: \(contentSubtitle), contentBody: \(contentBody)")
@@ -34,7 +36,12 @@ class PushNotification {
             content.subtitle = contentSubtitle
         }
         content.sound = UNNotificationSound.default
-        content.categoryIdentifier = "pushKActionCategory"
+        if(btnURL != "" && btnText != ""){
+            registerNotificationAction(btnText: btnText)
+            content.categoryIdentifier = "pushKActionCategory"
+            content.userInfo = ["pushKActionButtonURL" : btnURL]
+            
+        }
         
         let trigger = UNTimeIntervalNotificationTrigger(timeInterval: timeInterval, repeats: false)
         
@@ -89,6 +96,21 @@ class PushNotification {
                 PushKConstants.logger.error("UNUserNotificationCenter error: \(error.localizedDescription)")
             }
         })
+    }
+    
+    func registerNotificationAction(btnText: String){
+        let acceptAction = UNNotificationAction(identifier: "pushKNotificationActionId",
+              title: btnText,
+                                                options: [UNNotificationActionOptions.foreground])
+        
+        let pushCategory =
+              UNNotificationCategory(identifier: "pushKActionCategory",
+              actions: [acceptAction],
+              intentIdentifiers: [],
+              hiddenPreviewsBodyPlaceholder: "",
+              options: .customDismissAction)
+        
+        UNUserNotificationCenter.current().setNotificationCategories([pushCategory])
     }
     
     func areNotificationsEnabled(completion:@escaping (Bool)->Swift.Void) {

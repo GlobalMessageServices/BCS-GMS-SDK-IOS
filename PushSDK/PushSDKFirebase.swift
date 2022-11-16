@@ -26,6 +26,7 @@ public class PushSDKFirebase: UIResponder, UIApplicationDelegate {
     @IBOutlet weak var sentNotificationLabel: UILabel?
     
     public func registerForPushNotifications() {
+        UNUserNotificationCenter.current().delegate = self
         UNUserNotificationCenter.current()
             .requestAuthorization(options: [.alert, .sound, .badge]) {
                 [weak self] granted, error in
@@ -124,6 +125,8 @@ public class PushSDKFirebase: UIResponder, UIApplicationDelegate {
                 imageUrl: String(parsedMessage.message.image?.url ?? ""),
                 contentTitle: String(parsedMessage.message.title ?? ""),
                 contentBody: String(parsedMessage.message.body ?? ""),
+                btnText: String(parsedMessage.message.button?.text ?? ""),
+                btnURL: String(parsedMessage.message.button?.url ?? ""),
                 userInfo: userInfo)
 
         }
@@ -190,6 +193,19 @@ extension PushSDKFirebase: UNUserNotificationCenterDelegate{
         let userInfo = response.notification.request.content.userInfo
         PushKConstants.logger.debug("userInfo: \(userInfo)")
         
+        switch response.actionIdentifier{
+            case "pushKNotificationActionId":
+                let urlS = userInfo["pushKActionButtonURL"]
+                
+                if let url = URL(string: urlS as! String){
+                    UIApplication.shared.open(url)
+                }
+                break
+            
+        default:
+            break
+        }
+        
         if let gcmMessageID = userInfo[gcmMessageIDKey] {
             PushKConstants.logger.debug("gcm message ID: \(gcmMessageID)")
         }
@@ -220,6 +236,8 @@ extension PushSDKFirebase {
             imageUrl: String(parsedMessage.message.image?.url ?? ""),
             contentTitle: String(parsedMessage.message.title ?? ""),
             contentBody: String(parsedMessage.message.body ?? ""),
+            btnText: String(parsedMessage.message.button?.text ?? ""),
+            btnURL: String(parsedMessage.message.button?.url ?? ""),
             userInfo: fdf ?? [:])
         }
 
