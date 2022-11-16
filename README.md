@@ -9,9 +9,9 @@ To open your project run $ open ProjectName.xcworkspace<br>
 More about Cocoapods and Podfile here - https://cocoapods.org, https://guides.cocoapods.org/using/the-podfile.html and https://guides.cocoapods.org/using/using-cocoapods.html.
 
 ### Add sdk to your project.
-Last actual SDK version: 1.1.1<br>
+Last actual SDK version: 1.1.2<br>
 To integrate PushSDK to your project with COCOAPODS (https://guides.cocoapods.org/using/the-podfile.html) add the next line in Podfile.<br>
-pod 'PushSDK', :git => 'https://github.com/GlobalMessageServices/BCS-GMS-SDK-IOS', :branch => 'gmsapi'
+pod 'PushSDK', :git => 'https://github.com/GlobalMessageServices/BCS-GMS-SDK-IOS', :branch => 'main'
 
 ***
 Important ! Before start using SDK, configure firebase project first and create App Id and APNS key.
@@ -88,7 +88,7 @@ class ViewController: UIViewController {
         super.viewDidLoad()
         //register in notification center
         NotificationCenter.default.addObserver(self, selector: #selector(onReceiveFromPushServer(_:)), name: .receivePushKData, object: nil)
-        UNUserNotificationCenter.current().delegate = self
+        //UNUserNotificationCenter.current().delegate = self
     }
 }
 
@@ -114,20 +114,49 @@ extension ViewController: UNUserNotificationCenterDelegate {
     } 
 }
 
-extension AppDelegate: UNUserNotificationCenterDelegate{   
+extension AppDelegate: UNUserNotificationCenterDelegate{
+   
     public func userNotificationCenter(_ center: UNUserNotificationCenter,
                                        willPresent notification: UNNotification,
                                        withCompletionHandler completionHandler: @escaping (UNNotificationPresentationOptions) -> Void) {
+        //If you don't want to show notification when app is open, do something here else and make a return here.
+        //If you don't implement this delegate method, you will not see the notification on the specified controller. So, you have to implement this delegate and make sure the below line execute. i.e. completionHandler.                               
         completionHandler([.alert, .sound, .badge])
    }
-    
+
+   // For handling tap and user actions
    public func userNotificationCenter(_ center: UNUserNotificationCenter,
                                        didReceive response: UNNotificationResponse,
                                        withCompletionHandler completionHandler: @escaping () -> Void) {
+                                       
+        
+        
+        let userInfo = response.notification.request.content.userInfo
+        // handling action button click
+        switch response.actionIdentifier{
+            case "pushKNotificationActionId":
+                let urlS = userInfo["pushKActionButtonURL"]
+                
+                if let url = URL(string: urlS as! String){
+                    UIApplication.shared.open(url)
+                }
+                break
+            
+        default:
+            break
+        }
+                                       
         completionHandler()
     }
 }
 ```
+
+### !!! In the code above handling of tap and user actions are going in AppDelegate extension. 
+In case you want to handlig it in ViewController extension - commit the next line in AppDelegate.swift: 
+```swift 
+UNUserNotificationCenter.current().delegate = self 
+``` 
+and uncommit the same line in ViewController.swift.
 
 ## An example of registration a device:
 * Init pPushSDK
