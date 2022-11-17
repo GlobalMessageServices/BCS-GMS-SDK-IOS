@@ -28,7 +28,7 @@ public struct PushKConstants {
     
     let kOSType = "ios"
     static let serverSdkVersion = "2.3"
-    static let sdkVersion = "1.1.1"
+    static let sdkVersion = "1.1.2"
     static let devOSVersion = UIDevice.current.systemVersion
     static let deviceType = "\(UIDevice.current.model)"
     static let deviceType2 = "\(UIDevice.current.batteryLevel)"
