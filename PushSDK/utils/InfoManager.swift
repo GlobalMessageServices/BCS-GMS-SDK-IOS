@@ -52,7 +52,7 @@ class InfoManager: NSObject, CLLocationManagerDelegate {
     }
     
     
-    func isLocationServicesEnaled()->Bool{
+    func isLocationServicesEnaled() async ->Bool{
         return CLLocationManager.locationServicesEnabled()
     }
     

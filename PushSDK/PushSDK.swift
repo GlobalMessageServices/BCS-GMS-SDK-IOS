@@ -376,33 +376,36 @@ public class PushSDK {
     
     // get country of location. user permission is required
     public func locationCountry(handler: @escaping(String,String) -> Void){
-        PushKConstants.logger.debug("start function getLocationCountry")
+        PushKConstants.logger.debug("start function locationCountry")
         let infoManager = InfoManager()
-        var countryCode = "n/a"
-        var countryName = "n/a"
-        if infoManager.isLocationServicesEnaled(){
-            let location = infoManager.locationManager.location
-            if location != nil{
-                infoManager.geoCoder.reverseGeocodeLocation(location!) { (placemarks, error) in
-                    guard let currentLocPlacemark = placemarks?.first else {
-                        PushKConstants.logger.debug("location could not be determined")
+        Task{
+            var countryCode = "n/a"
+            var countryName = "n/a"
+            if await infoManager.isLocationServicesEnaled(){
+                let location = infoManager.locationManager.location
+                if location != nil{
+                    infoManager.geoCoder.reverseGeocodeLocation(location!) { (placemarks, error) in
+                        guard let currentLocPlacemark = placemarks?.first else {
+                            PushKConstants.logger.debug("location could not be determined")
+                            infoManager.locationManager.stopMonitoringSignificantLocationChanges()
+                            handler(countryCode, countryName)
+                            return
+                        }
+                        
+                        countryCode = currentLocPlacemark.isoCountryCode ?? "n/a"
+                        countryName = currentLocPlacemark.country ?? "n/a"
+                        PushKConstants.logger.debug("countryCode: \(countryCode)")
+                        PushKConstants.logger.debug("countryName: \(countryName)")
                         infoManager.locationManager.stopMonitoringSignificantLocationChanges()
                         handler(countryCode, countryName)
-                        return
                     }
-                    
-                    countryCode = currentLocPlacemark.isoCountryCode ?? "n/a"
-                    countryName = currentLocPlacemark.country ?? "n/a"
-                    PushKConstants.logger.debug("countryCode: \(countryCode)")
-                    PushKConstants.logger.debug("countryName: \(countryName)")
-                    infoManager.locationManager.stopMonitoringSignificantLocationChanges()
-                    handler(countryCode, countryName)
                 }
+                
+            }else{
+                PushKConstants.logger.debug("location service is not enabled")
+                handler(countryCode, countryName)
             }
             
-        }else{
-            PushKConstants.logger.debug("location service is not enabled")
-            handler(countryCode, countryName)
         }
     }
     
