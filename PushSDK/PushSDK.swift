@@ -375,7 +375,7 @@ public class PushSDK {
     
     
     // get country of location. user permission is required
-    func locationCountry(handler: @escaping(String,String) -> Void){
+    public func locationCountry(handler: @escaping(String,String) -> Void){
         PushKConstants.logger.debug("start function getLocationCountry")
         let infoManager = InfoManager()
         var countryCode = "n/a"
