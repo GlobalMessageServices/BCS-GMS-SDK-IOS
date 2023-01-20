@@ -220,3 +220,30 @@ public struct BranchStructObj {
      var pusUrlMessQueue: String
      var urlHttpMessHistory: String
 }
+
+
+public struct PushkUserData {
+    var deviceOS: String
+    var osVersion: String
+    var deviceModel: String
+    var languageAndRegion: LanguageAndRegion
+    var timeZoneAbreviation: String
+    var timeZoneIdentifier: String
+    
+    public func toString() -> String {
+        return "PushkUserData(deviceOS: \(self.deviceOS),\n osVersion: \(self.osVersion),\n deviceModel: \(self.deviceModel),\n languageAndRegion: \(self.languageAndRegion.toString()),\n timeZoneAbreviation: \(self.timeZoneAbreviation),\n timeZoneIdentifier: \(self.timeZoneIdentifier))"
+    }
+}
+
+public struct LanguageAndRegion{
+    var deviceLanguage: String
+    var deviceLanguageEn: String
+    var isoLanguageCode: String
+    var isoRegion: String
+    var region: String
+    var regionEn: String
+    
+    public func toString() -> String {
+        return "LanguageAndRegion(deviceLanguage: \(self.deviceLanguage),\n deviceLanguageEn: \(self.deviceLanguageEn),\n isoLanguageCode: \(self.isoLanguageCode),\n isoRegion: \(self.isoRegion),\n region: \(self.region),\n regionEn: \(self.regionEn))"
+    }
+}

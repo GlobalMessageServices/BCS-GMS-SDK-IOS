@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		016F280528D2063D00F7D1A1 /* Notifications.swift in Sources */ = {isa = PBXBuildFile; fileRef = 016F280428D2063D00F7D1A1 /* Notifications.swift */; };
+		01C91A2B29797D3C00F3C3B6 /* InfoManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 01C91A2A29797D3C00F3C3B6 /* InfoManager.swift */; };
 		01FCADDA28C0C15E00D77FA4 /* PushSDK.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 01FCADD128C0C15E00D77FA4 /* PushSDK.framework */; };
 		01FCADDF28C0C15E00D77FA4 /* PushSDKTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 01FCADDE28C0C15E00D77FA4 /* PushSDKTests.swift */; };
 		01FCADE028C0C15E00D77FA4 /* PushSDK.h in Headers */ = {isa = PBXBuildFile; fileRef = 01FCADD428C0C15E00D77FA4 /* PushSDK.h */; settings = {ATTRIBUTES = (Public, ); }; };
@@ -38,6 +39,7 @@
 
 /* Begin PBXFileReference section */
 		016F280428D2063D00F7D1A1 /* Notifications.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Notifications.swift; sourceTree = "<group>"; };
+		01C91A2A29797D3C00F3C3B6 /* InfoManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InfoManager.swift; sourceTree = "<group>"; };
 		01FCADD128C0C15E00D77FA4 /* PushSDK.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = PushSDK.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		01FCADD428C0C15E00D77FA4 /* PushSDK.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = PushSDK.h; sourceTree = "<group>"; };
 		01FCADD928C0C15E00D77FA4 /* PushSDKTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = PushSDKTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -82,6 +84,14 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		01C91A2929797D0A00F3C3B6 /* utils */ = {
+			isa = PBXGroup;
+			children = (
+				01C91A2A29797D3C00F3C3B6 /* InfoManager.swift */,
+			);
+			path = utils;
+			sourceTree = "<group>";
+		};
 		01FCADC728C0C15E00D77FA4 = {
 			isa = PBXGroup;
 			children = (
@@ -105,6 +115,7 @@
 		01FCADD328C0C15E00D77FA4 /* PushSDK */ = {
 			isa = PBXGroup;
 			children = (
+				01C91A2929797D0A00F3C3B6 /* utils */,
 				01FCADED28C0C27D00D77FA4 /* api */,
 				01FCADEF28C0C27D00D77FA4 /* core */,
 				01FCADF728C0C27D00D77FA4 /* firebase */,
@@ -374,6 +385,7 @@
 				01FCAE0028C0C27D00D77FA4 /* JsonParser.swift in Sources */,
 				01FCADFC28C0C27D00D77FA4 /* PushAdapter.swift in Sources */,
 				01FCADFE28C0C27D00D77FA4 /* DataSaver.swift in Sources */,
+				01C91A2B29797D3C00F3C3B6 /* InfoManager.swift in Sources */,
 				01FCAE0328C0C27D00D77FA4 /* FireBaseHelpers.swift in Sources */,
 				01FCAE0228C0C27D00D77FA4 /* PushSDK.swift in Sources */,
 				01FCADF928C0C27D00D77FA4 /* PushSDKFirebase.swift in Sources */,

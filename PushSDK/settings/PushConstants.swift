@@ -28,10 +28,12 @@ public struct PushKConstants {
     
     let kOSType = "ios"
     static let serverSdkVersion = "2.3"
-    static let sdkVersion = "1.1.2"
+    static let sdkVersion = "1.1.3"
+    static let devOSName = UIDevice.current.systemName
     static let devOSVersion = UIDevice.current.systemVersion
     static let deviceType = "\(UIDevice.current.model)"
     static let deviceType2 = "\(UIDevice.current.batteryLevel)"
+    static let deviceModel = UIDevice.modelName
     static let identifierForVendor = "\(String(describing: UIDevice.current.identifierForVendor))"
     static let localizedModel = "\(UIDevice.current.localizedModel)"
     static let kBundleID = Bundle.main.infoDictionary?[kCFBundleIdentifierKey as String] as? String
