@@ -46,9 +46,9 @@ class InfoManager: NSObject, CLLocationManagerDelegate {
         return LanguageAndRegion(deviceLanguage: language ?? "n/a",
                                  deviceLanguageEn: languageEn ?? "n/a",
                                  isoLanguageCode: locale.languageCode,
-                                 isoRegion: region ?? "n/a",
-                                 region: regionEn ?? "n/a",
-                                 regionEn: locale.countryCode ?? "n/a")
+                                 isoRegion: locale.countryCode ?? "n/a",
+                                 region: region ?? "n/a",
+                                 regionEn: regionEn ?? "n/a")
     }
     
     
