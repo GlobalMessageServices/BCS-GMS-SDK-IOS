@@ -282,9 +282,9 @@ public func getUserData()-> PushkUserData
 ```swift
     public func locationCountry(handler: @escaping(String,String) -> Void)
 ```
-User permission is required to use this function. To prepare to ask the user for location permission add to Info.plist the following keys:
-Privacy - Location When In Use Usage Description
-Privacy - Location Always and When In Use Usage Description
+User permission is required to use this function. To prepare to ask the user for location permission add to Info.plist the following keys:<br>
+Privacy - Location When In Use Usage Description<br>
+Privacy - Location Always and When In Use Usage Description<br>
 ![photo1674487044](https://user-images.githubusercontent.com/46021248/214077180-437f00d4-d996-49ce-86c4-585b05b6473f.jpeg)
 Example of using this function
 ```swift
