@@ -9,7 +9,7 @@ To open your project run $ open ProjectName.xcworkspace<br>
 More about Cocoapods and Podfile here - https://cocoapods.org, https://guides.cocoapods.org/using/the-podfile.html and https://guides.cocoapods.org/using/using-cocoapods.html.
 
 ### Add sdk to your project.
-Last actual SDK version: 1.1.2<br>
+Last actual SDK version: 1.1.3<br>
 To integrate PushSDK to your project with COCOAPODS (https://guides.cocoapods.org/using/the-podfile.html) add the next line in Podfile.<br>
 pod 'PushSDK', :git => 'https://github.com/GlobalMessageServices/BCS-GMS-SDK-IOS', :branch => 'main'
 
@@ -272,6 +272,28 @@ public static func parseIncomingPush(message: Notification) -> PushKMess
 public static func parseIncomingPush(message:  [AnyHashable : Any]) -> PushKMess
 ```
 ***
+
+* get user/device data - iOS version, device model, language, time zoone, region (from user settings)
+```swift
+public func getUserData()-> PushkUserData
+```
+
+* get country of user current location.
+```swift
+    public func locationCountry(handler: @escaping(String,String) -> Void)
+```
+User permission is required to use this function. To prepare to ask the user for location permission add to Info.plist the following keys:
+Privacy - Location When In Use Usage Description
+Privacy - Location Always and When In Use Usage Description
+![photo1674487044](https://user-images.githubusercontent.com/46021248/214077180-437f00d4-d996-49ce-86c4-585b05b6473f.jpeg)
+Example of using this function
+```swift
+pushSdk.locationCountry{(isoCountry, countryName) in
+
+    print(isoCountry)
+    print(countryName)
+}
+```
 
 # SDK answers. <br>
 200 - Ok. All processed successfully<br>
