@@ -399,10 +399,15 @@ public class PushSDK {
                         infoManager.locationManager.stopMonitoringSignificantLocationChanges()
                         handler(countryCode, countryName)
                     }
+                }else{
+                    PushKConstants.logger.debug("location could not be determined")
+                    infoManager.locationManager.stopMonitoringSignificantLocationChanges()
+                    handler(countryCode, countryName)
                 }
                 
             }else{
                 PushKConstants.logger.debug("location service is not enabled")
+                infoManager.locationManager.stopMonitoringSignificantLocationChanges()
                 handler(countryCode, countryName)
             }
             
