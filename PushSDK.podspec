@@ -1,6 +1,6 @@
 Pod::Spec.new do |s|
   s.name             = "PushSDK"
-  s.version          = "1.1.2"
+  s.version          = "1.1.3"
   s.summary          = "SDK for sending push messages to iOS devices."
   s.homepage         = "https://github.com/GlobalMessageServices/BCS-GMS-SDK-IOS"
   
@@ -18,7 +18,7 @@ Pod::Spec.new do |s|
   s.swift_version = ['3.0', '4.0', '4.2', '5.0', '5.1']
  
   #s.source_files = 'PushSDKIOS/**/*.{swift}'
-  s.source_files  = "Classes", "Classes/**/*.{h,m}", "PushSDK/*.{h,m}", "PushSDK/*.swift", "PushSDK/api", "PushSDK/core", "PushSDK/settings", "PushSDK/firebase", "PushSDK/models"
+  s.source_files  = "Classes", "Classes/**/*.{h,m}", "PushSDK/*.{h,m}", "PushSDK/*.swift", "PushSDK/api", "PushSDK/core", "PushSDK/settings", "PushSDK/firebase", "PushSDK/models", "PushSDK/utils"
 
 
   

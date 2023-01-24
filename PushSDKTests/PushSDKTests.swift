@@ -140,6 +140,19 @@ class PushSDKTests: XCTestCase {
     }
     
     
+    func testGetUserData(){
+        let response = sdkInitPush.getUserData()
+        print(response)
+    }
+    
+    
+    func testGetLocation(){
+        sdkInitPush.locationCountry{(code, name) in
+            print("code: \(code)")
+            print("name: \(name)")
+        }
+    }
+    
 }
 
 

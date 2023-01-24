@@ -39,7 +39,9 @@ class PushNotification {
         if(btnURL != "" && btnText != ""){
             registerNotificationAction(btnText: btnText)
             content.categoryIdentifier = "pushKActionCategory"
-            content.userInfo = ["pushKActionButtonURL" : btnURL]
+            
+            let userInfoAction = userInfo.merging(["pushKActionButtonURL" : btnURL]){(current, _) in current}
+            content.userInfo = userInfoAction
             
         }
         
