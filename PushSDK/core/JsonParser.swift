@@ -179,7 +179,7 @@ struct PushKMessageListParse: Decodable {
     var time: String?=nil
     var body: String?=nil
     var title: String?=nil
-    var is2Way: Boll?=false
+    var is2Way: Bool?=false
 }
 
 struct FullFirebaseMessage: Decodable {

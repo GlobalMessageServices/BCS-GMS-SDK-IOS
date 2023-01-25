@@ -19,7 +19,7 @@ class PushNotification {
                               contentBody: String,
                                  btnText: String,
                                  btnURL: String,
-                                 is2Way: Bool
+                                 is2Way: Bool,
                               userInfo: [AnyHashable: Any]
     ) {
         PushKConstants.logger.debug("makePushNotification input: imageUrl: \(imageUrl), timeInterval: \(timeInterval), contentTitle: \(contentTitle), contentSubtitle: \(contentSubtitle), contentBody: \(contentBody)")
