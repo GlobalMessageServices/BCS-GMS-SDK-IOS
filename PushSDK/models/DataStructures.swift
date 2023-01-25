@@ -122,9 +122,10 @@ public struct MessagesResponseStr {
     public var button: ButtonResponse?=nil
     public var time: String?=""
     public var partner: String?=""
+    public var is2Way:Bool?=false
     
     public func toString() -> String {
-        return "MessagesResponseStr(phone: \(self.phone ?? ""), messageId: \(self.messageId ?? ""), title: \(self.title ?? ""), body: \(self.body ?? ""), image: \(self.image?.toString() ?? ""), button: \(self.button?.toString() ?? ""), time: \(self.time ?? ""), partner: \(self.partner ?? ""))"
+        return "MessagesResponseStr(phone: \(self.phone ?? ""), messageId: \(self.messageId ?? ""), title: \(self.title ?? ""), body: \(self.body ?? ""), image: \(self.image?.toString() ?? ""), button: \(self.button?.toString() ?? ""), time: \(self.time ?? ""), partner: \(self.partner ?? ""), is2Way: \(self.is2Way ?? false))"
     }
 }
 

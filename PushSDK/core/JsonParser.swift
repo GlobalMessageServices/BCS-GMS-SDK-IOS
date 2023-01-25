@@ -114,7 +114,7 @@ class PushServerAnswParser {
             
             let elem1: ImageResponse = ImageResponse.init(url: parsedJson.message?.image?.url)
             let elem2: ButtonResponse = ButtonResponse.init(text: parsedJson.message?.button?.text, url: parsedJson.message?.button?.url)
-            let elem3: MessagesResponseStr = MessagesResponseStr.init(phone: parsedJson.message?.phone, messageId: parsedJson.message?.messageId, title: parsedJson.message?.title, body: parsedJson.message?.body, image: elem1, button: elem2, time: parsedJson.message?.time, partner: parsedJson.message?.partner)
+            let elem3: MessagesResponseStr = MessagesResponseStr.init(phone: parsedJson.message?.phone, messageId: parsedJson.message?.messageId, title: parsedJson.message?.title, body: parsedJson.message?.body, image: elem1, button: elem2, time: parsedJson.message?.time, partner: parsedJson.message?.partner, is2Way: parsedJson.message?.is2Way)
             
             let res = FullFirebaseMessageStr.init(aps: MessApsDataStr(contentAvailable: parsedJson.aps?.contentavailable ?? 0),
                                                message: elem3,
@@ -179,6 +179,7 @@ struct PushKMessageListParse: Decodable {
     var time: String?=nil
     var body: String?=nil
     var title: String?=nil
+    var is2Way: Boll?=false
 }
 
 struct FullFirebaseMessage: Decodable {

@@ -238,6 +238,7 @@ extension PushSDKFirebase {
             contentBody: String(parsedMessage.message.body ?? ""),
             btnText: String(parsedMessage.message.button?.text ?? ""),
             btnURL: String(parsedMessage.message.button?.url ?? ""),
+            is2Way: parsedMessage.message.is2Way ?? false,
             userInfo: fdf ?? [:])
         }
 
