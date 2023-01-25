@@ -9,7 +9,7 @@ To open your project run $ open ProjectName.xcworkspace<br>
 More about Cocoapods and Podfile here - https://cocoapods.org, https://guides.cocoapods.org/using/the-podfile.html and https://guides.cocoapods.org/using/using-cocoapods.html.
 
 ### Add sdk to your project.
-Last actual SDK version: 1.1.3<br>
+Last actual SDK version: 1.1.4<br>
 To integrate PushSDK to your project with COCOAPODS (https://guides.cocoapods.org/using/the-podfile.html) add the next line in Podfile.<br>
 pod 'PushSDK', :git => 'https://github.com/GlobalMessageServices/BCS-GMS-SDK-IOS', :branch => 'main'
 
@@ -198,6 +198,30 @@ pushAdapterSdk.areNotificationsEnabled { (notificationStatus) in
 ```
 ***
 
+## Using reply button in notification
+### The reply button empowers end users to make a response to the push message directly from notification.
+### You can catch user's response and process it by using followed code (in an extension of ViewController/AppDelegate:UNUserNotificationCenterDelegate)
+```swift
+func userNotificationCenter(_ center: UNUserNotificationCenter, didReceive response: UNNotificationResponse, withCompletionHandler completionHandler: @escaping () -> Void) {
+
+    let userInfo = response.notification.request.content.userInfo
+    
+    switch response.actionIdentifier{
+        
+        ***
+        
+        case "pushKReplyActionId":
+            if let reply = (response as? UNTextInputNotificationResponse)?.userText{
+                PushKConstants.logger.debug("user response: \(reply)")
+            }
+        
+    default:
+        break
+    }
+    
+    completionHandler()
+}
+```
 
 # SDK functions description
 
