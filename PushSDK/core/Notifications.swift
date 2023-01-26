@@ -19,6 +19,7 @@ class PushNotification {
                               contentBody: String,
                                  btnText: String,
                                  btnURL: String,
+                                 is2Way: Bool,
                               userInfo: [AnyHashable: Any]
     ) {
         PushKConstants.logger.debug("makePushNotification input: imageUrl: \(imageUrl), timeInterval: \(timeInterval), contentTitle: \(contentTitle), contentSubtitle: \(contentSubtitle), contentBody: \(contentBody)")
@@ -36,12 +37,18 @@ class PushNotification {
             content.subtitle = contentSubtitle
         }
         content.sound = UNNotificationSound.default
+        content.categoryIdentifier = "pushKActionCategory"
+        
+        var isPushActionButton = false
         if(btnURL != "" && btnText != ""){
-            registerNotificationAction(btnText: btnText)
-            content.categoryIdentifier = "pushKActionCategory"
+            isPushActionButton = true
             
             let userInfoAction = userInfo.merging(["pushKActionButtonURL" : btnURL]){(current, _) in current}
             content.userInfo = userInfoAction
+        }
+        
+        if(isPushActionButton || is2Way){
+            setActions(btnText: btnText, isPushActionButton: isPushActionButton, is2Way: is2Way)
             
         }
         
@@ -100,18 +107,37 @@ class PushNotification {
         })
     }
     
-    func registerNotificationAction(btnText: String){
-        let acceptAction = UNNotificationAction(identifier: "pushKNotificationActionId",
-              title: btnText,
-                                                options: [UNNotificationActionOptions.foreground])
-        
-        let pushCategory =
-              UNNotificationCategory(identifier: "pushKActionCategory",
-              actions: [acceptAction],
-              intentIdentifiers: [],
-              hiddenPreviewsBodyPlaceholder: "",
-              options: .customDismissAction)
-        
+    
+    // set action and reply buttons
+    func setActions(btnText: String, isPushActionButton : Bool, is2Way: Bool){
+        var actions: [UNNotificationAction] = []
+        PushKConstants.logger.debug("start setActions, isPushActionButton: \(isPushActionButton), is2Way: \(is2Way)")
+        if(isPushActionButton && is2Way){
+            let acceptAction = UNNotificationAction(identifier: "pushKNotificationActionId",
+                  title: btnText, options: [UNNotificationActionOptions.foreground])
+            let replyAction = UNTextInputNotificationAction(identifier: "pushKReplyActionId", title: "Reply", options: [])
+            
+            actions.append(acceptAction)
+            actions.append(replyAction)
+        }else{
+            if(isPushActionButton && !is2Way){
+                let acceptAction = UNNotificationAction(identifier: "pushKNotificationActionId",
+                      title: btnText, options: [UNNotificationActionOptions.foreground])
+                
+                actions.append(acceptAction)
+            }else{
+                let replyAction = UNTextInputNotificationAction(identifier: "pushKReplyActionId", title: "Reply", options: [])
+                
+                actions.append(replyAction)
+            }
+        }
+
+        let pushCategory = UNNotificationCategory(identifier: "pushKActionCategory",
+                                   actions: actions,
+                                   intentIdentifiers: [],
+                                   hiddenPreviewsBodyPlaceholder: "",
+                                   options: .customDismissAction)
+            
         UNUserNotificationCenter.current().setNotificationCategories([pushCategory])
     }
     

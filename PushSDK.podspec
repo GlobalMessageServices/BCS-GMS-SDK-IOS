@@ -1,6 +1,6 @@
 Pod::Spec.new do |s|
   s.name             = "PushSDK"
-  s.version          = "1.1.3"
+  s.version          = "1.1.4"
   s.summary          = "SDK for sending push messages to iOS devices."
   s.homepage         = "https://github.com/GlobalMessageServices/BCS-GMS-SDK-IOS"
   
