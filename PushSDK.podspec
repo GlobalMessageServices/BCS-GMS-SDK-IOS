@@ -22,7 +22,7 @@ Pod::Spec.new do |s|
 
 
   
-s.dependency "BoringSSL-GRPC"
+
 #s.dependency "BoringSSL-GRPC"
 s.dependency "CryptoSwift"
 s.dependency "SwiftyJSON", "5.0.0"
